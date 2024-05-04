@@ -41,6 +41,48 @@
     ],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "warn",
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-member-accessibility": [
+      2,
+      {
+        "accessibility": "no-public"
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase"]
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "variable",
+        "types": ["boolean", "string", "number"],
+        "format": ["UPPER_CASE"]
+      },
+      {
+        "selector": "memberLike",
+        "modifiers": ["private", "protected"],
+        "format": ["camelCase"],
+        "leadingUnderscore": "require"
+      },
+      {
+        "selector": "memberLike",
+        "modifiers": ["public"],
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": "class",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "function",
+        "format": ["camelCase"]
+      }
+    ]
   }
 }
