@@ -1,6 +1,7 @@
+import { JSX } from 'react';
 import cl from './App.module.css';
 
-function App() {
+function App(): JSX.Element {
   const title: string = 'Hi!';
   return (
     <>

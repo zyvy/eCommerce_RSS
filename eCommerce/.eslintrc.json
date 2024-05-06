@@ -23,7 +23,8 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": ["**/tsconfig.json"]
   },
   "parser": "@typescript-eslint/parser",
   "settings": {
@@ -31,7 +32,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "prettier", "@typescript-eslint"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
@@ -40,6 +41,47 @@
     "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
     "no-shadow": "off",
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "@typescript-eslint/no-explicit-any": 2,
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/no-shadow": "warn",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-member-accessibility": [
+      2,
+      {
+        "accessibility": "no-public"
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase"]
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "memberLike",
+        "modifiers": ["private", "protected"],
+        "format": ["camelCase"],
+        "leadingUnderscore": "require"
+      },
+      {
+        "selector": "memberLike",
+        "modifiers": ["public"],
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": "class",
+        "format": ["PascalCase"]
+      }
+    ]
   }
 }
