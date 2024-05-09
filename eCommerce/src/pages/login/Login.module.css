@@ -42,3 +42,12 @@ form > .password {
 form > .buttonNewAccount {
   min-width: 200px;
 }
+
+.errorMessage {
+  padding: 10px 20px;
+  text-align: center;
+  color: #d32f2f;
+  font-size: 0.75rem;
+  border: 1px solid #d32f2f;
+  border-radius: 10px;
+}
