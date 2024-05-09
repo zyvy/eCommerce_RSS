@@ -28,12 +28,9 @@ type AuthData = {
 
 const KEY_CUSTOMER_TOKEN = 'customerToken';
 const AUTH_URL = 'https://auth.europe-west1.gcp.commercetools.com';
-const PROJECT_KEY = 'rs-ecommerce-5348424';
-const CLIENT_ID = '7EyqlqolfuhMn_2EQWURRqdM';
-const CLIENT_SECRET = 'QE6vCqcgW43BjLE9IYOJpbjfFdLrnFyu';
 
 function authenticateUser() {
-  const token = `${CLIENT_ID}:${CLIENT_SECRET}`;
+  const token = `${import.meta.env.VITE_CLIENT_ID}:${import.meta.env.VITE_CLIENT_SECRET}`;
   const hash = btoa(token);
   return `Basic ${hash}`;
 }
@@ -57,7 +54,10 @@ export class AuthorizationService {
 
     let response = null;
     try {
-      response = await fetch(`${AUTH_URL}/oauth/${PROJECT_KEY}/customers/token?${params}`, requestOptions);
+      response = await fetch(
+        `${AUTH_URL}/oauth/${import.meta.env.VITE_PROJECT_KEY}/customers/token?${params}`,
+        requestOptions,
+      );
     } catch (error: unknown) {
       const message = typeof error === 'string' ? error : '';
       return {

@@ -72,7 +72,6 @@ function Login() {
     if (!error) {
       authorization();
     }
-    // console.log(import.meta.env);
   };
 
   const passwordErrorText =
