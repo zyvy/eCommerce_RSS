@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 import styles from './Registration.module.css';
+import { Box } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function Registration() {
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastName, setLastName] = useState('');
   const [lastNameError, setLastNameError] = useState(false);
+  const [Date, setDate] = useState('');
+  const [DateError, setDateError] = useState(false);
+  const [street, setStreet] = useState('');
+  const [streetError, setStreetError] = useState(false);
+  const [city, setCity] = useState('');
+  const [cityError, setCityError] = useState(false);
 
   const isPasswordValid = () => {
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     return regex.test(password);
   };
 
@@ -25,13 +35,28 @@ function Registration() {
   };
 
   const isFirstNameValid = () => {
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+    const regex = /^[A-Z][a-z]*$/;
     return regex.test(firstName);
   };
 
   const isLastNameValid = () => {
+    const regex = /^[A-Z][a-z]*$/;
+    return regex.test(lastName);
+  };
+
+  const isDateValid = () => {
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
-    return regex.test(firstName);
+    return regex.test(Date);
+  };
+
+  const isStreetValid = () => {
+    const regex = /^[A-Za-z0-9]*$/;
+    return regex.test(street);
+  };
+
+  const isCityValid = () => {
+    const regex = /^[A-Za-z]*$/;
+    return regex.test(city);
   };
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +77,21 @@ function Registration() {
   const handleLastNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastNameError(false);
     setLastName(e.target.value);
+  };
+
+  const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDateError(false);
+    setDate(e.target.value);
+  };
+
+  const handleStreetInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStreetError(false);
+    setStreet(e.target.value);
+  };
+
+  const handleCityInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCityError(false);
+    setCity(e.target.value);
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -78,6 +118,21 @@ function Registration() {
         mistake = true;
     }
 
+    if (!isDateValid()) {
+        setDateError(true);
+        mistake = true;
+    }
+
+    if (!isStreetValid()) {
+        setStreetError(true);
+        mistake = true;
+    }
+
+    if (!isCityValid()) {
+        setCityError(true);
+        mistake = true;
+    }
+
     if (!mistake) {
       console.log('sent to the server');
     }
@@ -86,11 +141,40 @@ function Registration() {
   const passwordErrorText =
     'Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters';
 
-  const emailErrorText = 'Incorrect password. The password should be like: test@gmail.com';
+  const emailErrorText = 'Incorrect e-mail. The e-mail should be like: example@gmail.com';
 
-  const firstNameErrorText = 'Тут сделать текст ошибки First Name';
+  const firstNameErrorText = 'It must begin with a capital letter, must contain at least one character and no special characters or numbers';
 
-  const lastNameErrorText = 'Тут сделать текст ошибки First Name';
+  const lastNameErrorText = 'It must begin with a capital letter, must contain at least one character and no special characters or numbers';
+
+  const DateErrorText = 'Age is unacceptable, you must be over 12 years old';
+
+  const streetErrorText = 'Must contain at least one character';
+
+  const cityErrorText = 'Must contain at least one character and no special characters or numbers';
+
+  const currencies = [
+    {
+      value: 'Italy',
+      label: 'Italy',
+      // reg: '/^\d{5}$/',
+    },
+    {
+      value: 'Canada',
+      label: 'Canada',
+      // reg: '/^(?:[ABCEGHJ-NPRSTVXY]\d[A-Z][ -]?\d[A-Z]\d)$/i',
+    },
+    {
+      value: 'Germany',
+      label: 'Germany',
+      // reg: '/^\d{5}$/',
+    },
+    {
+      value: 'Spain',
+      label: 'Spain',
+      // reg: '/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/',
+    },
+  ];
 
   return (
     <div className={styles.container}>
@@ -135,6 +219,70 @@ function Registration() {
           type="text"
           onInput={handleLastNameInput}
         />
+        <TextField
+          error={DateError}
+          helperText={DateError ? DateErrorText : ''}
+          required
+          id="Registration_Date"
+          label="Date of birth"
+          variant="outlined"
+          type="date"
+          onInput={handleDateInput}
+        />
+        <TextField
+        error={streetError}
+        helperText={streetError ? streetErrorText : ''}
+        required
+        id="Registration_street"
+        label="Street"
+        variant="outlined"
+        type="text"
+        onInput={handleStreetInput}
+      />
+      <TextField
+        error={cityError}
+        helperText={cityError ? cityErrorText : ''}
+        required
+        id="Registration_city"
+        label="City"
+        variant="outlined"
+        type="text"
+        onInput={handleStreetInput}
+      />
+      <Box>
+        <TextField
+          // error={cityError}
+          // helperText={cityError ? cityErrorText : ''}
+          // required
+          // id="Registration_city"
+          sx={{ m: 1, width: '25ch' }}
+          select
+          label="Country"
+          variant="outlined"
+          type="text"
+          onInput={handleStreetInput}
+          >
+          {currencies.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+          ))}
+          </TextField>
+          <TextField
+          // error={cityError}
+          // helperText={cityError ? cityErrorText : ''}
+          // required
+          sx={{ m: 1, width: '25ch' }}
+          id="Registration_city"
+          label="Postal code"
+          variant="outlined"
+          type="text"
+          onInput={handleStreetInput}
+        />
+        </Box>
+        <FormControlLabel control={<Checkbox />} label="Default billing address" />
+        <FormControlLabel control={<Checkbox />} label="Default shipping address" />
+        <FormControlLabel control={<Checkbox />} label="Required" />
         <Button type="submit" className={styles.button} variant="contained">
         Register
         </Button>
