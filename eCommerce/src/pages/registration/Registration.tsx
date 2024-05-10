@@ -7,6 +7,19 @@ import { Box } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
+// const getDate = (test: String) => {
+//   const userDate = new Date(`${test}`); // день рождения
+//   const cutoffDate = new Date(); // сейчас
+//   let result = false
+//   cutoffDate.setFullYear(cutoffDate.getFullYear() - 12); // 18 лет назад
+//   if (cutoffDate > userDate) {
+//     return result
+//   } else {
+//     result = true
+//     return result
+//   }
+// }
+
 function Registration() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
@@ -22,6 +35,10 @@ function Registration() {
   const [streetError, setStreetError] = useState(false);
   const [city, setCity] = useState('');
   const [cityError, setCityError] = useState(false);
+  const [country, setCountry] = useState('');
+  const [countryError, setCountryError] = useState(false);
+  const [code, setCode] = useState('');
+  const [codeError, setCodeError] = useState(false);
 
   const isPasswordValid = () => {
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -59,6 +76,20 @@ function Registration() {
     return regex.test(city);
   };
 
+  const isCountryValid = () => {
+    const regex = /^[A-Za-z]*$/;
+    return regex.test(country);
+  };
+
+  const isCodeValid = () => {
+    const regex = /^[A-Za-z]*$/;
+    return regex.test(code);
+  };
+
+  /*ТЕСТ ДАТЫ*/
+  
+  /*ТЕСТ ДАТЫ*/
+
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordError(false);
     setPassword(e.target.value);
@@ -82,6 +113,7 @@ function Registration() {
   const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDateError(false);
     setDate(e.target.value);
+    // getDate(e.target.value)
   };
 
   const handleStreetInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,6 +124,16 @@ function Registration() {
   const handleCityInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCityError(false);
     setCity(e.target.value);
+  };
+
+  const handleCountryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCountryError(false);
+    setCountry(e.target.value);
+  };
+
+  const handleCodeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCodeError(false);
+    setCode(e.target.value);
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -133,6 +175,16 @@ function Registration() {
         mistake = true;
     }
 
+    if (!isCodeValid()) {
+      setCodeError(true);
+      mistake = true;
+  }
+
+    if (!isCountryValid()) {
+      setCountryError(true);
+      mistake = true;
+  }
+
     if (!mistake) {
       console.log('sent to the server');
     }
@@ -152,6 +204,10 @@ function Registration() {
   const streetErrorText = 'Must contain at least one character';
 
   const cityErrorText = 'Must contain at least one character and no special characters or numbers';
+
+  const countryErrorText = 'Must contain at least one character and no special characters or numbers';
+
+  const codeErrorText = 'Must contain at least one character and no special characters or numbers';
 
   const currencies = [
     {
@@ -247,20 +303,20 @@ function Registration() {
         label="City"
         variant="outlined"
         type="text"
-        onInput={handleStreetInput}
+        onInput={handleCityInput}
       />
       <Box>
         <TextField
-          // error={cityError}
-          // helperText={cityError ? cityErrorText : ''}
-          // required
-          // id="Registration_city"
+          error={countryError}
+          helperText={countryError ? countryErrorText : ''}
+          required
+          id="Registration_country"
           sx={{ m: 1, width: '25ch' }}
           select
           label="Country"
           variant="outlined"
           type="text"
-          onInput={handleStreetInput}
+          onInput={handleCountryInput}
           >
           {currencies.map((option) => (
           <MenuItem key={option.value} value={option.value}>
@@ -269,15 +325,15 @@ function Registration() {
           ))}
           </TextField>
           <TextField
-          // error={cityError}
-          // helperText={cityError ? cityErrorText : ''}
-          // required
+          error={codeError}
+          helperText={codeError ? codeErrorText : ''}
+          required
           sx={{ m: 1, width: '25ch' }}
-          id="Registration_city"
+          id="Registration_code"
           label="Postal code"
           variant="outlined"
           type="text"
-          onInput={handleStreetInput}
+          onInput={handleCodeInput}
         />
         </Box>
         <FormControlLabel control={<Checkbox />} label="Default billing address" />
