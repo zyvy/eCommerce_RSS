@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import testGet from '../../services/test.ts';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -72,6 +73,7 @@ function Login() {
     if (!error) {
       authorization();
     }
+    testGet();
   };
 
   const passwordErrorText =
