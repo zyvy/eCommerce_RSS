@@ -1,0 +1,18 @@
+.header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo_image{
+    height: 100px;
+
+}
+.button{
+    padding: 5px;
+
+}
+.search_input{
+    padding: 5px;
+}
+.auth_area{}
