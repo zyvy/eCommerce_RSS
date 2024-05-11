@@ -4,8 +4,6 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './Registration.module.css';
 import { Box } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 // const getDate = (test: String) => {
 //   const userDate = new Date(`${test}`); // день рождения
@@ -39,6 +37,45 @@ function Registration() {
   const [countryError, setCountryError] = useState(false);
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState(false);
+
+  const currencies = [
+    {
+      value: 'Italy',
+      label: 'Italy',
+      reg: '/^\d{5}$/',
+      error: 'Must contain only 5 digits',
+    },
+    {
+      value: 'Belgium',
+      label: 'Belgium',
+      reg: '/^(?:(?:[1-9])(?:\d{3}))$/',
+      error: 'Must contain only 4 digits',
+    },
+    {
+      value: 'Germany',
+      label: 'Germany',
+      reg: '/^\d{5}$/',
+      error: 'Must contain only 5 digits',
+    },
+    {
+      value: 'Spain',
+      label: 'Spain',
+      reg: '/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/',
+      error: 'Must contain 5 digits',
+    },
+  ];
+
+  const settingsAdress = [
+    {
+      value: 'Default billing address',
+    },
+    {
+      value: 'Default shipping address',
+    },
+    {
+      value: 'Default billing and shipping address',
+    }
+  ]
 
   const isPasswordValid = () => {
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -82,13 +119,15 @@ function Registration() {
   };
 
   const isCodeValid = () => {
-    const regex = /^[A-Za-z]*$/;
-    return regex.test(code);
+    let regTemplate: RegExp = /^/
+    currencies.forEach(options => {
+      if (options.value === country) {
+        console.log(options.reg)
+        regTemplate = new RegExp(`${options.reg}`)
+      }
+    })
+    return regTemplate.test(code);
   };
-
-  /*ТЕСТ ДАТЫ*/
-  
-  /*ТЕСТ ДАТЫ*/
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordError(false);
@@ -113,7 +152,6 @@ function Registration() {
   const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDateError(false);
     setDate(e.target.value);
-    // getDate(e.target.value)
   };
 
   const handleStreetInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -207,30 +245,8 @@ function Registration() {
 
   const countryErrorText = 'Must contain at least one character and no special characters or numbers';
 
-  const codeErrorText = 'Must contain at least one character and no special characters or numbers';
-
-  const currencies = [
-    {
-      value: 'Italy',
-      label: 'Italy',
-      // reg: '/^\d{5}$/',
-    },
-    {
-      value: 'Canada',
-      label: 'Canada',
-      // reg: '/^(?:[ABCEGHJ-NPRSTVXY]\d[A-Z][ -]?\d[A-Z]\d)$/i',
-    },
-    {
-      value: 'Germany',
-      label: 'Germany',
-      // reg: '/^\d{5}$/',
-    },
-    {
-      value: 'Spain',
-      label: 'Spain',
-      // reg: '/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/',
-    },
-  ];
+  let codeErrorText = '';
+  currencies.forEach(options => options.value === country ? codeErrorText = options.error : '')
 
   return (
     <div className={styles.container}>
@@ -239,18 +255,20 @@ function Registration() {
         <TextField
           error={emailError}
           helperText={emailError ? emailErrorText : ''}
+          size="small"
           required
           id="Registration_email"
-          label="email"
+          label="Email"
           variant="outlined"
           onInput={handleEmailInput}
         />
         <TextField
           error={passwordError}
           helperText={passwordError ? passwordErrorText : ''}
+          size="small"
           required
           id="Registration_password"
-          label="password"
+          label="Password"
           variant="outlined"
           type="password"
           onInput={handlePasswordInput}
@@ -258,6 +276,7 @@ function Registration() {
         <TextField
           error={firstNameError}
           helperText={firstNameError ? firstNameErrorText : ''}
+          size="small"
           required
           id="Registration_firstName"
           label="First name"
@@ -268,6 +287,7 @@ function Registration() {
         <TextField
           error={lastNameError}
           helperText={lastNameError ? lastNameErrorText : ''}
+          size="small"
           required
           id="Registration_lastName"
           label="Last name"
@@ -278,6 +298,7 @@ function Registration() {
         <TextField
           error={DateError}
           helperText={DateError ? DateErrorText : ''}
+          size="small"
           required
           id="Registration_Date"
           label="Date of birth"
@@ -288,6 +309,7 @@ function Registration() {
         <TextField
         error={streetError}
         helperText={streetError ? streetErrorText : ''}
+        size="small"
         required
         id="Registration_street"
         label="Street"
@@ -298,6 +320,7 @@ function Registration() {
       <TextField
         error={cityError}
         helperText={cityError ? cityErrorText : ''}
+        size="small"
         required
         id="Registration_city"
         label="City"
@@ -312,11 +335,11 @@ function Registration() {
           required
           id="Registration_country"
           sx={{ m: 1, width: '25ch' }}
+          size="small"
           select
           label="Country"
           variant="outlined"
-          type="text"
-          onInput={handleCountryInput}
+          onChange={handleCountryInput}
           >
           {currencies.map((option) => (
           <MenuItem key={option.value} value={option.value}>
@@ -327,6 +350,7 @@ function Registration() {
           <TextField
           error={codeError}
           helperText={codeError ? codeErrorText : ''}
+          size="small"
           required
           sx={{ m: 1, width: '25ch' }}
           id="Registration_code"
@@ -336,9 +360,21 @@ function Registration() {
           onInput={handleCodeInput}
         />
         </Box>
-        <FormControlLabel control={<Checkbox />} label="Default billing address" />
-        <FormControlLabel control={<Checkbox />} label="Default shipping address" />
-        <FormControlLabel control={<Checkbox />} label="Required" />
+        <TextField
+            id="Registration_adress_settings"
+            select
+            label="Set a default address"
+            required
+            variant="outlined"
+            onChange={handleCountryInput}
+            size="small"
+            >
+            {settingsAdress.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.value}
+            </MenuItem>
+            ))}
+          </TextField>
         <Button type="submit" className={styles.button} variant="contained">
         Register
         </Button>
