@@ -9,10 +9,14 @@
 
 }
 .button{
-    padding: 5px;
+    margin: 5px;
 
 }
 .search_input{
-    padding: 5px;
+    display: flex;
+    gap: 5px;
 }
-.auth_area{}
+.auth_area{
+    display: flex;
+    gap: 5px;
+}

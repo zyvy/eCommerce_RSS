@@ -13,14 +13,12 @@ function Header() {
       <div className={styles.logo}>
         <img className={styles.logo_image} src="./logo.png" alt="Logo" />
       </div>
-      <div className={styles.search_input}>
-        <form onSubmit={handleSearch}>
-          <input type="text" name="searchQuery" />
-          <Button type="submit" className={styles.button} variant="contained">
-            Search
-          </Button>
-        </form>
-      </div>
+      <form className={styles.search_input} onSubmit={handleSearch}>
+        <input type="text" name="searchQuery" />
+        <Button type="submit" className={styles.button} variant="contained">
+          Search
+        </Button>
+      </form>
       <div className={styles.auth_area}>
         <Button type="submit" className={styles.button} variant="contained">
           Log in
@@ -31,6 +29,6 @@ function Header() {
       </div>
     </header>
   );
-};
+}
 
 export default Header;
