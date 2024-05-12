@@ -9,7 +9,7 @@ import { Box } from '@mui/material';
 //   const userDate = new Date(`${test}`); // день рождения
 //   const cutoffDate = new Date(); // сейчас
 //   let result = false
-//   cutoffDate.setFullYear(cutoffDate.getFullYear() - 12); // 18 лет назад
+//   cutoffDate.setFullYear(cutoffDate.getFullYear() - 12); // 12 лет назад
 //   if (cutoffDate > userDate) {
 //     return result
 //   } else {
@@ -379,7 +379,11 @@ function Registration() {
         Register
         </Button>
         <h4 className={styles.subtitle}>Do you have an account?</h4>
-        <Button className={[styles.button, styles.buttonNewAccount].join(' ')} variant="outlined">
+        <Button
+          className={[styles.button, styles.buttonNewAccount].join(' ')}
+          variant="outlined"
+          onClick={() => console.log('To login')}
+          >
         Sign in
         </Button>
       </form>
