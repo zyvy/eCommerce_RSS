@@ -13,7 +13,7 @@ function Login() {
   const [authError, setAuthError] = useState('');
 
   useEffect(() => {
-    if (AuthorizationService.getCustomerToken()) {
+    if (AuthorizationService.getCustomerLogin().token) {
       console.log('move to the main page');
     }
   }, []);
@@ -46,12 +46,12 @@ function Login() {
 
   async function authorization() {
     clearAuthError();
-    const token = await AuthorizationService.getAccessTokenByPassword({ email, password });
-    if (token.error) {
-      setAuthError(token.errorDescription);
-      AuthorizationService.removeCustomerToken();
+    const login = await AuthorizationService.login({ email, password });
+    if (login.error) {
+      setAuthError(login.errorDescription);
+      AuthorizationService.removeCustomerLogin();
     } else {
-      AuthorizationService.saveCustomerToken(token.accessToken);
+      AuthorizationService.updateCustomerLogin('id', login.customer!.id);
       console.log('move to the main page');
     }
   }

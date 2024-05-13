@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-type Token = {
+import { Customer, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import { ctpClient } from './ctpClient.ts';
+
+/* type Token = {
   access_token: string;
   expires_in: number;
   refresh_token: string;
@@ -13,11 +16,11 @@ type BadResponse = {
   error_description: string;
   message: string;
   statusCode: number;
-};
+}; */
 
-type AnswerAccessToket = {
+type LoginResponse = {
   error: boolean;
-  accessToken: string;
+  customer: Customer | null;
   errorDescription: string;
 };
 
@@ -26,71 +29,90 @@ type AuthData = {
   password: string;
 };
 
-const KEY_CUSTOMER_TOKEN = 'customerToken';
-const AUTH_URL = 'https://auth.europe-west1.gcp.commercetools.com';
+type CustomerLogin = {
+  id: string;
+  token: string;
+};
 
-function authenticateUser() {
-  const token = `${import.meta.env.VITE_CLIENT_ID}:${import.meta.env.VITE_CLIENT_SECRET}`;
-  const hash = btoa(token);
-  return `Basic ${hash}`;
-}
+/* interface InvalidCredentials {
+  code: number;
+  message: string;
+} */
+
+const KEY_CUSTOMER = 'customer';
 
 export class AuthorizationService {
-  static async getAccessTokenByPassword({ email, password }: AuthData): Promise<AnswerAccessToket> {
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', authenticateUser());
+  static async login({ email, password }: AuthData): Promise<LoginResponse> {
+    const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
+      projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
+    });
 
-    const requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: '',
-    };
-
-    const params = new URLSearchParams({
-      grant_type: 'password',
-      username: email,
-      password,
-    }).toString();
-
-    let response = null;
     try {
-      response = await fetch(
-        `${AUTH_URL}/oauth/${import.meta.env.VITE_PROJECT_KEY}/customers/token?${params}`,
-        requestOptions,
-      );
-    } catch (error: unknown) {
-      const message = typeof error === 'string' ? error : '';
-      return {
-        error: true,
-        accessToken: '',
-        errorDescription: message,
-      };
-    }
-    if (response.status === 200) {
-      const data: Token = await response.json();
+      const {
+        body: { customer },
+      } = await apiRoot
+        .login()
+        .post({
+          body: {
+            email,
+            password,
+          },
+        })
+        .execute();
+
       return {
         error: false,
-        accessToken: data.access_token,
+        customer,
         errorDescription: '',
       };
+    } catch (error) {
+      return {
+        error: true,
+        customer: null,
+        errorDescription: error.message,
+      };
     }
-    const data: BadResponse = await response.json();
+  }
+
+  static async getCustomerToken(customerId: string, ttlMinutes = 60) {
+    const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
+      projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
+    });
+
+    try {
+      const {
+        body: { value },
+      } = await apiRoot
+        .customers()
+        .emailToken()
+        .post({ body: { id: customerId, ttlMinutes } })
+        .execute();
+
+      return value;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
+  static removeCustomerLogin() {
+    localStorage.removeItem(KEY_CUSTOMER);
+  }
+
+  static updateCustomerLogin(key: keyof CustomerLogin, value: string) {
+    const customer = AuthorizationService.getCustomerLogin();
+    customer[key] = value;
+    localStorage.setItem(KEY_CUSTOMER, JSON.stringify(customer));
+  }
+
+  static getCustomerLogin() {
+    const customer = localStorage.getItem(KEY_CUSTOMER);
+    if (customer) {
+      return <CustomerLogin>JSON.parse(customer);
+    }
     return {
-      error: true,
-      accessToken: '',
-      errorDescription: data.error_description,
+      id: '',
+      token: '',
     };
-  }
-
-  static saveCustomerToken(token: string) {
-    localStorage.setItem(KEY_CUSTOMER_TOKEN, token);
-  }
-
-  static removeCustomerToken() {
-    localStorage.removeItem(KEY_CUSTOMER_TOKEN);
-  }
-
-  static getCustomerToken() {
-    return localStorage.getItem(KEY_CUSTOMER_TOKEN);
   }
 }
