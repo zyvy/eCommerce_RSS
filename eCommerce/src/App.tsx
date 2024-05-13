@@ -1,17 +1,19 @@
-import { JSX } from 'react';
-import cl from './App.module.css';
+import AppRouter from './components/Router';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-function App(): JSX.Element {
-  const title: string = 'Hi!';
+function App() {
   return (
-    <>
-      <h1 className={cl.header}>{title}</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus earum magni quae itaque, voluptate officiis
-        veritatis at iste, quis incidunt cupiditate deleniti molestiae tempore totam laudantium quas perspiciatis?
-        Provident, commodi?
-      </p>
-    </>
+    <Router>
+      <div>
+        <AppRouter />
+        <nav>
+          <Link to="/">Главная</Link><br/>
+          <Link to="/login">Войти</Link><br/>
+          <Link to="/register">Регистрация</Link><br/>
+          <Link to="/404">404</Link>
+        </nav>
+      </div>
+    </Router>
   );
 }
 
