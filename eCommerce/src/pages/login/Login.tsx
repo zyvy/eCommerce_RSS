@@ -1,6 +1,11 @@
+import Header from '../../components/UI/Header';
+
 function Login() {
   return (
-    <h1>Login page</h1>
+    <>
+      <Header />
+      <h1>Login page</h1>
+    </>
   );
 }
 

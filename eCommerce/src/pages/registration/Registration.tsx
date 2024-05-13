@@ -1,7 +1,12 @@
+import Header from '../../components/UI/Header';
+
 function Registration() {
-    return (
+  return (
+    <>
+      <Header />
       <h1>Registration page</h1>
-    );
-  }
-  
-  export default Registration;
+    </>
+  );
+}
+
+export default Registration;
