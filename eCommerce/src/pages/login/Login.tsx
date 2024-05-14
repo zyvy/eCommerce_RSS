@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
-import testGet from '../../services/test.ts';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -52,7 +51,11 @@ function Login() {
       AuthorizationService.removeCustomerLogin();
     } else {
       AuthorizationService.updateCustomerLogin('id', login.customer!.id);
-      console.log('move to the main page');
+      const token = await AuthorizationService.getAccessToken({ email, password });
+      if (!token.error) {
+        AuthorizationService.updateCustomerLogin('token', token.accessToken);
+        console.log('move to the main page');
+      }
     }
   }
 
@@ -73,7 +76,6 @@ function Login() {
     if (!error) {
       authorization();
     }
-    testGet();
   };
 
   const passwordErrorText =
@@ -86,7 +88,7 @@ function Login() {
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
         <TextField
-          defaultValue="johndoe@example.com"
+          // defaultValue="johndoe@example.com"
           error={emailError}
           helperText={emailError ? emailErrorText : ''}
           required
@@ -96,7 +98,7 @@ function Login() {
           onInput={handleEmailInput}
         />
         <TextField
-          defaultValue="Secret123"
+          // defaultValue="Secret123"
           error={passwordError}
           helperText={passwordError ? passwordErrorText : ''}
           required

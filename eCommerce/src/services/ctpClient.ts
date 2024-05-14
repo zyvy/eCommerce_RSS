@@ -1,16 +1,15 @@
 import fetch from 'node-fetch';
 import {
   ClientBuilder,
-
-  // Import middlewares
-  type AuthMiddlewareOptions, // Required for auth
-  type HttpMiddlewareOptions, // Required for sending HTTP requests
+  PasswordAuthMiddlewareOptions,
+  UserAuthOptions,
+  type AuthMiddlewareOptions,
+  type HttpMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
 
 const projectKey = import.meta.env.VITE_PROJECT_KEY;
 const scopes = [import.meta.env.VITE_SCOPE];
 
-// Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: `https://auth.${import.meta.env.VITE_REGION}.commercetools.com`,
   projectKey,
@@ -22,16 +21,26 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
   fetch,
 };
 
-// Configure httpMiddlewareOptions
-const httpMiddlewareOptions: HttpMiddlewareOptions = {
+export const httpMiddlewareOptions: HttpMiddlewareOptions = {
   host: `https://api.${import.meta.env.VITE_REGION}.commercetools.com`,
   fetch,
 };
 
-// Export the ClientBuilder
+export const authMiddlewareForPasswordFlow = (user: UserAuthOptions): PasswordAuthMiddlewareOptions => ({
+  host: `https://auth.${import.meta.env.VITE_REGION}.commercetools.com`,
+  projectKey,
+  credentials: {
+    clientId: import.meta.env.VITE_CLIENT_ID,
+    clientSecret: import.meta.env.VITE_CLIENT_SECRET,
+    user,
+  },
+  scopes,
+  fetch,
+});
+
 export const ctpClient = new ClientBuilder()
-  .withProjectKey(projectKey) // .withProjectKey() is not required if the projectKey is included in authMiddlewareOptions
+  .withProjectKey(projectKey)
   .withClientCredentialsFlow(authMiddlewareOptions)
   .withHttpMiddleware(httpMiddlewareOptions)
-  .withLoggerMiddleware() // Include middleware for logging
+  .withLoggerMiddleware()
   .build();

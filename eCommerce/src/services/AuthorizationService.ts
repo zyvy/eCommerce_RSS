@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-
 import { Customer, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
 
-/* type Token = {
+type Token = {
   access_token: string;
   expires_in: number;
   refresh_token: string;
@@ -16,7 +15,13 @@ type BadResponse = {
   error_description: string;
   message: string;
   statusCode: number;
-}; */
+};
+
+type AccessToketResponse = {
+  error: boolean;
+  accessToken: string;
+  errorDescription: string;
+};
 
 type LoginResponse = {
   error: boolean;
@@ -34,23 +39,23 @@ type CustomerLogin = {
   token: string;
 };
 
-/* interface InvalidCredentials {
-  code: number;
-  message: string;
-} */
-
 const KEY_CUSTOMER = 'customer';
+
+function authenticateUser() {
+  const token = `${import.meta.env.VITE_CLIENT_ID}:${import.meta.env.VITE_CLIENT_SECRET}`;
+  const hash = btoa(token);
+  return `Basic ${hash}`;
+}
 
 export class AuthorizationService {
   static async login({ email, password }: AuthData): Promise<LoginResponse> {
-    const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
-      projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
-    });
+    const apiRoot = AuthorizationService.getApiRoot();
 
     try {
       const {
         body: { customer },
       } = await apiRoot
+        .me()
         .login()
         .post({
           body: {
@@ -74,11 +79,8 @@ export class AuthorizationService {
     }
   }
 
-  static async getCustomerToken(customerId: string, ttlMinutes = 60) {
-    const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
-      projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
-    });
-
+  static async getCustomerTokenById(customerId: string, ttlMinutes = 3600): Promise<string | null> {
+    const apiRoot = AuthorizationService.getApiRoot();
     try {
       const {
         body: { value },
@@ -90,9 +92,72 @@ export class AuthorizationService {
 
       return value;
     } catch (error) {
-      console.log(error);
       return null;
     }
+  }
+
+  static async getAccessToken({ email, password }: AuthData): Promise<AccessToketResponse> {
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', authenticateUser());
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: '',
+    };
+
+    const params = new URLSearchParams({
+      grant_type: 'password',
+      username: email,
+      password,
+    }).toString();
+
+    let response = null;
+    try {
+      response = await fetch(
+        `https://auth.${import.meta.env.VITE_REGION}.commercetools.com/oauth/${import.meta.env.VITE_PROJECT_KEY}/customers/token?${params}`,
+        requestOptions,
+      );
+    } catch (error: unknown) {
+      const message = typeof error === 'string' ? error : '';
+      return {
+        error: true,
+        accessToken: '',
+        errorDescription: message,
+      };
+    }
+    if (response.status === 200) {
+      const data: Token = await response.json();
+      console.log('token', data);
+      return {
+        error: false,
+        accessToken: data.access_token,
+        errorDescription: '',
+      };
+    }
+    const data: BadResponse = await response.json();
+    return {
+      error: true,
+      accessToken: '',
+      errorDescription: data.error_description,
+    };
+  }
+
+  static async getCustomerPasswordToken(email: string) {
+    const apiRoot = AuthorizationService.getApiRoot();
+    try {
+      const body = await apiRoot.customers().passwordToken().post({ body: { email } }).execute();
+      console.log(body);
+      return body;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static getApiRoot() {
+    return createApiBuilderFromCtpClient(ctpClient).withProjectKey({
+      projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
+    });
   }
 
   static removeCustomerLogin() {
