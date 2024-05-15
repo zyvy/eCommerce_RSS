@@ -71,10 +71,18 @@ export class AuthorizationService {
         errorDescription: '',
       };
     } catch (error) {
+      console.log('error', error);
+      if (error instanceof Error) {
+        return {
+          error: true,
+          customer: null,
+          errorDescription: error.message,
+        };
+      }
       return {
         error: true,
         customer: null,
-        errorDescription: error.message,
+        errorDescription: '',
       };
     }
   }
@@ -128,7 +136,6 @@ export class AuthorizationService {
     }
     if (response.status === 200) {
       const data: Token = await response.json();
-      console.log('token', data);
       return {
         error: false,
         accessToken: data.access_token,

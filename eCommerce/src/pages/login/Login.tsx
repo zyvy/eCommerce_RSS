@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import { isEmailValid, isPasswordValid } from '../../utils/utils.ts';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -18,17 +19,6 @@ function Login() {
   }, []);
 
   const clearAuthError = () => setAuthError('');
-
-  const isPasswordValid = () => {
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
-    return regex.test(password);
-  };
-
-  const isEmailValid = () => {
-    const regex =
-      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-    return regex.test(email);
-  };
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordError(false);
@@ -63,12 +53,12 @@ function Login() {
     e.preventDefault();
     let error = false;
 
-    if (!isPasswordValid()) {
+    if (!isPasswordValid(password)) {
       setPasswordError(true);
       error = true;
     }
 
-    if (!isEmailValid()) {
+    if (!isEmailValid(email)) {
       setEmailError(true);
       error = true;
     }
@@ -79,9 +69,9 @@ function Login() {
   };
 
   const passwordErrorText =
-    'Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters';
+    'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters';
 
-  const emailErrorText = 'Incorrect password. The password should be like: test@gmail.com';
+  const emailErrorText = 'Incorrect email. The email should be like: example@email.com';
 
   return (
     <div className={styles.container}>
