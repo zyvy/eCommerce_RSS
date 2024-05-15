@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { IconButton, InputAdornment } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
-import { isEmailValid, isPasswordValid } from '../../utils/utils.ts';
+import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.ts';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -11,12 +14,20 @@ function Login() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [showPassword, setShowPassword] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   useEffect(() => {
     if (AuthorizationService.getCustomerLogin().token) {
-      console.log('move to the main page');
+      navigate(PagePaths.Main);
     }
-  }, []);
+  });
 
   const clearAuthError = () => setAuthError('');
 
@@ -44,7 +55,7 @@ function Login() {
       const token = await AuthorizationService.getAccessToken({ email, password });
       if (!token.error) {
         AuthorizationService.updateCustomerLogin('token', token.accessToken);
-        console.log('move to the main page');
+        navigate(PagePaths.Main);
       }
     }
   }
@@ -94,9 +105,21 @@ function Login() {
           required
           id="login_password"
           label="password"
-          variant="outlined"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           onInput={handlePasswordInput}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
         <Button type="submit" className={styles.button} variant="contained">
