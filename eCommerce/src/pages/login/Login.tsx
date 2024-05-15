@@ -129,7 +129,7 @@ function Login() {
         <Button
           className={[styles.button, styles.buttonNewAccount].join(' ')}
           variant="outlined"
-          onClick={() => console.log('move to registration page')}>
+          onClick={() => navigate(PagePaths.Register)}>
           Create new account
         </Button>
       </form>
