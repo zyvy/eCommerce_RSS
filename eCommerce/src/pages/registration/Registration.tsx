@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
+import DateInput from '../../utils/my-utils';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import styles from './Registration.module.css';
 import { Box } from '@mui/material';
-
-// const getDate = (test: String) => {
-//   const userDate = new Date(`${test}`); // день рождения
-//   const cutoffDate = new Date(); // сейчас
-//   let result = false
-//   cutoffDate.setFullYear(cutoffDate.getFullYear() - 12); // 12 лет назад
-//   if (cutoffDate > userDate) {
-//     return result
-//   } else {
-//     result = true
-//     return result
-//   }
-// }
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import List from '@mui/material/List';
+import Collapse from '@mui/material/Collapse';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function Registration() {
   const [email, setEmail] = useState('');
@@ -37,6 +32,16 @@ function Registration() {
   const [countryError, setCountryError] = useState(false);
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState(false);
+
+  const [openBilling, setOpenBilling] = useState(false);
+  const [openShipping, setOpenShipping] = useState(false);
+
+  const handleClickBilling = () => {
+    setOpenBilling(!openBilling);
+  };
+  const handleClickShipping = () => {
+    setOpenShipping(!openShipping);
+  };
 
   const currencies = [
     {
@@ -65,60 +70,48 @@ function Registration() {
     },
   ];
 
-  const settingsAdress = [
-    {
-      value: 'Default billing address',
-    },
-    {
-      value: 'Default shipping address',
-    },
-    {
-      value: 'Default billing and shipping address',
-    }
-  ]
-
-  const isPasswordValid = () => {
+  const isPasswordValid = (): boolean => {
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
     return regex.test(password);
   };
 
-  const isEmailValid = () => {
+  const isEmailValid = (): boolean => {
     const regex =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     return regex.test(email);
   };
 
-  const isFirstNameValid = () => {
+  const isFirstNameValid = (): boolean => {
     const regex = /^[A-Z][a-z]*$/;
     return regex.test(firstName);
   };
 
-  const isLastNameValid = () => {
+  const isLastNameValid = (): boolean => {
     const regex = /^[A-Z][a-z]*$/;
     return regex.test(lastName);
   };
 
-  const isDateValid = () => {
+  const isDateValid = (): boolean => {
     const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
     return regex.test(Date);
   };
 
-  const isStreetValid = () => {
+  const isStreetValid = (): boolean => {
     const regex = /^[A-Za-z0-9]*$/;
     return regex.test(street);
   };
 
-  const isCityValid = () => {
+  const isCityValid = (): boolean => {
     const regex = /^[A-Za-z]*$/;
     return regex.test(city);
   };
 
-  const isCountryValid = () => {
+  const isCountryValid = (): boolean => {
     const regex = /^[A-Za-z]*$/;
     return regex.test(country);
   };
 
-  const isCodeValid = () => {
+  const isCodeValid = (): boolean => {
     let regTemplate: RegExp = /^/
     currencies.forEach(options => {
       if (options.value === country) {
@@ -237,8 +230,6 @@ function Registration() {
 
   const lastNameErrorText = 'It must begin with a capital letter, must contain at least one character and no special characters or numbers';
 
-  const DateErrorText = 'Age is unacceptable, you must be over 12 years old';
-
   const streetErrorText = 'Must contain at least one character';
 
   const cityErrorText = 'Must contain at least one character and no special characters or numbers';
@@ -295,86 +286,152 @@ function Registration() {
           type="text"
           onInput={handleLastNameInput}
         />
-        <TextField
-          error={DateError}
-          helperText={DateError ? DateErrorText : ''}
-          size="small"
-          required
-          id="Registration_Date"
-          label="Date of birth"
-          variant="outlined"
-          type="date"
-          onInput={handleDateInput}
-        />
-        <TextField
-        error={streetError}
-        helperText={streetError ? streetErrorText : ''}
-        size="small"
-        required
-        id="Registration_street"
-        label="Street"
-        variant="outlined"
-        type="text"
-        onInput={handleStreetInput}
-      />
-      <TextField
-        error={cityError}
-        helperText={cityError ? cityErrorText : ''}
-        size="small"
-        required
-        id="Registration_city"
-        label="City"
-        variant="outlined"
-        type="text"
-        onInput={handleCityInput}
-      />
-      <Box>
-        <TextField
-          error={countryError}
-          helperText={countryError ? countryErrorText : ''}
-          required
-          id="Registration_country"
-          sx={{ m: 1, width: '25ch' }}
-          size="small"
-          select
-          label="Country"
-          variant="outlined"
-          onChange={handleCountryInput}
-          >
-          {currencies.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-          ))}
-          </TextField>
-          <TextField
-          error={codeError}
-          helperText={codeError ? codeErrorText : ''}
-          size="small"
-          required
-          sx={{ m: 1, width: '25ch' }}
-          id="Registration_code"
-          label="Postal code"
-          variant="outlined"
-          type="text"
-          onInput={handleCodeInput}
-        />
-        </Box>
-        <TextField
-            id="Registration_adress_settings"
-            select
-            label="Set a default address"
-            required
-            variant="outlined"
-            onChange={handleCountryInput}
-            size="small"
-            >
-            {settingsAdress.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.value}
-            </MenuItem>
-            ))}
-          </TextField>
+        {DateInput()}
+        
+        <ListItemButton onClick={handleClickBilling}>
+          <ListItemIcon>
+            <p>1. </p>
+          </ListItemIcon>
+          <ListItemText primary="Add billing address"/>
+        </ListItemButton>
+        <Collapse in={openBilling} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <TextField
+              error={streetError}
+              helperText={streetError ? streetErrorText : ''}
+              size="small"
+              required
+              sx={{ width: "100%"}}
+              id="Registration_street"
+              label="Street"
+              variant="outlined"
+              type="text"
+              onInput={handleStreetInput}
+            />
+            <TextField
+              error={cityError}
+              helperText={cityError ? cityErrorText : ''}
+              size="small"
+              required
+              sx={{ width: "100%" }}
+              id="Registration_city"
+              label="City"
+              variant="outlined"
+              type="text"
+              onInput={handleCityInput}
+            />
+            <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
+                <TextField
+                  error={countryError}
+                  helperText={countryError ? countryErrorText : ''}
+                  required
+                  id="Registration_country"
+                  sx={{width: '100%' }}
+                  size="small"
+                  select
+                  label="Country"
+                  defaultValue = ""
+                  variant="outlined"
+                  onChange={handleCountryInput}
+                  >
+                  {currencies.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  error={codeError}
+                  helperText={codeError ? codeErrorText : ''}
+                  size="small"
+                  required
+                  sx={{width: '100%' }}
+                  id="Registration_code"
+                  label="Postal code"
+                  variant="outlined"
+                  type="text"
+                  onInput={handleCodeInput}
+                />
+            </Box>
+                <FormControlLabel control={<Checkbox />} label="Default" />
+            </Box>
+            </ListItemButton>
+          </List>
+        </Collapse>
+        <ListItemButton onClick={handleClickShipping}>
+          <ListItemIcon>
+            <p>2. </p>
+          </ListItemIcon>
+          <ListItemText primary="Add shipping address"/>
+        </ListItemButton>
+        <Collapse in={openShipping} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <TextField
+              error={streetError}
+              helperText={streetError ? streetErrorText : ''}
+              size="small"
+              required
+              sx={{ width: "100%"}}
+              id="Registration_street"
+              label="Street"
+              variant="outlined"
+              type="text"
+              onInput={handleStreetInput}
+            />
+            <TextField
+              error={cityError}
+              helperText={cityError ? cityErrorText : ''}
+              size="small"
+              required
+              sx={{ width: "100%" }}
+              id="Registration_city"
+              label="City"
+              variant="outlined"
+              type="text"
+              onInput={handleCityInput}
+            />
+            <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
+                <TextField
+                  error={countryError}
+                  helperText={countryError ? countryErrorText : ''}
+                  required
+                  id="Registration_country"
+                  sx={{width: '100%' }}
+                  size="small"
+                  select
+                  label="Country"
+                  defaultValue = ""
+                  variant="outlined"
+                  onChange={handleCountryInput}
+                  >
+                  {currencies.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  error={codeError}
+                  helperText={codeError ? codeErrorText : ''}
+                  size="small"
+                  required
+                  sx={{width: '100%' }}
+                  id="Registration_code"
+                  label="Postal code"
+                  variant="outlined"
+                  type="text"
+                  onInput={handleCodeInput}
+                />
+            </Box>
+                <FormControlLabel control={<Checkbox />} label="Default" />
+            </Box>
+            </ListItemButton>
+          </List>
+        </Collapse>
         <Button type="submit" className={styles.button} variant="contained">
         Register
         </Button>
