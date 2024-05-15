@@ -1,5 +1,6 @@
 import Header from '../../components/UI/Header';
 import { Link } from 'react-router-dom';
+import Footer from '../../components/UI/footer';
 
 function Main() {
   return (
@@ -17,6 +18,7 @@ function Main() {
           <Link to="/404">404</Link>
         </nav>
       </div>
+      <Footer />
     </>
   );
 }
