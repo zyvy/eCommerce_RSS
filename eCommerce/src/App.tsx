@@ -1,8 +1,13 @@
-// import cl from './App.module.css';
-import Login from './pages/login/Login.tsx';
+
+import AppRouter from './components/Router';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
-  return <Login />;
+  return (
+    <Router>
+      <AppRouter />
+    </Router>
+  );
 }
 
 export default App;

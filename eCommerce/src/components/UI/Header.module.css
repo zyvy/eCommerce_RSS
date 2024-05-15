@@ -1,0 +1,24 @@
+.header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo_image{
+    height: 100px;
+
+}
+.button{
+    margin: 5px;
+    cursor: pointer;
+    border: 1px;
+
+}
+.search_input{
+    display: flex;
+    gap: 5px;
+}
+.auth_area{
+    display: flex;
+    gap: 5px;
+}
