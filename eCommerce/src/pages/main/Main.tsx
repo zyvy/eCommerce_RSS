@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/UI/Header.tsx';
 import { PagePaths } from '../../utils/utils.ts';
+import Footer from '../../components/UI/footer';
 
 function Main() {
   return (
@@ -18,6 +19,7 @@ function Main() {
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
+      <Footer />
     </>
   );
 }

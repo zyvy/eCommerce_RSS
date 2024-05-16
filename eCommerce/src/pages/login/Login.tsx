@@ -7,6 +7,9 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
 import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.ts';
+import { isEmailValid, isPasswordValid } from '../../utils/utils.ts';
+import Footer from '../../components/UI/footer.tsx';
+import Header from '../../components/UI/Header.tsx';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -85,6 +88,8 @@ function Login() {
   const emailErrorText = 'Incorrect email. The email should be like: example@email.com';
 
   return (
+    <>
+    <Header />
     <div className={styles.container}>
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
@@ -134,6 +139,8 @@ function Login() {
         </Button>
       </form>
     </div>
+    <Footer />
+    </>
   );
 }
 
