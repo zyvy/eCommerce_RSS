@@ -1,5 +1,6 @@
-import Header from '../../components/UI/Header';
 import { Link } from 'react-router-dom';
+import Header from '../../components/UI/Header.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 import Footer from '../../components/UI/footer';
 
 function Main() {
@@ -9,13 +10,13 @@ function Main() {
       <h1>Main page</h1>
       <div>
         <nav>
-          <Link to="/">Главная</Link>
+          <Link to={PagePaths.Main}>Главная</Link>
           <br />
-          <Link to="/login">Войти</Link>
+          <Link to={PagePaths.Login}>Войти</Link>
           <br />
-          <Link to="/register">Регистрация</Link>
+          <Link to={PagePaths.Register}>Регистрация</Link>
           <br />
-          <Link to="/404">404</Link>
+          <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
       <Footer />

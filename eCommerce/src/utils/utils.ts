@@ -5,7 +5,13 @@ export const isEmailValid = (email: string) => {
 };
 
 export const isPasswordValid = (password: string) => {
-  console.log(password);
-  const regex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(.+)$/;
+  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return regex.test(password);
 };
+
+export enum PagePaths {
+  Main = '/',
+  Login = '/login',
+  Register = '/register',
+  NotFound = '/404',
+}

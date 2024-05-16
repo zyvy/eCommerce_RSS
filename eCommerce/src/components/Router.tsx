@@ -1,11 +1,11 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Route, Routes } from 'react-router-dom';
-import MainPage from '../pages/main/Main';
-import LoginPage from '../pages/login/Login';
-import RegisterPage from '../pages/registration/Registration';
-import NotFound from '../pages/not_found/Notfound';
+import MainPage from '../pages/main/Main.tsx';
+import LoginPage from '../pages/login/Login.tsx';
+import RegisterPage from '../pages/registration/Registration.tsx';
+import NotFound from '../pages/not_found/Notfound.tsx';
 
-const AppRouter: React.FC = () => {
+function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
@@ -14,6 +14,6 @@ const AppRouter: React.FC = () => {
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
+}
 
 export default AppRouter;

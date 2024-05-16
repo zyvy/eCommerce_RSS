@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
+import styles from './Header.module.css';
 
 const theme = createTheme({
   breakpoints: {
