@@ -174,6 +174,15 @@ function Registration() {
     setCodeShip(e.target.value);
   };
 
+  const handleAllDefaultBox = () => {
+    setStreetShip(street)
+    setCountryShip(country)
+    setCodeShip(code)
+    setCityShip(city)
+
+    setAllDefaultBox(!allDefaultBox)
+  }
+
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let mistake = false;
@@ -225,9 +234,9 @@ function Registration() {
 
     if (!mistake) {
       console.log('sent to the server');
-      registration()
+      
     }
-    
+    registration()
   };
 
   const passwordErrorText =
@@ -386,7 +395,7 @@ function Registration() {
                 <FormControlLabel
                   control={<Checkbox />}
                   label="Also use as shipping adress"
-                  onChange={() => setAllDefaultBox(!allDefaultBox)}
+                  onChange={handleAllDefaultBox}
                   />
             </Box>
             </ListItemButton>
