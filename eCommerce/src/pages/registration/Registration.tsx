@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DateInput from '../../utils/my-utils';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -18,6 +18,8 @@ import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { RegistrationService } from '../../services/RegistrationService';
+import { CustomerDraft } from '@commercetools/platform-sdk';
 
 function Registration() {
   const [email, setEmail] = useState('');
@@ -39,14 +41,50 @@ function Registration() {
   const [countryError, setCountryError] = useState(false);
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState(false);
-  const [defaultBox, setDefaultBox] = useState(false);
+
+  const [streetShip, setStreetShip] = useState('');
+  const [streetShipError, setStreetShipError] = useState(false);
+  const [cityShip, setCityShip] = useState('');
+  const [cityShipError, setCityShipError] = useState(false);
+  const [countryShip, setCountryShip] = useState('');
+  const [countryShipError, setCountryShipError] = useState(false);
+  const [codeShip, setCodeShip] = useState('');
+  const [codeShipError, setCodeShipError] = useState(false);
+
+  const [defaultBil, setDefaultBil] = useState(false);
+  const [defaultShip, setDefaultShip] = useState(false);
   const [allDefaultBox, setAllDefaultBox] = useState(true);
 
   const [openBilling, setOpenBilling] = useState(false);
   const [openShipping, setOpenShipping] = useState(false);
 
-  const [openBill, setOpenBill] = React.useState(true);
-  const [openShipp, setOpenShipp] = React.useState(true);
+  const [openBill, setOpenBill] = useState(true);
+  const [openShipp, setOpenShipp] = useState(true);
+
+
+  async function registration() {
+    const customer: CustomerDraft = {
+      email,
+      password,
+      firstName,
+      lastName,
+      dateOfBirth: Date,
+      addresses: [{country,city,postalCode: code,streetName:street},{country: countryShip,city: cityShip,postalCode: codeShip,streetName:streetShip}],
+      shippingAddresses: [1],
+      billingAddresses: [0],
+      ...(defaultBil && {defaultBillingAddress: 0}),
+      ...(defaultShip && {defaultShippingAddress: 1})
+    }
+
+    const reg = await RegistrationService.registration(customer);
+    if (reg.error) {
+      console.log('11111')
+      // setAuthError(reg.errorDescription);
+    } else {
+      console.log('22222')
+        // navigate(PagePaths.Main);
+    }
+  }
 
   const handleClickBilling = () => {
     setOpenBill(!openBill);
@@ -57,25 +95,17 @@ function Registration() {
     setOpenShipping(!openShipping);
   };
 
-  const handleDefaultBox = () => {
-    setDefaultBox(!defaultBox)
-  }
-  const handleAllDefaultBox = () => {
-    setAllDefaultBox(!allDefaultBox)
-  }
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
-  const isCodeValid = (code: string): boolean => {
+  const isCodeValid = () => {
     let regTemplate: RegExp = /^/
     currencies.forEach(options => {
       if (options.value === country) {
-        console.log(options.reg)
-        regTemplate = new RegExp(`${options.reg}`)
+        regTemplate = new RegExp(options.reg)
       }
     })
     return regTemplate.test(code);
@@ -111,20 +141,37 @@ function Registration() {
     setStreetError(false);
     setStreet(e.target.value);
   };
+  const handleStreetShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStreetShipError(false);
+    setStreetShip(e.target.value);
+  };
 
   const handleCityInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCityError(false);
     setCity(e.target.value);
+  };
+  const handleCityShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCityShipError(false);
+    setCityShip(e.target.value);
   };
 
   const handleCountryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCountryError(false);
     setCountry(e.target.value);
   };
+  const handleCountryShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCountryShipError(false);
+    setCountryShip(e.target.value);
+  };
 
   const handleCodeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value)
     setCodeError(false);
     setCode(e.target.value);
+  };
+  const handleCodeShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCodeShipError(false);
+    setCodeShip(e.target.value);
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -151,7 +198,7 @@ function Registration() {
         mistake = true;
     }
 
-    // if (!isDateValid(da)) {
+    // if (!isDateValid()) {
     //     setDateError(true);
     //     mistake = true;
     // }
@@ -166,10 +213,10 @@ function Registration() {
         mistake = true;
     }
 
-    if (!isCodeValid(code)) {
+    if (!isCodeValid()) {
       setCodeError(true);
       mistake = true;
-  }
+    }
 
     if (!isCountryValid(country)) {
       setCountryError(true);
@@ -178,7 +225,9 @@ function Registration() {
 
     if (!mistake) {
       console.log('sent to the server');
+      registration()
     }
+    
   };
 
   const passwordErrorText =
@@ -332,12 +381,12 @@ function Registration() {
                 <FormControlLabel
                   control={<Checkbox />}
                   label="Default"
-                  onChange={handleDefaultBox}
+                  onChange={() => setDefaultBil(!defaultBil)}
                  />
                 <FormControlLabel
                   control={<Checkbox />}
                   label="Also use as shipping adress"
-                  onChange={handleAllDefaultBox}
+                  onChange={() => setAllDefaultBox(!allDefaultBox)}
                   />
             </Box>
             </ListItemButton>
@@ -357,8 +406,8 @@ function Registration() {
             <ListItemButton sx={{ pl: 4 }}>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
             <TextField
-              error={streetError}
-              helperText={streetError ? streetErrorText : ''}
+              error={streetShipError}
+              helperText={streetShipError ? streetErrorText : ''}
               size="small"
               required
               sx={{ width: "100%"}}
@@ -366,11 +415,11 @@ function Registration() {
               label="Street"
               variant="outlined"
               type="text"
-              onInput={handleStreetInput}
+              onInput={handleStreetShipInput}
             />
             <TextField
-              error={cityError}
-              helperText={cityError ? cityErrorText : ''}
+              error={cityShipError}
+              helperText={cityShipError ? cityErrorText : ''}
               size="small"
               required
               sx={{ width: "100%" }}
@@ -378,12 +427,12 @@ function Registration() {
               label="City"
               variant="outlined"
               type="text"
-              onInput={handleCityInput}
+              onInput={handleCityShipInput}
             />
             <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
                 <TextField
-                  error={countryError}
-                  helperText={countryError ? countryErrorText : ''}
+                  error={countryShipError}
+                  helperText={countryShipError ? countryErrorText : ''}
                   required
                   id="Registration_country"
                   sx={{width: '100%' }}
@@ -392,7 +441,7 @@ function Registration() {
                   label="Country"
                   defaultValue = ""
                   variant="outlined"
-                  onChange={handleCountryInput}
+                  onChange={handleCountryShipInput}
                   >
                   {currencies.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -401,8 +450,8 @@ function Registration() {
                   ))}
                 </TextField>
                 <TextField
-                  error={codeError}
-                  helperText={codeError ? codeErrorText : ''}
+                  error={codeShipError}
+                  helperText={codeShipError ? codeErrorText : ''}
                   size="small"
                   required
                   sx={{width: '100%' }}
@@ -410,10 +459,14 @@ function Registration() {
                   label="Postal code"
                   variant="outlined"
                   type="text"
-                  onInput={handleCodeInput}
+                  onInput={handleCodeShipInput}
                 />
             </Box>
-                <FormControlLabel control={<Checkbox />} label="Default" />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Default"
+                  onChange={() => setDefaultShip(!defaultShip)}
+                  />
             </Box>
             </ListItemButton>
           </List>
