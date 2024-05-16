@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/UI/Header.tsx';
-import { PagePaths } from '../../utils/utils.ts';
+import { PagePaths, isUserLoggedIn } from '../../utils/utils.ts';
 import Footer from '../../components/UI/footer';
 
 function Main() {
@@ -12,9 +12,9 @@ function Main() {
         <nav>
           <Link to={PagePaths.Main}>Главная</Link>
           <br />
-          <Link to={PagePaths.Login}>Войти</Link>
+          {isUserLoggedIn() ? 'Logout' : <Link to={PagePaths.Login}>Войти</Link>}
           <br />
-          <Link to={PagePaths.Register}>Регистрация</Link>
+          {isUserLoggedIn() ? 'Orders' :<Link to={PagePaths.Register}>Регистрация</Link>}
           <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>

@@ -3,7 +3,9 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
-import styles from './Header.module.css';
+import { PagePaths, isUserLoggedIn } from '../../utils/utils';
+import { useNavigate } from 'react-router-dom';
+
 
 const theme = createTheme({
   breakpoints: {
@@ -17,11 +19,32 @@ const theme = createTheme({
   },
 });
 
+
 function Header() {
+  const navigate = useNavigate();
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO search
   };
+  const HandleAuthButtonClick = () => {
+    if (isUserLoggedIn()) {
+      // Logout();
+      console.log('logout')
+      navigate(PagePaths.Main);
+    } else {
+      navigate(PagePaths.Login);
+    }
+  }
+
+  const HandleRegisterButtonClick = () => {
+    if (isUserLoggedIn()) {
+      // getOrders();
+      console.log('get orders')
+      navigate(PagePaths.Main);
+    } else {
+      navigate(PagePaths.Register);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -32,7 +55,7 @@ function Header() {
           </Link>
         </div>
         <div>
-         {/*  <form className={styles.search_input} onSubmit={handleSearch}>
+          {/*  <form className={styles.search_input} onSubmit={handleSearch}>
             <input type="text" name="searchQuery" />
             <Button
               type="submit"
@@ -43,24 +66,22 @@ function Header() {
             </Button>
           </form> */}
           <div className={styles.auth_area}>
-            <Link to="/login">
-              <Button
-                type="submit"
-                className={styles.button}
-                variant="contained"
-                sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}>
-                Log in
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button
-                type="submit"
-                className={styles.button}
-                variant="contained"
-                sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}>
-                Register
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}
+              onClick={HandleAuthButtonClick}>
+              {isUserLoggedIn() ? 'Logout' : 'Log in'}
+            </Button>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}
+              onClick={HandleRegisterButtonClick}>
+              {isUserLoggedIn() ? 'My orders' : 'Register'}
+            </Button>
           </div>
         </div>
       </header>
