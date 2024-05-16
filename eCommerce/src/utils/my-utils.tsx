@@ -74,3 +74,44 @@ function DateInput() {
   };
   
   export default DateInput;
+
+  export const isPasswordValid = (password: string): boolean => {
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    return regex.test(password);
+  };
+
+  export const isEmailValid = (email: string): boolean => {
+    const regex =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    return regex.test(email);
+  };
+
+  export const isFirstNameValid = (firstName: string): boolean => {
+    const regex = /^[A-Z][a-z]*$/;
+    return regex.test(firstName);
+  };
+
+  export const isLastNameValid = (lastName: string): boolean => {
+    const regex = /^[A-Z][a-z]*$/;
+    return regex.test(lastName);
+  };
+
+  export const isDateValid = (Date: string): boolean => {
+    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
+    return regex.test(Date);
+  };
+
+  export const isStreetValid = (street: string): boolean => {
+    const regex = /^[A-Za-z0-9]*$/;
+    return regex.test(street);
+  };
+
+  export const isCityValid = (city: string): boolean => {
+    const regex = /^[A-Za-z]*$/;
+    return regex.test(city);
+  };
+
+  export const isCountryValid = (country: string): boolean => {
+    const regex = /^[A-Za-z]*$/;
+    return regex.test(country);
+  };

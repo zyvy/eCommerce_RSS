@@ -12,12 +12,19 @@ import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { isPasswordValid,isEmailValid,isFirstNameValid,isLastNameValid,isStreetValid, isCityValid, isCountryValid} from '../../utils/my-utils';
+import currencies from './currencies';
+import { IconButton, InputAdornment } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 function Registration() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
   const [firstName, setFirstName] = useState('');
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastName, setLastName] = useState('');
@@ -32,86 +39,38 @@ function Registration() {
   const [countryError, setCountryError] = useState(false);
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState(false);
+  const [defaultBox, setDefaultBox] = useState(false);
+  const [allDefaultBox, setAllDefaultBox] = useState(true);
 
   const [openBilling, setOpenBilling] = useState(false);
   const [openShipping, setOpenShipping] = useState(false);
 
+  const [openBill, setOpenBill] = React.useState(true);
+  const [openShipp, setOpenShipp] = React.useState(true);
+
   const handleClickBilling = () => {
+    setOpenBill(!openBill);
     setOpenBilling(!openBilling);
   };
   const handleClickShipping = () => {
+    setOpenShipp(!openShipp);
     setOpenShipping(!openShipping);
   };
 
-  const currencies = [
-    {
-      value: 'Italy',
-      label: 'Italy',
-      reg: '/^\d{5}$/',
-      error: 'Must contain only 5 digits',
-    },
-    {
-      value: 'Belgium',
-      label: 'Belgium',
-      reg: '/^(?:(?:[1-9])(?:\d{3}))$/',
-      error: 'Must contain only 4 digits',
-    },
-    {
-      value: 'Germany',
-      label: 'Germany',
-      reg: '/^\d{5}$/',
-      error: 'Must contain only 5 digits',
-    },
-    {
-      value: 'Spain',
-      label: 'Spain',
-      reg: '/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/',
-      error: 'Must contain 5 digits',
-    },
-  ];
+  const handleDefaultBox = () => {
+    setDefaultBox(!defaultBox)
+  }
+  const handleAllDefaultBox = () => {
+    setAllDefaultBox(!allDefaultBox)
+  }
 
-  const isPasswordValid = (): boolean => {
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-    return regex.test(password);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
   };
 
-  const isEmailValid = (): boolean => {
-    const regex =
-      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-    return regex.test(email);
-  };
-
-  const isFirstNameValid = (): boolean => {
-    const regex = /^[A-Z][a-z]*$/;
-    return regex.test(firstName);
-  };
-
-  const isLastNameValid = (): boolean => {
-    const regex = /^[A-Z][a-z]*$/;
-    return regex.test(lastName);
-  };
-
-  const isDateValid = (): boolean => {
-    const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/;
-    return regex.test(Date);
-  };
-
-  const isStreetValid = (): boolean => {
-    const regex = /^[A-Za-z0-9]*$/;
-    return regex.test(street);
-  };
-
-  const isCityValid = (): boolean => {
-    const regex = /^[A-Za-z]*$/;
-    return regex.test(city);
-  };
-
-  const isCountryValid = (): boolean => {
-    const regex = /^[A-Za-z]*$/;
-    return regex.test(country);
-  };
-
-  const isCodeValid = (): boolean => {
+  const isCodeValid = (code: string): boolean => {
     let regTemplate: RegExp = /^/
     currencies.forEach(options => {
       if (options.value === country) {
@@ -121,6 +80,7 @@ function Registration() {
     })
     return regTemplate.test(code);
   };
+  
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordError(false);
@@ -171,47 +131,47 @@ function Registration() {
     e.preventDefault();
     let mistake = false;
 
-    if (!isPasswordValid()) {
+    if (!isPasswordValid(password)) {
       setPasswordError(true);
       mistake = true;
     }
 
-    if (!isEmailValid()) {
+    if (!isEmailValid(email)) {
       setEmailError(true);
       mistake = true;
     }
 
-    if (!isFirstNameValid()) {
+    if (!isFirstNameValid(firstName)) {
         setFirstNameError(true);
         mistake = true;
     }
 
-    if (!isLastNameValid()) {
+    if (!isLastNameValid(lastName)) {
         setLastNameError(true);
         mistake = true;
     }
 
-    if (!isDateValid()) {
-        setDateError(true);
-        mistake = true;
-    }
+    // if (!isDateValid(da)) {
+    //     setDateError(true);
+    //     mistake = true;
+    // }
 
-    if (!isStreetValid()) {
+    if (!isStreetValid(street)) {
         setStreetError(true);
         mistake = true;
     }
 
-    if (!isCityValid()) {
+    if (!isCityValid(city)) {
         setCityError(true);
         mistake = true;
     }
 
-    if (!isCodeValid()) {
+    if (!isCodeValid(code)) {
       setCodeError(true);
       mistake = true;
   }
 
-    if (!isCountryValid()) {
+    if (!isCountryValid(country)) {
       setCountryError(true);
       mistake = true;
   }
@@ -261,8 +221,21 @@ function Registration() {
           id="Registration_password"
           label="Password"
           variant="outlined"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           onInput={handlePasswordInput}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <TextField
           error={firstNameError}
@@ -293,6 +266,7 @@ function Registration() {
             <p>1. </p>
           </ListItemIcon>
           <ListItemText primary="Add billing address"/>
+          {openBill ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={openBilling} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
@@ -355,16 +329,28 @@ function Registration() {
                   onInput={handleCodeInput}
                 />
             </Box>
-                <FormControlLabel control={<Checkbox />} label="Default" />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Default"
+                  onChange={handleDefaultBox}
+                 />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Also use as shipping adress"
+                  onChange={handleAllDefaultBox}
+                  />
             </Box>
             </ListItemButton>
           </List>
         </Collapse>
-        <ListItemButton onClick={handleClickShipping}>
+        {allDefaultBox &&
+          <>
+          <ListItemButton onClick={handleClickShipping}>
           <ListItemIcon>
             <p>2. </p>
           </ListItemIcon>
           <ListItemText primary="Add shipping address"/>
+          {openShipp ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={openShipping} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
@@ -432,6 +418,8 @@ function Registration() {
             </ListItemButton>
           </List>
         </Collapse>
+          </>
+        }
         <Button type="submit" className={styles.button} variant="contained">
         Register
         </Button>
