@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { PagePaths, isUserLoggedIn } from '../../utils/utils';
 import { useNavigate } from 'react-router-dom';
-
+import { AuthorizationService } from '../../services/AuthorizationService.ts';
 
 const theme = createTheme({
   breakpoints: {
@@ -19,7 +19,6 @@ const theme = createTheme({
   },
 });
 
-
 function Header() {
   const navigate = useNavigate();
   const handleSearch = (e: React.FormEvent) => {
@@ -28,23 +27,27 @@ function Header() {
   };
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
-      // Logout();
-      console.log('logout')
-      navigate(PagePaths.Main);
+      AuthorizationService.removeCustomerLogin();
+      console.log('logout');
+      if (location.pathname === PagePaths.Main) {
+        navigate(0);
+      } else {
+        navigate(PagePaths.Main);
+      }
     } else {
       navigate(PagePaths.Login);
     }
-  }
+  };
 
   const HandleRegisterButtonClick = () => {
     if (isUserLoggedIn()) {
       // getOrders();
-      console.log('get orders')
+      console.log('get orders');
       navigate(PagePaths.Main);
     } else {
       navigate(PagePaths.Register);
     }
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
