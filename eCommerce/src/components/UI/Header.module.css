@@ -1,0 +1,33 @@
+.header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 700px) {
+    .header {
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+}
+
+.logo_image{
+    height: 100px;
+
+}
+.button{
+    margin: 5px;
+    cursor: pointer;
+    border: 1px;
+    font-size: 1em;
+
+}
+.search_input{
+    display: flex;
+    gap: 5px;
+}
+.auth_area{
+    display: flex;
+    gap: 5px;
+}

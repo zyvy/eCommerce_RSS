@@ -1,11 +1,12 @@
-import { JSX } from 'react';
-import Registration from './pages/registration/Registration';
 
-function App(): JSX.Element {
+import AppRouter from './components/Router';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+function App() {
   return (
-    <>
-      <Registration />
-    </>
+    <Router>
+      <AppRouter />
+    </Router>
   );
 }
 
