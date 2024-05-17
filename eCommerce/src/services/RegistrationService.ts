@@ -2,7 +2,6 @@
 import { BaseAddress, Customer, CustomerDraft, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
 
-
 type ReistrationResponse = {
   error: boolean;
   customer: Customer | null;
@@ -23,7 +22,6 @@ type ReistrationResponse = {
 //     billingAddresses?: number[];
 // };
 
-
 // const KEY_CUSTOMER = 'customer';
 
 // function authenticateUser() {
@@ -43,7 +41,7 @@ export class RegistrationService {
       } = await apiRoot
         .customers()
         .post({
-            body: customerDraft
+          body: customerDraft,
         })
         .execute();
 
@@ -74,5 +72,4 @@ export class RegistrationService {
       projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
     });
   }
-
 }
