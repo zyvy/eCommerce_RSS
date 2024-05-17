@@ -30,6 +30,8 @@ import {
 import currencies from './currencies';
 import Header from '../../components/UI/Header';
 import Footer from '../../components/UI/footer';
+import { useNavigate } from 'react-router-dom';
+import { PagePaths } from '../../utils/utils';
 
 function Registration() {
   //statt inputs
@@ -71,6 +73,8 @@ function Registration() {
   const [allDefaultBox, setAllDefaultBox] = useState(false);
   const [authError, setAuthError] = useState('');
 
+  const navigate = useNavigate();
+
   const clearAuthError = () => setAuthError('');
 
   async function registration() {
@@ -105,8 +109,7 @@ function Registration() {
     if (reg.error) {
       setAuthError(reg.errorDescription);
     } else {
-      console.log('редирект на main');
-      // navigate(PagePaths.Main);
+      navigate(PagePaths.Main);
     }
   }
 
@@ -508,7 +511,7 @@ function Registration() {
         <Button
           className={[styles.button, styles.buttonNewAccount].join(' ')}
           variant="outlined"
-          onClick={() => console.log('To login')}>
+          onClick={() => navigate(PagePaths.Login)}>
           Sign in
         </Button>
       </form>
