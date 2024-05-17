@@ -28,6 +28,8 @@ import {
   isCountryValid,
 } from '../../utils/my-utils';
 import currencies from './currencies';
+import Header from '../../components/UI/Header';
+import Footer from '../../components/UI/footer';
 
 function Registration() {
   //statt inputs
@@ -270,6 +272,8 @@ function Registration() {
   currencies.forEach((options) => (options.value === country ? (codeErrorText = options.error) : ''));
 
   return (
+    <>
+    <Header/>
     <div className={styles.container}>
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Registration</h2>
@@ -509,6 +513,8 @@ function Registration() {
         </Button>
       </form>
     </div>
+    <Footer/>
+    </>
   );
 }
 
