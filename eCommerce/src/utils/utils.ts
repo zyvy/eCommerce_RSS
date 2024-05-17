@@ -9,6 +9,11 @@ export const isPasswordValid = (password: string) => {
   return regex.test(password);
 };
 
+export const isUserLoggedIn = (): boolean => {
+  const accessToken = localStorage.getItem('customer');
+  return !!accessToken; 
+}
+
 export enum PagePaths {
   Main = '/',
   Login = '/login',
