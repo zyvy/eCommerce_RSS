@@ -1,20 +1,24 @@
 import React, {useState, ChangeEvent} from "react";
 import { TextField } from "@mui/material";
 
-function DateInput() {
-    const [date, setDate] = useState<string>('');
+type DateInput = {
+  dateOfBirth: string,
+  updateDate: (text: string)=>void
+}
+
+function DateInput({dateOfBirth, updateDate} : DateInput) {
     const [error, setError] = useState<string>('');
-  
+
     const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setDate(value);
+      updateDate(value)
   
       // Date validation logic
       if (isValidDate(value)) {
-        if (isOver18(value)) {
+        if (isOver12(value)) {
           setError('');
         } else {
-          setError('You must be at least 18 years old.');
+          setError('You must be at least 12 years old.');
         }
       } else {
         setError('Invalid date format. Please use YYYY-MM-DD.');
@@ -38,7 +42,7 @@ function DateInput() {
       );
     };
   
-    const isOver18 = (dateString: string): boolean => {
+    const isOver12 = (dateString: string): boolean => {
       const today = new Date();
       const [year, month, day] = dateString.split('-').map(Number);
       const birthDate = new Date(year, month - 1, day);
@@ -48,8 +52,8 @@ function DateInput() {
   
       // Check if the user is 18 years old
       if (
-        age > 18 ||
-        (age === 18 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)))
+        age > 12 ||
+        (age === 12 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)))
       ) {
         return true;
       }
@@ -65,7 +69,7 @@ function DateInput() {
           label="Date of birth"
           type="date"
           id="date-input"
-          value={date}
+          value={dateOfBirth}
           onChange={handleDateChange}
         />
         {error && <p style={{ color: 'red' }}>{error}</p>}

@@ -21,6 +21,8 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { RegistrationService } from '../../services/RegistrationService';
 import { CustomerDraft } from '@commercetools/platform-sdk';
 
+
+
 function Registration() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
@@ -31,8 +33,8 @@ function Registration() {
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastName, setLastName] = useState('');
   const [lastNameError, setLastNameError] = useState(false);
-  const [Date, setDate] = useState('');
-  const [DateError, setDateError] = useState(false);
+  const [dateOfBirth, setDate] = useState('');
+  // const [DateError, setDateError] = useState(false);
   const [street, setStreet] = useState('');
   const [streetError, setStreetError] = useState(false);
   const [city, setCity] = useState('');
@@ -53,7 +55,7 @@ function Registration() {
 
   const [defaultBil, setDefaultBil] = useState(false);
   const [defaultShip, setDefaultShip] = useState(false);
-  const [allDefaultBox, setAllDefaultBox] = useState(true);
+  const [allDefaultBox, setAllDefaultBox] = useState(false);
 
   const [openBilling, setOpenBilling] = useState(false);
   const [openShipping, setOpenShipping] = useState(false);
@@ -68,7 +70,7 @@ function Registration() {
       password,
       firstName,
       lastName,
-      dateOfBirth: Date,
+      dateOfBirth,
       addresses: [{country,city,postalCode: code,streetName:street},{country: countryShip,city: cityShip,postalCode: codeShip,streetName:streetShip}],
       shippingAddresses: [1],
       billingAddresses: [0],
@@ -85,6 +87,14 @@ function Registration() {
         // navigate(PagePaths.Main);
     }
   }
+
+  //DAte
+
+  const updateDate = (text: string) => {
+    setDate(text);
+  };
+
+  //Date
 
   const handleClickBilling = () => {
     setOpenBill(!openBill);
@@ -132,10 +142,10 @@ function Registration() {
     setLastName(e.target.value);
   };
 
-  const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDateError(false);
-    setDate(e.target.value);
-  };
+  // const handleDateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setDateError(false);
+  //   setDate(e.target.value);
+  // };
 
   const handleStreetInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStreetError(false);
@@ -175,13 +185,19 @@ function Registration() {
   };
 
   const handleAllDefaultBox = () => {
-    setStreetShip(street)
-    setCountryShip(country)
-    setCodeShip(code)
-    setCityShip(city)
-
     setAllDefaultBox(!allDefaultBox)
+    
+    setCityShip(city)
+    setCodeShip(code)
+    setCountryShip(country)
+    console.log(cityShip)
+    console.log(codeShip)
+    console.log(countryShip)
   }
+
+  //чек
+
+  //чек
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -230,13 +246,20 @@ function Registration() {
     if (!isCountryValid(country)) {
       setCountryError(true);
       mistake = true;
-  }
+    }
+
+    if(allDefaultBox) {
+      console.log('street',streetShip)
+      console.log('country',countryShip)
+      console.log('code',codeShip)
+      console.log('city',cityShip)
+    }
 
     if (!mistake) {
       console.log('sent to the server');
-      
+      registration()
     }
-    registration()
+    
   };
 
   const passwordErrorText =
@@ -317,7 +340,10 @@ function Registration() {
           type="text"
           onInput={handleLastNameInput}
         />
-        {DateInput()}
+        <DateInput
+          dateOfBirth={dateOfBirth}
+          updateDate={updateDate}
+        />
         
         <ListItemButton onClick={handleClickBilling}>
           <ListItemIcon>
@@ -394,14 +420,15 @@ function Registration() {
                  />
                 <FormControlLabel
                   control={<Checkbox />}
-                  label="Also use as shipping adress"
+                  label="Also use as default shipping and billing adress"
                   onChange={handleAllDefaultBox}
+                  checked={allDefaultBox}
                   />
             </Box>
             </ListItemButton>
           </List>
         </Collapse>
-        {allDefaultBox &&
+        {!allDefaultBox &&
           <>
           <ListItemButton onClick={handleClickShipping}>
           <ListItemIcon>
