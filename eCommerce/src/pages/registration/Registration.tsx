@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Registration.module.css';
-import DateInput from '../../utils/my-utils';
+import DateInput from '../../utils/utils';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
@@ -26,7 +26,7 @@ import {
   isStreetValid,
   isCityValid,
   isCountryValid,
-} from '../../utils/my-utils';
+} from '../../utils/utils';
 import currencies from './currencies';
 import Header from '../../components/UI/Header';
 import Footer from '../../components/UI/footer';
@@ -126,47 +126,57 @@ function Registration() {
   };
 
   const handleFirstNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setFirstNameError(false);
     setFirstName(e.target.value);
   };
 
   const handleLastNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setLastNameError(false);
     setLastName(e.target.value);
   };
 
   const handleStreetInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setStreetError(false);
     setStreet(e.target.value);
   };
   const handleStreetShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setStreetShipError(false);
     setStreetShip(e.target.value);
   };
 
   const handleCityInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setCityError(false);
     setCity(e.target.value);
   };
   const handleCityShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setCityShipError(false);
     setCityShip(e.target.value);
   };
 
   const handleCountryInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setCountryError(false);
     setCountry(e.target.value);
   };
   const handleCountryShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setCountryShipError(false);
     setCountryShip(e.target.value);
   };
 
   const handleCodeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setCodeError(false);
     setCode(e.target.value);
   };
   const handleCodeShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    clearAuthError();
     setCodeShipError(false);
     setCodeShip(e.target.value);
   };
@@ -191,6 +201,7 @@ function Registration() {
   };
 
   const handleAllDefaultBox = () => {
+    clearAuthError();
     setAllDefaultBox(!allDefaultBox);
     setCityShip(city);
     setCodeShip(code);
@@ -241,15 +252,7 @@ function Registration() {
       mistake = true;
     }
 
-    if (allDefaultBox) {
-      console.log('street', streetShip);
-      console.log('country', countryShip);
-      console.log('code', codeShip);
-      console.log('city', cityShip);
-    }
-
     if (!mistake) {
-      console.log('sent to the server');
       registration();
     }
   };

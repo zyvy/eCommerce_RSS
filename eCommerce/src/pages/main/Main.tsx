@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/UI/Header.tsx';
-import { PagePaths, isUserLoggedIn } from '../../utils/utils.ts';
+import { PagePaths, isUserLoggedIn } from '../../utils/utils';
 import Footer from '../../components/UI/footer';
 
 function Main() {
