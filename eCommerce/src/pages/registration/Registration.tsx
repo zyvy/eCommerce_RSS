@@ -16,6 +16,9 @@ import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import CircularProgress from '@mui/material/CircularProgress';
 import { RegistrationService } from '../../services/RegistrationService';
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import {
@@ -72,6 +75,7 @@ function Registration() {
 
   const [allDefaultBox, setAllDefaultBox] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [regSuccess, setRegSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -109,7 +113,10 @@ function Registration() {
     if (reg.error) {
       setAuthError(reg.errorDescription);
     } else {
-      navigate(PagePaths.Main);
+      setRegSuccess(true)
+      setTimeout(() => {
+        navigate(PagePaths.Main);
+      }, 5000);
     }
   }
 
@@ -507,6 +514,17 @@ function Registration() {
           </>
         )}
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
+        {regSuccess && 
+        <>
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Registration was completed successfully. Now you can log in.
+          </Alert>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress />
+          </Box>
+          </>
+          }
         <Button type="submit" className={styles.button} variant="contained">
           Register
         </Button>

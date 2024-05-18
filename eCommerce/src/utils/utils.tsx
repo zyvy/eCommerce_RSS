@@ -23,7 +23,7 @@ export const isFirstNameValid = (firstName: string): boolean => {
 };
 
 export const isLastNameValid = (lastName: string): boolean => {
-  const regex = /^[A-Z][a-z]*$/;
+  const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
   return regex.test(lastName);
 };
 
@@ -38,7 +38,7 @@ export const isStreetValid = (street: string): boolean => {
 };
 
 export const isCityValid = (city: string): boolean => {
-  const regex = /^[A-Za-z]*$/;
+  const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
   return regex.test(city);
 };
 
