@@ -1,3 +1,7 @@
 .catpic{
     width: 320px;
 }
+.not_found_wrap{
+    max-width: 500px;
+    padding: 10px;
+}
