@@ -11,12 +11,12 @@ export const isPasswordValid = (password: string) => {
 
 export const isUserLoggedIn = (): boolean => {
   const accessToken = localStorage.getItem('customer');
-  return !!accessToken; 
-}
+  return !!accessToken;
+};
 
 export enum PagePaths {
   Main = '/',
   Login = '/login',
-  Register = '/register',
+  Register = '/registration',
   NotFound = '/404',
 }
