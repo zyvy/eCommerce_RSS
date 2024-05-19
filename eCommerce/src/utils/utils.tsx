@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { TextField } from '@mui/material';
 
 export const isEmailValid = (email: string) => {
@@ -14,8 +14,8 @@ export const isPasswordValid = (password: string) => {
 
 export const isUserLoggedIn = (): boolean => {
   const accessToken = localStorage.getItem('customer');
-  return !!accessToken; 
-}
+  return !!accessToken;
+};
 
 export const isFirstNameValid = (firstName: string): boolean => {
   const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
@@ -54,29 +54,13 @@ export enum PagePaths {
   NotFound = '/404',
 }
 
-type DateInput = {
+type DateInputType = {
   dateOfBirth: string;
   updateDate: (date: string) => void;
 };
 
-function DateInput({ dateOfBirth, updateDate }: DateInput) {
+function DateInput({ dateOfBirth, updateDate }: DateInputType) {
   const [error, setError] = useState<string>('');
-
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    updateDate(value);
-
-    // Date validation logic
-    if (isValidDate(value)) {
-      if (isOver13(value)) {
-        setError('');
-      } else {
-        setError('You must be at least 13 years old.');
-      }
-    } else {
-      setError('Invalid date format. Please use DD-MM-YYYY.');
-    }
-  };
 
   const isValidDate = (dateString: string): boolean => {
     // Check if the date string matches the format YYYY-MM-DD
@@ -104,6 +88,22 @@ function DateInput({ dateOfBirth, updateDate }: DateInput) {
       return true;
     }
     return false;
+  };
+
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    updateDate(value);
+
+    // Date validation logic
+    if (isValidDate(value)) {
+      if (isOver13(value)) {
+        setError('');
+      } else {
+        setError('You must be at least 13 years old.');
+      }
+    } else {
+      setError('Invalid date format. Please use DD-MM-YYYY.');
+    }
   };
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Route, Routes } from 'react-router-dom';
 import MainPage from '../pages/main/Main.tsx';
 import LoginPage from '../pages/login/Login.tsx';

@@ -14,7 +14,7 @@ function Main() {
           <br />
           {isUserLoggedIn() ? 'Logout' : <Link to={PagePaths.Login}>Войти</Link>}
           <br />
-          {isUserLoggedIn() ? 'Orders' :<Link to={PagePaths.Register}>Регистрация</Link>}
+          {isUserLoggedIn() ? 'Orders' : <Link to={PagePaths.Register}>Регистрация</Link>}
           <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
