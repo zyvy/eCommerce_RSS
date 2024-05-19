@@ -58,6 +58,7 @@ function Login() {
       if (!token.error) {
         AuthorizationService.updateCustomerLogin('token', token.accessToken);
         navigate(PagePaths.Main);
+        console.log(login, token)
       }
     }
   }
@@ -115,7 +116,7 @@ function Login() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label="toggle passw visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
                   edge="end">
@@ -126,14 +127,15 @@ function Login() {
           }}
         />
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
-        <Button type="submit" className={styles.button} variant="contained">
+        <Button type="submit" className={styles.button} variant="contained" id="signin_button">
           Sign in
         </Button>
         <h4 className={styles.subtitle}>Don&#39;t have an account?</h4>
         <Button
           className={[styles.button, styles.buttonNewAccount].join(' ')}
           variant="outlined"
-          onClick={() => navigate(PagePaths.Register)}>
+          onClick={() => navigate(PagePaths.Register)}
+          id="register_button">
           Create new account
         </Button>
       </form>
