@@ -50,7 +50,7 @@ function Login() {
     clearAuthError();
     const login = await AuthorizationService.login({ email, password });
     if (login.error) {
-      setAuthError(login.errorDescription);
+      setAuthError('Incorrect email or passoword.');
       AuthorizationService.removeCustomerLogin();
     } else {
       AuthorizationService.updateCustomerLogin('id', login.customer!.id);
@@ -88,57 +88,57 @@ function Login() {
 
   return (
     <>
-    <Header />
-    <div className={styles.container}>
-      <form className={styles.form} onSubmit={submit}>
-        <h2 className={styles.title}>Sign in</h2>
-        <TextField
-          // defaultValue="johndoe@example.com"
-          error={emailError}
-          helperText={emailError ? emailErrorText : ''}
-          required
-          id="login_email"
-          label="email"
-          variant="outlined"
-          onInput={handleEmailInput}
-        />
-        <TextField
-          // defaultValue="Secret123"
-          error={passwordError}
-          helperText={passwordError ? passwordErrorText : ''}
-          required
-          id="login_password"
-          label="password"
-          type={showPassword ? 'text' : 'password'}
-          onInput={handlePasswordInput}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end">
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
-        <Button type="submit" className={styles.button} variant="contained">
-          Sign in
-        </Button>
-        <h4 className={styles.subtitle}>Don&#39;t have an account?</h4>
-        <Button
-          className={[styles.button, styles.buttonNewAccount].join(' ')}
-          variant="outlined"
-          onClick={() => navigate(PagePaths.Register)}>
-          Create new account
-        </Button>
-      </form>
-    </div>
-    <Footer />
+      <Header />
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={submit}>
+          <h2 className={styles.title}>Sign in</h2>
+          <TextField
+            // defaultValue="johndoe@example.com"
+            error={emailError}
+            helperText={emailError ? emailErrorText : ''}
+            required
+            id="login_email"
+            label="email"
+            variant="outlined"
+            onInput={handleEmailInput}
+          />
+          <TextField
+            // defaultValue="Secret123"
+            error={passwordError}
+            helperText={passwordError ? passwordErrorText : ''}
+            required
+            id="login_password"
+            label="password"
+            type={showPassword ? 'text' : 'password'}
+            onInput={handlePasswordInput}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
+          <Button type="submit" className={styles.button} variant="contained">
+            Sign in
+          </Button>
+          <h4 className={styles.subtitle}>Don&#39;t have an account?</h4>
+          <Button
+            className={[styles.button, styles.buttonNewAccount].join(' ')}
+            variant="outlined"
+            onClick={() => navigate(PagePaths.Register)}>
+            Create new account
+          </Button>
+        </form>
+      </div>
+      <Footer />
     </>
   );
 }
