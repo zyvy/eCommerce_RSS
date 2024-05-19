@@ -1,9 +1,12 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+/**
+ * @jest-environment jsdom
+ */
+
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
+import { MemoryRouter } from 'react-router-dom';
 
-// Mock the utils and services
 jest.mock('../../utils/utils', () => ({
   ...jest.requireActual('../../utils/utils'),
   isUserLoggedIn: jest.fn(),
@@ -13,7 +16,6 @@ jest.mock('../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
     removeCustomerLogin: jest.fn(),
   },
-  // Mock authenticateUser function
   authenticateUser: jest.fn(() => {
     const mockClientId = 'mockClientId';
     const mockClientSecret = 'mockClientSecret';
@@ -23,28 +25,48 @@ jest.mock('../../services/AuthorizationService.ts', () => ({
   }),
 }));
 
+const mockUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+   ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockUsedNavigate,
+}));
+
 describe('Header Component', () => {
   let isUserLoggedIn: jest.Mock;
+
+  beforeEach(() => {
+    isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
+  });
+
   test('renders logo', () => {
-    // Mock the return value of isUserLoggedIn
-    const { getByAltText } = render(<Header />);
+    const { getByAltText } = render(<MemoryRouter><Header /></MemoryRouter>);
     const logo = getByAltText('Logo');
     expect(logo).toBeInTheDocument();
   });
 
   test('renders login button', () => {
-    // Set up mock for isUserLoggedIn
     isUserLoggedIn.mockReturnValue(false);
-    const { getByText } = render(<Header />);
+    const { getByText } = render(<MemoryRouter><Header /></MemoryRouter>);
     const loginButton = getByText(/Log in/i);
+    expect(loginButton).toBeInTheDocument();
+  });
+  test('renders logout button', () => {
+    isUserLoggedIn.mockReturnValue(true);
+    const { getByText } = render(<MemoryRouter><Header /></MemoryRouter>);
+    const loginButton = getByText(/Logout/i);
     expect(loginButton).toBeInTheDocument();
   });
 
   test('renders register button', () => {
-    // Set up mock for isUserLoggedIn
     isUserLoggedIn.mockReturnValue(false);
-    const { getByText } = render(<Header />);
+    const { getByText } = render(<MemoryRouter><Header /></MemoryRouter>);
     const registerButton = getByText(/Register/i);
+    expect(registerButton).toBeInTheDocument();
+  });
+  test('renders register button', () => {
+    isUserLoggedIn.mockReturnValue(true);
+    const { getByText } = render(<MemoryRouter><Header /></MemoryRouter>);
+    const registerButton = getByText(/My orders/i);
     expect(registerButton).toBeInTheDocument();
   });
 });

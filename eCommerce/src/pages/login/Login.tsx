@@ -7,7 +7,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
 import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.ts';
-import Footer from '../../components/UI/footer.tsx';
+import Footer from '../../components/UI/Footer.tsx';
 import Header from '../../components/UI/Header.tsx';
 
 function Login() {
