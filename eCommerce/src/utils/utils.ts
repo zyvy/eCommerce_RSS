@@ -5,14 +5,14 @@ export const isEmailValid = (email: string) => {
 };
 
 export const isPasswordValid = (password: string) => {
-  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/;
   return regex.test(password);
 };
 
 export const isUserLoggedIn = (): boolean => {
   const accessToken = localStorage.getItem('customer');
-  return !!accessToken; 
-}
+  return !!accessToken;
+};
 
 export enum PagePaths {
   Main = '/',
