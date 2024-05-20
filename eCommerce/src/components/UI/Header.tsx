@@ -1,10 +1,9 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
-import { Link } from 'react-router-dom';
 import { PagePaths, isUserLoggedIn } from '../../utils/utils';
-import { useNavigate } from 'react-router-dom';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
 
 const theme = createTheme({
