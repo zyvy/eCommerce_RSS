@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthorizationService } from '../services/AuthorizationService.ts';
-import { PagePaths } from '../utils/utils.ts';
+import { PagePaths } from '../utils/utils.tsx';
 
 type ComponentProps = {
   children: React.ReactNode;
