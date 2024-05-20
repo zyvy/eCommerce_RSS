@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
-import { AuthorizationService } from '../../services/AuthorizationService.ts';
-import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.ts';
-import Footer from '../../components/UI/Footer.tsx';
-import Header from '../../components/UI/Header.tsx';
+import { AuthorizationService } from '../../services/AuthorizationService';
+import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils';
+import Footer from '../../components/UI/Footer';
+import Header from '../../components/UI/Header';
 
 function Login() {
   const [password, setPassword] = useState('');
