@@ -34,7 +34,6 @@ function NotFound() {
       {pic && <img className={styles.catpic} src={pic} alt="Cat" />}
       {fact && <p>Random cat fact: {fact}</p>}
     </div>
-    </>
   );
 }
 

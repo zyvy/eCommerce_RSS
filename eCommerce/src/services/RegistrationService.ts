@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { BaseAddress, Customer, CustomerDraft, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import { Customer, CustomerDraft, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
 
 type ReistrationResponse = {
