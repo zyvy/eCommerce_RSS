@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -26,6 +28,7 @@ form > .password {
 
 .title {
   text-align: center;
+  color: #1976d2;
 }
 
 .subtitle {
