@@ -18,7 +18,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import CircularProgress from '@mui/material/CircularProgress';
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { useNavigate } from 'react-router-dom';
-import { RegistrationService } from '../../services/RegistrationService';
+import { RegistrationService } from '../../services/RegistrationService.ts';
 import DateInput, {
   isPasswordValid,
   isEmailValid,
@@ -31,15 +31,14 @@ import DateInput, {
   isCountryBillValid,
   isCountryShippValid,
   PagePaths,
-} from '../../utils/utils';
-import currencies from './currencies';
-import Header from '../../components/UI/Header';
-import Footer from '../../components/UI/footer';
+} from '../../utils/utils.tsx';
+import currencies from './currencies.tsx';
+import Header from '../../components/UI/Header.tsx';
+import Footer from '../../components/UI/footer.tsx';
 import styles from './Registration.module.css';
-import { AuthorizationService } from '../../services/AuthorizationService';
+import { AuthorizationService } from '../../services/AuthorizationService.ts';
 
 function Registration() {
-  // statt inputs
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [password, setPassword] = useState('');
@@ -62,7 +61,6 @@ function Registration() {
   const [openBilling, setOpenBilling] = useState(true);
   const [openBill, setOpenBill] = useState(true);
 
-  // inputs shipping address
   const [streetShip, setStreetShip] = useState('');
   const [streetShipError, setStreetShipError] = useState(false);
   const [cityShip, setCityShip] = useState('');

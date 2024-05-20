@@ -1,5 +1,5 @@
-import Header from "../../components/UI/Header";
 import React from 'react';
+import Header from '../../components/UI/Header.tsx';
 import styles from './Notfound.module.css';
 
 function NotFound() {
@@ -27,13 +27,14 @@ function NotFound() {
 
   return (
     <>
-    <Header />
-    <div className={styles.not_found_wrap}>
-      <h1>404 error</h1>
-      <h2>There is no such page</h2>
-      {pic && <img className={styles.catpic} src={pic} alt="Cat" />}
-      {fact && <p>Random cat fact: {fact}</p>}
-    </div>
+      <Header />
+      <div className={styles.not_found_wrap}>
+        <h1>404 error</h1>
+        <h2>There is no such page</h2>
+        {pic && <img className={styles.catpic} src={pic} alt="Cat" />}
+        {fact && <p>Random cat fact: {fact}</p>}
+      </div>
+    </>
   );
 }
 

@@ -6,32 +6,33 @@ import {
   type AuthMiddlewareOptions,
   type HttpMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
+import { env } from '../utils/utils.tsx';
 
-const projectKey = import.meta.env.VITE_PROJECT_KEY;
-const scopes = [import.meta.env.VITE_SCOPE];
+const projectKey = env.VITE_PROJECT_KEY;
+const scopes = [env.VITE_SCOPE];
 
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: `https://auth.${import.meta.env.VITE_REGION}.commercetools.com`,
+  host: `https://auth.${env.VITE_REGION}.commercetools.com`,
   projectKey,
   credentials: {
-    clientId: import.meta.env.VITE_CLIENT_ID,
-    clientSecret: import.meta.env.VITE_CLIENT_SECRET,
+    clientId: env.VITE_CLIENT_ID,
+    clientSecret: env.VITE_CLIENT_SECRET,
   },
   scopes,
   fetch,
 };
 
 export const httpMiddlewareOptions: HttpMiddlewareOptions = {
-  host: `https://api.${import.meta.env.VITE_REGION}.commercetools.com`,
+  host: `https://api.${env.VITE_REGION}.commercetools.com`,
   fetch,
 };
 
 export const authMiddlewareForPasswordFlow = (user: UserAuthOptions): PasswordAuthMiddlewareOptions => ({
-  host: `https://auth.${import.meta.env.VITE_REGION}.commercetools.com`,
+  host: `https://auth.${env.VITE_REGION}.commercetools.com`,
   projectKey,
   credentials: {
-    clientId: import.meta.env.VITE_CLIENT_ID,
-    clientSecret: import.meta.env.VITE_CLIENT_SECRET,
+    clientId: env.VITE_CLIENT_ID,
+    clientSecret: env.VITE_CLIENT_SECRET,
     user,
   },
   scopes,

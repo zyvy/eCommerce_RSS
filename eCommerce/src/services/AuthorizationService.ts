@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Customer, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
+import { env } from '../utils/utils.tsx';
 
 type Token = {
   access_token: string;
@@ -42,7 +43,7 @@ type CustomerLogin = {
 const KEY_CUSTOMER = 'customer';
 
 function authenticateUser() {
-  const token = `${import.meta.env.VITE_CLIENT_ID}:${import.meta.env.VITE_CLIENT_SECRET}`;
+  const token = `${env.VITE_CLIENT_ID}:${env.VITE_CLIENT_SECRET}`;
   const hash = btoa(token);
   return `Basic ${hash}`;
 }
@@ -122,7 +123,7 @@ export class AuthorizationService {
     let response = null;
     try {
       response = await fetch(
-        `https://auth.${import.meta.env.VITE_REGION}.commercetools.com/oauth/${import.meta.env.VITE_PROJECT_KEY}/customers/token?${params}`,
+        `https://auth.${env.VITE_REGION}.commercetools.com/oauth/${env.VITE_PROJECT_KEY}/customers/token?${params}`,
         requestOptions,
       );
     } catch (error: unknown) {
@@ -161,7 +162,7 @@ export class AuthorizationService {
 
   static getApiRoot() {
     return createApiBuilderFromCtpClient(ctpClient).withProjectKey({
-      projectKey: `${import.meta.env.VITE_PROJECT_KEY}`,
+      projectKey: `${env.VITE_PROJECT_KEY}`,
     });
   }
 

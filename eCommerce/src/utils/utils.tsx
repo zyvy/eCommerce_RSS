@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { useState, ChangeEvent } from 'react';
 import { TextField } from '@mui/material';
 
@@ -74,19 +75,30 @@ type DateInputType = {
   updateDate: (date: string) => void;
 };
 
+interface Env {
+  readonly VITE_PROJECT_KEY: string;
+  readonly VITE_CLIENT_ID: string;
+  readonly VITE_CLIENT_SECRET: string;
+  readonly VITE_SCOPE: string;
+  readonly VITE_REGION: string;
+}
+
+export const env: Env = {
+  VITE_PROJECT_KEY: 'rs-ecommerce-5348424',
+  VITE_CLIENT_ID: '7EyqlqolfuhMn_2EQWURRqdM',
+  VITE_CLIENT_SECRET: 'QE6vCqcgW43BjLE9IYOJpbjfFdLrnFyu',
+  VITE_SCOPE: 'manage_project:rs-ecommerce-5348424',
+  VITE_REGION: 'europe-west1.gcp',
+};
+
 function DateInput({ dateOfBirth, updateDate }: DateInputType) {
   const [error, setError] = useState<string>('');
-  
   const isValidDate = (dateString: string): boolean => {
     // Check if the date string matches the format YYYY-MM-DD
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(dateString)) return false;
-
-    // Parse the date components
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day);
-
-    // Check if the date is valid
     return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
   };
 
@@ -98,7 +110,6 @@ function DateInput({ dateOfBirth, updateDate }: DateInputType) {
     const monthDiff = today.getMonth() - birthDate.getMonth();
     const dayDiff = today.getDate() - birthDate.getDate();
 
-    // Check if the user is 18 years old
     if (age > 13 || (age === 13 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)))) {
       return true;
     }
