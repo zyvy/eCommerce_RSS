@@ -34,7 +34,7 @@ import DateInput, {
 } from '../../utils/utils';
 import currencies from './currencies';
 import Header from '../../components/UI/Header';
-import Footer from '../../components/UI/footer';
+import Footer from '../../components/UI/Footer';
 import styles from './Registration.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService';
 

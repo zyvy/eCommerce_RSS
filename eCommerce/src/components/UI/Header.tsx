@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,10 +19,10 @@ const theme = createTheme({
 
 function Header() {
   const navigate = useNavigate();
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  /* const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault(); 
     // TODO search
-  };
+  };*/
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
       AuthorizationService.removeCustomerLogin();
@@ -89,6 +88,6 @@ function Header() {
       </header>
     </ThemeProvider>
   );
-}
+};
 
 export default Header;

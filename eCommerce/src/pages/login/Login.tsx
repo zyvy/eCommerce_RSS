@@ -7,8 +7,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
 import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.tsx';
-import Footer from '../../components/UI/footer.tsx';
-import Header from '../../components/UI/Header.tsx';
+import Footer from '../../components/UI/Footer';
+import Header from '../../components/UI/Header';
 
 function Login() {
   const [password, setPassword] = useState('');

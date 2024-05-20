@@ -6,7 +6,8 @@ import { render, screen } from '@testing-library/react';
 import Registration from './Registration';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService';
+import React from 'react';
+// import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService';
 
 jest.mock('../../services/RegistrationService', () => {
   RegistrationService: {
@@ -15,8 +16,8 @@ jest.mock('../../services/RegistrationService', () => {
 });
 
 describe('Registration Page', () => {
-  let RegistrationService: typeof OldRegistrationService;
-  RegistrationService = require('../../services/RegistrationService');
+ // let RegistrationService: typeof OldRegistrationService;
+ // RegistrationService = require('../../services/RegistrationService');
   test('renders Registration component correctly', () => {
     render(
       <MemoryRouter>
