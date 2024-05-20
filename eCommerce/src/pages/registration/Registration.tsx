@@ -114,7 +114,9 @@ function Registration() {
     const reg = await RegistrationService.registration(customer);
     if (reg.error) {
       if (reg.errorDescription === 'There is already an existing customer with the provided email.') {
-        setAuthError('A user with such an e-mail has already been registered. Go to the authorization page or use another e-mail');
+        setAuthError(
+          'A user with such an e-mail has already been registered. Go to the authorization page or use another e-mail',
+        );
       } else {
         setAuthError(reg.errorDescription);
       }
@@ -325,10 +327,22 @@ function Registration() {
   const countryErrorText = 'Must contain at least one character and no special characters or numbers';
 
   let codeErrorText = '';
-  currencies.forEach((options) => (options.value === country ? (codeErrorText = options.error) : ''));
+  currencies.forEach((options) => {
+    if (options.value === country) {
+      codeErrorText = options.error;
+      return codeErrorText;
+    }
+    return '';
+  });
 
   let codeShippErrorText = '';
-  currencies.forEach((options) => (options.value === countryShip ? (codeShippErrorText = options.error) : ''));
+  currencies.forEach((options) => {
+    if (options.value === countryShip) {
+      codeShippErrorText = options.error;
+      return codeShippErrorText;
+    }
+    return '';
+  });
 
   return (
     <>
