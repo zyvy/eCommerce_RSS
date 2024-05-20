@@ -14,8 +14,8 @@ export const isPasswordValid = (password: string) => {
 
 export const isUserLoggedIn = (): boolean => {
   const accessToken = localStorage.getItem('customer');
-  return !!accessToken; 
-}
+  return !!accessToken;
+};
 
 export const isFirstNameValid = (firstName: string): boolean => {
   const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
@@ -50,7 +50,7 @@ export const isCountryValid = (country: string): boolean => {
 export enum PagePaths {
   Main = '/',
   Login = '/login',
-  Register = '/register',
+  Register = '/registration',
   NotFound = '/404',
 }
 
