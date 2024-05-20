@@ -568,7 +568,7 @@ function Registration() {
             <>
               <Alert severity="success">
                 <AlertTitle>Success</AlertTitle>
-                Registration was completed successfully. Now you can log in.
+                Registration was completed successfully!
               </Alert>
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <CircularProgress />

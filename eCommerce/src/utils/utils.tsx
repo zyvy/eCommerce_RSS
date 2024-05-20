@@ -18,12 +18,12 @@ export const isUserLoggedIn = (): boolean => {
 };
 
 export const isFirstNameValid = (firstName: string): boolean => {
-  const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
+  const regex = /^[A-Z][\sa-zA-Z]*$/;
   return regex.test(firstName);
 };
 
 export const isLastNameValid = (lastName: string): boolean => {
-  const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
+  const regex = /^[A-Z][\sa-zA-Z]*$/;
   return regex.test(lastName);
 };
 
