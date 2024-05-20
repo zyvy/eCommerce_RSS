@@ -24,9 +24,12 @@ import DateInput, {
   isEmailValid,
   isFirstNameValid,
   isLastNameValid,
-  isStreetValid,
-  isCityValid,
-  isCountryValid,
+  isStreetBillValid,
+  isCityBillValid,
+  isStreetShippValid,
+  isCityShippValid,
+  isCountryBillValid,
+  isCountryShippValid,
   PagePaths,
 } from '../../utils/utils';
 import currencies from './currencies';
@@ -56,7 +59,7 @@ function Registration() {
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState(false);
   const [defaultBil, setDefaultBil] = useState(false);
-  const [openBilling, setOpenBilling] = useState(false);
+  const [openBilling, setOpenBilling] = useState(true);
   const [openBill, setOpenBill] = useState(true);
 
   // inputs shipping address
@@ -69,7 +72,7 @@ function Registration() {
   const [codeShip, setCodeShip] = useState('');
   const [codeShipError, setCodeShipError] = useState(false);
   const [defaultShip, setDefaultShip] = useState(false);
-  const [openShipping, setOpenShipping] = useState(false);
+  const [openShipping, setOpenShipping] = useState(true);
   const [openShipp, setOpenShipp] = useState(true);
 
   const [allDefaultBox, setAllDefaultBox] = useState(false);
@@ -110,7 +113,11 @@ function Registration() {
 
     const reg = await RegistrationService.registration(customer);
     if (reg.error) {
-      setAuthError(reg.errorDescription);
+      if (reg.errorDescription === 'There is already an existing customer with the provided email.') {
+        setAuthError('A user with such an e-mail has already been registered. Go to the authorization page or use another e-mail');
+      } else {
+        setAuthError(reg.errorDescription);
+      }
     } else {
       setRegSuccess(true);
       AuthorizationService.removeCustomerLogin();
@@ -203,7 +210,7 @@ function Registration() {
     setOpenShipping(!openShipping);
   };
 
-  const isCodeValid = () => {
+  const isCodeBillValid = () => {
     let regTemplate: RegExp = /^/;
     currencies.forEach((options) => {
       if (options.value === country) {
@@ -211,6 +218,16 @@ function Registration() {
       }
     });
     return regTemplate.test(code);
+  };
+
+  const isCodeShippValid = () => {
+    let regTemplate: RegExp = /^/;
+    currencies.forEach((options) => {
+      if (options.value === countryShip) {
+        regTemplate = new RegExp(options.reg);
+      }
+    });
+    return regTemplate.test(codeShip);
   };
 
   const handleAllDefaultBox = () => {
@@ -245,23 +262,43 @@ function Registration() {
       mistake = true;
     }
 
-    if (!isStreetValid(street)) {
+    if (!isStreetBillValid(street)) {
       setStreetError(true);
       mistake = true;
     }
 
-    if (!isCityValid(city)) {
+    if (!isStreetShippValid(streetShip)) {
+      setStreetShipError(true);
+      mistake = true;
+    }
+
+    if (!isCityBillValid(city)) {
       setCityError(true);
       mistake = true;
     }
 
-    if (!isCodeValid()) {
+    if (!isCityShippValid(cityShip)) {
+      setCityShipError(true);
+      mistake = true;
+    }
+
+    if (!isCodeBillValid()) {
       setCodeError(true);
       mistake = true;
     }
 
-    if (!isCountryValid(country)) {
+    if (!isCodeShippValid()) {
+      setCodeShipError(true);
+      mistake = true;
+    }
+
+    if (!isCountryBillValid(country)) {
       setCountryError(true);
+      mistake = true;
+    }
+
+    if (!isCountryShippValid(country)) {
+      setCountryShipError(true);
       mistake = true;
     }
 
@@ -289,6 +326,9 @@ function Registration() {
 
   let codeErrorText = '';
   currencies.forEach((options) => (options.value === country ? (codeErrorText = options.error) : ''));
+
+  let codeShippErrorText = '';
+  currencies.forEach((options) => (options.value === countryShip ? (codeShippErrorText = options.error) : ''));
 
   return (
     <>
@@ -378,7 +418,7 @@ function Registration() {
                     size="small"
                     required
                     sx={{ width: '100%' }}
-                    id="Registration_street"
+                    id="Registration_street_billing"
                     label="Street"
                     variant="outlined"
                     type="text"
@@ -390,7 +430,7 @@ function Registration() {
                     size="small"
                     required
                     sx={{ width: '100%' }}
-                    id="Registration_city"
+                    id="Registration_city_billing"
                     label="City"
                     variant="outlined"
                     type="text"
@@ -421,7 +461,7 @@ function Registration() {
                       size="small"
                       required
                       sx={{ width: '100%' }}
-                      id="Registration_code"
+                      id="Registration_code_billing"
                       label="Postal code"
                       variant="outlined"
                       type="text"
@@ -462,7 +502,7 @@ function Registration() {
                         size="small"
                         required
                         sx={{ width: '100%' }}
-                        id="Registration_street"
+                        id="Registration_street_shipping"
                         label="Street"
                         variant="outlined"
                         type="text"
@@ -474,7 +514,7 @@ function Registration() {
                         size="small"
                         required
                         sx={{ width: '100%' }}
-                        id="Registration_city"
+                        id="Registration_city_shipping"
                         label="City"
                         variant="outlined"
                         type="text"
@@ -501,11 +541,11 @@ function Registration() {
                         </TextField>
                         <TextField
                           error={codeShipError}
-                          helperText={codeShipError ? codeErrorText : ''}
+                          helperText={codeShipError ? codeShippErrorText : ''}
                           size="small"
                           required
                           sx={{ width: '100%' }}
-                          id="Registration_code"
+                          id="Registration_code_shipping"
                           label="Postal code"
                           variant="outlined"
                           type="text"

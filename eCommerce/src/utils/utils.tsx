@@ -32,19 +32,34 @@ export const isDateValid = (Date: string): boolean => {
   return regex.test(Date);
 };
 
-export const isStreetValid = (street: string): boolean => {
+export const isStreetBillValid = (street: string): boolean => {
   const regex = /^[A-Za-z0-9]*$/;
   return regex.test(street);
 };
 
-export const isCityValid = (city: string): boolean => {
+export const isStreetShippValid = (street: string): boolean => {
+  const regex = /^[A-Za-z0-9]*$/;
+  return regex.test(street);
+};
+
+export const isCityBillValid = (city: string): boolean => {
   const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
   return regex.test(city);
 };
 
-export const isCountryValid = (country: string): boolean => {
+export const isCityShippValid = (city: string): boolean => {
+  const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
+  return regex.test(city);
+};
+
+export const isCountryBillValid = (country: string): boolean => {
   const regex = /^[A-Za-z]*$/;
   return regex.test(country);
+};
+
+export const isCountryShippValid = (countryShip: string): boolean => {
+  const regex = /^[A-Za-z]*$/;
+  return regex.test(countryShip);
 };
 
 export enum PagePaths {
