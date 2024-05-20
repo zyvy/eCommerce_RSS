@@ -1,9 +1,10 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/naming-convention */
+// import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
-import { PagePaths, isUserLoggedIn } from '../../utils/utils';
+import { PagePaths, isUserLoggedIn } from '../../utils/utils.tsx';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
 
 const theme = createTheme({
@@ -20,15 +21,14 @@ const theme = createTheme({
 
 function Header() {
   const navigate = useNavigate();
-  const handleSearch = (e: React.FormEvent) => {
+  /* const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO search
-  };
+  }; */
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
       AuthorizationService.removeCustomerLogin();
-      console.log('logout');
-      if (location.pathname === PagePaths.Main) {
+      if (window.location.pathname === PagePaths.Main) {
         navigate(0);
       } else {
         navigate(PagePaths.Main);
@@ -41,7 +41,6 @@ function Header() {
   const HandleRegisterButtonClick = () => {
     if (isUserLoggedIn()) {
       // getOrders();
-      console.log('get orders');
       navigate(PagePaths.Main);
     } else {
       navigate(PagePaths.Register);
@@ -52,7 +51,7 @@ function Header() {
     <ThemeProvider theme={theme}>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <Link to="/">
+          <Link to={PagePaths.Main}>
             <img className={styles.logo_image} src="./logo.png" alt="Logo" />
           </Link>
         </div>

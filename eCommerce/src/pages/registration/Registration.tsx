@@ -161,6 +161,9 @@ function Registration() {
     clearAuthError();
     setStreetError(false);
     setStreet(e.target.value);
+    if (allDefaultBox) {
+      setStreetShip(e.target.value);
+    }
   };
   const handleStreetShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearAuthError();
@@ -172,6 +175,9 @@ function Registration() {
     clearAuthError();
     setCityError(false);
     setCity(e.target.value);
+    if (allDefaultBox) {
+      setCityShip(e.target.value);
+    }
   };
   const handleCityShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearAuthError();
@@ -183,6 +189,9 @@ function Registration() {
     clearAuthError();
     setCountryError(false);
     setCountry(e.target.value);
+    if (allDefaultBox) {
+      setCountryShip(e.target.value);
+    }
   };
   const handleCountryShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearAuthError();
@@ -194,6 +203,9 @@ function Registration() {
     clearAuthError();
     setCodeError(false);
     setCode(e.target.value);
+    if (allDefaultBox) {
+      setCodeShip(e.target.value);
+    }
   };
   const handleCodeShipInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearAuthError();
@@ -236,6 +248,7 @@ function Registration() {
     setCityShip(city);
     setCodeShip(code);
     setCountryShip(country);
+    setStreetShip(street);
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -343,264 +356,258 @@ function Registration() {
   });
 
   return (
-    <>
+    <div className={styles.container}>
       <Header />
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={submit}>
-          <h2 className={styles.title}>Registration</h2>
-          <TextField
-            error={emailError}
-            helperText={emailError ? emailErrorText : ''}
-            size="small"
-            required
-            id="Registration_email"
-            label="Email"
-            variant="outlined"
-            onInput={handleEmailInput}
-          />
-          <TextField
-            error={passwordError}
-            helperText={passwordError ? passwordErrorText : ''}
-            size="small"
-            required
-            id="Registration_password"
-            label="Password"
-            variant="outlined"
-            type={showPassword ? 'text' : 'password'}
-            onInput={handlePasswordInput}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => setShowPassword((show) => !show)}
-                    onMouseDown={(event: React.MouseEvent<HTMLButtonElement>) => {
-                      event.preventDefault();
-                    }}
-                    edge="end">
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            error={firstNameError}
-            helperText={firstNameError ? firstNameErrorText : ''}
-            size="small"
-            required
-            id="Registration_firstName"
-            label="First name"
-            variant="outlined"
-            type="text"
-            onInput={handleFirstNameInput}
-          />
-          <TextField
-            error={lastNameError}
-            helperText={lastNameError ? lastNameErrorText : ''}
-            size="small"
-            required
-            id="Registration_lastName"
-            label="Last name"
-            variant="outlined"
-            type="text"
-            onInput={handleLastNameInput}
-          />
-          <DateInput
-            dateOfBirth={dateOfBirth}
-            updateDate={(date: string) => {
-              setDate(date);
-            }}
-          />
+      <form className={styles.form} onSubmit={submit}>
+        <h2 className={styles.title}>Registration</h2>
+        <TextField
+          error={emailError}
+          helperText={emailError ? emailErrorText : ''}
+          size="small"
+          required
+          id="Registration_email"
+          label="Email"
+          variant="outlined"
+          onInput={handleEmailInput}
+        />
+        <TextField
+          error={passwordError}
+          helperText={passwordError ? passwordErrorText : ''}
+          size="small"
+          required
+          id="Registration_password"
+          label="Password"
+          variant="outlined"
+          type={showPassword ? 'text' : 'password'}
+          onInput={handlePasswordInput}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => setShowPassword((show) => !show)}
+                  onMouseDown={(event: React.MouseEvent<HTMLButtonElement>) => {
+                    event.preventDefault();
+                  }}
+                  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          error={firstNameError}
+          helperText={firstNameError ? firstNameErrorText : ''}
+          size="small"
+          required
+          id="Registration_firstName"
+          label="First name"
+          variant="outlined"
+          type="text"
+          onInput={handleFirstNameInput}
+        />
+        <TextField
+          error={lastNameError}
+          helperText={lastNameError ? lastNameErrorText : ''}
+          size="small"
+          required
+          id="Registration_lastName"
+          label="Last name"
+          variant="outlined"
+          type="text"
+          onInput={handleLastNameInput}
+        />
+        <DateInput
+          dateOfBirth={dateOfBirth}
+          updateDate={(date: string) => {
+            setDate(date);
+          }}
+        />
 
-          <ListItemButton onClick={handleClickBilling}>
-            <ListItemIcon>
-              <p>1. </p>
-            </ListItemIcon>
-            <ListItemText primary="Add billing address" />
-            {openBill ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={openBilling} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        <ListItemButton onClick={handleClickBilling}>
+          <ListItemIcon>
+            <p>1. </p>
+          </ListItemIcon>
+          <ListItemText primary="Add billing address" />
+          {openBill ? <ExpandLess /> : <ExpandMore />}
+        </ListItemButton>
+        <Collapse in={openBilling} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                <TextField
+                  error={streetError}
+                  helperText={streetError ? streetErrorText : ''}
+                  size="small"
+                  required
+                  sx={{ width: '100%' }}
+                  id="Registration_street_billing"
+                  label="Street"
+                  variant="outlined"
+                  type="text"
+                  onInput={handleStreetInput}
+                />
+                <TextField
+                  error={cityError}
+                  helperText={cityError ? cityErrorText : ''}
+                  size="small"
+                  required
+                  sx={{ width: '100%' }}
+                  id="Registration_city_billing"
+                  label="City"
+                  variant="outlined"
+                  type="text"
+                  onInput={handleCityInput}
+                />
+                <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
                   <TextField
-                    error={streetError}
-                    helperText={streetError ? streetErrorText : ''}
+                    error={countryError}
+                    helperText={countryError ? countryErrorText : ''}
+                    required
+                    id="Registration_country"
+                    sx={{ width: '100%' }}
+                    size="small"
+                    select
+                    label="Country"
+                    defaultValue=""
+                    variant="outlined"
+                    onChange={handleCountryInput}>
+                    {currencies.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                  <TextField
+                    error={codeError}
+                    helperText={codeError ? codeErrorText : ''}
                     size="small"
                     required
                     sx={{ width: '100%' }}
-                    id="Registration_street_billing"
-                    label="Street"
+                    id="Registration_code_billing"
+                    label="Postal code"
                     variant="outlined"
                     type="text"
-                    onInput={handleStreetInput}
-                  />
-                  <TextField
-                    error={cityError}
-                    helperText={cityError ? cityErrorText : ''}
-                    size="small"
-                    required
-                    sx={{ width: '100%' }}
-                    id="Registration_city_billing"
-                    label="City"
-                    variant="outlined"
-                    type="text"
-                    onInput={handleCityInput}
-                  />
-                  <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
-                    <TextField
-                      error={countryError}
-                      helperText={countryError ? countryErrorText : ''}
-                      required
-                      id="Registration_country"
-                      sx={{ width: '100%' }}
-                      size="small"
-                      select
-                      label="Country"
-                      defaultValue=""
-                      variant="outlined"
-                      onChange={handleCountryInput}>
-                      {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                    <TextField
-                      error={codeError}
-                      helperText={codeError ? codeErrorText : ''}
-                      size="small"
-                      required
-                      sx={{ width: '100%' }}
-                      id="Registration_code_billing"
-                      label="Postal code"
-                      variant="outlined"
-                      type="text"
-                      onInput={handleCodeInput}
-                    />
-                  </Box>
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Default"
-                    onChange={() => setDefaultBil(!defaultBil)}
-                  />
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label="Also use as default shipping and billing adress"
-                    onChange={handleAllDefaultBox}
-                    checked={allDefaultBox}
+                    onInput={handleCodeInput}
                   />
                 </Box>
-              </ListItemButton>
-            </List>
-          </Collapse>
-          {!allDefaultBox && (
-            <>
-              <ListItemButton onClick={handleClickShipping}>
-                <ListItemIcon>
-                  <p>2. </p>
-                </ListItemIcon>
-                <ListItemText primary="Add shipping address" />
-                {openShipp ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Collapse in={openShipping} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                <FormControlLabel control={<Checkbox />} label="Default" onChange={() => setDefaultBil(!defaultBil)} />
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label="Also use as default shipping and billing adress"
+                  onChange={handleAllDefaultBox}
+                  checked={allDefaultBox}
+                />
+              </Box>
+            </ListItemButton>
+          </List>
+        </Collapse>
+        {!allDefaultBox && (
+          <>
+            <ListItemButton onClick={handleClickShipping}>
+              <ListItemIcon>
+                <p>2. </p>
+              </ListItemIcon>
+              <ListItemText primary="Add shipping address" />
+              {openShipp ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={openShipping} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    <TextField
+                      error={streetShipError}
+                      helperText={streetShipError ? streetErrorText : ''}
+                      size="small"
+                      required
+                      sx={{ width: '100%' }}
+                      id="Registration_street_shipping"
+                      label="Street"
+                      variant="outlined"
+                      type="text"
+                      onInput={handleStreetShipInput}
+                    />
+                    <TextField
+                      error={cityShipError}
+                      helperText={cityShipError ? cityErrorText : ''}
+                      size="small"
+                      required
+                      sx={{ width: '100%' }}
+                      id="Registration_city_shipping"
+                      label="City"
+                      variant="outlined"
+                      type="text"
+                      onInput={handleCityShipInput}
+                    />
+                    <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
                       <TextField
-                        error={streetShipError}
-                        helperText={streetShipError ? streetErrorText : ''}
+                        error={countryShipError}
+                        helperText={countryShipError ? countryErrorText : ''}
+                        required
+                        id="Registration_country"
+                        sx={{ width: '100%' }}
+                        size="small"
+                        select
+                        label="Country"
+                        defaultValue=""
+                        variant="outlined"
+                        onChange={handleCountryShipInput}>
+                        {currencies.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                      <TextField
+                        error={codeShipError}
+                        helperText={codeShipError ? codeShippErrorText : ''}
                         size="small"
                         required
                         sx={{ width: '100%' }}
-                        id="Registration_street_shipping"
-                        label="Street"
+                        id="Registration_code_shipping"
+                        label="Postal code"
                         variant="outlined"
                         type="text"
-                        onInput={handleStreetShipInput}
-                      />
-                      <TextField
-                        error={cityShipError}
-                        helperText={cityShipError ? cityErrorText : ''}
-                        size="small"
-                        required
-                        sx={{ width: '100%' }}
-                        id="Registration_city_shipping"
-                        label="City"
-                        variant="outlined"
-                        type="text"
-                        onInput={handleCityShipInput}
-                      />
-                      <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
-                        <TextField
-                          error={countryShipError}
-                          helperText={countryShipError ? countryErrorText : ''}
-                          required
-                          id="Registration_country"
-                          sx={{ width: '100%' }}
-                          size="small"
-                          select
-                          label="Country"
-                          defaultValue=""
-                          variant="outlined"
-                          onChange={handleCountryShipInput}>
-                          {currencies.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                        <TextField
-                          error={codeShipError}
-                          helperText={codeShipError ? codeShippErrorText : ''}
-                          size="small"
-                          required
-                          sx={{ width: '100%' }}
-                          id="Registration_code_shipping"
-                          label="Postal code"
-                          variant="outlined"
-                          type="text"
-                          onInput={handleCodeShipInput}
-                        />
-                      </Box>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label="Default"
-                        onChange={() => setDefaultShip(!defaultShip)}
+                        onInput={handleCodeShipInput}
                       />
                     </Box>
-                  </ListItemButton>
-                </List>
-              </Collapse>
-            </>
-          )}
-          {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
-          {regSuccess && (
-            <>
-              <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                Registration was completed successfully!
-              </Alert>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <CircularProgress />
-              </Box>
-            </>
-          )}
-          <Button type="submit" className={styles.button} variant="contained">
-            Register
-          </Button>
-          <h4 className={styles.subtitle}>Do you have an account?</h4>
-          <Button
-            className={[styles.button, styles.buttonNewAccount].join(' ')}
-            variant="outlined"
-            onClick={() => navigate(PagePaths.Login)}>
-            Sign in
-          </Button>
-        </form>
-      </div>
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Default"
+                      onChange={() => setDefaultShip(!defaultShip)}
+                    />
+                  </Box>
+                </ListItemButton>
+              </List>
+            </Collapse>
+          </>
+        )}
+        {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
+        {regSuccess && (
+          <>
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              Registration was completed successfully!
+            </Alert>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <CircularProgress />
+            </Box>
+          </>
+        )}
+        <Button type="submit" className={styles.button} variant="contained">
+          Register
+        </Button>
+        <h4 className={styles.subtitle}>Do you have an account?</h4>
+        <Button
+          className={[styles.button, styles.buttonNewAccount].join(' ')}
+          variant="outlined"
+          onClick={() => navigate(PagePaths.Login)}>
+          Sign in
+        </Button>
+      </form>
       <Footer />
-    </>
+    </div>
   );
 }
 
