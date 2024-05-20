@@ -8,7 +8,7 @@ export const isEmailValid = (email: string) => {
 };
 
 export const isPasswordValid = (password: string) => {
-  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/;
   return regex.test(password);
 };
 
@@ -65,7 +65,7 @@ export const isCountryShippValid = (countryShip: string): boolean => {
 export enum PagePaths {
   Main = '/',
   Login = '/login',
-  Register = '/register',
+  Register = '/registration',
   NotFound = '/404',
 }
 
@@ -76,7 +76,7 @@ type DateInputType = {
 
 function DateInput({ dateOfBirth, updateDate }: DateInputType) {
   const [error, setError] = useState<string>('');
-
+  
   const isValidDate = (dateString: string): boolean => {
     // Check if the date string matches the format YYYY-MM-DD
     const regex = /^\d{4}-\d{2}-\d{2}$/;
@@ -108,8 +108,6 @@ function DateInput({ dateOfBirth, updateDate }: DateInputType) {
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     updateDate(value);
-
-    // Date validation logic
     if (isValidDate(value)) {
       if (isOver13(value)) {
         setError('');

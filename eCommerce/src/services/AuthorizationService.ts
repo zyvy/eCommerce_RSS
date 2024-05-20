@@ -71,7 +71,6 @@ export class AuthorizationService {
         errorDescription: '',
       };
     } catch (error) {
-      console.log('error', error);
       if (error instanceof Error) {
         return {
           error: true,
@@ -154,7 +153,6 @@ export class AuthorizationService {
     const apiRoot = AuthorizationService.getApiRoot();
     try {
       const body = await apiRoot.customers().passwordToken().post({ body: { email } }).execute();
-      console.log(body);
       return body;
     } catch (error) {
       return null;

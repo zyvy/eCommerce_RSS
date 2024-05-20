@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
-import { AuthorizationService } from '../../services/AuthorizationService';
-import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils';
-import Footer from '../../components/UI/Footer';
-import Header from '../../components/UI/Header';
+import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.tsx';
+import Footer from '../../components/UI/footer.tsx';
+import Header from '../../components/UI/Header.tsx';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -25,32 +25,35 @@ function Login() {
     event.preventDefault();
   };
 
-  useEffect(() => {
-    if (AuthorizationService.getCustomerLogin().token) {
-      navigate(PagePaths.Main);
-    }
-  });
-
   const clearAuthError = () => setAuthError('');
 
   const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswordError(false);
-    setAuthError('');
-    setPassword(e.target.value);
+    const currentPassword = e.target.value;
     clearAuthError();
+    setPassword(currentPassword);
+    if (currentPassword && !isPasswordValid(currentPassword)) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
   };
 
   const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailError(false);
-    setEmail(e.target.value);
+    const currentEmail = e.target.value;
+    setEmail(currentEmail);
     clearAuthError();
+    if (currentEmail && !isEmailValid(currentEmail)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
   };
 
   async function authorization() {
     clearAuthError();
     const login = await AuthorizationService.login({ email, password });
     if (login.error) {
-      setAuthError(login.errorDescription);
+      setAuthError('Incorrect email or passoword.');
       AuthorizationService.removeCustomerLogin();
     } else {
       AuthorizationService.updateCustomerLogin('id', login.customer!.id);
@@ -58,26 +61,14 @@ function Login() {
       if (!token.error) {
         AuthorizationService.updateCustomerLogin('token', token.accessToken);
         navigate(PagePaths.Main);
-        console.log(login, token)
+        console.log(login, token);
       }
     }
   }
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let error = false;
-
-    if (!isPasswordValid(password)) {
-      setPasswordError(true);
-      error = true;
-    }
-
-    if (!isEmailValid(email)) {
-      setEmailError(true);
-      error = true;
-    }
-
-    if (!error) {
+    if (!passwordError && !emailError) {
       authorization();
     }
   };
@@ -88,9 +79,8 @@ function Login() {
   const emailErrorText = 'Incorrect email. The email should be like: example@email.com';
 
   return (
-    <>
-    <Header />
     <div className={styles.container}>
+      <Header />
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
         <TextField
@@ -139,9 +129,8 @@ function Login() {
           Create new account
         </Button>
       </form>
+      <Footer />
     </div>
-    <Footer />
-    </>
   );
 }
 
