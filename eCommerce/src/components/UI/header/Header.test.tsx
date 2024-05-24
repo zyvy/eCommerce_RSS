@@ -4,10 +4,10 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from './Header';
+import Header from '../Header';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
-import { PagePaths } from '../../utils/utils';
-import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
+import { PagePaths } from '../../../utils/utils';
+import { AuthorizationService as oldAuthorizationService } from '../../../services/AuthorizationService';
 
 jest.mock('../../utils/utils', () => ({
   ...jest.requireActual('../../utils/utils'),

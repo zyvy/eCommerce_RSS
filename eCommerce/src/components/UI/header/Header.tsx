@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
-import { PagePaths, isUserLoggedIn } from '../../utils/utils.tsx';
-import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import { PagePaths, isUserLoggedIn } from '../../../utils/utils.tsx';
+import { AuthorizationService } from '../../../services/AuthorizationService.ts';
 
 const theme = createTheme({
   breakpoints: {
