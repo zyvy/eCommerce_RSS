@@ -32,7 +32,7 @@ import {
   isCountryShippValid,
 } from '../../utils/validation.ts';
 import InputDate from '../../components/UI/input-date/InputDate.tsx';
-import { PagePaths } from '../../utils/utils.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 import currencies from './currencies.tsx';
 import Header from '../../components/UI/header/Header.tsx';
 import Footer from '../../components/UI/footer/Footer.tsx';

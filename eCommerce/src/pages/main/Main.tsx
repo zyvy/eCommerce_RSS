@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/UI/header/Header.tsx';
-import { PagePaths } from '../../utils/utils.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 import styles from './Main.module.css';
 import Footer from '../../components/UI/footer/Footer.tsx';
 
