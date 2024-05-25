@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Customer, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
-import { env } from '../utils/utils.tsx';
+import { env } from '../utils/utils.ts';
 
 type Token = {
   access_token: string;

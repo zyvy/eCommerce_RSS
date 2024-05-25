@@ -19,7 +19,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { CustomerDraft } from '@commercetools/platform-sdk';
 import { useNavigate } from 'react-router-dom';
 import { RegistrationService } from '../../services/RegistrationService.ts';
-import DateInput, {
+import {
   isPasswordValid,
   isEmailValid,
   isFirstNameValid,
@@ -30,11 +30,12 @@ import DateInput, {
   isCityShippValid,
   isCountryBillValid,
   isCountryShippValid,
-  PagePaths,
-} from '../../utils/utils.tsx';
+} from '../../utils/validation.ts';
+import InputDate from '../../components/UI/input-date/InputDate.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 import currencies from './currencies.tsx';
-import Header from '../../components/UI/Header.tsx';
-import Footer from '../../components/UI/footer.tsx';
+import Header from '../../components/UI/header/Header.tsx';
+import Footer from '../../components/UI/footer/Footer.tsx';
 import styles from './Registration.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
 
@@ -418,7 +419,7 @@ function Registration() {
           type="text"
           onInput={handleLastNameInput}
         />
-        <DateInput
+        <InputDate
           dateOfBirth={dateOfBirth}
           updateDate={(date: string) => {
             setDate(date);

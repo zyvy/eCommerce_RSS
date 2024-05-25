@@ -1,6 +1,6 @@
 import { Customer, CustomerDraft, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
-import { env } from '../utils/utils.tsx';
+import { env } from '../utils/utils.ts';
 
 type ReistrationResponse = {
   error: boolean;

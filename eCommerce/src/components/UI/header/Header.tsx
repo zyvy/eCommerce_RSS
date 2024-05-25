@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-// import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
-import { PagePaths, isUserLoggedIn } from '../../utils/utils.tsx';
-import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import { isUserLoggedIn } from '../../../utils/validation.ts';
+import { PagePaths } from '../../../utils/utils.ts';
+import { AuthorizationService } from '../../../services/AuthorizationService.ts';
 
 const theme = createTheme({
   breakpoints: {
