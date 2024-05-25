@@ -2,11 +2,16 @@ import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { isPasswordValid } from '../../../utils/validation.ts';
-import { useAuth } from '../../../context/AuthContext.tsx';
+import { isPasswordValid } from '../../../../utils/validation.ts';
+import { useAuth } from '../../../../context/AuthContext.tsx';
+import { SizeOfInput } from '../../../../utils/utils.ts';
 
-function InputPassword() {
-  const PASSWORD_ERROR_TEXT =
+type ComponentProps = {
+  size?: SizeOfInput;
+};
+
+function InputPassword({ size }: ComponentProps) {
+  const ERROR_TEXT =
     'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters';
 
   const [showPassword, setShowPassword] = useState(false);
@@ -29,8 +34,9 @@ function InputPassword() {
     <TextField
       // defaultValue="Secret1234"
       error={passwordError}
-      helperText={passwordError ? PASSWORD_ERROR_TEXT : ''}
+      helperText={passwordError ? ERROR_TEXT : ''}
       required
+      size={size}
       label="password"
       type={showPassword ? 'text' : 'password'}
       onInput={handleOnInput}
@@ -50,5 +56,9 @@ function InputPassword() {
     />
   );
 }
+
+InputPassword.defaultProps = {
+  size: 'medium',
+};
 
 export default InputPassword;

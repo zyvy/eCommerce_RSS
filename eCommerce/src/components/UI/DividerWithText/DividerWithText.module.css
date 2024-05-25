@@ -1,0 +1,19 @@
+.lineWithText {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.lineWithText::before,
+.lineWithText::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #1976d2;
+  margin: 0 10px;
+}
+
+.title {
+  padding: 0 10px;
+}

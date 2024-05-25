@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Box, IconButton, InputAdornment } from '@mui/material';
+import { Box } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -10,7 +10,6 @@ import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Alert from '@mui/material/Alert';
@@ -20,10 +19,6 @@ import { CustomerDraft } from '@commercetools/platform-sdk';
 import { useNavigate } from 'react-router-dom';
 import { RegistrationService } from '../../services/RegistrationService.ts';
 import {
-  isPasswordValid,
-  isEmailValid,
-  isFirstNameValid,
-  isLastNameValid,
   isStreetBillValid,
   isCityBillValid,
   isStreetShippValid,
@@ -31,25 +26,29 @@ import {
   isCountryBillValid,
   isCountryShippValid,
 } from '../../utils/validation.ts';
-import InputDate from '../../components/UI/input-date/InputDate.tsx';
+import InputDate from '../../components/UI/inputs/input-date/InputDate.tsx';
 import { PagePaths } from '../../utils/utils.ts';
 import currencies from './currencies.tsx';
 import Header from '../../components/UI/header/Header.tsx';
 import Footer from '../../components/UI/footer/Footer.tsx';
 import styles from './Registration.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import InputPassword from '../../components/UI/inputs/input-password/InputPassword.tsx';
+import InputEmail from '../../components/UI/inputs/input-email/InputEmail.tsx';
+import { useAuth } from '../../context/AuthContext.tsx';
+import { useUserPersonalData } from '../../context/UserPersonalDataContext.tsx';
+import InputFirstName from '../../components/UI/inputs/input-first-name/InputFirstName.tsx';
+import InputLastName from '../../components/UI/inputs/input-last-name/InputLastName.tsx';
+import DividerWithText from '../../components/UI/DividerWithText/DividerWithText.tsx';
 
 function Registration() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [firstNameError, setFirstNameError] = useState(false);
-  const [lastName, setLastName] = useState('');
-  const [lastNameError, setLastNameError] = useState(false);
-  const [dateOfBirth, setDate] = useState('');
+  const auth = useAuth();
+  const { email, password, passwordError, emailError } = { ...auth };
+
+  const userPersonalData = useUserPersonalData();
+  const { firstName, firstNameError, lastName, lastNameError, dateOfBirth, dateOfBirthError } = { ...userPersonalData };
+
+  // const [dateOfBirth, setDate] = useState('');
   const [street, setStreet] = useState('');
   const [streetError, setStreetError] = useState(false);
   const [city, setCity] = useState('');
@@ -133,30 +132,6 @@ function Registration() {
       }, 3000);
     }
   }
-
-  const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearAuthError();
-    setPasswordError(false);
-    setPassword(e.target.value);
-  };
-
-  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearAuthError();
-    setEmailError(false);
-    setEmail(e.target.value);
-  };
-
-  const handleFirstNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearAuthError();
-    setFirstNameError(false);
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearAuthError();
-    setLastNameError(false);
-    setLastName(e.target.value);
-  };
 
   const handleStreetInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     clearAuthError();
@@ -256,23 +231,7 @@ function Registration() {
     e.preventDefault();
     let mistake = false;
 
-    if (!isPasswordValid(password)) {
-      setPasswordError(true);
-      mistake = true;
-    }
-
-    if (!isEmailValid(email)) {
-      setEmailError(true);
-      mistake = true;
-    }
-
-    if (!isFirstNameValid(firstName)) {
-      setFirstNameError(true);
-      mistake = true;
-    }
-
-    if (!isLastNameValid(lastName)) {
-      setLastNameError(true);
+    if (passwordError || emailError || firstNameError || lastNameError || dateOfBirthError) {
       mistake = true;
     }
 
@@ -321,17 +280,6 @@ function Registration() {
     }
   };
 
-  const passwordErrorText =
-    'Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters';
-
-  const emailErrorText = 'Incorrect e-mail. The e-mail should be like: example@gmail.com';
-
-  const firstNameErrorText =
-    'It must begin with a capital letter, must contain at least one character and no special characters or numbers';
-
-  const lastNameErrorText =
-    'It must begin with a capital letter, must contain at least one character and no special characters or numbers';
-
   const streetErrorText = 'Must contain at least one character';
 
   const cityErrorText = 'Must contain at least one character and no special characters or numbers';
@@ -361,70 +309,12 @@ function Registration() {
       <Header />
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Registration</h2>
-        <TextField
-          error={emailError}
-          helperText={emailError ? emailErrorText : ''}
-          size="small"
-          required
-          id="Registration_email"
-          label="Email"
-          variant="outlined"
-          onInput={handleEmailInput}
-        />
-        <TextField
-          error={passwordError}
-          helperText={passwordError ? passwordErrorText : ''}
-          size="small"
-          required
-          id="Registration_password"
-          label="Password"
-          variant="outlined"
-          type={showPassword ? 'text' : 'password'}
-          onInput={handlePasswordInput}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={() => setShowPassword((show) => !show)}
-                  onMouseDown={(event: React.MouseEvent<HTMLButtonElement>) => {
-                    event.preventDefault();
-                  }}
-                  edge="end">
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          error={firstNameError}
-          helperText={firstNameError ? firstNameErrorText : ''}
-          size="small"
-          required
-          id="Registration_firstName"
-          label="First name"
-          variant="outlined"
-          type="text"
-          onInput={handleFirstNameInput}
-        />
-        <TextField
-          error={lastNameError}
-          helperText={lastNameError ? lastNameErrorText : ''}
-          size="small"
-          required
-          id="Registration_lastName"
-          label="Last name"
-          variant="outlined"
-          type="text"
-          onInput={handleLastNameInput}
-        />
-        <InputDate
-          dateOfBirth={dateOfBirth}
-          updateDate={(date: string) => {
-            setDate(date);
-          }}
-        />
+        <InputEmail size="small" />
+        <InputPassword size="small" />
+        <InputFirstName />
+        <InputLastName />
+        <InputDate />
+        <DividerWithText text="Billing address" />
 
         <ListItemButton onClick={handleClickBilling}>
           <ListItemIcon>
