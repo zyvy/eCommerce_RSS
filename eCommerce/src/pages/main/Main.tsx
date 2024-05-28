@@ -3,6 +3,7 @@ import Header from '../../components/UI/Header.tsx';
 import { PagePaths } from '../../utils/utils.tsx';
 import Footer from '../../components/UI/footer.tsx';
 import styles from './Main.module.css';
+import ProductItem from '../../components/UI/ProductItem.tsx';
 
 function Main() {
   return (
@@ -19,6 +20,9 @@ function Main() {
           <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
+      </div>
+      <div>
+        <ProductItem />
       </div>
       <Footer />
     </div>
