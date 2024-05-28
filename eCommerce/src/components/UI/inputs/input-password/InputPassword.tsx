@@ -7,10 +7,10 @@ import { useAuth } from '../../../../context/AuthContext.tsx';
 import { SizeOfInput } from '../../../../utils/utils.ts';
 
 type ComponentProps = {
-  size?: SizeOfInput;
+  size: SizeOfInput;
 };
 
-function InputPassword({ size }: ComponentProps) {
+function InputPassword({ size = 'medium' }: ComponentProps) {
   const ERROR_TEXT =
     'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters';
 
@@ -56,9 +56,5 @@ function InputPassword({ size }: ComponentProps) {
     />
   );
 }
-
-InputPassword.defaultProps = {
-  size: 'medium',
-};
 
 export default InputPassword;

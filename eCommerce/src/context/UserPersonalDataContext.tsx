@@ -1,34 +1,34 @@
 import { Dispatch, SetStateAction, createContext, useState, useContext, useMemo, ReactNode } from 'react';
 
-type UserPersonalDataType = {
+interface UserPersonalDataState {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
   firstNameError: boolean;
   lastNameError: boolean;
   dateOfBirthError: boolean;
-  setData: Dispatch<SetStateAction<Omit<UserPersonalDataType, 'setData'>>>;
+}
+
+type UserPersonalDataContextType = UserPersonalDataState & {
+  setData: Dispatch<SetStateAction<UserPersonalDataState>>;
 };
 
-const UserPersonalDataContext = createContext<UserPersonalDataType>({
+const initialState: UserPersonalDataState = {
   firstName: '',
   lastName: '',
   dateOfBirth: '',
   firstNameError: false,
   lastNameError: false,
   dateOfBirthError: false,
+};
+
+const UserPersonalDataContext = createContext<UserPersonalDataContextType>({
+  ...initialState,
   setData: () => {},
 });
 
 export function UserPersonalDataProvider({ children }: { children: ReactNode }) {
-  const [userPersonalData, setData] = useState<Omit<UserPersonalDataType, 'setData'>>({
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    firstNameError: false,
-    lastNameError: false,
-    dateOfBirthError: false,
-  });
+  const [userPersonalData, setData] = useState<UserPersonalDataState>(initialState);
 
   const userPersonalDataMemo = useMemo(
     () => ({

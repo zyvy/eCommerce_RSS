@@ -1,28 +1,30 @@
 import { Dispatch, SetStateAction, createContext, useState, useContext, useMemo, ReactNode } from 'react';
 
-type AuthContextType = {
+interface AuthState {
   email: string;
   password: string;
   emailError: boolean;
   passwordError: boolean;
-  setAuth: Dispatch<SetStateAction<Omit<AuthContextType, 'setAuth'>>>;
+}
+
+type AuthContextType = AuthState & {
+  setAuth: Dispatch<SetStateAction<AuthState>>;
 };
 
-const AuthContext = createContext<AuthContextType>({
+const initialAuthState: AuthState = {
   email: '',
   password: '',
   emailError: false,
   passwordError: false,
+};
+
+const AuthContext = createContext<AuthContextType>({
+  ...initialAuthState,
   setAuth: () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [auth, setAuth] = useState<Omit<AuthContextType, 'setAuth'>>({
-    email: '',
-    password: '',
-    emailError: false,
-    passwordError: false,
-  });
+  const [auth, setAuth] = useState<AuthState>(initialAuthState);
 
   const authMemo = useMemo(
     () => ({

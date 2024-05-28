@@ -1,14 +1,14 @@
-import TextField from '@mui/material/TextField';
 import React from 'react';
+import TextField from '@mui/material/TextField';
 import { useAuth } from '../../../../context/AuthContext.tsx';
 import { isEmailValid } from '../../../../utils/validation.ts';
 import { SizeOfInput } from '../../../../utils/utils.ts';
 
 type ComponentProps = {
-  size?: SizeOfInput;
+  size: SizeOfInput;
 };
 
-function InputEmail({ size }: ComponentProps) {
+function InputEmail({ size = 'small' }: ComponentProps) {
   const ERROR_TEXT = 'Incorrect email. The email should be like: example@email.com';
   const auth = useAuth();
   const { emailError, setAuth } = { ...auth };
@@ -32,9 +32,5 @@ function InputEmail({ size }: ComponentProps) {
     />
   );
 }
-
-InputEmail.defaultProps = {
-  size: 'medium',
-};
 
 export default InputEmail;

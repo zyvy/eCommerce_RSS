@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute.tsx';
 import { PagePaths } from '../utils/utils.ts';
 import { AuthProvider } from '../context/AuthContext.tsx';
 import { UserPersonalDataProvider } from '../context/UserPersonalDataContext.tsx';
+import { AddressProvider } from '../context/AddressesContext.tsx';
 
 function AppRouter() {
   return (
@@ -28,7 +29,9 @@ function AppRouter() {
           <PrivateRoute>
             <AuthProvider>
               <UserPersonalDataProvider>
-                <RegisterPage />
+                <AddressProvider>
+                  <RegisterPage />
+                </AddressProvider>
               </UserPersonalDataProvider>
             </AuthProvider>
           </PrivateRoute>

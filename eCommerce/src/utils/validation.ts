@@ -1,3 +1,5 @@
+import { CountryType, currencies } from './currencies.ts';
+
 export const isEmailValid = (email: string) => {
   const regex =
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
@@ -38,32 +40,27 @@ export const isDateValid = (Date: string): boolean => {
   return regex.test(Date);
 };
 
-export const isStreetBillValid = (street: string): boolean => {
+export const isStreetValid = (street: string): boolean => {
   const regex = /^[A-Za-z0-9]*$/;
   return regex.test(street);
 };
 
-export const isStreetShippValid = (street: string): boolean => {
-  const regex = /^[A-Za-z0-9]*$/;
-  return regex.test(street);
-};
-
-export const isCityBillValid = (city: string): boolean => {
+export const isCityValid = (city: string): boolean => {
   const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
   return regex.test(city);
 };
 
-export const isCityShippValid = (city: string): boolean => {
-  const regex = /^[a-zA-Z][\sa-zA-Z]*$/;
-  return regex.test(city);
-};
-
-export const isCountryBillValid = (country: string): boolean => {
+export const isCountryValid = (country: string): boolean => {
   const regex = /^[A-Za-z]*$/;
   return regex.test(country);
 };
 
-export const isCountryShippValid = (countryShip: string): boolean => {
-  const regex = /^[A-Za-z]*$/;
-  return regex.test(countryShip);
+export const isCodeValid = (country: CountryType, code: string) => {
+  let regTemplate: RegExp = /^/;
+  currencies.forEach((options) => {
+    if (options.value === country) {
+      regTemplate = new RegExp(options.reg);
+    }
+  });
+  return regTemplate.test(code);
 };
