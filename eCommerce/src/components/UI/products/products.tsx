@@ -40,6 +40,8 @@ const ProductList: React.FC = () => {
           name={product.name['en-US']}
           image={product.masterVariant?.images?.[0].url? product.masterVariant?.images?.[0].url: 'http://localhost'}
           description={product.description?.['en-US']? extractFirstSentence(product.description?.['en-US']): 'description' }
+          price = {product.masterVariant?.prices?.[0].value?.centAmount? product.masterVariant.prices[0].value.centAmount / 100: 0}
+          discount_price={product.masterVariant?.prices?.[0].discounted? product.masterVariant?.prices?.[0].discounted?.value?.centAmount / 100: 0}
         />
       ))}
     </div>

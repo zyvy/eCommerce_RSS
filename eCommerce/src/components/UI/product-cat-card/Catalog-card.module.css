@@ -23,3 +23,14 @@
     font-size: 0.9em;
     color: #555;
   }
+  .product_price{
+    font-weight: 700;
+    font-size: 110%;
+  }
+  .product_discount{
+    font-size: 90%;
+  }
+  .product_sale{
+      font-weight: lighter; 
+      color: red; 
+  }
