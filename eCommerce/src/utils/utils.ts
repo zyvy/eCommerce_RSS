@@ -5,6 +5,7 @@ export enum PagePaths {
   Login = '/login',
   Register = '/registration',
   NotFound = '/404',
+  Profile = 'profile',
 }
 
 export type SizeOfInput = 'small' | 'medium';

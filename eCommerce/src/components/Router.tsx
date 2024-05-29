@@ -8,6 +8,7 @@ import { PagePaths } from '../utils/utils.ts';
 import { AuthProvider } from '../context/AuthContext.tsx';
 import { UserPersonalDataProvider } from '../context/UserPersonalDataContext.tsx';
 import { AddressProvider } from '../context/AddressesContext.tsx';
+import Profile from '../pages/profile/Profile.tsx';
 
 function AppRouter() {
   return (
@@ -37,6 +38,7 @@ function AppRouter() {
           </PrivateRoute>
         }
       />
+      <Route path={PagePaths.Profile} element={<Profile />} />
       <Route path={PagePaths.NotFound} element={<NotFound />} />
     </Routes>
   );

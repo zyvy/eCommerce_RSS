@@ -18,6 +18,8 @@ function Main() {
           <br />
           <Link to={PagePaths.Main}>Главная</Link>
           <br />
+          <Link to={PagePaths.Profile}>Профиль</Link>
+          <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
