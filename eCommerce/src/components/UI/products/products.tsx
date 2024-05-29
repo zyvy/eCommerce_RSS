@@ -4,6 +4,11 @@ import { ProductsService } from '../../../services/ProductsService';
 import { ProductProjection } from '@commercetools/platform-sdk';
 import ProductCard from '../product-cat-card/Catalog-card';
 
+function extractFirstSentence(text: string): string {
+  const match = text.match(/.*?[.!?](?:\s|$)/);
+  return match ? match[0] : text;
+}
+
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +39,7 @@ const ProductList: React.FC = () => {
           id={product.id}
           name={product.name['en-US']}
           image={product.masterVariant?.images?.[0].url? product.masterVariant?.images?.[0].url: 'http://localhost'}
-          description={product.description?.['en-US']? product.description?.['en-US']: 'description' }
+          description={product.description?.['en-US']? extractFirstSentence(product.description?.['en-US']): 'description' }
         />
       ))}
     </div>

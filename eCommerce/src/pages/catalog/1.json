@@ -1,0 +1,1645 @@
+{
+  "limit": 20,
+  "offset": 0,
+  "count": 20,
+  "total": 103,
+  "results": [
+    {
+      "id": "4f751c98-2394-4b1f-80f0-87489fc0a116",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": {
+        "en-US": "Canela Three-Seater Sofa",
+        "en-GB": "Canela Three-Seater Sofa",
+        "de-DE": "Canela 3-Sitzer-Sofa"
+      },
+      "description": {
+        "en-GB": "A leather three-seater sofa is a piece of furniture designed to provide comfortable seating for three people. The sofa is made of high-quality leather, which is known for its durability, strength, and natural beauty. The leather material is treated with protective coatings to make it more resistant to wear and tear, stains, and spills.  The sofa features a sturdy frame made of wood, with a series of springs and cushions providing support and comfort for the seated individuals. The cushions are filled with down feathers.  The leather sofa has clean lines and minimal decorative elements for a more modern or contemporary look.  Overall, a leather three-seater sofa is a versatile and stylish piece of furniture that can provide comfortable seating and add a touch of elegance to any living space.",
+        "en-US": "A leather three-seater sofa is a piece of furniture designed to provide comfortable seating for three people. The sofa is made of high-quality leather, which is known for its durability, strength, and natural beauty. The leather material is treated with protective coatings to make it more resistant to wear and tear, stains, and spills.  The sofa features a sturdy frame made of wood, with a series of springs and cushions providing support and comfort for the seated individuals. The cushions are filled with down feathers.  The leather sofa has clean lines and minimal decorative elements for a more modern or contemporary look.  Overall, a leather three-seater sofa is a versatile and stylish piece of furniture that can provide comfortable seating and add a touch of elegance to any living space.",
+        "de-DE": "Ein Leder-Dreisitzer-Sofa ist ein Möbelstück, das entworfen wurde, um bequemen Platz für drei Personen zu bieten. Das Sofa ist aus hochwertigem Leder gefertigt, das für seine Langlebigkeit, Stärke und natürliche Schönheit bekannt ist. Das Ledermaterial ist mit einer Schutzbeschichtung behandelt, um es widerstandsfähiger gegen Abnutzung, Flecken und Spritzer zu machen.  Das Sofa verfügt über einen stabilen Rahmen aus Holz mit einer Reihe von Federn und Kissen, die den sitzenden Personen Halt und Komfort bieten. Die Kissen sind mit Daunenfedern gefüllt.  Das Ledersofa hat klare Linien und minimale dekorative Elemente für einen moderneren oder zeitgemäßeren Look.  Ein Leder-Dreisitzer-Sofa ein vielseitiges und stilvolles Möbelstück, das bequeme Sitzgelegenheiten bietet und jedem Wohnraum einen Hauch von Eleganz verleiht."
+      },
+      "categories": [
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "0ae2cc1b-bb3e-4aa0-b055-6cb9281975cc" },
+        { "typeId": "category", "id": "dff73bb8-45f4-4966-b009-de60813b1149" }
+      ],
+      "categoryOrderHints": {},
+      "slug": {
+        "en-US": "canela-three-seater-sofa",
+        "en-GB": "canela-three-seater-sofa",
+        "de-DE": "canela-3-sitzer-sofa"
+      },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Leather upholstery \n- 3 seater",
+              "de-DE": "- Lederpolsterung\n- 3-Sitzer",
+              "en-US": "- Leather upholstery \n- 3 seater"
+            }
+          },
+          { "name": "colorlabel", "value": { "en-GB": "Tan", "de-DE": "Bräunen", "en-US": "Tan" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#D2B48C", "label": { "de-DE": "Bräunen", "en-GB": "Tan", "en-US": "Tan" } }
+          },
+          { "name": "color", "value": { "en-GB": "#CE9A17", "de-DE": "#CE9A17", "en-US": "#CE9A17" } },
+          { "name": "finishlabel", "value": { "en-GB": "Pine", "de-DE": "Kiefer", "en-US": "Pine" } },
+          { "name": "finish", "value": { "en-GB": "#E4B849", "de-DE": "#E4B849", "en-US": "#E4B849" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 1000,
+          "version": 1,
+          "id": "258ca214-6eec-4af0-a84c-de810c7af724"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Canela_Three_Seater_Sofa-1.1.jpeg",
+            "dimensions": { "w": 5029, "h": 3353 }
+          },
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Canela_Three_Seater_Sofa-1.2.jpeg",
+            "dimensions": { "w": 1170, "h": 780 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "0b93c14e-3b1f-433b-85bb-a6897ce283cc",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 259900, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "1dda135e-3644-4c90-9b8b-2f0f4114e648",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 259900, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "45f9e6d6-5ef3-48be-9351-7b660c052100",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 259900, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "CTSS-098",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "canela-three-seater-sofa",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.541Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.762Z"
+    },
+    {
+      "id": "b58d3bab-9059-4f36-b34b-9a7e12646325",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-GB": "Opal King Bed", "de-DE": "Opal King Bett", "en-US": "Opal King Bed" },
+      "description": {
+        "en-GB": "A modern king bed with a tufted headboard is a stylish and elegant piece of furniture that can bring a touch of luxury and sophistication to any bedroom. The mattress platform is large enough to accommodate a king-size mattress, and the entire bed is designed with clean, sleek lines that give it a modern look.  The tufted headboard is the centerpiece of the bed and is often the most eye-catching feature. It is made of soft, durable fabric that is tufted in a square pattern. The tufted design gives the headboard a plush, cushioned appearance, making it comfortable for sitting up in bed to read or watch TV.  The overall design of the bed is modern, emphasizing the beauty of the tufted headboard.   Overall, a modern king bed with a tufted headboard is a statement piece that can add both style and comfort to any bedroom.",
+        "de-DE": "Ein modernes Kingsize-Bett mit getuftetem Kopfteil ist ein stilvolles und elegantes Möbelstück, das einen Hauch von Luxus und Raffinesse in jedes Schlafzimmer bringen kann. Die Matratzenplattform ist groß genug, um eine Kingsize-Matratze aufzunehmen, und das gesamte Bett ist mit klaren, schlanken Linien gestaltet, die ihm einen modernen Look verleihen. Das getuftete Kopfteil ist das Herzstück des Bettes und oft der Blickfang schlechthin. Es ist aus weichem, strapazierfähigem Stoff gefertigt, der in einem quadratischen Muster getuftet ist. Das getuftete Design verleiht dem Kopfteil ein plüschiges, gepolstertes Aussehen und macht es bequem, wenn man im Bett sitzt, um zu lesen oder fernzusehen. Das Gesamtdesign des Bettes ist modern und unterstreicht die Schönheit des getufteten Kopfteils. Insgesamt ist ein modernes Doppelbett mit getuftetem Kopfteil ein Highlight, das jedes Schlafzimmer mit Stil und Komfort bereichert.",
+        "en-US": "A modern king bed with a tufted headboard is a stylish and elegant piece of furniture that can bring a touch of luxury and sophistication to any bedroom. The mattress platform is large enough to accommodate a king-size mattress, and the entire bed is designed with clean, sleek lines that give it a modern look.  The tufted headboard is the centerpiece of the bed and is often the most eye-catching feature. It is made of soft, durable fabric that is tufted in a square pattern. The tufted design gives the headboard a plush, cushioned appearance, making it comfortable for sitting up in bed to read or watch TV.  The overall design of the bed is modern, emphasizing the beauty of the tufted headboard.   Overall, a modern king bed with a tufted headboard is a statement piece that can add both style and comfort to any bedroom."
+      },
+      "categories": [
+        { "typeId": "category", "id": "1a8d5adc-1554-4936-b184-8df6d76a7658" },
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "14c78758-6f29-4e40-bd3a-1764cd8c00c4" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-GB": "opal-king-bed", "de-DE": "opal-kingsize-bett", "en-US": "opal-king-bed" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": { "en-GB": "- Assembly included", "de-DE": "- Montage inklusive", "en-US": "- Assembly included" }
+          },
+          { "name": "color", "value": { "en-GB": "#000", "de-DE": "#000", "en-US": "#000" } },
+          { "name": "colorlabel", "value": { "en-GB": "Black", "de-DE": "Schwarz", "en-US": "Black" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#000", "label": { "de-DE": "Schwarz", "en-GB": "Black", "en-US": "Black" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "3065d5fd-26ec-4369-9b2e-bda44a536c57"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Opal_King_Bed-1.1.jpeg",
+            "dimensions": { "w": 2000, "h": 2000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "0125fb97-6a41-4051-86a0-00c52b6e6060",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 129900, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "f49f4969-8624-4c02-987a-51ee3b77dd87",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 129900, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "43ff5d6d-1d7c-4aec-b674-77526b7dea0f",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 129900, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "MTB-023",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "opal-king-bed",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.626Z",
+      "lastModifiedAt": "2024-04-30T14:41:19.195Z"
+    },
+    {
+      "id": "f8127929-1f41-400e-8be6-df3555e2e01c",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Lana Pillow Cover", "en-GB": "Lana Pillow Cover", "de-DE": "Lana Kissenbezug" },
+      "description": {
+        "en-GB": "A microfiber pillow cover is a type of textile covering for a pillow that is made from synthetic fibers such as polyester or nylon. Microfiber is known for its softness, durability, and easy maintenance.  The pillow cover is designed to fit over a standard size pillow, usually around 18 inches square. It features a square shape and can come in a variety of colors and patterns to suit different decor styles and preferences.  The microfiber fabric has a smooth and silky feel that is gentle on the skin and provides a comfortable surface for sleeping. It is also breathable and moisture-wicking, which helps to regulate body temperature and prevent overheating during the night.  The pillow cover is often used for its practical and functional features, such as its easy care and resistance to wrinkles, stains, and fading. It can be easily washed and dried in a machine, making it a convenient and low-maintenance option for busy households.  Overall, a microfiber pillow cover is a versatile and practical accessory that can enhance the comfort and durability of a pillow. It can be used for everyday sleeping, as well as for decorative purposes in a variety of settings, such as bedrooms, guest rooms, and living rooms.",
+        "en-US": "A microfiber pillow cover is a type of textile covering for a pillow that is made from synthetic fibers such as polyester or nylon. Microfiber is known for its softness, durability, and easy maintenance.  The pillow cover is designed to fit over a standard size pillow, usually around 18 inches square. It features a square shape and can come in a variety of colors and patterns to suit different decor styles and preferences.  The microfiber fabric has a smooth and silky feel that is gentle on the skin and provides a comfortable surface for sleeping. It is also breathable and moisture-wicking, which helps to regulate body temperature and prevent overheating during the night.  The pillow cover is often used for its practical and functional features, such as its easy care and resistance to wrinkles, stains, and fading. It can be easily washed and dried in a machine, making it a convenient and low-maintenance option for busy households.  Overall, a microfiber pillow cover is a versatile and practical accessory that can enhance the comfort and durability of a pillow. It can be used for everyday sleeping, as well as for decorative purposes in a variety of settings, such as bedrooms, guest rooms, and living rooms.",
+        "de-DE": "Ein Mikrofaser-Kissenbezug ist eine Art Textilbezug für ein Kissen, der aus synthetischen Fasern wie Polyester oder Nylon hergestellt wird. Mikrofaser ist bekannt für ihre Weichheit, Haltbarkeit und einfache Pflege.  Der Kissenbezug ist so konzipiert, dass er über ein Kissen in Standardgröße passt, normalerweise etwa 18 Zoll im Quadrat. Es hat eine quadratische Form und kann in einer Vielzahl von Farben und Mustern erhältlich sein, um verschiedenen Einrichtungsstilen und Vorlieben gerecht zu werden.  Das Mikrofasergewebe fühlt sich glatt und seidig an, ist sanft zur Haut und bietet eine angenehme Schlafoberfläche. Es ist außerdem atmungsaktiv und feuchtigkeitstransportierend, was hilft, die Körpertemperatur zu regulieren und eine Überhitzung während der Nacht zu verhindern.  Der Kissenbezug wird oft wegen seiner praktischen und funktionalen Eigenschaften verwendet, wie z. B. seiner Pflegeleichtigkeit und Beständigkeit gegen Falten, Flecken und Ausbleichen. Es kann einfach in einer Maschine gewaschen und getrocknet werden, was es zu einer praktischen und pflegeleichten Option für vielbeschäftigte Haushalte macht.  Insgesamt ist ein Mikrofaser-Kissenbezug ein vielseitiges und praktisches Accessoire, das den Komfort und die Haltbarkeit eines Kissens verbessern kann. Es kann sowohl zum täglichen Schlafen als auch zu dekorativen Zwecken in einer Vielzahl von Umgebungen wie Schlaf-, Gästezimmern und Wohnzimmern verwendet werden."
+      },
+      "categories": [
+        { "typeId": "category", "id": "ecb6a570-fafc-4e80-8e24-6d90b52e0695" },
+        { "typeId": "category", "id": "fa70825a-fef3-4256-adc2-02845bf4d55d" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "lana-pillow-cover", "en-GB": "lana-pillow-cover", "de-DE": "lana-kissenbezug" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Machine washable\n- Pillow not included\n- Has a zip enclosure",
+              "de-DE": "- Waschmaschinenfest\n- Kissen nicht im Lieferumfang enthalten\n- Verfügt über ein Reißverschlussgehäuse",
+              "en-US": "- Machine washable\n- Pillow not included\n- Has a zip enclosure"
+            }
+          },
+          {
+            "name": "color-filter",
+            "value": { "key": "#808080", "label": { "de-DE": "Grau", "en-GB": "Gray", "en-US": "Gray" } }
+          },
+          { "name": "color", "value": { "en-GB": "#ABA9A7", "de-DE": "#ABA9A7", "en-US": "#ABA9A7" } },
+          { "name": "colorlabel", "value": { "en-GB": "Feather Gray", "de-DE": "Federgrau", "en-US": "Feather Gray" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "52440ea7-ab5c-4e9e-a70b-4cd086021b55"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Lana_Pillow_Cover-1.1.jpeg",
+            "dimensions": { "w": 4350, "h": 3143 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "84c39d6e-918c-4050-8b27-389cb54ca334",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 1099, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "f6794e57-8667-4f17-82aa-76a28aab59ff",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 1099, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "4a361a89-ed27-4018-a5ae-af2052e4516b",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 1099, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "LPC-09",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "lana-pillow-cover",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.673Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.575Z"
+    },
+    {
+      "id": "3b02a20c-b194-4838-badd-584c5c16d630",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Rustic Oven Casserole", "en-GB": "Rustic Oven Casserole", "de-DE": "Rustikale Auflaufform" },
+      "description": {
+        "de-DE": "Die rustikale Keramik-Kasserolle eignet sich ideal zum Backen oder Braten von Aufläufen, Eintöpfen oder anderen Ofengerichten. Im traditionellen Stil gehalten, hat die Ofenform ein rustikales Aussehen, ist in erdigen Farben und mit strukturierter Oberfläche und unebenen Rändern gestaltet.  Die Dicke des Materials macht sie langlebig und temperaturfest, sodass Risse und Absplitterungen ausgeschlossen werden können. Das Material ist zudem so beständig, dass es nicht auf saure oder scharfe Speisen reagiert. Die Aromen der Gerichte bleiben somit jederzeit unverändert.  Das Design der Keramikform sorgt für rustikalen Charme in der Küche und im Essbereich. Besonders in der kalten Jahreszeit eignet sich die Ofenform außerdem ideal zum Servieren warmer und herzhafter Speisen.  Für die Reinigung der rustikalen Servierform empfiehlt es sich, sie nach vollständigem Abkühlen mit warmem Seifenwasser zu waschen. Sie sollte vor der Lagerung gründlich getrocknet werden, um zu verhindern, dass Feuchtigkeit im Inneren eingeschlossen wird.  Eine rustikale Auflaufform aus Keramik ist ein praktisches und ästhetisch ansprechendes Kochgeschirr, das jeder Küche einen Hauch von Wärme und Charakter verleiht. Die robuste Machart und das klassische Design machen sie zum Must-have der Küchenausstattung für Hobbyköche und Köche gleichermaßen.",
+        "en-GB": "A rustic ceramic oven casserole is a cooking dish made of ceramic that is designed to be used in the oven for baking or roasting casseroles, stews, or other dishes. It has a traditional and rustic look, often featuring earthy colors, textured surfaces, and uneven edges.  The ceramic material is thick and durable, allowing it to withstand high temperatures in the oven without cracking or chipping. It is also non-reactive, meaning it won't interact with acidic or spicy foods, ensuring that the flavors of the dish remain intact.  The rustic design of the ceramic oven casserole adds a touch of warmth and charm to the kitchen and dining area. It is perfect for serving hot and hearty meals, particularly during colder months.  To clean a rustic ceramic oven casserole, it is recommended to let it cool down after use before washing it with warm, soapy water. It should be dried thoroughly before storing to prevent any moisture from being trapped inside.  Overall, a rustic ceramic oven casserole is a practical and aesthetically pleasing cooking dish that adds a touch of warmth and character to any kitchen. Its sturdy construction and classic design make it a staple for home cooks and chefs alike.",
+        "en-US": "A rustic ceramic oven casserole is a cooking dish made of ceramic that is designed to be used in the oven for baking or roasting casseroles, stews, or other dishes. It has a traditional and rustic look, often featuring earthy colors, textured surfaces, and uneven edges.  The ceramic material is thick and durable, allowing it to withstand high temperatures in the oven without cracking or chipping. It is also non-reactive, meaning it won't interact with acidic or spicy foods, ensuring that the flavors of the dish remain intact.  The rustic design of the ceramic oven casserole adds a touch of warmth and charm to the kitchen and dining area. It is perfect for serving hot and hearty meals, particularly during colder months.  To clean a rustic ceramic oven casserole, it is recommended to let it cool down after use before washing it with warm, soapy water. It should be dried thoroughly before storing to prevent any moisture from being trapped inside.  Overall, a rustic ceramic oven casserole is a practical and aesthetically pleasing cooking dish that adds a touch of warmth and character to any kitchen. Its sturdy construction and classic design make it a staple for home cooks and chefs alike."
+      },
+      "categories": [],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "rustic-oven-casserole", "en-GB": "rustic-oven-casserole", "de-DE": "rustikaler-ofentopf" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": { "en-GB": "- Does not include lid", "en-US": "- Does not include lid", "de-DE": "- Ohne Deckel" }
+          },
+          { "name": "colorlabel", "value": { "en-GB": "Terracotta", "de-DE": "Terrakotta", "en-US": "Terracotta" } },
+          { "name": "color", "value": { "en-GB": "#E3793E", "de-DE": "#E3793E", "en-US": "#E3793E" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#FFA500", "label": { "de-DE": "Orange", "en-GB": "Orange", "en-US": "Orange" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "0935e607-acc6-46ac-80b8-c7b2ee3ba45e"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Rustic_Oven_Casserole-1.1.jpeg",
+            "dimensions": { "w": 4746, "h": 3710 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "d9fe7f74-51d6-4d96-a7ee-d2f90540691a",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 2599, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "bee07653-2935-48d2-a2a6-972feda7bada",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 2599, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "a6c0ffe4-dcfc-41b9-b277-b26af54a4e9f",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 2599, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "RCC-09",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "rustic-oven-casserole",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.677Z",
+      "lastModifiedAt": "2024-04-30T14:41:17.764Z"
+    },
+    {
+      "id": "2afbec38-bc9b-4a97-8670-0c35219e8dd1",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Raven Bowl", "en-GB": "Raven Bowl", "de-DE": "Suppenschüssel >Raven<" },
+      "description": {
+        "en-GB": "This bowl is a dish designed to serve soup and other liquid-based foods. It is a square-shaped bowl with four straight sides and a flat bottom, creating a modern and contemporary look for dining.  Overall, a square soup bowl is a functional and stylish choice for serving soup and other liquid-based foods. Its unique shape and contemporary design make it a popular choice for those who appreciate modern aesthetics and practicality.",
+        "en-US": "This bowl is a dish designed to serve soup and other liquid-based foods. It is a square-shaped bowl with four straight sides and a flat bottom, creating a modern and contemporary look for dining.  Overall, a square soup bowl is a functional and stylish choice for serving soup and other liquid-based foods. Its unique shape and contemporary design make it a popular choice for those who appreciate modern aesthetics and practicality.",
+        "de-DE": "Die Schüssel >Raven< wurde zum Servieren von Suppen und anderer Flüssigspeisen designt. Die quadratische Form aus vier geraden Seiten und einem flachen Boden verleiht dem Suppentellerl einen modernen und zeitgemäßen Look.  Durch die einzigartige Form und das zeitgemäße Design ist >Raven< eine beliebte Wahl für all diejenigen, die Ästhetik und Praktikabilität auf ihrem Esstisch schätzen."
+      },
+      "categories": [
+        { "typeId": "category", "id": "273d830d-512c-4ae9-8a0f-6fd985ab029b" },
+        { "typeId": "category", "id": "331ac096-d529-433b-9a3d-7a99bb924f46" },
+        { "typeId": "category", "id": "bbf525c1-18c4-4371-ad8c-1a2478de1d3e" },
+        { "typeId": "category", "id": "2b7279fb-b51f-404a-bee8-107c02639d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "raven-bowl", "en-GB": "raven-bowl", "de-DE": "rabenschssel" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": { "en-GB": "- Includes 1 bowl", "en-US": "- Includes 1 bowl", "de-DE": "- Enthält 1 Schüssel" }
+          },
+          { "name": "color", "value": { "en-GB": "#FFF", "de-DE": "#FFF", "en-US": "#FFF" } },
+          { "name": "colorlabel", "value": { "en-GB": "White", "de-DE": "Weiß", "en-US": "White" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#FFF", "label": { "de-DE": "Weiss", "en-GB": "White", "en-US": "White" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "9ac6f6f6-b2b0-40f1-85da-7305b98d8209"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Raven_Bowl-1.1.jpeg",
+            "dimensions": { "w": 4232, "h": 2904 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "85c0ccd7-a2d3-4cf1-83b8-34a2aa969c86",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 299, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "2c61dc94-9681-41f5-82e2-3abd58aaa488",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 299, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "bac5f4a6-72ab-415e-a5ee-3be91bb10b42",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 299, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "RB-093",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "raven-bowl",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.647Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.200Z"
+    },
+    {
+      "id": "f5942aba-3cbe-4d17-8132-c8173d9b67be",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Comfort Coffee Mug", "en-GB": "Comfort Coffee Mug", "de-DE": "Komfort-Kaffeetasse" },
+      "description": {
+        "en-GB": "The Comfort Coffee Mug is made from ceramic. The design of the mug is intended to make it easy to hold and drink from, with a handle on one side for comfortable grip.  The mug is plain, but its basic design is generally simple and functional. The body of the mug is often smooth-sided, with a wide opening that makes it easy to pour and drink coffee.  The Comfort Coffee Mug is easy to clean and maintain. It can be washed by hand or in a dishwasher, and should be dried thoroughly to prevent water spots or residue from forming.  Overall, the Comfort Coffee Mug is a practical and functional type of drinking vessel that is ideal for enjoying a cup of coffee at home or at work. Its basic design and ease of use make it a popular choice for coffee lovers of all types.",
+        "en-US": "The Comfort Coffee Mug is made from ceramic. The design of the mug is intended to make it easy to hold and drink from, with a handle on one side for comfortable grip.  The mug is plain, but its basic design is generally simple and functional. The body of the mug is often smooth-sided, with a wide opening that makes it easy to pour and drink coffee.  The Comfort Coffee Mug is easy to clean and maintain. It can be washed by hand or in a dishwasher, and should be dried thoroughly to prevent water spots or residue from forming.  Overall, the Comfort Coffee Mug is a practical and functional type of drinking vessel that is ideal for enjoying a cup of coffee at home or at work. Its basic design and ease of use make it a popular choice for coffee lovers of all types.",
+        "de-DE": "Unsere Komfort-Kaffeestasse ist aus Keramik gefertigt. Das Design der Tasse die für ein optimales Trinkerlebenis optimiert - unter anderem durch einen Griff auf einer Seite für bequemen Halt.  Der Becher ist schlicht und sein zeitloses Design ist einfach und funktional. Die Komfort-Kaffeetasse ist leicht zu reinigen und zu pflegen. Sie kann von Hand oder in der Spülmaschine gewaschen werden und sollte gründlich getrocknet werden, um Wasserflecken oder Rückstände zu vermeiden.  Diese Komfort-Kaffeetasse ist ein praktisches und funktionelles Trinkgefäß, das sich ideal für den Kaffeegenuss zu Hause oder am Arbeitsplatz eignet. Sein einfaches Design und seine Benutzerfreundlichkeit machen ihn zu einer beliebten Wahl für Kaffeeliebhaber."
+      },
+      "categories": [
+        { "typeId": "category", "id": "66589a6d-3ed4-4e8b-8cc4-7c1950ac94c5" },
+        { "typeId": "category", "id": "30a7063e-be2d-4fce-bf37-805189239b3d" },
+        { "typeId": "category", "id": "bbf525c1-18c4-4371-ad8c-1a2478de1d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-GB": "comfort-coffee-mug", "de-DE": "komfort-kaffeetasse", "en-US": "comfort-coffee-mug" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Includes 1 mug\n- Dishwasher and microwave safe",
+              "de-DE": "- Enthält 1 Tasse\n- Spülmaschinen- und mikrowellengeeignet",
+              "en-US": "- Includes 1 mug\n- Dishwasher and microwave safe"
+            }
+          },
+          {
+            "name": "color-filter",
+            "value": { "key": "#FFF", "label": { "de-DE": "Weiss", "en-GB": "White", "en-US": "White" } }
+          },
+          { "name": "color", "value": { "en-GB": "#FFF", "de-DE": "#FFF", "en-US": "#FFF" } },
+          { "name": "colorlabel", "value": { "en-GB": "White", "de-DE": "Weiß", "en-US": "White" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "d86acc9f-e621-40f4-9854-4a1f2d1de4c9"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Comfort_Coffee_Mug-1.1.jpeg",
+            "dimensions": { "w": 2340, "h": 2256 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "75614838-a5b0-4dcb-9089-7452fc805c48",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 199, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "99580a1b-5411-4e7b-aba2-01949e989517",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 199, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "0643ef23-72ec-43bb-9786-264c7d868d75",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 199, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "CCM-089",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "comfort-coffee-mug",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.633Z",
+      "lastModifiedAt": "2024-04-30T14:41:19.194Z"
+    },
+    {
+      "id": "9f47fff1-d9df-43f3-a1a6-c4d32692d655",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Walnut Cabinet", "en-GB": "Walnut Cabinet", "de-DE": "Sideboard aus Nussbaumholz" },
+      "description": {
+        "en-US": "This Walnut Cabinet has many drawers, which are arranged in rows, with several drawers per row. The drawers are large and deep, allowing for ample storage space. The drawers may have simple handles.  The top of the sideboard is flat and smooth, and can be used to display decorative items such as vases or candles.   Overall, a large sideboard with many drawers is a functional and practical piece of furniture that can add style and storage to any room.",
+        "de-DE": "Dieser Nussbaumschrank besticht durch seine Vielzahl an Schubladen, die in Reihen angeordnet sind, mit mehreren Schubladen pro Reihe. Die Schubladen sind groß und tief und bieten viel Stauraum. Die Schubladen sind mit einfachen Griffen zu haben.  Die Oberseite des Sideboards ist flach und glatt und kann zur Präsentation von Dekorationsartikeln wie Vasen oder Kerzen verwendet werden.  Das geräumige Sideboard mit vielen Schubladen ist ein funktionales und praktisches Möbelstück, das jedem Raum Stil und Stauraum verleiht.",
+        "en-GB": "This Walnut Cabinet has many drawers, which are arranged in rows, with several drawers per row. The drawers are large and deep, allowing for ample storage space. The drawers may have simple handles.  The top of the sideboard is flat and smooth, and can be used to display decorative items such as vases or candles.   Overall, a large sideboard with many drawers is a functional and practical piece of furniture that can add style and storage to any room."
+      },
+      "categories": [
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "1a8d5adc-1554-4936-b184-8df6d76a7658" },
+        { "typeId": "category", "id": "5f75fefa-9007-498f-9c0b-957d9679b527" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "walnut-cabinet", "en-GB": "walnut-cabinet", "de-DE": "nussbaum-schrank" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Assembly included in delivery",
+              "en-US": "- Assembly included in delivery",
+              "de-DE": "- Montage im Lieferumfang enthalten"
+            }
+          },
+          { "name": "finishlabel", "value": { "en-GB": "Walnut", "de-DE": "Nussbaum", "en-US": "Walnut" } },
+          {
+            "name": "color-filter",
+            "value": {
+              "key": "#964B00",
+              "label": { "de-DE": "Dunkelbraun", "en-GB": "Dark Brown", "en-US": "Dark Brown" }
+            }
+          },
+          { "name": "finish", "value": { "en-GB": "#7A5905", "en-US": "#7A5905", "de-DE": "#7A5905" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "cd9ec333-a25b-4471-90a1-3eeb39a25397"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Walnut_Cabinet-1.1.jpeg",
+            "dimensions": { "w": 4400, "h": 2935 }
+          },
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Walnut_Cabinet-1.2.jpeg",
+            "dimensions": { "w": 4400, "h": 2935 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "f765d42f-bfad-4caf-b022-4e4bd3bab921",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 159900, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "60ab4fa8-1f04-4f7e-a871-9322ed986373",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 159900, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "0bfb223c-9e2d-4515-867f-85f8af7b3a0c",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 159900, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "WCS-09",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "walnut-cabinet",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.642Z",
+      "lastModifiedAt": "2024-04-30T14:41:17.781Z"
+    },
+    {
+      "id": "96a1886f-deb7-4d59-8928-0c8d333964c7",
+      "version": 4,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Art Deco Chair", "en-GB": "Art Deco Chair", "de-DE": "Sessel im Art-Deco-Stil" },
+      "description": {
+        "en-GB": "An art deco chair with metal legs has a sleek, streamlined design that exudes sophistication and elegance. The chair has a comfortable padded seat and backrest, with durable cotton upholstery providing a soft and luxurious feel. The metal legs have a smooth finish that accentuates the chair's modern style. The chair features distinctive art deco elements such as angular shapes, bold lines, and geometric patterns. Overall, this chair is a striking piece of furniture that adds both style and comfort to any room.",
+        "en-US": "An art deco chair with metal legs has a sleek, streamlined design that exudes sophistication and elegance. The chair has a comfortable padded seat and backrest, with durable cotton upholstery providing a soft and luxurious feel. The metal legs have a smooth finish that accentuates the chair's modern style. The chair features distinctive art deco elements such as angular shapes, bold lines, and geometric patterns. Overall, this chair is a striking piece of furniture that adds both style and comfort to any room.",
+        "de-DE": "Dieser Art-Deco-Stuhl mit Metallbeinen hat ein schlankes, stromlinienförmiges Design, das Raffinesse und Eleganz ausstrahlt. Der Stuhl hat einen bequem gepolsterten Sitz und eine Rückenlehne mit strapazierfähiger Baumwollpolsterung, die ein weiches und luxuriöses Gefühl vermittelt. Die Metallbeine haben eine glatte Oberfläche, die den modernen Stil des Stuhls betont. Der Stuhl bedient sich markante Art-Deco-Elemente wie eckige Formen, kräftige Linien und geometrische Muster. Der Stuhl ist ein markantes Möbelstück, das jedem Raum Stil und Komfort verleiht."
+      },
+      "categories": [
+        { "typeId": "category", "id": "e3f3f3ca-577d-417e-8d26-c8ce3c3843f2" },
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "dff73bb8-45f4-4966-b009-de60813b1149" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "art-deco-chair", "en-GB": "art-deco-chair", "de-DE": "art-deco-stuhl" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Assembly on delivery",
+              "de-DE": "- Montage bei Lieferung",
+              "en-US": "- Assembly on delivery"
+            }
+          },
+          { "name": "colorlabel", "value": { "en-GB": "Gray", "de-DE": "Grau", "en-US": "Gray" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#808080", "label": { "de-DE": "Grau", "en-GB": "Gray", "en-US": "Gray" } }
+          },
+          { "name": "color", "value": { "en-GB": "#DAD7D0", "de-DE": "#DAD7D0", "en-US": "#DAD7D0" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "de94507a-1e6b-4a56-9a8e-5a10c1634655"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Art_Deco_Chair-1.1.jpeg",
+            "dimensions": { "w": 5500, "h": 4400 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "c165adfe-d5e7-417f-ac44-6e97bfe57ef2",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 39900, "fractionDigits": 2 },
+            "country": "DE",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 33915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "6249e867-8083-48b6-b594-9f9434f7b104",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 39900, "fractionDigits": 2 },
+            "country": "GB",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 33915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "c191adfc-794e-45da-a5bb-c6bd3b015892",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 39900, "fractionDigits": 2 },
+            "country": "US",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 33915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          }
+        ],
+        "sku": "ADARM-04",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "art-deco-chair",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.584Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.534Z"
+    },
+    {
+      "id": "3ba0ef22-2868-4f0c-8135-0fcc0729e695",
+      "version": 4,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Abigail Lounge Chair", "en-GB": "Abigail Lounge Chair", "de-DE": "Abigail Lounge-Sessel" },
+      "description": {
+        "en-GB": "A lounge chair with pink velvet upholstery and brass spindle legs is a luxurious and stylish piece of furniture that can add a touch of glamour to any living room, bedroom or office. The chair features a comfortable and spacious seat with soft and plush velvet upholstery in soft pink color.  The backrest and armrests of the chair are slightly curved, providing a comfortable and supportive place to sit and relax. The brass spindle legs are tapered, adding to the overall elegance and sophistication of the design.  The combination of pink velvet and brass is both opulent and chic, making the lounge chair a perfect addition to a range of decor styles, from modern and minimalist to vintage-inspired and glam.  Overall, a lounge chair with pink velvet upholstery and brass spindle legs is a luxurious and comfortable piece of furniture that can add a touch of glamour and sophistication to any space. Its soft and plush upholstery, combined with its elegant and timeless design, make it a perfect place to relax and unwind in style.",
+        "en-US": "A lounge chair with pink velvet upholstery and brass spindle legs is a luxurious and stylish piece of furniture that can add a touch of glamour to any living room, bedroom or office. The chair features a comfortable and spacious seat with soft and plush velvet upholstery in soft pink color.  The backrest and armrests of the chair are slightly curved, providing a comfortable and supportive place to sit and relax. The brass spindle legs are tapered, adding to the overall elegance and sophistication of the design.  The combination of pink velvet and brass is both opulent and chic, making the lounge chair a perfect addition to a range of decor styles, from modern and minimalist to vintage-inspired and glam.  Overall, a lounge chair with pink velvet upholstery and brass spindle legs is a luxurious and comfortable piece of furniture that can add a touch of glamour and sophistication to any space. Its soft and plush upholstery, combined with its elegant and timeless design, make it a perfect place to relax and unwind in style.",
+        "de-DE": "Ein Loungesessel mit rosafarbener Samtpolsterung und Spindelbeinen aus Messing ist ein luxuriöses und stilvolles Möbelstück, das jedem Wohnzimmer, Schlafzimmer oder Büro einen Hauch von Glamour verleihen kann. Der Stuhl verfügt über einen bequemen und geräumigen Sitz mit weicher und plüschiger Samtpolsterung in zartrosa Farbe.  Die Rückenlehne und die Armlehnen des Stuhls sind leicht gebogen und bieten einen bequemen und stützenden Platz zum Sitzen und Entspannen. Die Spindelbeine aus Messing sind konisch zulaufend und tragen zur allgemeinen Eleganz und Raffinesse des Designs bei.  Die Kombination aus rosafarbenem Samt und Messing ist sowohl opulent als auch schick und macht diesen Loungesessel zu einer perfekten Ergänzung für eine Reihe von Einrichtungsstilen, von modern und minimalistisch bis hin zu Vintage-inspiriert und glamourös. Seine weiche Polsterung, kombiniert mit seinem eleganten und zeitlosen Design, machen ihn zu einem perfekten Ort, um sich stilvoll zu entspannen."
+      },
+      "categories": [
+        { "typeId": "category", "id": "dff73bb8-45f4-4966-b009-de60813b1149" },
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "e3f3f3ca-577d-417e-8d26-c8ce3c3843f2" },
+        { "typeId": "category", "id": "2b7279fb-b51f-404a-bee8-107c02639d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "abigail-lounge-chair", "en-GB": "abigail-lounge-chair", "de-DE": "abigail-lounge-stuhl" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          { "name": "color", "value": { "en-US": "lightpink", "en-GB": "lightpink", "de-DE": "lightpink" } },
+          { "name": "colorlabel", "value": { "en-US": "Soft Pink", "en-GB": "Soft Pink", "de-DE": "Soft Pink" } },
+          { "name": "finishlabel", "value": { "en-US": "Brass", "en-GB": "Brass", "de-DE": "Brass" } },
+          { "name": "finish", "value": { "en-US": "goldenrod", "en-GB": "goldenrod", "de-DE": "goldenrod" } },
+          {
+            "name": "productspec",
+            "value": {
+              "en-US": "- Comes with matching throw pillow\n- Velvet upholstery\n- Pre-assembled",
+              "en-GB": "- Comes with matching throw pillow\n- Velvet upholstery\n- Pre-assembled",
+              "de-DE": "- Wird mit passendem Kissen geliefert\n- Samtpolsterung\n- Wird zusammengebaut geliefert"
+            }
+          },
+          {
+            "name": "color-filter",
+            "value": { "key": "#FFC0CB", "label": { "de-DE": "Rosa", "en-GB": "Pink", "en-US": "Pink" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 73,
+          "version": 1,
+          "id": "d7c3b592-013f-47ec-89ec-6c409ee66bc7"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Abigail_Lounge_Chair-1.1.jpeg",
+            "dimensions": { "w": 5000, "h": 4000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "c185fb2b-f165-4b37-b6bb-86cb2f02e8f6",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 75000, "fractionDigits": 2 },
+            "country": "DE",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 63750, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "22aa16a0-837c-4c20-a610-185788fa1394",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 75000, "fractionDigits": 2 },
+            "country": "GB",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 63750, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "986f34d2-b3c9-48d6-b84d-545a3e24f900",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 75000, "fractionDigits": 2 },
+            "country": "US",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 63750, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          }
+        ],
+        "sku": "ALC-01",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "abigail-lounge-chair",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.561Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.172Z"
+    },
+    {
+      "id": "3443e226-6c09-453f-8331-fff9e2b53f89",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": {
+        "en-US": "Cobblestone Rug",
+        "en-GB": "Cobblestone Rug",
+        "de-DE": "Strukturteppich \"Kopfsteinpflaster\""
+      },
+      "description": {
+        "de-DE": "Dieser Strukturteppich kann in einer Vielzahl von Räumen verwendet werden, von Wohnzimmern über Schlafzimmer bis hin zu Heimbüros. Er ist besonders beliebt in modernen und zeitgenössischen Einrichtungsstilen. Hier kann er ein mutiger und grafischer Hingucker sein.  Insgesamt ist ein Teppich mit geometrischen Akzenten eine stilvolle und vielseitige Designwahl, die jedem Raum im Haus visuelles Interesse und Textur verleihen kann.",
+        "en-GB": "The Cobblestone Rug can be used in a variety of spaces, from living rooms to bedrooms to home offices. It is especially popular in modern and contemporary decor styles, where they can add a bold and graphic element to the space.  Overall, a geometric accent rug is a stylish and versatile design choice that can add visual interest and texture to any room in the home.",
+        "en-US": "The Cobblestone Rug can be used in a variety of spaces, from living rooms to bedrooms to home offices. It is especially popular in modern and contemporary decor styles, where they can add a bold and graphic element to the space.  Overall, a geometric accent rug is a stylish and versatile design choice that can add visual interest and texture to any room in the home."
+      },
+      "categories": [
+        { "typeId": "category", "id": "71ed8439-14e9-4db4-b0f5-126263d37791" },
+        { "typeId": "category", "id": "3b2fbb5a-03b4-439c-9a49-9cf0bf409c70" },
+        { "typeId": "category", "id": "fa70825a-fef3-4256-adc2-02845bf4d55d" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-GB": "cobblestone-rug", "de-DE": "kopfsteinpflaster", "en-US": "cobblestone-rug" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "color-filter",
+            "value": { "key": "#808080", "label": { "de-DE": "Grau", "en-GB": "Gray", "en-US": "Gray" } }
+          },
+          {
+            "name": "productspec",
+            "value": { "en-GB": "- 5ft x 3ft", "de-DE": "- 5 Fuß x 3 Fuß", "en-US": "- 5ft x 3ft" }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "403638ec-d216-4b89-b345-c203972835a0"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Cobblestone_Rug-1.1.jpeg",
+            "dimensions": { "w": 7006, "h": 2820 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "6ea1c8f0-f56b-4032-acb3-f0cbe3298ed3",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 12999, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "635d8b17-1a37-4e6b-ba28-a84e3926dbed",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 12999, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "106236a3-036d-49b9-8131-ff143449dd4f",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 12999, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "CR-098",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "cobblestone-rug",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.635Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.849Z"
+    },
+    {
+      "id": "7a35dff2-1cf3-40f2-81e9-012a1984946a",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Stout Beer Glass", "en-GB": "Stout Beer Glass", "de-DE": "Stout-Bierglas" },
+      "description": {
+        "en-US": "A stout beer glass, also known as a \"pint glass,\" is a type of drinking glass that is designed specifically for serving and enjoying stout beers. It has a short, wide shape with a thick, heavy base that provides stability and balance.  The design of the stout beer glass is intended to enhance the drinking experience by allowing the full range of flavors and aromas of the beer to be appreciated. The wide opening of the glass allows the drinker to fully appreciate the color and clarity of the beer, while the heavy base helps to keep the beer from spilling or tipping over.  Overall, a stout beer glass is a classic and timeless type of drinking glass that is ideal for savoring the rich flavor and aroma of fine stout beers. Its simple yet elegant design makes it a popular choice for beer lovers and casual drinkers alike.",
+        "de-DE": "Ein Stout-Bierglas, auch als \"Pintglas\" bekannt, ist ein Trinkglas, das speziell zum Servieren und Genießen von Starkbieren entwickelt wurde. Es hat eine kurze, breite Form mit einem dicken, schweren Boden, der für Stabilität und Gleichgewicht sorgt.  Das Design des Stout-Bierglases unterstützt das Trinkerlebnis, indem es die volle Geschmacks- und Aromenvielfalt des Bieres zur Geltung bringt. Die breite Öffnung des Glases lässt die Farbe und Klarheit des Bieres erkennen, während der schwere Boden dazu beiträgt, dass das Bier nicht verschüttet oder umkippt.  Ein Pintglas ist ein klassisches und zeitloses Trinkglas, das sich ideal eignet, um den reichen Geschmack und das Aroma feiner Stout-Biere zu genießen. Sein einfaches aber elegantes Design macht es zu einer beliebten Wahl für Bierliebhaber und Gelegenheitsgeniesser gleichermaßen.",
+        "en-GB": "A stout beer glass, also known as a \"pint glass,\" is a type of drinking glass that is designed specifically for serving and enjoying stout beers. It has a short, wide shape with a thick, heavy base that provides stability and balance.  The design of the stout beer glass is intended to enhance the drinking experience by allowing the full range of flavors and aromas of the beer to be appreciated. The wide opening of the glass allows the drinker to fully appreciate the color and clarity of the beer, while the heavy base helps to keep the beer from spilling or tipping over.  Overall, a stout beer glass is a classic and timeless type of drinking glass that is ideal for savoring the rich flavor and aroma of fine stout beers. Its simple yet elegant design makes it a popular choice for beer lovers and casual drinkers alike."
+      },
+      "categories": [
+        { "typeId": "category", "id": "66589a6d-3ed4-4e8b-8cc4-7c1950ac94c5" },
+        { "typeId": "category", "id": "30a7063e-be2d-4fce-bf37-805189239b3d" },
+        { "typeId": "category", "id": "bbf525c1-18c4-4371-ad8c-1a2478de1d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "stout-beer-glass", "en-GB": "stout-beer-glass", "de-DE": "starkes-bierglas" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Set includes 6 glasses",
+              "en-US": "- Set includes 6 glasses",
+              "de-DE": "- Das Set enthält 6 Gläser"
+            }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "71faa82e-6970-4819-a582-6e1c67aab03b"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Stout_Beer_Glass-1.1.jpeg",
+            "dimensions": { "w": 3000, "h": 3000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "13e8050d-8ffc-4c50-978a-a7f9dbd7101f",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 5699, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "47e737d8-50c6-40e2-ad03-730a65e406d8",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 5699, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "f4a5f675-2b1f-470f-bfb1-f2b19f83d4ec",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 5999, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "SBG-09",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "stout-beer-glass",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.642Z",
+      "lastModifiedAt": "2024-04-30T14:41:17.979Z"
+    },
+    {
+      "id": "458426a8-1462-4d2b-8c01-45582843ed37",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": {
+        "en-US": "Square Bamboo Coaster",
+        "en-GB": "Square Bamboo Coaster",
+        "de-DE": "Quadratischer Untersetzer aus Bambus"
+      },
+      "description": {
+        "de-DE": "Der quadratische Untersetzer aus Bambus besteht aus einer kleinen Matte mit großer Wirkung, da sie Oberflächen vor Wasserflecken oder Beschädigungen durch Trinkgläser oder Tassen schützt. Er besteht aus natürlichem Bambusmaterial und hat eine glatte Oberfläche. Der Untersetzer hat eine quadratische Form mit leicht abgerundeten Kanten und misst etwa 3,5 Zoll x 3,5 Zoll. Seine leichte und strapazierfähige Beschaffenheit macht ihn zu einer beliebten Wahl für legere und formelle Anlässe gleichermaßen.",
+        "en-GB": "A square bamboo coaster is a small mat used to protect surfaces from water stains or damage caused by drinking glasses or mugs. It is made of natural bamboo material and has a smooth surface. The coaster is square in shape with slightly rounded edges, and measures approximately 3.5 inches by 3.5 inches. Its lightweight and durable nature make it a popular choice for casual and formal occasions alike.",
+        "en-US": "A square bamboo coaster is a small mat used to protect surfaces from water stains or damage caused by drinking glasses or mugs. It is made of natural bamboo material and has a smooth surface. The coaster is square in shape with slightly rounded edges, and measures approximately 3.5 inches by 3.5 inches. Its lightweight and durable nature make it a popular choice for casual and formal occasions alike."
+      },
+      "categories": [
+        { "typeId": "category", "id": "bbf525c1-18c4-4371-ad8c-1a2478de1d3e" },
+        { "typeId": "category", "id": "575a1e87-3bf7-49e7-88e0-9a051d1455ae" },
+        { "typeId": "category", "id": "30a7063e-be2d-4fce-bf37-805189239b3d" }
+      ],
+      "categoryOrderHints": {},
+      "slug": {
+        "en-US": "square-bamboo-coaster",
+        "en-GB": "square-bamboo-coaster",
+        "de-DE": "quadratischer-untersetzer-aus-bambus"
+      },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Wipe clean with wet cloth\n- Set includes 4 coaster",
+              "en-US": "- Wipe clean with wet cloth\n- Set includes 4 coaster",
+              "de-DE": "- Mit einem feuchten Tuch abwischen\n- Das Set enthält 4 Untersetzer"
+            }
+          },
+          {
+            "name": "color-filter",
+            "value": { "key": "#F5F5DC", "label": { "de-DE": "Beige", "en-GB": "Beige", "en-US": "Beige" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "f2407df3-9304-44cd-83cb-13aa22078868"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Square_Bamboo_Coaster-1.1.jpeg",
+            "dimensions": { "w": 2912, "h": 2912 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "9e728e90-69e9-48a6-ae9c-3bb15d6285af",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 1099, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "ed809c01-cff0-4bc7-9ddc-1e7cf74e2402",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 1099, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "274f9753-1ed8-4b7e-b9e2-09ea0a8795cf",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 1099, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "BAMB-084",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "square-bamboo-coaster",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.651Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.160Z"
+    },
+    {
+      "id": "0714f1c5-0057-466d-9f67-bf7c330a5bad",
+      "version": 1,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Indoor Jute Planter", "en-GB": "Indoor Jute Planter", "de-DE": "Indoor Jute Blumentopf " },
+      "description": {
+        "en-GB": "An indoor jute planter for plants is a decorative and eco-friendly way to display greenery in your home. The planter is made from natural jute fibers, which are woven into a sturdy and breathable container for your plants.  The neutral color of the jute fibers complements the natural color of plants, making them stand out beautifully.  The jute fibers of the planter are absorbent, allowing for proper drainage and air circulation for the plant roots. This helps to prevent root rot and other soil-borne diseases, ensuring healthy plant growth.  Overall, an indoor jute planter is a charming and practical way to bring a touch of nature into your home, while also being kind to the planet.",
+        "en-US": "An indoor jute planter for plants is a decorative and eco-friendly way to display greenery in your home. The planter is made from natural jute fibers, which are woven into a sturdy and breathable container for your plants.  The neutral color of the jute fibers complements the natural color of plants, making them stand out beautifully.  The jute fibers of the planter are absorbent, allowing for proper drainage and air circulation for the plant roots. This helps to prevent root rot and other soil-borne diseases, ensuring healthy plant growth.  Overall, an indoor jute planter is a charming and practical way to bring a touch of nature into your home, while also being kind to the planet.",
+        "de-DE": "Ein Indoor-Blumentopf für Pflanzen ist eine dekorative und umweltfreundliche Möglichkeit, Pflanzen in Ihrem Zuhause zu präsentieren. Der Blumentopf besteht aus natürlichen Jutefasern, die zu einem robusten und atmungsaktiven Behälter für Ihre Pflanzen verwoben sind. Die neutrale Farbe der Jutefasern ergänzt die natürliche Farbe der Pflanzen und lässt sie schön zur Geltung kommen. Die Jutefasern des Blumentopfes sind saugfähig und ermöglichen eine ordnungsgemäße Entwässerung und Luftzirkulation für die Pflanzenwurzeln. Dies trägt dazu bei, Wurzelfäule und andere bodenbürtige Krankheiten zu verhindern und ein gesundes Pflanzenwachstum zu gewährleisten. Insgesamt ist ein Blumentopf aus Jute für den Innenbereich eine charmante und praktische Möglichkeit, einen Hauch von Natur in Ihr Zuhause zu bringen und gleichzeitig die Umwelt zu schonen."
+      },
+      "categories": [
+        { "typeId": "category", "id": "3b2fbb5a-03b4-439c-9a49-9cf0bf409c70" },
+        { "typeId": "category", "id": "312164ce-80ba-4ce4-9e87-d23693baddbb" },
+        { "typeId": "category", "id": "fa70825a-fef3-4256-adc2-02845bf4d55d" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "indoor-jute-planter", "en-GB": "indoor-jute-planter", "de-DE": "indoor-jute-planter" },
+      "variants": [
+        {
+          "attributes": [
+            {
+              "name": "productspec",
+              "value": {
+                "en-GB": "- Plant not included",
+                "en-US": "- Plant not included",
+                "de-DE": "- Pflanze nicht im Lieferumfang enthalten"
+              }
+            },
+            { "name": "size", "value": { "en-GB": "Small" } },
+            {
+              "name": "color-filter",
+              "value": { "key": "#000", "label": { "de-DE": "Schwarz", "en-GB": "Black", "en-US": "Black" } }
+            }
+          ],
+          "assets": [],
+          "images": [
+            {
+              "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Indoor_Jute_Planter-2.1.jpeg",
+              "dimensions": { "w": 5000, "h": 5000 }
+            }
+          ],
+          "prices": [
+            {
+              "id": "f178c0f8-46d5-4606-88b7-fe58457adc5a",
+              "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 1999, "fractionDigits": 2 },
+              "country": "DE"
+            },
+            {
+              "id": "18a5f2c2-cf7e-4447-99f5-0da802c386d7",
+              "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 1999, "fractionDigits": 2 },
+              "country": "GB"
+            },
+            {
+              "id": "3b5dd41a-11cf-4996-a1fe-557b08c31c4c",
+              "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 1999, "fractionDigits": 2 },
+              "country": "US"
+            }
+          ],
+          "sku": "IJP-04",
+          "id": 2
+        }
+      ],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Plant not included",
+              "en-US": "- Plant not included",
+              "de-DE": "- Pflanze nicht im Lieferumfang enthalten"
+            }
+          },
+          { "name": "size", "value": { "en-GB": "Large" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#000", "label": { "de-DE": "Schwarz", "en-GB": "Black", "en-US": "Black" } }
+          }
+        ],
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Indoor_Jute_Planter-1.1.jpeg",
+            "dimensions": { "w": 5000, "h": 5000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "9f9a3faf-f0aa-46bd-84ea-14169e57143b",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 3299, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "22e5d5e6-f78e-4fa2-80c3-008a64060d5f",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 3299, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "5a083d26-9cb2-4197-afdd-5b48ad908249",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 3299, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "IJP-03",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "indoor-jute-planter",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.644Z",
+      "lastModifiedAt": "2024-04-30T14:41:10.644Z"
+    },
+    {
+      "id": "815a9ed7-9e02-4c2f-9e49-7fcbc40d1fc7",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": {
+        "en-US": "Traditional Three Seater Sofa",
+        "en-GB": "Traditional Three Seater Sofa",
+        "de-DE": "Traditionelles Dreisitzer-Sofa"
+      },
+      "description": {
+        "en-US": "A traditional three-seater sofa is a classic and elegant piece of furniture that can add a touch of sophistication to any living room or sitting area. The sofa features a sturdy wooden frame that is designed to provide durability and stability, ensuring that the sofa can withstand regular use over time.  The sofa is upholstered in a rich emerald-colored fabric, providing a vibrant and eye-catching focal point in the room. The fabric is soft and comfortable to the touch, allowing you to relax and unwind in style.  The sofa is equipped with two large cushions, which are filled with a high-quality foam material, providing excellent support and comfort for extended periods of sitting. The backrest and armrests of the sofa are filled with a soft and plush material, allowing you to sink into the sofa and relax after a long day.  The traditional three-seater sofa is a versatile piece of furniture that can complement a range of interior design styles, from classic and traditional to more modern and eclectic. It can be paired with a variety of decorative accents, such as pillows, throws, and rugs, to create a cohesive and stylish living space.  Overall, a traditional three-seater sofa in emerald fabric is a timeless and elegant piece of furniture that can provide both comfort and style to any living room or sitting area. Its classic design, high-quality materials, and practical features make it a functional and stylish choice for any home.",
+        "de-DE": "Das traditionelle Dreisitzer-Sofa ist ein klassisches und elegantes Möbelstück, das jedem Wohnzimmer oder Sitzbereich einen Hauch von Raffinesse verleiht. Das Sofa ist mit einem robusten Holzrahmen konzipiert, der auf Langlebigkeit und Stabilität ausgelegt ist und sicherstellt, dass das Sofa einer regelmäßigen Nutzung im Laufe der Zeit standhält.  Das Sofa ist mit einem smaragdfarbenem Stoff bezogen - ein wahrer Hingucker in jedem Raum. Der Stoff fühlt sich weich und angenehm an, sodass dem stilvollen Entspannen nichts mehr im Wege steht. Das Sofa ist mit zwei großen Kissen ausgestattet, die mit hochwertigem Schaumstoffmaterial gefüllt sind und bei längerem Sitzen hervorragenden Halt und Komfort bieten. Die Rückenlehne und die Armlehnen des Sofas sind mit einem weichen und plüschigen Material gefüllt, sodass Sie nach einem langen Tag in das Sofa sinken und sich entspannen können.  Das traditionelle Dreisitzer-Sofa ist ein vielseitiges Möbelstück, das eine Reihe von Einrichtungsstilen ergänzen kann, von klassisch und traditionell bis hin zu modern. Es kann mit einer Vielzahl von dekorativen Akzenten wie Kissen, Überwürfen und Teppichen kombiniert werden, um einen zusammenhängenden und stilvollen Wohnraum zu schaffen.  Das traditionelle Dreisitzer-Sofa aus smaragdgrünem Stoff ist ein zeitloses und elegantes Möbelstück, das jedem Wohnzimmer oder Sitzbereich sowohl Komfort als auch Stil verleiht. Sein klassisches Design, die hochwertigen Materialien und seine Funktionalität machen es zu einer funktionalen und stilvollen Wahl für jedes Zuhause.",
+        "en-GB": "A traditional three-seater sofa is a classic and elegant piece of furniture that can add a touch of sophistication to any living room or sitting area. The sofa features a sturdy wooden frame that is designed to provide durability and stability, ensuring that the sofa can withstand regular use over time.  The sofa is upholstered in a rich emerald-colored fabric, providing a vibrant and eye-catching focal point in the room. The fabric is soft and comfortable to the touch, allowing you to relax and unwind in style.  The sofa is equipped with two large cushions, which are filled with a high-quality foam material, providing excellent support and comfort for extended periods of sitting. The backrest and armrests of the sofa are filled with a soft and plush material, allowing you to sink into the sofa and relax after a long day.  The traditional three-seater sofa is a versatile piece of furniture that can complement a range of interior design styles, from classic and traditional to more modern and eclectic. It can be paired with a variety of decorative accents, such as pillows, throws, and rugs, to create a cohesive and stylish living space.  Overall, a traditional three-seater sofa in emerald fabric is a timeless and elegant piece of furniture that can provide both comfort and style to any living room or sitting area. Its classic design, high-quality materials, and practical features make it a functional and stylish choice for any home."
+      },
+      "categories": [
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "2b7279fb-b51f-404a-bee8-107c02639d3e" },
+        { "typeId": "category", "id": "39d5c4d5-945d-4200-a923-53bc669b1f93" },
+        { "typeId": "category", "id": "9eafcc8d-30be-4ea3-8aa3-613457d5b7d5" },
+        { "typeId": "category", "id": "0ae2cc1b-bb3e-4aa0-b055-6cb9281975cc" },
+        { "typeId": "category", "id": "dff73bb8-45f4-4966-b009-de60813b1149" }
+      ],
+      "categoryOrderHints": {},
+      "slug": {
+        "en-US": "traditional-three-seater-sofa",
+        "en-GB": "traditional-three-seater-sofa",
+        "de-DE": "traditionelles-dreisitzer-sofa"
+      },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-US": "- Three seater sofa\n- Velvet upholstery\n- Assembly on site",
+              "en-GB": "- Three seater sofa\n- Velvet upholstery\n- Assembly on site",
+              "de-DE": "- Dreisitzer\n- Samtbezug\n- Selbstmontage"
+            }
+          },
+          { "name": "color", "value": { "en-US": "#09331c", "en-GB": "#09331c", "de-DE": "#09331c" } },
+          { "name": "colorlabel", "value": { "en-US": "Emerald", "en-GB": "Emerald", "de-DE": "Emerald" } },
+          { "name": "finish", "value": { "en-US": "#202120", "en-GB": "#202120", "de-DE": "#202120" } },
+          { "name": "finishlabel", "value": { "en-US": "Espresso", "en-GB": "Espresso", "de-DE": "Espresso" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#00FF00", "label": { "de-DE": "Grün", "en-GB": "Green", "en-US": "Green" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 76,
+          "version": 1,
+          "id": "1e8d672e-ac86-414c-836b-91df08a969c9"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Traditional_Three_Seater_Sofa-1.3.jpeg",
+            "dimensions": { "w": 2500, "h": 2500 }
+          },
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Traditional_Three_Seater_Sofa-1.1.jpeg",
+            "dimensions": { "w": 2500, "h": 2500 }
+          },
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Traditional_Three_Seater_Sofa-1.2.jpeg",
+            "dimensions": { "w": 5760, "h": 3840 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "a1c020f8-514b-4667-aa89-33aeae2e4374",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 239900, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "c53bc541-a7ab-487c-8318-a16053474865",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 239900, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "916f1b21-a322-4684-9e0e-52d9a1a7d432",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 239900, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "TTSS-01",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "traditional-three-seater-sofa",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.665Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.216Z"
+    },
+    {
+      "id": "68fc88da-6cc1-4ec9-abeb-1d69c108214a",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": {
+        "en-US": "Rustic Country Queen Bed",
+        "en-GB": "Rustic Country Queen Bed",
+        "de-DE": "Rustikales Queensize-Bett im Landhausstil"
+      },
+      "description": {
+        "en-GB": "A rustic queen bed with a suede headboard is a beautiful and comfortable piece of furniture that can add warmth and texture to any bedroom. The bed features a sturdy wooden frame and a vintage look that is both rustic and inviting.  The headboard of the bed is upholstered in soft suede fabric, providing a comfortable and stylish backrest for reading or relaxing in bed. The suede material also adds a tactile and luxurious feel to the bed, creating a cozy and inviting atmosphere in the bedroom.  The bed comes with a sturdy wooden slat system that provides excellent support for the mattress and ensures a comfortable and restful night's sleep.  The rustic queen bed with a suede headboard is designed to be both functional and stylish. The bed comes with a matching dresser to create a cohesive and stylish bedroom decor.  Overall, a rustic queen bed with a suede headboard is a beautiful and comfortable piece of furniture that can add warmth and texture to any bedroom. Its sturdy construction, comfortable design, and charming rustic style make it a functional and beautiful addition to any home with a rustic or country decor style.",
+        "en-US": "A rustic queen bed with a suede headboard is a beautiful and comfortable piece of furniture that can add warmth and texture to any bedroom. The bed features a sturdy wooden frame and a vintage look that is both rustic and inviting.  The headboard of the bed is upholstered in soft suede fabric, providing a comfortable and stylish backrest for reading or relaxing in bed. The suede material also adds a tactile and luxurious feel to the bed, creating a cozy and inviting atmosphere in the bedroom.  The bed comes with a sturdy wooden slat system that provides excellent support for the mattress and ensures a comfortable and restful night's sleep.  The rustic queen bed with a suede headboard is designed to be both functional and stylish. The bed comes with a matching dresser to create a cohesive and stylish bedroom decor.  Overall, a rustic queen bed with a suede headboard is a beautiful and comfortable piece of furniture that can add warmth and texture to any bedroom. Its sturdy construction, comfortable design, and charming rustic style make it a functional and beautiful addition to any home with a rustic or country decor style.",
+        "de-DE": "Das rustikale Queensize-Bett mit dem Kopfteil aus Wildleder ist ein schönes und komfortables Möbelstück, das jedem Schlafzimmer Wärme und Struktur verleiht. Das Bett hat einen stabilen Holzrahmen im Vintage-Look, der zum Relaxen einlädt.  Das Kopfteil des Bettes ist mit weichem Wildleder bezogen und bietet eine bequeme und stilvolle Rückenlehne zum Lesen oder Entspannen im Bett. Das Wildledermaterial verleiht dem Bett luxuriöses Gefühl zum Anfassen und schafft eine gemütliche und einladende Atmosphäre im Schlafzimmer.  Der stabile Holzlattenrost des Betts bietet eine solide Grundlage für die Matratze und somit für einen komfortablen und erholsamen Schlaf.  Das rustikale Queensize-Bett mit Kopfteil aus Wildleder ist sowohl funktional als auch stilvoll designt. Zu dem Bett gibt es eine passende Kommode, mit der ein zusammenhängendes und stilvolles Schlafzimmerdekor geschaffen werden kann.  Ein rustikales Queensize-Bett mit einem Kopfteil aus Wildleder ist ein schönes und komfortables Möbelstück, das Wärme und Textur in jedes Schlafzimmer bringt. Seine robuste Konstruktion, sein komfortables Design und der charmant-rustikale Charakter machen es zu einer funktionalen und schönen Ergänzung für jedes Zuhause im angesagten Landhausstil."
+      },
+      "categories": [
+        { "typeId": "category", "id": "1a8d5adc-1554-4936-b184-8df6d76a7658" },
+        { "typeId": "category", "id": "14c78758-6f29-4e40-bd3a-1764cd8c00c4" },
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "2b7279fb-b51f-404a-bee8-107c02639d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": {
+        "en-US": "rustic-country-queen-bed",
+        "en-GB": "rustic-country-queen-bed",
+        "de-DE": "rustikales-country-queen-bett"
+      },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          { "name": "color", "value": { "en-US": "tan", "en-GB": "tan", "de-DE": "tan" } },
+          { "name": "colorlabel", "value": { "en-US": "Tan", "en-GB": "Tan", "de-DE": "Bräunen" } },
+          { "name": "finishlabel", "value": { "en-US": "Briarsmoke", "en-GB": "Briarsmoke", "de-DE": "Briarsmoke" } },
+          { "name": "finish", "value": { "en-US": "rosybrown", "en-GB": "rosybrown", "de-DE": "rosybrown" } },
+          {
+            "name": "productspec",
+            "value": {
+              "en-US": "- Leather upholstery\n- Standard Queen size\n- Assembly on site",
+              "en-GB": "- Leather upholstery\n- Standard Queen size\n- Assembly on site",
+              "de-DE": "- Leather upholstery\n- Standard Queen size\n- Assembly on site"
+            }
+          },
+          {
+            "name": "color-filter",
+            "value": { "key": "#D2B48C", "label": { "de-DE": "Bräunen", "en-GB": "Tan", "en-US": "Tan" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 76,
+          "version": 1,
+          "id": "bdbc8f07-4714-4088-955b-7236984465fa"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Rustic_Country_Queen_Bed-1.1.jpeg",
+            "dimensions": { "w": 5000, "h": 5000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "99505206-6cbe-452e-8085-dfeddc7d741e",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 329900, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "c6a99f00-5f16-4850-9922-597735e58300",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 329900, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "b3d639bf-152f-4140-b6f8-f0d96bc5c76b",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 329900, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "RCQB-01",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "rustic-country-queen-bed",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.637Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.205Z"
+    },
+    {
+      "id": "469bf705-4078-44ff-b63c-4745808b1e20",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": {
+        "en-GB": "Modern Landscape Painting",
+        "de-DE": "Moderne Landschaftsmalerei",
+        "en-US": "Modern Landscape Painting"
+      },
+      "description": {
+        "en-GB": "A modern cubist landscape painting is a striking and dynamic work of art that combines elements of traditional landscape painting with the fractured and abstract style of cubism. The painting is created with oil paints on canvas, and features a range of bold colors and geometric shapes.  The composition of the painting is a landscape scene, depicting a natural setting. However, the scene is fragmented and abstracted, with overlapping planes of color and geometric shapes that distort and fracture the landscape.  The use of color in the painting is vibrant and bold, with strong contrasts between light and dark areas. The artist may have used a variety of techniques, such as layering, blending, or stippling, to create a dynamic and visually interesting piece.  The modern and abstract nature of the painting makes it a perfect addition to contemporary interior design schemes.  Overall, a modern cubist landscape painting is a bold and innovative work of art that can add a sense of energy and dynamism to any space. Its fragmented and abstracted composition invites viewers to interpret and connect with the painting in their own way, while the use of bold colors and geometric shapes creates a sense of drama and excitement.",
+        "de-DE": "Ein modernes kubistisches Landschaftsgemälde ist ein eindrucksvolles und dynamisches Kunstwerk, das Elemente der traditionellen Landschaftsmalerei mit dem gebrochenen und abstrakten Stil des Kubismus verbindet. Das Gemälde wurde mit Ölfarben auf Leinwand gemalt und weist eine Reihe kräftiger Farben und geometrischer Formen auf. Die Komposition des Gemäldes ist eine Landschaftsszene, die eine natürliche Umgebung darstellt. Die Szene ist jedoch fragmentiert und abstrahiert, mit sich überlagernden Farbflächen und geometrischen Formen, die die Landschaft verzerren und zerbrechen. Die Farbgebung des Gemäldes ist lebhaft und kräftig, mit starken Kontrasten zwischen hellen und dunklen Bereichen. Der Künstler hat möglicherweise eine Reihe von Techniken angewandt, wie z. B. Schichtung, Überblendung oder Tupfen, um ein dynamisches und visuell interessantes Werk zu schaffen. Der moderne und abstrakte Charakter des Gemäldes macht es zu einer perfekten Ergänzung für zeitgenössische Innenarchitekturen. Insgesamt ist ein modernes kubistisches Landschaftsgemälde ein kühnes und innovatives Kunstwerk, das jedem Raum ein Gefühl von Energie und Dynamik verleihen kann. Die fragmentierte und abstrahierte Komposition lädt den Betrachter dazu ein, das Gemälde auf seine eigene Weise zu interpretieren und mit ihm in Verbindung zu treten, während die Verwendung kräftiger Farben und geometrischer Formen ein Gefühl von Dramatik und Aufregung erzeugt.",
+        "en-US": "A modern cubist landscape painting is a striking and dynamic work of art that combines elements of traditional landscape painting with the fractured and abstract style of cubism. The painting is created with oil paints on canvas, and features a range of bold colors and geometric shapes.  The composition of the painting is a landscape scene, depicting a natural setting. However, the scene is fragmented and abstracted, with overlapping planes of color and geometric shapes that distort and fracture the landscape.  The use of color in the painting is vibrant and bold, with strong contrasts between light and dark areas. The artist may have used a variety of techniques, such as layering, blending, or stippling, to create a dynamic and visually interesting piece.  The modern and abstract nature of the painting makes it a perfect addition to contemporary interior design schemes.  Overall, a modern cubist landscape painting is a bold and innovative work of art that can add a sense of energy and dynamism to any space. Its fragmented and abstracted composition invites viewers to interpret and connect with the painting in their own way, while the use of bold colors and geometric shapes creates a sense of drama and excitement."
+      },
+      "categories": [
+        { "typeId": "category", "id": "312164ce-80ba-4ce4-9e87-d23693baddbb" },
+        { "typeId": "category", "id": "3b2fbb5a-03b4-439c-9a49-9cf0bf409c70" },
+        { "typeId": "category", "id": "fa70825a-fef3-4256-adc2-02845bf4d55d" }
+      ],
+      "categoryOrderHints": {},
+      "slug": {
+        "en-GB": "modern-landscape-painting",
+        "de-DE": "moderne-landschaftsmalerei",
+        "en-US": "modern-landscape-painting"
+      },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Oil on canvas\n- Frame not included\n- 3ft by 4ft",
+              "de-DE": "- Öl auf Leinwand\n- Rahmen nicht im Lieferumfang enthalten\n- 3 Fuß mal 4 Fuß",
+              "en-US": "- Oil on canvas\n- Frame not included\n- 3ft by 4ft"
+            }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 84,
+          "version": 1,
+          "id": "4014c88f-1e6f-470a-8625-b14e7714b27f"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Modern_Landscape_Painting-1.1.jpeg",
+            "dimensions": { "w": 5313, "h": 5355 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "c675606f-36c7-49b8-a049-dcb973299ff6",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 5299, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "933d0e94-1026-4ee3-862e-32877804e792",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 5299, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "4c1b6a17-7d98-4dc0-b658-925c005b3ecb",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 5299, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "MLP-01",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "modern-landscape-painting",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.631Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.158Z"
+    },
+    {
+      "id": "e934759e-3662-4cb4-aba0-e789f77ea6dc",
+      "version": 4,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Leather Weave Chair", "en-GB": "Leather Weave Chair", "de-DE": "Ledergeflecht Stuhl" },
+      "description": {
+        "en-GB": "A wooden chair with leather weave upholstery is a beautiful and functional piece of furniture that blends natural materials with a touch of luxury. The chair features a sturdy and durable wooden frame, crafted from high-quality hardwood, that provides a solid foundation for the seat and backrest.  The seat and backrest of the chair are made from a tight weave of leather strips, creating a unique and eye-catching texture that adds to the chair's overall appeal.   The chair has a simple and elegant design, with clean lines and a minimalist aesthetic that makes it easy to incorporate into a variety of interior design styles.   The legs of the chair are angled slightly outward for stability. The bottom of the legs may be fitted with protective caps to prevent scratches or damage to your floors.  Overall, a wooden chair with leather weave upholstery is a versatile and stylish piece of furniture that can add warmth, texture, and visual interest to any room. Its combination of natural materials and luxurious details makes it a popular choice for anyone looking to add a touch of sophistication and elegance to their home.",
+        "en-US": "A wooden chair with leather weave upholstery is a beautiful and functional piece of furniture that blends natural materials with a touch of luxury. The chair features a sturdy and durable wooden frame, crafted from high-quality hardwood, that provides a solid foundation for the seat and backrest.  The seat and backrest of the chair are made from a tight weave of leather strips, creating a unique and eye-catching texture that adds to the chair's overall appeal.   The chair has a simple and elegant design, with clean lines and a minimalist aesthetic that makes it easy to incorporate into a variety of interior design styles.   The legs of the chair are angled slightly outward for stability. The bottom of the legs may be fitted with protective caps to prevent scratches or damage to your floors.  Overall, a wooden chair with leather weave upholstery is a versatile and stylish piece of furniture that can add warmth, texture, and visual interest to any room. Its combination of natural materials and luxurious details makes it a popular choice for anyone looking to add a touch of sophistication and elegance to their home.",
+        "de-DE": "Ein Holzstuhl mit Lederbezug ist ein schönes und funktionales Möbelstück, das natürliche Materialien mit einem Hauch von Luxus verbindet. Der Stuhl verfügt über einen robusten und langlebigen Holzrahmen aus hochwertigem Hartholz, der eine solide Grundlage für Sitz und Rückenlehne bietet.  Der Sitz und die Rückenlehne des Stuhls bestehen aus einem engen Gewebe aus Lederstreifen, wodurch eine einzigartige und auffällige Textur entsteht, die den Gesamteindruck des Stuhls verstärkt.  Der Stuhl hat ein einfaches und elegantes Design mit klaren Linien und einer minimalistischen Ästhetik, die sich leicht in eine Vielzahl von Einrichtungsstilen integrieren lässt.  Die Beine des Stuhls sind aus Stabilitätsgründen leicht nach außen geneigt. Die Unterseite der Beine kann mit Schutzkappen versehen werden, um Kratzer oder Schäden an Ihren Böden zu vermeiden.  Insgesamt ist ein Holzstuhl mit Lederbezug ein vielseitiges und stilvolles Möbelstück, das jedem Raum Wärme, Textur und visuelles Interesse verleiht. Seine Kombination aus natürlichen Materialien und luxuriösen Details macht es zu einer beliebten Wahl für alle, die ihrem Zuhause einen Hauch von Raffinesse und Eleganz verleihen möchten."
+      },
+      "categories": [
+        { "typeId": "category", "id": "2b7279fb-b51f-404a-bee8-107c02639d3e" },
+        { "typeId": "category", "id": "dff73bb8-45f4-4966-b009-de60813b1149" },
+        { "typeId": "category", "id": "e3f3f3ca-577d-417e-8d26-c8ce3c3843f2" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "leather-weave-chair", "en-GB": "leather-weave-chair", "de-DE": "stuhl-aus-ledergeflecht" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "color-filter",
+            "value": { "key": "#D2B48C", "label": { "de-DE": "Bräunen", "en-GB": "Tan", "en-US": "Tan" } }
+          },
+          { "name": "new-arrival", "value": true },
+          { "name": "finishlabel", "value": { "en-GB": "Oak", "de-DE": "Eiche", "en-US": "Oak" } },
+          { "name": "colorlabel", "value": { "en-GB": "Tan", "de-DE": "Bräunen", "en-US": "Tan" } },
+          { "name": "color", "value": { "en-GB": "#BC5724", "de-DE": "#BC5724", "en-US": "#BC5724" } },
+          { "name": "finish", "value": { "en-GB": "#E3AF81", "de-DE": "#E3AF81", "en-US": "#E3AF81" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 98,
+          "version": 1,
+          "id": "20337e95-5b74-4d1e-a98e-9292b9085c63"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Leather_Weave_Chair-1.1.jpeg",
+            "dimensions": { "w": 5500, "h": 4400 }
+          },
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Leather_Weave_Chair-1.2.jpeg",
+            "dimensions": { "w": 3375, "h": 4500 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "3d96e0cd-800a-468d-aa6b-42be022f7ce2",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 39900, "fractionDigits": 2 },
+            "country": "DE",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 33915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "6b55a1e7-1f77-4f5f-b8f5-c0b68f78f83f",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 34900, "fractionDigits": 2 },
+            "country": "GB",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 29665, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "b77f0ef1-7438-4de3-bc36-6e37180d29a9",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 39900, "fractionDigits": 2 },
+            "country": "US",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 33915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          }
+        ],
+        "sku": "BA-092",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "leather-weave-chair",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.619Z",
+      "lastModifiedAt": "2024-04-30T14:41:19.155Z"
+    },
+    {
+      "id": "44f77983-aca5-49d8-8e9c-27c55715aa00",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Harmony Drinking Glass", "en-GB": "Harmony Drinking Glass", "de-DE": "Harmonie Trinkglas" },
+      "description": {
+        "en-GB": "The Harmony Drinking Glass is designed to hold water or other beverages. It has a capacity of around 8 to 12 ounces.  The design of the water glass is intended to make it easy and comfortable to hold and drink from. It has a straight, smooth-sided body with a thick, stable base that provides balance and stability. The rim of the glass is slightly curved or rounded, making it comfortable to drink from.  The Harmony Drinking Glass can be used for a variety of beverages, including water, juice, iced tea, and other non-alcoholic drinks.  The drinking glasses are generally easy to clean and maintain. They can be washed by hand or in a dishwasher, and should be dried thoroughly to prevent water spots or residue from forming.  Overall, the Harmony Drinking Glass is a simple and functional type of drinking glass that is ideal for everyday use. Its basic design and versatility make it a popular choice for both casual and formal settings.",
+        "en-US": "The Harmony Drinking Glass is designed to hold water or other beverages. It has a capacity of around 8 to 12 ounces.  The design of the water glass is intended to make it easy and comfortable to hold and drink from. It has a straight, smooth-sided body with a thick, stable base that provides balance and stability. The rim of the glass is slightly curved or rounded, making it comfortable to drink from.  The Harmony Drinking Glass can be used for a variety of beverages, including water, juice, iced tea, and other non-alcoholic drinks.  The drinking glasses are generally easy to clean and maintain. They can be washed by hand or in a dishwasher, and should be dried thoroughly to prevent water spots or residue from forming.  Overall, the Harmony Drinking Glass is a simple and functional type of drinking glass that is ideal for everyday use. Its basic design and versatility make it a popular choice for both casual and formal settings.",
+        "de-DE": "Das Trinkglas Harmonie wurde entwickelt, um Wasser oder andere Getränke zu servieren. Es hat eine Kapazität von etwa 230 bis 350ml. Das Design des Wasserglases soll das Halten und Trinken einfach und bequem machen. Es hat einen geraden Körper mit glatten Seiten und einer dicken, stabilen Basis, die für Gleichgewicht und Stabilität sorgt. Der Rand des Glases ist leicht gewölbt oder abgerundet, was das Trinken angenehm macht. Das Trinkglas Harmonie kann für eine Vielzahl von Getränken verwendet werden, darunter Wasser, Saft, Eistee und andere alkoholfreie Getränke. Die Trinkgläser sind im Allgemeinen leicht zu reinigen und zu pflegen. Sie können von Hand oder in der Spülmaschine gewaschen werden und sollten gründlich getrocknet werden, um Wasserflecken oder Rückstände zu vermeiden. Insgesamt ist das Harmonie Trinkglas ein schlichter und funktionaler Trinkglastyp, der sich ideal für den täglichen Gebrauch eignet. Sein einfaches Design und seine Vielseitigkeit machen es zu einer beliebten Wahl für lässige und formelle Anlässe."
+      },
+      "categories": [
+        { "typeId": "category", "id": "66589a6d-3ed4-4e8b-8cc4-7c1950ac94c5" },
+        { "typeId": "category", "id": "30a7063e-be2d-4fce-bf37-805189239b3d" },
+        { "typeId": "category", "id": "bbf525c1-18c4-4371-ad8c-1a2478de1d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "harmony-drinking-glass", "en-GB": "harmony-drinking-glass", "de-DE": "harmonie-trinkglas" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Set includes 6 glasses",
+              "de-DE": "- Das Set enthält 6 Gläser",
+              "en-US": "- Set includes 6 glasses"
+            }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "7225e7da-b4af-4c88-97ee-ceaa3fc538f5"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Harmony_Drinking_Glass-1.1.jpeg",
+            "dimensions": { "w": 3000, "h": 3000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "99c9df64-8165-42dc-8473-b137d569b5bf",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 2499, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "f453a0c2-6f1d-4488-9934-4232d2f81950",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 2499, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "5e5ba321-4c38-4655-9e64-b57911a50684",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 2499, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "HDG-02",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "harmony-drinking-glass",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.633Z",
+      "lastModifiedAt": "2024-04-30T14:41:17.822Z"
+    },
+    {
+      "id": "6d157165-85f1-4aeb-9c48-c55e333b8508",
+      "version": 3,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Sipper Coffee Mug", "en-GB": "Sipper Coffee Mug", "de-DE": "Sipper-Kaffeetasse" },
+      "description": {
+        "en-GB": "The Sipper Coffee Mug is made from ceramic. The design of the mug is intended to make it easy to hold and drink from, with a handle on one side for comfortable grip.  The mug is plain, but its basic design is generally simple and functional. The body of the mug is often smooth-sided, with a wide opening that makes it easy to pour and drink coffee.  The Sipper Coffee Mug is easy to clean and maintain. It can be washed by hand or in a dishwasher, and should be dried thoroughly to prevent water spots or residue from forming.  Overall, the Sipper Coffee Mug is a practical and functional type of drinking vessel that is ideal for enjoying a cup of coffee at home or at work. Its basic design and ease of use make it a popular choice for coffee lovers of all types.",
+        "en-US": "The Sipper Coffee Mug is made from ceramic. The design of the mug is intended to make it easy to hold and drink from, with a handle on one side for comfortable grip.  The mug is plain, but its basic design is generally simple and functional. The body of the mug is often smooth-sided, with a wide opening that makes it easy to pour and drink coffee.  The Sipper Coffee Mug is easy to clean and maintain. It can be washed by hand or in a dishwasher, and should be dried thoroughly to prevent water spots or residue from forming.  Overall, the Sipper Coffee Mug is a practical and functional type of drinking vessel that is ideal for enjoying a cup of coffee at home or at work. Its basic design and ease of use make it a popular choice for coffee lovers of all types.",
+        "de-DE": "Die Sipper-Tasse besteht aus Keramik und besticht durch ihr schlichtes Design mit seitlichem Henkel, der ein bequemes Halten und Trinken ermöglicht.  Das grundlegende Design ist minimalistisch und funktional. Der Körper des Bechers ist glatt abgerundet und hat eine breite Trinköffnung, die das Eingießen und Trinken von Heißgetränken erleichtert.  Der Sipper-Kaffeebecher ist leicht zu reinigen und zu pflegen. Er kann von Hand oder in der Spülmaschine gewaschen werden und sollte gründlich getrocknet werden, um Wasserflecken oder Rückstände zu vermeiden.  Die Sipper-Kaffeetasse ein praktisches und funktionelles Trinkgefäß, das sich ideal für den Tee- oder Kaffeegenuss zu Hause oder auf der Arbeit eignet. Ihr schlichtes Design und die benutzerfreundliche Handhabung machen sie zu einer beliebten Wahl für Kaffeeliebhaber aller Art."
+      },
+      "categories": [
+        { "typeId": "category", "id": "66589a6d-3ed4-4e8b-8cc4-7c1950ac94c5" },
+        { "typeId": "category", "id": "30a7063e-be2d-4fce-bf37-805189239b3d" },
+        { "typeId": "category", "id": "bbf525c1-18c4-4371-ad8c-1a2478de1d3e" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "sipper-coffee-mug", "en-GB": "sipper-coffee-mug", "de-DE": "sipper-kaffeetasse" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": { "en-GB": "- Includes 1 mug", "en-US": "- Includes 1 mug", "de-DE": "- Enthält 1 Tasse" }
+          },
+          { "name": "color", "value": { "en-GB": "#FFF", "de-DE": "#FFF", "en-US": "#FFF" } },
+          { "name": "colorlabel", "value": { "en-GB": "White", "de-DE": "Weiß", "en-US": "White" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#FFF", "label": { "de-DE": "Weiss", "en-GB": "White", "en-US": "White" } }
+          }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "f7b23041-be42-45af-9a79-5bb260a1d2c1"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Sipper_Coffee_Mug-1.1.jpeg",
+            "dimensions": { "w": 4500, "h": 3000 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "f137ecfb-bd1c-4abf-a492-510963f661cd",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 299, "fractionDigits": 2 },
+            "country": "DE"
+          },
+          {
+            "id": "12d7b439-684c-4fc9-a6c6-16fb75a47cf9",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 299, "fractionDigits": 2 },
+            "country": "GB"
+          },
+          {
+            "id": "f0c847e4-a3a9-4905-98e9-51ad0ff8fc79",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 299, "fractionDigits": 2 },
+            "country": "US"
+          }
+        ],
+        "sku": "SCM-02",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "sipper-coffee-mug",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.635Z",
+      "lastModifiedAt": "2024-04-30T14:41:18.172Z"
+    },
+    {
+      "id": "de843943-522a-417d-91c7-e823e39bfe9c",
+      "version": 4,
+      "productType": { "typeId": "product-type", "id": "63ee18ca-93b6-4bbf-a630-102c427469dc" },
+      "name": { "en-US": "Glam Armchair", "en-GB": "Glam Armchair", "de-DE": "Glam Sessel" },
+      "description": {
+        "en-GB": "A gold velvet chair with a brass frame is an elegant and luxurious piece of furniture. The soft, plush velvet material of the chair provides a comfortable and cozy seating experience. The gold color of the velvet fabric is soft and delicate, adding a touch of glamour to the overall look of the chair.  The brass frame of the chair is sturdy and durable, providing a solid foundation for the seating area. The brass color of the frame adds a touch of warmth and sophistication to the overall look of the chair. The combination of the gold velvet and brass frame creates a striking contrast, making this chair a statement piece in any room.  The chair features a high backrest with a curved design, providing support for the back and shoulders. The armrests are also curved, providing a comfortable place to rest the arms. The chair is designed for both style and comfort, making it a great addition to any living room, bedroom, or office space.",
+        "en-US": "A gold velvet chair with a brass frame is an elegant and luxurious piece of furniture. The soft, plush velvet material of the chair provides a comfortable and cozy seating experience. The gold color of the velvet fabric is soft and delicate, adding a touch of glamour to the overall look of the chair.  The brass frame of the chair is sturdy and durable, providing a solid foundation for the seating area. The brass color of the frame adds a touch of warmth and sophistication to the overall look of the chair. The combination of the gold velvet and brass frame creates a striking contrast, making this chair a statement piece in any room.  The chair features a high backrest with a curved design, providing support for the back and shoulders. The armrests are also curved, providing a comfortable place to rest the arms. The chair is designed for both style and comfort, making it a great addition to any living room, bedroom, or office space.",
+        "de-DE": "Ein goldfarbener Samtstuhl mit Messingrahmen ist ein elegantes und luxuriöses Möbelstück. Das weiche, plüschige Samtmaterial des Stuhls sorgt für ein bequemes und gemütliches Sitzerlebnis. Die goldene Farbe des Samtstoffs ist weich und zart und verleiht dem Gesamtbild des Stuhls einen Hauch von Glamour.  Der Messingrahmen des Stuhls ist robust und langlebig und bietet eine solide Grundlage für den Sitzbereich. Die Messingfarbe des Gestells verleiht dem Gesamtbild des Stuhls einen Hauch von Wärme und Raffinesse. Die Kombination aus Goldsamt und Messingrahmen schafft einen auffälligen Kontrast und macht diesen Stuhl zu einem Statement-Piece in jedem Raum.  Der Stuhl verfügt über eine hohe Rückenlehne mit geschwungenem Design, die Rücken und Schultern stützt. Die Armlehnen sind ebenfalls gebogen und bieten eine bequeme Ablagefläche für die Arme. Der Stuhl ist sowohl stilvoll als auch auf Komfort ausgelegt, was ihn zu einer großartigen Ergänzung für jedes Wohnzimmer, Schlafzimmer oder Büro macht."
+      },
+      "categories": [
+        { "typeId": "category", "id": "9ae7f59e-b0ba-478e-8c44-fc64db4548a6" },
+        { "typeId": "category", "id": "e3f3f3ca-577d-417e-8d26-c8ce3c3843f2" },
+        { "typeId": "category", "id": "dff73bb8-45f4-4966-b009-de60813b1149" }
+      ],
+      "categoryOrderHints": {},
+      "slug": { "en-US": "glam-armchair", "en-GB": "glam-armchair", "de-DE": "glam-sessel" },
+      "variants": [],
+      "masterVariant": {
+        "attributes": [
+          {
+            "name": "productspec",
+            "value": {
+              "en-GB": "- Dry clean only\n- Pillow included",
+              "de-DE": "- Nur chemische Reinigung\n- Kissen inklusive",
+              "en-US": "- Dry clean only\n- Pillow included"
+            }
+          },
+          { "name": "color", "value": { "en-GB": "#FECB69", "de-DE": "#FECB69", "en-US": "#FECB69" } },
+          { "name": "colorlabel", "value": { "en-GB": "Gold", "de-DE": "Gold", "en-US": "Gold" } },
+          {
+            "name": "color-filter",
+            "value": { "key": "#FFD700", "label": { "de-DE": "Gold", "en-GB": "Gold", "en-US": "Gold" } }
+          },
+          { "name": "finish", "value": { "en-GB": "#FFDF7F", "de-DE": "#FFDF7F", "en-US": "#FFDF7F" } },
+          { "name": "finishlabel", "value": { "en-GB": "Brass", "de-DE": "Messing", "en-US": "Brass" } }
+        ],
+        "availability": {
+          "isOnStock": true,
+          "availableQuantity": 100,
+          "version": 1,
+          "id": "9e612a85-847a-4041-98ce-e0b70707a6ef"
+        },
+        "assets": [],
+        "images": [
+          {
+            "url": "https://storage.googleapis.com/merchant-center-europe/sample-data/goodstore/Glam_Armchair-1.1.jpeg",
+            "dimensions": { "w": 5500, "h": 4400 }
+          }
+        ],
+        "prices": [
+          {
+            "id": "aefc0f66-28c3-4db9-ab8d-432bd7266027",
+            "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 59900, "fractionDigits": 2 },
+            "country": "DE",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "EUR", "centAmount": 50915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "29b148ae-67ac-431b-96bd-8254731355ab",
+            "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 59900, "fractionDigits": 2 },
+            "country": "GB",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "GBP", "centAmount": 50915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          },
+          {
+            "id": "e87dd4d7-949b-4832-8a28-787f1fbec61f",
+            "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 59900, "fractionDigits": 2 },
+            "country": "US",
+            "discounted": {
+              "value": { "type": "centPrecision", "currencyCode": "USD", "centAmount": 50915, "fractionDigits": 2 },
+              "discount": { "typeId": "product-discount", "id": "88980b1f-364f-4d3c-a0f6-315073fbd3b4" }
+            }
+          }
+        ],
+        "sku": "GARM-093",
+        "id": 1
+      },
+      "searchKeywords": {},
+      "hasStagedChanges": false,
+      "published": true,
+      "key": "glam-armchair",
+      "taxCategory": { "typeId": "tax-category", "id": "5e361d16-ed1f-4852-8c8e-cb2a7070083b" },
+      "createdAt": "2024-04-30T14:41:10.614Z",
+      "lastModifiedAt": "2024-04-30T14:41:19.714Z"
+    }
+  ],
+  "facets": {}
+}
