@@ -50,8 +50,8 @@ function Login() {
       <Header />
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
-        <InputEmail />
-        <InputPassword />
+        <InputEmail size="medium" />
+        <InputPassword size="medium" />
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
         <Button type="submit" className={styles.button} variant="contained">
           Sign in

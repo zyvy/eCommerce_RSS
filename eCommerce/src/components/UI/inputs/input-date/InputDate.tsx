@@ -42,6 +42,8 @@ function InputDate() {
       label="Date of birth"
       type="date"
       onChange={handleDateChange}
+      value={dateOfBirth}
+      InputLabelProps={{ shrink: !!dateOfBirth }}
     />
   );
 }

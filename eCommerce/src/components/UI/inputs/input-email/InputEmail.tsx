@@ -11,17 +11,17 @@ type ComponentProps = {
 function InputEmail({ size = 'small' }: ComponentProps) {
   const ERROR_TEXT = 'Incorrect email. The email should be like: example@email.com';
   const auth = useAuth();
-  const { emailError, setAuth } = { ...auth };
+  const { email, emailError, setAuth } = { ...auth };
 
   const handleOnInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const email = e.target.value;
-    const error = !(!email || isEmailValid(email));
-    setAuth({ ...auth, email, emailError: error });
+    const newEmail = e.target.value;
+    const error = !(!newEmail || isEmailValid(newEmail));
+    setAuth({ ...auth, email: newEmail, emailError: error });
   };
 
   return (
     <TextField
-      // defaultValue="johndoe@example.com"
+      // defaultValue="test@a.com"
       error={emailError}
       size={size}
       helperText={emailError ? ERROR_TEXT : ''}
@@ -29,6 +29,8 @@ function InputEmail({ size = 'small' }: ComponentProps) {
       label="email"
       variant="outlined"
       onInput={handleOnInput}
+      value={email}
+      InputLabelProps={{ shrink: !!email }}
     />
   );
 }

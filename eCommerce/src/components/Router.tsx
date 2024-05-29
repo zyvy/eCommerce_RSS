@@ -3,12 +3,13 @@ import MainPage from '../pages/main/Main.tsx';
 import LoginPage from '../pages/login/Login.tsx';
 import RegisterPage from '../pages/registration/Registration.tsx';
 import NotFound from '../pages/not_found/Notfound.tsx';
-import PrivateRoute from './PrivateRoute.tsx';
+import PrivateRouteForAuthUser from './PrivateRouteForAuthUser.tsx';
+import PrivateRouteForNotAuthUser from './PrivateRouteForNotAuthUser.tsx';
 import { PagePaths } from '../utils/utils.ts';
 import { AuthProvider } from '../context/AuthContext.tsx';
 import { UserPersonalDataProvider } from '../context/UserPersonalDataContext.tsx';
 import { AddressProvider } from '../context/AddressesContext.tsx';
-import Profile from '../pages/profile/Profile.tsx';
+import ProfilePage from '../pages/profile/Profile.tsx';
 
 function AppRouter() {
   return (
@@ -17,17 +18,17 @@ function AppRouter() {
       <Route
         path={PagePaths.Login}
         element={
-          <PrivateRoute>
+          <PrivateRouteForAuthUser>
             <AuthProvider>
               <LoginPage />
             </AuthProvider>
-          </PrivateRoute>
+          </PrivateRouteForAuthUser>
         }
       />
       <Route
         path={PagePaths.Register}
         element={
-          <PrivateRoute>
+          <PrivateRouteForAuthUser>
             <AuthProvider>
               <UserPersonalDataProvider>
                 <AddressProvider>
@@ -35,10 +36,23 @@ function AppRouter() {
                 </AddressProvider>
               </UserPersonalDataProvider>
             </AuthProvider>
-          </PrivateRoute>
+          </PrivateRouteForAuthUser>
         }
       />
-      <Route path={PagePaths.Profile} element={<Profile />} />
+      <Route
+        path={PagePaths.Profile}
+        element={
+          <PrivateRouteForNotAuthUser>
+            <AuthProvider>
+              <UserPersonalDataProvider>
+                <AddressProvider>
+                  <ProfilePage />
+                </AddressProvider>
+              </UserPersonalDataProvider>
+            </AuthProvider>
+          </PrivateRouteForNotAuthUser>
+        }
+      />
       <Route path={PagePaths.NotFound} element={<NotFound />} />
     </Routes>
   );
