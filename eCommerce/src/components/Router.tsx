@@ -6,6 +6,8 @@ import NotFound from '../pages/not_found/Notfound.tsx';
 import PrivateRoute from './PrivateRoute.tsx';
 import { PagePaths } from '../utils/utils.ts';
 import { AuthProvider } from '../context/AuthContext.tsx';
+import { UserPersonalDataProvider } from '../context/UserPersonalDataContext.tsx';
+import { AddressProvider } from '../context/AddressesContext.tsx';
 
 function AppRouter() {
   return (
@@ -25,7 +27,13 @@ function AppRouter() {
         path={PagePaths.Register}
         element={
           <PrivateRoute>
-            <RegisterPage />
+            <AuthProvider>
+              <UserPersonalDataProvider>
+                <AddressProvider>
+                  <RegisterPage />
+                </AddressProvider>
+              </UserPersonalDataProvider>
+            </AuthProvider>
           </PrivateRoute>
         }
       />

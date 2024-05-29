@@ -7,8 +7,8 @@ import { PagePaths } from '../../utils/utils.ts';
 import Footer from '../../components/UI/footer/Footer.tsx';
 import Header from '../../components/UI/header/Header.tsx';
 import { useAuth } from '../../context/AuthContext.tsx';
-import InputPassword from '../../components/UI/input-password/InputEmail.tsx';
-import InputEmail from '../../components/UI/input-email/InputPassword.tsx';
+import InputEmail from '../../components/UI/inputs/input-email/InputEmail.tsx';
+import InputPassword from '../../components/UI/inputs/input-password/InputPassword.tsx';
 
 function Login() {
   const [authError, setAuthError] = useState('');
@@ -50,8 +50,8 @@ function Login() {
       <Header />
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
-        <InputPassword />
         <InputEmail />
+        <InputPassword />
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
         <Button type="submit" className={styles.button} variant="contained">
           Sign in

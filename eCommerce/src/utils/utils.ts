@@ -7,6 +7,10 @@ export enum PagePaths {
   NotFound = '/404',
 }
 
+export type SizeOfInput = 'small' | 'medium';
+
+export type AddressType = 'billing' | 'shipping';
+
 interface Env {
   readonly VITE_PROJECT_KEY: string;
   readonly VITE_CLIENT_ID: string;
