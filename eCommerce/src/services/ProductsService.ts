@@ -8,6 +8,7 @@ export class ProductsService {
       projectKey: `${env.VITE_PROJECT_KEY}`,
     });
   }
+  
   static async getProducts(): Promise<ProductProjectionPagedSearchResponse> {
     const apiRoot = ProductsService.getApiRoot();
     const response = await apiRoot.productProjections().search().get().execute();
