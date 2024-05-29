@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/UI/Header.tsx';
+import Header from '../../components/UI/header/Header.tsx';
 import styles from './Notfound.module.css';
 
 function NotFound() {

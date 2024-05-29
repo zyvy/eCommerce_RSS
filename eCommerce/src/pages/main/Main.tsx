@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import Header from '../../components/UI/Header.tsx';
-import { PagePaths } from '../../utils/utils.tsx';
-import Footer from '../../components/UI/footer.tsx';
+import Header from '../../components/UI/header/Header.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 import styles from './Main.module.css';
-import productStyles from '../../components/UI/ProductItem.module.css'
+import Footer from '../../components/UI/footer/Footer.tsx';
+import ProductList from '../../components/UI/products/products.tsx';
 import ProductItem from '../../components/UI/ProductItem.tsx';
 
 function Main() {
@@ -22,9 +22,10 @@ function Main() {
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
-      <div className={productStyles.swiper__img}>
-        <ProductItem />
+      <div>
+        <ProductList />
       </div>
+      <ProductItem />
       <Footer />
     </div>
   );

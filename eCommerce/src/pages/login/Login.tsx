@@ -1,53 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { IconButton, InputAdornment } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styles from './Login.module.css';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
-import { PagePaths, isEmailValid, isPasswordValid } from '../../utils/utils.tsx';
-import Footer from '../../components/UI/footer.tsx';
-import Header from '../../components/UI/Header.tsx';
+import { PagePaths } from '../../utils/utils.ts';
+import Footer from '../../components/UI/footer/Footer.tsx';
+import Header from '../../components/UI/header/Header.tsx';
+import { useAuth } from '../../context/AuthContext.tsx';
+import InputPassword from '../../components/UI/input-password/InputEmail.tsx';
+import InputEmail from '../../components/UI/input-email/InputPassword.tsx';
 
 function Login() {
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState(false);
   const [authError, setAuthError] = useState('');
-  const [showPassword, setShowPassword] = React.useState(false);
   const navigate = useNavigate();
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
   const clearAuthError = () => setAuthError('');
 
-  const handlePasswordInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentPassword = e.target.value;
-    clearAuthError();
-    setPassword(currentPassword);
-    if (currentPassword && !isPasswordValid(currentPassword)) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
-  };
+  const auth = useAuth();
+  const { email, password, passwordError, emailError } = { ...auth };
 
-  const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentEmail = e.target.value;
-    setEmail(currentEmail);
+  useEffect(() => {
     clearAuthError();
-    if (currentEmail && !isEmailValid(currentEmail)) {
-      setEmailError(true);
-    } else {
-      setEmailError(false);
-    }
-  };
+  }, [email, password]);
 
   async function authorization() {
     clearAuthError();
@@ -61,7 +34,6 @@ function Login() {
       if (!token.error) {
         AuthorizationService.updateCustomerLogin('token', token.accessToken);
         navigate(PagePaths.Main);
-        console.log(login, token);
       }
     }
   }
@@ -73,59 +45,22 @@ function Login() {
     }
   };
 
-  const passwordErrorText =
-    'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters';
-
-  const emailErrorText = 'Incorrect email. The email should be like: example@email.com';
-
   return (
     <div className={styles.container}>
       <Header />
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
-        <TextField
-          // defaultValue="johndoe@example.com"
-          error={emailError}
-          helperText={emailError ? emailErrorText : ''}
-          required
-          id="login_email"
-          label="email"
-          variant="outlined"
-          onInput={handleEmailInput}
-        />
-        <TextField
-          // defaultValue="Secret123"
-          error={passwordError}
-          helperText={passwordError ? passwordErrorText : ''}
-          required
-          id="login_password"
-          label="password"
-          type={showPassword ? 'text' : 'password'}
-          onInput={handlePasswordInput}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle passw visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end">
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+        <InputPassword />
+        <InputEmail />
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
-        <Button type="submit" className={styles.button} variant="contained" id="signin_button">
+        <Button type="submit" className={styles.button} variant="contained">
           Sign in
         </Button>
         <h4 className={styles.subtitle}>Don&#39;t have an account?</h4>
         <Button
           className={[styles.button, styles.buttonNewAccount].join(' ')}
           variant="outlined"
-          onClick={() => navigate(PagePaths.Register)}
-          id="register_button">
+          onClick={() => navigate(PagePaths.Register)}>
           Create new account
         </Button>
       </form>

@@ -1,7 +1,6 @@
 import { ProductProjection, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
-import { env } from '../utils/utils.tsx';
-
+import { env } from '../utils/utils.ts';
 
 export class ProductsService {
   static getApiRoot() {
@@ -9,11 +8,10 @@ export class ProductsService {
       projectKey: `${env.VITE_PROJECT_KEY}`,
     });
   }
-  static async getProducts(ID: string): Promise<ProductProjection> {
+  static async getProducts(key: string): Promise<ProductProjection> {
     const apiRoot = ProductsService.getApiRoot();
 
-
-    const responseTest = await apiRoot.productProjections().withId({ID}).get().execute();
+    const responseTest = await apiRoot.productProjections().withKey({ key }).get().execute();
     console.log('Products:', responseTest.body);
     return responseTest.body;
   }
