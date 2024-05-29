@@ -3,6 +3,7 @@ import Header from '../../components/UI/Header.tsx';
 import { PagePaths } from '../../utils/utils.tsx';
 import Footer from '../../components/UI/footer.tsx';
 import styles from './Main.module.css';
+import productStyles from '../../components/UI/ProductItem.module.css'
 import ProductItem from '../../components/UI/ProductItem.tsx';
 
 function Main() {
@@ -21,7 +22,7 @@ function Main() {
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
-      <div>
+      <div className={productStyles.swiper__img}>
         <ProductItem />
       </div>
       <Footer />
