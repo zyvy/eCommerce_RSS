@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './products.module.css'
+import styles from './products.module.css';
 import { ProductsService } from '../../../services/ProductsService';
 import { ProductProjection } from '@commercetools/platform-sdk';
 import ProductCard from '../product-cat-card/Catalog-card';
@@ -13,7 +13,7 @@ const ProductList: React.FC = () => {
       try {
         const productData = await ProductsService.getProducts();
         setProducts(productData.results);
-        console.log(productData.results[0].id)
+        console.log(productData.results[0].id);
       } catch (error) {
         setError('Failed to fetch products. Please try again later.');
         console.error(error);
@@ -29,12 +29,12 @@ const ProductList: React.FC = () => {
 
   return (
     <div className={styles.product_list}>
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard
           id={product.id}
           name={product.name['en-US']}
-          image={product.masterVariant?.images?.[0].url? product.masterVariant?.images?.[0].url: 'http://localhost'}
-          description={product.description?.['en-US']? product.description?.['en-US']: 'description' }
+          image={product.masterVariant?.images?.[0].url ? product.masterVariant?.images?.[0].url : 'http://localhost'}
+          description={product.description?.['en-US'] ? product.description?.['en-US'] : 'description'}
         />
       ))}
     </div>
