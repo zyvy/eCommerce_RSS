@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ProductsService } from '../../services/ProductItemService';
-import { ProductProjection, Image } from '@commercetools/platform-sdk';
+import { ProductProjection, Image, Price } from '@commercetools/platform-sdk';
 import styles from './ProductItem.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -13,6 +13,7 @@ function ProductItem() {
   const [productTitle, setProductTitle] = useState('');
   const [productDescr, setProductDescr] = useState<string | undefined>('');
   const [productArtNumber, setProductArtNumber] = useState<string | undefined>('');
+  const [productPrice, setProductPrice] = useState<Price[] | undefined>([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function ProductItem() {
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
         setProductArtNumber(productData.masterVariant.sku);
+        setProductPrice(productData.masterVariant.prices);
       } catch (error) {
         setError('Тут написать про ошибку');
         console.error(error);
