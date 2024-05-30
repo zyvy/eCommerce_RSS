@@ -18,7 +18,7 @@ function ProductItem() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const productData = await ProductsService.getProducts('canela-three-seater-sofa');
+        const productData = await ProductsService.getProducts('art-deco-chair');
         console.log('fesf', productData);
         setProductImg(productData.masterVariant.images);
         setProductTitle(productData.name['en-US']);
