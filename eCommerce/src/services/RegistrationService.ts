@@ -1,4 +1,4 @@
-import { Customer, CustomerDraft, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import { Customer, CustomerDraft, CustomerUpdate, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
 import { env } from '../utils/utils.ts';
 import { AuthorizationService } from './AuthorizationService.ts';
@@ -83,5 +83,21 @@ export class RegistrationService {
       customer: null,
       errorDescription: '',
     };
+  }
+
+  static async updateCustomer(customer: CustomerUpdate) {
+    const apiRoot = RegistrationService.getApiRoot();
+    try {
+      const data = await apiRoot
+        .customers()
+        .withId({ ID: AuthorizationService.getCustomerLogin().id })
+        .post({
+          body: customer,
+        })
+        .execute();
+      console.log(data);
+    } catch (e: unknown) {
+      console.log(e);
+    }
   }
 }

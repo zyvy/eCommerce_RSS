@@ -1,4 +1,4 @@
-export type CountryType = 'IT' | 'BE' | 'DE' | 'ES' | '';
+export type CountryType = 'IT' | 'BE' | 'DE' | 'ES' | '' | string;
 
 export type CurrencyType = {
   value: CountryType;
@@ -46,4 +46,12 @@ export function getErrorDescription(country: CountryType): string {
     return '';
   }
   return value.error;
+}
+
+export function getCountry(country: CountryType): string {
+  const value = currencies.find((currency) => currency.value === country);
+  if (!value) {
+    return '';
+  }
+  return value.label;
 }

@@ -18,6 +18,14 @@
   gap: 15px;
 }
 
+.btnControls {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
 @media (max-width: 500px) {
   .personalData {
     grid-template-columns: 1fr;
