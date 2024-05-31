@@ -21,7 +21,7 @@
   object-fit: cover;
 }
 .swiper__img {
-  width: 840px;
+  width: 45%;
   height: auto;
 }
 .swiper__img2 {
@@ -31,4 +31,12 @@
 .product__wrapper {
   display: flex;
   gap: 20px;
+  max-width: 1000px;
+}
+.price__sale{
+  text-decoration: line-through;
+}
+.price__discounted{
+  color: red;
+  font-weight: 700;
 }

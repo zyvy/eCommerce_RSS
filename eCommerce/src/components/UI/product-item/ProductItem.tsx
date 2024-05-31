@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ProductsService } from '../../services/ProductItemService';
-import { ProductProjection, Image, Price } from '@commercetools/platform-sdk';
+import { ProductsService } from '../../../services/ProductItemService';
+import { ProductProjection, Image, Price, DiscountedPrice } from '@commercetools/platform-sdk';
 import styles from './ProductItem.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
+import { dividerClasses } from '@mui/material';
 
 function ProductItem() {
   const [productImg, setProductImg] = useState<Image[] | undefined>([]);
@@ -14,6 +15,7 @@ function ProductItem() {
   const [productDescr, setProductDescr] = useState<string | undefined>('');
   const [productArtNumber, setProductArtNumber] = useState<string | undefined>('');
   const [productPrice, setProductPrice] = useState<Price[] | undefined>([]);
+  const [productDiscountedPrice, setProductDiscountedPrice] = useState<Price[] | undefined>(undefined);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -25,7 +27,8 @@ function ProductItem() {
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
         setProductArtNumber(productData.masterVariant.sku);
-        setProductPrice(productData.masterVariant.prices);
+        setProductPrice(productData.masterVariant.prices)
+        setProductDiscountedPrice(productData.masterVariant.prices);
       } catch (error) {
         setError('Тут написать про ошибку');
         console.error(error);
@@ -33,8 +36,6 @@ function ProductItem() {
     };
     getProducts();
   }, []);
-
-  console.log(productTitle);
 
   const slides = productImg?.map((prod) => prod.url);
 
@@ -60,6 +61,8 @@ function ProductItem() {
         <div>
           <p>Article number: {productArtNumber}</p>
           <p>{productDescr}</p>
+          <p className={styles.price__sale}>{productPrice? productPrice[2].value.centAmount: undefined}$</p>
+          <p className={styles.price__discounted}>{productPrice? productPrice[2].discounted?.value.centAmount : undefined}$</p>
         </div>
       </div>
     </>
