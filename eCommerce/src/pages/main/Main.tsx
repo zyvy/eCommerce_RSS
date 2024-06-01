@@ -4,6 +4,8 @@ import { PagePaths } from '../../utils/utils.ts';
 import styles from './Main.module.css';
 import Footer from '../../components/UI/footer/Footer.tsx';
 import ProductList from '../../components/UI/products/products.tsx';
+import CategoriesComponent from '../../components/UI/filters/Category-filter.tsx';
+import FiltersComponent from '../../components/UI/filters/Attributes-filter.tsx';
 
 function Main() {
   return (
@@ -22,8 +24,11 @@ function Main() {
         </nav>
       </div>
       <div>
-        <ProductList />
+        <CategoriesComponent />
+        <FiltersComponent />
+        <ProductList color="#808080"/>
       </div>
+
       <Footer />
     </div>
   );
