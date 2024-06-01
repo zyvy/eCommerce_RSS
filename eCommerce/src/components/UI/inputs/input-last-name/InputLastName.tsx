@@ -8,11 +8,15 @@ function InputLastName() {
     'It must begin with a capital letter, must contain at least one character and no special characters or numbers';
 
   const userPersonalData = useUserPersonalData();
-  const { lastNameError, setData } = { ...userPersonalData };
+  const { lastName, lastNameError, setData } = { ...userPersonalData };
 
   const handleOnInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const lastName = e.target.value;
-    setData({ ...userPersonalData, lastName, lastNameError: !(!lastName || isLastNameValid(lastName)) });
+    const newLastName = e.target.value;
+    setData({
+      ...userPersonalData,
+      lastName: newLastName,
+      lastNameError: !(!newLastName || isLastNameValid(newLastName)),
+    });
   };
 
   return (
@@ -25,6 +29,8 @@ function InputLastName() {
       variant="outlined"
       type="text"
       onInput={handleOnInput}
+      value={lastName}
+      InputLabelProps={{ shrink: !!lastName }}
     />
   );
 }

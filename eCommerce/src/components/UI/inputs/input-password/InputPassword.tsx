@@ -16,12 +16,12 @@ function InputPassword({ size = 'medium' }: ComponentProps) {
 
   const [showPassword, setShowPassword] = useState(false);
   const auth = useAuth();
-  const { passwordError, setAuth } = { ...auth };
+  const { password, passwordError, setAuth } = { ...auth };
 
   const handleOnInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const password = e.target.value;
-    const error = !(!password || isPasswordValid(password));
-    setAuth({ ...auth, password, passwordError: error });
+    const newPassword = e.target.value;
+    const error = !(!newPassword || isPasswordValid(newPassword));
+    setAuth({ ...auth, password: newPassword, passwordError: error });
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -40,6 +40,8 @@ function InputPassword({ size = 'medium' }: ComponentProps) {
       label="password"
       type={showPassword ? 'text' : 'password'}
       onInput={handleOnInput}
+      value={password}
+      InputLabelProps={{ shrink: !!password }}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

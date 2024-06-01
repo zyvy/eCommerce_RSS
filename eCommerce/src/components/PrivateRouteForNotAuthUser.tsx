@@ -7,11 +7,11 @@ type ComponentProps = {
   children: React.ReactNode;
 };
 
-function PrivateRoute({ children }: ComponentProps) {
-  if (AuthorizationService.getCustomerLogin().token) {
+function PrivateRouteForNotAuthUser({ children }: ComponentProps) {
+  if (!AuthorizationService.getCustomerLogin().token) {
     return <Navigate to={PagePaths.Main} />;
   }
   return children;
 }
 
-export default PrivateRoute;
+export default PrivateRouteForNotAuthUser;

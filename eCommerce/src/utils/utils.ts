@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import { v4 as uuidv4 } from 'uuid';
 
 export enum PagePaths {
   Main = '/',
   Login = '/login',
   Register = '/registration',
   NotFound = '/404',
+  Profile = 'profile',
 }
 
 export type SizeOfInput = 'small' | 'medium';
@@ -26,3 +28,11 @@ export const env: Env = {
   VITE_SCOPE: 'manage_project:rs-ecommerce-5348424',
   VITE_REGION: 'europe-west1.gcp',
 };
+
+export function addKeyToArray<T extends { key: string }>(arr: T[]) {
+  arr.forEach((el) => {
+    if (!el.key) {
+      el.key = uuidv4();
+    }
+  });
+}
