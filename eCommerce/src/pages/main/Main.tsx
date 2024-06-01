@@ -4,6 +4,7 @@ import { PagePaths } from '../../utils/utils.ts';
 import styles from './Main.module.css';
 import Footer from '../../components/UI/footer/Footer.tsx';
 import ProductList from '../../components/UI/products/products.tsx';
+import ProductItem from '../../components/UI/product-item/ProductItem.tsx';
 
 function Main() {
   return (
@@ -26,6 +27,7 @@ function Main() {
       <div>
         <ProductList />
       </div>
+      <ProductItem/>
       <Footer />
     </div>
   );
