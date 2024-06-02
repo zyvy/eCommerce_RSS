@@ -44,11 +44,12 @@ const ProductList: React.FC = () => {
               ? product.masterVariant.prices[0].value.centAmount / 100
               : 0
           }
-          discount_price={
+          discountPrice={
             product.masterVariant?.prices?.[0].discounted
               ? product.masterVariant?.prices?.[0].discounted?.value?.centAmount / 100
               : 0
           }
+          slug={product.key ? product.key : ''}
         />
       ))}
     </div>
