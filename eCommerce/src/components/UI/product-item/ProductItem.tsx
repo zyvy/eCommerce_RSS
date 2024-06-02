@@ -18,8 +18,8 @@ function ProductItem({ slug }: ProductItemProps) {
   const [productTitle, setProductTitle] = useState('');
   const [productDescr, setProductDescr] = useState<string | undefined>('');
   const [productArtNumber, setProductArtNumber] = useState<string | undefined>('');
-  const [productPrice, setProductPrice] = useState<Price[] | undefined>([]);
-  const [productDiscountedPrice, setProductDiscountedPrice] = useState<Price[] | undefined>(undefined);
+  const [productPrice, setProductPrice] = useState<number | undefined>(undefined);
+  const [productDiscountedPrice, setProductDiscountedPrice] = useState<number | undefined>(undefined);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -31,8 +31,8 @@ function ProductItem({ slug }: ProductItemProps) {
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
         setProductArtNumber(productData.masterVariant.sku);
-        setProductPrice(productData.masterVariant.prices)
-        setProductDiscountedPrice(productData.masterVariant.prices);
+        setProductPrice(productData.masterVariant.prices ? productData.masterVariant.prices[0].value.centAmount : undefined)
+        setProductDiscountedPrice(productData.masterVariant.prices ? productData.masterVariant.prices[0].discounted?.value.centAmount : undefined);
       } catch (error) {
         setError('Тут написать про ошибку');
         console.error(error);
@@ -65,6 +65,12 @@ function ProductItem({ slug }: ProductItemProps) {
         <div>
           <p>Article number: {productArtNumber}</p>
           <p>{productDescr}</p>
+          {productPrice && 
+            <p className={styles.price__sale}>{productPrice}</p>
+          }
+          {productDiscountedPrice &&
+            <p className={styles.price__discounted}>{productDiscountedPrice}</p>
+          }
         </div>
       </div>
     </>
