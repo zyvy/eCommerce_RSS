@@ -6,6 +6,7 @@ import Footer from '../../components/UI/footer/Footer.tsx';
 import ProductList from '../../components/UI/products/products.tsx';
 import CategoriesComponent from '../../components/UI/filters/Category-filter.tsx';
 import FiltersComponent from '../../components/UI/filters/Attributes-filter.tsx';
+import ItemCategoryPath from '../../components/UI/category-path/ItemCategoryPath.tsx';
 
 function Main() {
   return (
@@ -25,8 +26,9 @@ function Main() {
       </div>
       <div>
         <CategoriesComponent />
+        <ItemCategoryPath />
         <FiltersComponent />
-        <ProductList color="#808080"/>
+        <ProductList />
       </div>
 
       <Footer />

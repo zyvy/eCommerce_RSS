@@ -5,10 +5,17 @@ const CategoriesComponent: React.FC = () => {
   const [categories, setCategories] = useState<Record<string, string>>({});
   useEffect(() => {
     async function loadCategories() {
-      const getCat = await ProductsService.getUniqueCategories();
-      setCategories(getCat);
-      console.log("get_cat",getCat)
+      const getCat = await ProductsService.getCategories();
+      const cat: Record<string, string> = {};
+      getCat.results.forEach((category) => {
+        if (!category.ancestors[0]) {
+          cat[category.name['en-US']] = category.id;
+        }
+      });
+      setCategories(cat);
+      console.log("get_cat", getCat);
     }
+
     loadCategories();
   }, []);
 

@@ -26,7 +26,7 @@ export class ProductsService {
   }
   static async getProducts(params: ProductFilterParams): Promise<ProductProjectionPagedSearchResponse> {
     const apiRoot = ProductsService.getApiRoot();
-    let queryArgs: { filter?: string[]} = {};
+    let queryArgs: { filter?: string[] } = {};
     queryArgs.filter = [];
     if (params.selectedCategory) {
       queryArgs.filter.push(`categories.id:"${params.selectedCategory}"`);
@@ -82,24 +82,19 @@ export class ProductsService {
       return '';
     }
   }
-  static async getUniqueCategories(): Promise<Record<string, string>> {
+  static async getCategories(): Promise<CategoryPagedQueryResponse> {
     const apiRoot = ProductsService.getApiRoot();
-    try {
-      let limit = 100;
-      const response = await apiRoot.categories().get({ queryArgs: { limit } }).execute();
-      const categoriesResponse: CategoryPagedQueryResponse = response.body;
+    let limit = 100;
+    const response = await apiRoot.categories().get({ queryArgs: { limit } }).execute();
+    /* const categoriesResponse: CategoryPagedQueryResponse = response.body;
 
       const categories: Record<string, string> = {};
       categoriesResponse.results.forEach((category) => {
         if (!category.ancestors[0]) {
           categories[category.name['en-US']] = category.id;
         }
-      });
+      }); */
 
-      return categories;
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-      return {};
-    }
+    return response.body;
   }
 }
