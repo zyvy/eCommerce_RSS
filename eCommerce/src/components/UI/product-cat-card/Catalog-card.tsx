@@ -9,7 +9,7 @@ interface ProductCardProps {
   description: string;
   price: number;
   discountPrice?: number;
-  slug: string
+  slug: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, description, price, discountPrice, slug }) => {
@@ -19,10 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, description,
   };
   return (
     <>
-      <div 
-      className={styles.product_card}
-      onClick={() => handleCardClick(slug)}
-      >
+      <div className={styles.product_card} onClick={() => handleCardClick(slug)}>
         <p>{id}</p>
         <img src={image} alt={name} className={styles.product_image} />
         <h2 className={styles.product_name}>{name}</h2>
