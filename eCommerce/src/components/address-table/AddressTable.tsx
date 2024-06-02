@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Checkbox, FormControlLabel, IconButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -18,6 +18,9 @@ import { getCountry } from '../../utils/currencies.ts';
 import AddressContainer from '../UI/address-container/AddressContainer.tsx';
 import styles from './AddressTable.module.css';
 import DividerWithText from '../UI/divider-with-text/DividerWithText.tsx';
+import { RegistrationService } from '../../services/RegistrationService.ts';
+import SuccessUpdate from '../UI/success-update/SuccessUpdate.tsx';
+import { setSuccessUpdateData } from '../../utils/utils.ts';
 
 interface Column {
   id: 'country' | 'city' | 'street' | 'postalCode' | 'default' | 'type' | 'actions';
@@ -62,6 +65,34 @@ type AddressFormPropsType = {
 function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
   const addressesState = useAddresses();
   const { setAddresses, currentAddressBilling, addresses } = { ...addressesState };
+  const [isValidAddress_, setIsValidAddress_] = useState(false);
+  const [successUpdate, setSuccessUpdate] = useState(false);
+
+  const isValidAddressCallback = useCallback(
+    () =>
+      !(
+        currentAddressBilling.cityError ||
+        currentAddressBilling.countryError ||
+        currentAddressBilling.streetError ||
+        currentAddressBilling.postalCodeError ||
+        !currentAddressBilling.city ||
+        !currentAddressBilling.country ||
+        !currentAddressBilling.street ||
+        !currentAddressBilling.postalCode
+      ),
+    [currentAddressBilling],
+  );
+
+  useEffect(() => {
+    setIsValidAddress_(isValidAddressCallback());
+  }, [
+    currentAddressBilling.country,
+    currentAddressBilling.city,
+    currentAddressBilling.country,
+    currentAddressBilling.street,
+    currentAddressBilling.postalCode,
+    isValidAddressCallback,
+  ]);
 
   const isEditing = editIndex >= 0;
 
@@ -86,18 +117,13 @@ function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
     });
   };
 
-  const isValidAddress = () =>
-    !(
-      currentAddressBilling.cityError ||
-      currentAddressBilling.countryError ||
-      currentAddressBilling.streetError ||
-      currentAddressBilling.postalCodeError
-    );
-
-  const handleUpdateAddress = () => {
-    if (!isValidAddress()) return;
+  const handleUpdateAddress = async () => {
+    if (!isValidAddressCallback()) return;
+    const { id, billing } = addresses[editIndex];
+    if (!addresses[editIndex].default && currentAddressBilling.default) {
+      await RegistrationService.setDefaultAddress(id || '', billing);
+    }
     checkDefaultAddress(addresses);
-    const { id } = addresses[editIndex];
     addresses[editIndex] = { ...currentAddressBilling, key: uuidv4(), id };
     setAddresses({
       ...addressesState,
@@ -105,12 +131,39 @@ function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
       currentAddressBilling: { ...initialAddressError, billing: true },
     });
     updateEditIndex(-1);
+
+    const data = await RegistrationService.changeAddress(addresses[editIndex].id || '', {
+      country: currentAddressBilling.country,
+      streetName: currentAddressBilling.street,
+      city: currentAddressBilling.city,
+      postalCode: currentAddressBilling.postalCode,
+    });
+    if (!data.error) {
+      setSuccessUpdateData(setSuccessUpdate);
+    }
   };
 
-  const handleAddAddress = () => {
-    if (!isValidAddress()) return;
+  const handleAddAddress = async () => {
+    if (!isValidAddressCallback()) return;
+
+    const data = await RegistrationService.addAddress(
+      {
+        country: currentAddressBilling.country,
+        city: currentAddressBilling.city,
+        streetName: currentAddressBilling.street,
+        postalCode: currentAddressBilling.postalCode,
+      },
+      currentAddressBilling.billing,
+      currentAddressBilling.default,
+    );
+
+    if (!data.error) {
+      setSuccessUpdateData(setSuccessUpdate);
+    }
+
     checkDefaultAddress(addresses);
-    addresses.push({ ...currentAddressBilling });
+    const id = data.customer?.addresses.at(-1)?.id || '';
+    addresses.push({ ...currentAddressBilling, key: uuidv4(), id });
     setAddresses({
       ...addressesState,
       addresses: [...addresses],
@@ -126,6 +179,7 @@ function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
 
   return (
     <div>
+      {successUpdate && <SuccessUpdate />}
       <DividerWithText text={editIndex >= 0 ? 'Edit Address' : 'Add Address'} />
       <form>
         <AddressContainer typeAddress="billing" />
@@ -133,14 +187,17 @@ function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
           <FormControlLabel
             control={<Checkbox checked={currentAddressBilling.default} onChange={handleChangeDefaultBilling} />}
             label="Default address"
+            disabled={editIndex >= 0 && currentAddressBilling.default}
           />
           <FormControlLabel
             control={<Checkbox checked={currentAddressBilling.billing} onChange={handleChangeTypeAddress} />}
             label="Billing address"
+            disabled={editIndex >= 0}
           />
           <FormControlLabel
             control={<Checkbox checked={currentAddressBilling.shipping} onChange={handleChangeTypeAddress} />}
             label="Shipping address"
+            disabled={editIndex >= 0}
           />
         </div>
 
@@ -148,6 +205,7 @@ function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
           <Button
             className={styles.button}
             variant="outlined"
+            disabled={!isValidAddress_}
             onClick={isEditing ? handleUpdateAddress : handleAddAddress}>
             {isEditing ? 'Update Address' : 'Add Address'}
           </Button>
@@ -163,6 +221,7 @@ function AddressTable() {
   const { setAddresses, addresses } = { ...addressesState };
 
   const [editIndex, setEditIndex] = useState(-1);
+  const [successUpdate, setSuccessUpdate] = useState(false);
 
   const handleEditAddress = (index: number) => {
     if (editIndex === index) {
@@ -185,15 +244,21 @@ function AddressTable() {
   };
 
   const handleDeleteAddress = (index: number) => {
+    RegistrationService.removeAddress(addresses[index].id || '', addresses[index].billing).then((res) => {
+      if (!res.error) {
+        setSuccessUpdateData(setSuccessUpdate);
+      }
+    });
+
     const updatedAddresses = addresses.filter((_, i) => i !== index);
     setAddresses({ ...addressesState, addresses: updatedAddresses });
   };
 
   return (
     <>
-      <Paper sx={{ width: '100%', overflowX: 'scroll' }}>
+      <Paper sx={{ width: '98vw', overflowX: 'auto', maxWidth: '1100px' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
-          <Table size="small" sx={{ minWidth: 380 }} stickyHeader aria-label="sticky table">
+          <Table size="small" stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
@@ -248,50 +313,10 @@ function AddressTable() {
           </Table>
         </TableContainer>
       </Paper>
+      {successUpdate && <SuccessUpdate />}
       <AddressForm editIndex={editIndex} updateEditIndex={setEditIndex} />
     </>
   );
-
-  /* return (
-    <div>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.tableHead}>Country</th>
-            <th className={styles.tableHead}>City</th>
-            <th className={styles.tableHead}>Street</th>
-            <th className={styles.tableHead}>Postal Code</th>
-            <th className={styles.tableHead}>Default</th>
-            <th className={styles.tableHead}>Type</th>
-            <th className={styles.tableHead}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {addresses.map((address, index) => (
-            <tr key={address.key}>
-              <td className={styles.tableData}>{getCountry(address.country)}</td>
-              <td className={styles.tableData}>{address.city}</td>
-              <td className={styles.tableData}>{address.street}</td>
-              <td className={styles.tableData}>{address.postalCode}</td>
-              <td className={styles.tableData}>{address.default ? 'Yes' : 'No'}</td>
-              <td className={styles.tableData}>{address.shipping ? 'Ship' : 'Bill'}</td>
-              <td className={styles.tableData}>
-                <div className={styles.tableButtons}>
-                  <IconButton type="button" onClick={() => handleEditAddress(index)}>
-                    {editIndex === index ? <EditOffTwoToneIcon /> : <EditTwoToneIcon />}
-                  </IconButton>
-                  <IconButton type="button" onClick={() => handleDeleteAddress(index)}>
-                    <DeleteForeverTwoToneIcon />
-                  </IconButton>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <AddressForm editIndex={editIndex} updateEditIndex={setEditIndex} />
-    </div>
-  ); */
 }
 
 export default AddressTable;

@@ -27,7 +27,7 @@ function Header() {
   }; */
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
-      AuthorizationService.removeCustomerLogin();
+      AuthorizationService.removeCustomerInfo();
       if (window.location.pathname === PagePaths.Main) {
         navigate(0);
       } else {

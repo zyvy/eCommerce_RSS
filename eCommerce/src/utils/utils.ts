@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export enum PagePaths {
@@ -35,4 +36,11 @@ export function addKeyToArray<T extends { key: string }>(arr: T[]) {
       el.key = uuidv4();
     }
   });
+}
+
+export function setSuccessUpdateData(callback: React.Dispatch<React.SetStateAction<boolean>>) {
+  callback(true);
+  setTimeout(() => {
+    callback(false);
+  }, 3000);
 }
