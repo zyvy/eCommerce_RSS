@@ -10,6 +10,7 @@ import { AuthProvider } from '../context/AuthContext.tsx';
 import { UserPersonalDataProvider } from '../context/UserPersonalDataContext.tsx';
 import { AddressProvider } from '../context/AddressesContext.tsx';
 import ProfilePage from '../pages/profile/Profile.tsx';
+import ItemCard from '../pages/ItemCard/ItemCard.tsx';
 
 function AppRouter() {
   return (
@@ -54,6 +55,7 @@ function AppRouter() {
         }
       />
       <Route path={PagePaths.NotFound} element={<NotFound />} />
+      <Route path="/product/:slug" element={<ItemCard />} />
     </Routes>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { ProductsService } from '../../../services/ProductItemService';
 import { ProductProjection, Image, Price, DiscountedPrice } from '@commercetools/platform-sdk';
 import styles from './ProductItem.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,8 +7,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import { dividerClasses } from '@mui/material';
+import { ProductsService } from '../../../services/ProductsService';
 
-function ProductItem() {
+interface ProductItemProps {
+  slug: string;
+}
+
+function ProductItem({ slug }: ProductItemProps) {
   const [productImg, setProductImg] = useState<Image[] | undefined>([]);
   const [productTitle, setProductTitle] = useState('');
   const [productDescr, setProductDescr] = useState<string | undefined>('');
@@ -21,7 +25,7 @@ function ProductItem() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const productData = await ProductsService.getProducts('art-deco-chair');
+        const productData = await ProductsService.getProductByKey(slug);
         console.log('fesf', productData);
         setProductImg(productData.masterVariant.images);
         setProductTitle(productData.name['en-US']);
@@ -35,7 +39,7 @@ function ProductItem() {
       }
     };
     getProducts();
-  }, []);
+  }, [slug]);
 
   const slides = productImg?.map((prod) => prod.url);
 
@@ -61,8 +65,6 @@ function ProductItem() {
         <div>
           <p>Article number: {productArtNumber}</p>
           <p>{productDescr}</p>
-          <p className={styles.price__sale}>{productPrice? productPrice[2].value.centAmount: undefined}$</p>
-          <p className={styles.price__discounted}>{productPrice? productPrice[2].discounted?.value.centAmount : undefined}$</p>
         </div>
       </div>
     </>
