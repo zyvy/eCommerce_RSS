@@ -14,7 +14,7 @@ function InputText({ label, errorText, handleOnInput }: PropsType) {
       helperText={errorText}
       size="small"
       required
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', maxWidth: '250px' }}
       label={label}
       variant="outlined"
       type="text"

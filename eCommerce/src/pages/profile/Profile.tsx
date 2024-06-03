@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from '@mui/material';
 import DividerWithText from '../../components/UI/divider-with-text/DividerWithText.tsx';
@@ -15,17 +15,35 @@ import { useAuth } from '../../context/AuthContext.tsx';
 import { useUserPersonalData } from '../../context/UserPersonalDataContext.tsx';
 import AddressTable from '../../components/address-table/AddressTable.tsx';
 import { Address, useAddresses } from '../../context/AddressesContext.tsx';
+import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import SuccessUpdate from '../../components/UI/success-update/SuccessUpdate.tsx';
+import { setSuccessUpdateData } from '../../utils/utils.ts';
+import InputText from '../../components/UI/inputs/input-text/InputText.tsx';
+
+function handleOldPassword(
+  e: React.ChangeEvent<HTMLInputElement>,
+  setOldPassword: React.Dispatch<React.SetStateAction<string>>,
+) {
+  setOldPassword(e.target.value);
+}
 
 function Profile() {
   const auth = useAuth();
-  const { email, password, passwordError, emailError, setAuth } = { ...auth };
+  const { email, emailError, password, passwordError, setAuth } = { ...auth };
+  const [successUpdate, setSuccessUpdate] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [changePasswordError, setChangePasswordError] = useState('');
 
   const userPersonalData = useUserPersonalData();
   const { firstName, firstNameError, lastName, lastNameError, dateOfBirth, dateOfBirthError } = { ...userPersonalData };
   const addressesState = useAddresses();
-  const { addresses } = { ...addressesState };
   const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleInputOldPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleOldPassword(e, setOldPassword);
+    setChangePasswordError('');
+  };
 
   const loadUser = async () => {
     setIsLoading(true);
@@ -37,9 +55,13 @@ function Profile() {
       return;
     }
 
-    setAuth({ ...auth, email: customer.email, password: customer.password || '' });
+    AuthorizationService.saveVersion(customer!.version);
+
+    setAuth({ ...auth, email: customer.email, emailError: false });
     userPersonalData.setData({
-      ...userPersonalData,
+      firstNameError: false,
+      lastNameError: false,
+      dateOfBirthError: false,
       firstName: customer.firstName ?? '',
       lastName: customer.lastName ?? '',
       dateOfBirth: customer.dateOfBirth ?? '',
@@ -76,49 +98,37 @@ function Profile() {
     if (!isLoading) {
       setIsEdit(true);
     }
-  }, [email, password, firstName, lastName, dateOfBirth, isLoading, addresses]);
-
-  /*   function resetAddressId(addresses: Address[]) {
-    addresses.forEach((address) => {
-      address.id = undefined;
-    });
-    return addresses;
-  } */
+  }, [email, firstName, lastName, dateOfBirth, isLoading]);
 
   const handleSave = () => {
-    if (!(passwordError || emailError || firstNameError || lastNameError || dateOfBirthError)) {
-      /* const defaultShip = addresses.findIndex((address) => address.default && address.shipping);
-      const defaultBill = addresses.findIndex((address) => address.default && address.billing);
-
-      const customer: CustomerDraft = {
+    if (!(emailError || firstNameError || lastNameError || dateOfBirthError)) {
+      const updateCustomer = {
         email,
-        password,
         firstName,
         lastName,
         dateOfBirth,
-        addresses: [...resetAddressId(addresses)],
-        billingAddresses: addresses.reduce((acc, address, i) => {
-          if (address.billing) {
-            acc.push(i);
-          }
-          return acc;
-        }, [] as number[]),
-
-        shippingAddresses: addresses.reduce((acc, address, i) => {
-          if (address.shipping) {
-            acc.push(i);
-          }
-          return acc;
-        }, [] as number[]),
-        ...(defaultBill >= 0 && { defaultBillingAddress: defaultBill }),
-        ...(defaultShip >= 0 && { defaultShippingAddress: defaultShip }),
-      }; */
-      // RegistrationService.updateCustomer(customer);
+      };
+      RegistrationService.updateCustomer(updateCustomer).then((response) => {
+        if (!response.error) {
+          setSuccessUpdateData(setSuccessUpdate);
+          setIsEdit(false);
+        }
+      });
     }
   };
 
   const handleCancel = () => {
     loadUser();
+  };
+
+  const handleChangePassword = async () => {
+    const response = await RegistrationService.changePassword(oldPassword, password);
+    if (!response.error) {
+      setSuccessUpdateData(setSuccessUpdate);
+      setIsEdit(false);
+    } else {
+      setChangePasswordError(response.errorDescription);
+    }
   };
 
   return (
@@ -127,14 +137,12 @@ function Profile() {
       <main className={styles.mainContainer}>
         <DividerWithText text="Personal data" />
         <div className={styles.personalData}>
-          <InputEmail size="small" />
-          <InputPassword size="small" />
           <InputFirstName />
+          <InputEmail size="small" />
           <InputLastName />
           <InputDate />
         </div>
-        <DividerWithText text="Addresses" />
-        <AddressTable />
+        {successUpdate && <SuccessUpdate />}
         <div style={{ visibility: isLoading ? 'hidden' : 'visible' }} className={styles.btnControls}>
           <Button color="success" disabled={!isEdit} className={styles.button} variant="outlined" onClick={handleSave}>
             Save
@@ -143,7 +151,31 @@ function Profile() {
             Cancel
           </Button>
         </div>
+        <DividerWithText text="Addresses" />
+        <AddressTable />
+        <DividerWithText text="Change password" />
+        <div className={styles.changePasswordContainer}>
+          <div className={styles.changePassword}>
+            <InputText
+              label="current password"
+              errorText={changePasswordError}
+              handleOnInput={handleInputOldPassword}
+            />
+            <InputPassword size="small" label="new password" />
+          </div>
+          <Button
+            sx={{ width: '90px' }}
+            color="success"
+            disabled={!oldPassword || !password || passwordError}
+            className={styles.button}
+            variant="outlined"
+            onClick={handleChangePassword}>
+            Update
+          </Button>
+          {successUpdate && <SuccessUpdate />}
+        </div>
       </main>
+
       <Footer />
     </div>
   );

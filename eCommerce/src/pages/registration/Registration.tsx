@@ -91,12 +91,13 @@ function Registration() {
       }
     } else {
       setRegSuccess(true);
-      AuthorizationService.removeCustomerLogin();
+      AuthorizationService.removeCustomerInfo();
       const login = await AuthorizationService.login({ email, password });
-      AuthorizationService.updateCustomerLogin('id', login.customer!.id);
+      AuthorizationService.updateCustomerInfo('id', login.customer!.id);
+      AuthorizationService.updateCustomerInfo('version', String(login.customer!.version));
       const token = await AuthorizationService.getAccessToken({ email, password });
       if (!token.error) {
-        AuthorizationService.updateCustomerLogin('token', token.accessToken);
+        AuthorizationService.updateCustomerInfo('token', token.accessToken);
       }
       setTimeout(() => {
         navigate(PagePaths.Main);

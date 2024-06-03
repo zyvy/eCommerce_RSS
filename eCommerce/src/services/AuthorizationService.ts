@@ -35,9 +35,10 @@ type AuthData = {
   password: string;
 };
 
-type CustomerLogin = {
+type CustomerInfo = {
   id: string;
   token: string;
+  version: string;
 };
 
 const KEY_CUSTOMER = 'customer';
@@ -166,24 +167,29 @@ export class AuthorizationService {
     });
   }
 
-  static removeCustomerLogin() {
+  static removeCustomerInfo() {
     localStorage.removeItem(KEY_CUSTOMER);
   }
 
-  static updateCustomerLogin(key: keyof CustomerLogin, value: string) {
-    const customer = AuthorizationService.getCustomerLogin();
+  static updateCustomerInfo(key: keyof CustomerInfo, value: string) {
+    const customer = AuthorizationService.getCustomerInfo();
     customer[key] = value;
     localStorage.setItem(KEY_CUSTOMER, JSON.stringify(customer));
   }
 
-  static getCustomerLogin() {
+  static getCustomerInfo() {
     const customer = localStorage.getItem(KEY_CUSTOMER);
     if (customer) {
-      return <CustomerLogin>JSON.parse(customer);
+      return <CustomerInfo>JSON.parse(customer);
     }
     return {
       id: '',
       token: '',
+      version: 0,
     };
+  }
+
+  static saveVersion(version: number) {
+    AuthorizationService.updateCustomerInfo('version', String(version));
   }
 }

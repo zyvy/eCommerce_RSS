@@ -1,10 +1,12 @@
 .container {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;
+  max-width: 1200px;
 }
 
 .mainContainer {
@@ -26,8 +28,22 @@
   gap: 30px;
 }
 
+.changePassword,
+.changePasswordContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.changePasswordContainer {
+  flex-direction: column;
+}
+
 @media (max-width: 500px) {
   .personalData {
     grid-template-columns: 1fr;
+  }
+
+  .changePassword {
+    flex-direction: column;
   }
 }
