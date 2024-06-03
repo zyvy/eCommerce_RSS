@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 
 jest.mock('../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
-    removeCustomerLogin: jest.fn(),
+    removeCustomerInfo: jest.fn(),
   },
   authenticateUser: jest.fn(() => {
     const mockClientId = 'mockClientId';

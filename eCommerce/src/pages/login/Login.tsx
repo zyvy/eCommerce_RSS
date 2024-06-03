@@ -27,12 +27,13 @@ function Login() {
     const login = await AuthorizationService.login({ email, password });
     if (login.error) {
       setAuthError('Incorrect email or passoword.');
-      AuthorizationService.removeCustomerLogin();
+      AuthorizationService.removeCustomerInfo();
     } else {
-      AuthorizationService.updateCustomerLogin('id', login.customer!.id);
+      AuthorizationService.updateCustomerInfo('id', login.customer!.id);
+      AuthorizationService.updateCustomerInfo('version', String(login.customer!.version));
       const token = await AuthorizationService.getAccessToken({ email, password });
       if (!token.error) {
-        AuthorizationService.updateCustomerLogin('token', token.accessToken);
+        AuthorizationService.updateCustomerInfo('token', token.accessToken);
         navigate(PagePaths.Main);
       }
     }

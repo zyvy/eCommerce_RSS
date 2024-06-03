@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 import { IconButton, InputAdornment } from '@mui/material';
@@ -8,9 +9,10 @@ import { SizeOfInput } from '../../../../utils/utils.ts';
 
 type ComponentProps = {
   size: SizeOfInput;
+  label?: string;
 };
 
-function InputPassword({ size = 'medium' }: ComponentProps) {
+function InputPassword({ size = 'medium', label = 'password' }: ComponentProps) {
   const ERROR_TEXT =
     'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters';
 
@@ -32,12 +34,12 @@ function InputPassword({ size = 'medium' }: ComponentProps) {
 
   return (
     <TextField
-      // defaultValue="Secret1234"
+      // defaultValue="Test1234"
       error={passwordError}
       helperText={passwordError ? ERROR_TEXT : ''}
       required
       size={size}
-      label="password"
+      label={label}
       type={showPassword ? 'text' : 'password'}
       onInput={handleOnInput}
       value={password}

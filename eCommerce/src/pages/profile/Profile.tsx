@@ -8,22 +8,23 @@ import InputDate from '../../components/UI/inputs/input-date/InputDate.tsx';
 import InputEmail from '../../components/UI/inputs/input-email/InputEmail.tsx';
 import InputFirstName from '../../components/UI/inputs/input-first-name/InputFirstName.tsx';
 import InputLastName from '../../components/UI/inputs/input-last-name/InputLastName.tsx';
-import InputPassword from '../../components/UI/inputs/input-password/InputPassword.tsx';
 import styles from './Profile.module.css';
 import { RegistrationService } from '../../services/RegistrationService.ts';
 import { useAuth } from '../../context/AuthContext.tsx';
 import { useUserPersonalData } from '../../context/UserPersonalDataContext.tsx';
 import AddressTable from '../../components/address-table/AddressTable.tsx';
 import { Address, useAddresses } from '../../context/AddressesContext.tsx';
+import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import SuccessModal from '../../components/UI/success-modal/SuccessModal.tsx';
+import ModalChangePassword from '../../components/UI/modal-change-password/ModalChangePassword.tsx';
 
 function Profile() {
   const auth = useAuth();
-  const { email, password, passwordError, emailError, setAuth } = { ...auth };
-
+  const { email, emailError, setAuth } = { ...auth };
+  const [successUpdate, setSuccessUpdate] = useState(false);
   const userPersonalData = useUserPersonalData();
   const { firstName, firstNameError, lastName, lastNameError, dateOfBirth, dateOfBirthError } = { ...userPersonalData };
   const addressesState = useAddresses();
-  const { addresses } = { ...addressesState };
   const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -37,9 +38,13 @@ function Profile() {
       return;
     }
 
-    setAuth({ ...auth, email: customer.email, password: customer.password || '' });
+    AuthorizationService.saveVersion(customer!.version);
+
+    setAuth({ ...auth, email: customer.email, emailError: false });
     userPersonalData.setData({
-      ...userPersonalData,
+      firstNameError: false,
+      lastNameError: false,
+      dateOfBirthError: false,
       firstName: customer.firstName ?? '',
       lastName: customer.lastName ?? '',
       dateOfBirth: customer.dateOfBirth ?? '',
@@ -76,44 +81,22 @@ function Profile() {
     if (!isLoading) {
       setIsEdit(true);
     }
-  }, [email, password, firstName, lastName, dateOfBirth, isLoading, addresses]);
-
-  /*   function resetAddressId(addresses: Address[]) {
-    addresses.forEach((address) => {
-      address.id = undefined;
-    });
-    return addresses;
-  } */
+  }, [email, firstName, lastName, dateOfBirth, isLoading]);
 
   const handleSave = () => {
-    if (!(passwordError || emailError || firstNameError || lastNameError || dateOfBirthError)) {
-      /* const defaultShip = addresses.findIndex((address) => address.default && address.shipping);
-      const defaultBill = addresses.findIndex((address) => address.default && address.billing);
-
-      const customer: CustomerDraft = {
+    if (!(emailError || firstNameError || lastNameError || dateOfBirthError)) {
+      const updateCustomer = {
         email,
-        password,
         firstName,
         lastName,
         dateOfBirth,
-        addresses: [...resetAddressId(addresses)],
-        billingAddresses: addresses.reduce((acc, address, i) => {
-          if (address.billing) {
-            acc.push(i);
-          }
-          return acc;
-        }, [] as number[]),
-
-        shippingAddresses: addresses.reduce((acc, address, i) => {
-          if (address.shipping) {
-            acc.push(i);
-          }
-          return acc;
-        }, [] as number[]),
-        ...(defaultBill >= 0 && { defaultBillingAddress: defaultBill }),
-        ...(defaultShip >= 0 && { defaultShippingAddress: defaultShip }),
-      }; */
-      // RegistrationService.updateCustomer(customer);
+      };
+      RegistrationService.updateCustomer(updateCustomer).then((response) => {
+        if (!response.error) {
+          setSuccessUpdate(true);
+          setIsEdit(false);
+        }
+      });
     }
   };
 
@@ -127,14 +110,11 @@ function Profile() {
       <main className={styles.mainContainer}>
         <DividerWithText text="Personal data" />
         <div className={styles.personalData}>
-          <InputEmail size="small" />
-          <InputPassword size="small" />
           <InputFirstName />
+          <InputEmail size="small" />
           <InputLastName />
           <InputDate />
         </div>
-        <DividerWithText text="Addresses" />
-        <AddressTable />
         <div style={{ visibility: isLoading ? 'hidden' : 'visible' }} className={styles.btnControls}>
           <Button color="success" disabled={!isEdit} className={styles.button} variant="outlined" onClick={handleSave}>
             Save
@@ -143,7 +123,23 @@ function Profile() {
             Cancel
           </Button>
         </div>
+        <DividerWithText text="Addresses" />
+        <AddressTable />
+
+        <div className={styles.changePasswordContainer}>
+          <ModalChangePassword />
+        </div>
+
+        {successUpdate && (
+          <SuccessModal
+            title=""
+            handleClose={() => {
+              setSuccessUpdate(true);
+            }}
+          />
+        )}
       </main>
+
       <Footer />
     </div>
   );

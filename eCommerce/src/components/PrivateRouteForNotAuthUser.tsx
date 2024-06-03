@@ -8,7 +8,7 @@ type ComponentProps = {
 };
 
 function PrivateRouteForNotAuthUser({ children }: ComponentProps) {
-  if (!AuthorizationService.getCustomerLogin().token) {
+  if (!AuthorizationService.getCustomerInfo().token) {
     return <Navigate to={PagePaths.Main} />;
   }
   return children;

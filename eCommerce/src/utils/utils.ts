@@ -36,3 +36,10 @@ export function addKeyToArray<T extends { key: string }>(arr: T[]) {
     }
   });
 }
+
+/* export function setSuccessUpdateData(callback: React.Dispatch<React.SetStateAction<boolean>>) {
+  callback(true);
+  setTimeout(() => {
+    callback(false);
+  }, 20000);
+} */

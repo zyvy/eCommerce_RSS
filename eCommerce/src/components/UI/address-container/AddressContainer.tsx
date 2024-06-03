@@ -15,7 +15,7 @@ const COUNTRY_CITY_ERROR_TEXT = 'Must contain at least one character and no spec
 
 function AddressContainer({ typeAddress }: PropsType) {
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px', padding: '10px' }}>
       <InputAddress
         typeAddress={typeAddress}
         fieldName="street"
@@ -33,7 +33,7 @@ function AddressContainer({ typeAddress }: PropsType) {
         validation={isCityValid}
       />
 
-      <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
+      <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '10px' }}>
         <InputAddress
           typeAddress={typeAddress}
           isHandleOnInput={false}

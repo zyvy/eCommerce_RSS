@@ -26,7 +26,7 @@ function Header() {
   }; */
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
-      AuthorizationService.removeCustomerLogin();
+      AuthorizationService.removeCustomerInfo();
       if (window.location.pathname === PagePaths.Main) {
         navigate(0);
       } else {
@@ -66,6 +66,17 @@ function Header() {
             </Button>
           </form> */}
           <div className={styles.auth_area}>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+                visibility: AuthorizationService.getCustomerInfo().id ? 'visible' : 'hidden',
+              }}
+              onClick={() => navigate(PagePaths.Profile)}>
+              Profile
+            </Button>
             <Button
               type="submit"
               className={styles.button}

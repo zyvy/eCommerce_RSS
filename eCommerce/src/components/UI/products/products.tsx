@@ -17,7 +17,6 @@ const ProductList: React.FC = () => {
       try {
         const productData = await ProductsService.getProducts();
         setProducts(productData.results);
-        console.log(productData.results[0].id);
       } catch (error) {
         setError('Failed to fetch products. Please try again later.');
         console.error(error);
