@@ -51,7 +51,7 @@ function Header() {
       <header className={styles.header}>
         <div className={styles.logo}>
           <Link to={PagePaths.Main}>
-            <img className={styles.logo_image} src="./logo.png" alt="Logo" />
+            <img className={styles.logo_image} src="/logo.png" alt="Logo" />
           </Link>
         </div>
         <div>

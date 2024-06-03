@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductProjection } from '@commercetools/platform-sdk';
 import styles from './products.module.css';
-import { ProductsService } from '../../../services/ProductsService';
-import ProductCard from '../product-cat-card/Catalog-card';
+import { ProductsService } from '../../../services/ProductsService.ts';
+import ProductCard from '../product-cat-card/Catalog-card.tsx';
 
 function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-const ProductList: React.FC = () => {
+function ProductList() {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,9 +17,9 @@ const ProductList: React.FC = () => {
       try {
         const productData = await ProductsService.getProducts();
         setProducts(productData.results);
-      } catch (error) {
+      } catch (e) {
         setError('Failed to fetch products. Please try again later.');
-        console.error(error);
+        console.error(e);
       }
     };
 
@@ -33,6 +33,7 @@ const ProductList: React.FC = () => {
     <div className={styles.product_list}>
       {products.map((product) => (
         <ProductCard
+          key={product.id}
           id={product.id}
           name={product.name['en-US']}
           image={product.masterVariant?.images?.[0].url ? product.masterVariant?.images?.[0].url : 'http://localhost'}
@@ -54,6 +55,6 @@ const ProductList: React.FC = () => {
       ))}
     </div>
   );
-};
+}
 
 export default ProductList;

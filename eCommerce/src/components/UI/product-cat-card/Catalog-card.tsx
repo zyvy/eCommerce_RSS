@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Catalog-card.module.css';
 
@@ -12,7 +11,7 @@ interface ProductCardProps {
   slug: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, description, price, discountPrice, slug }) => {
+function ProductCard({ id, name, image, description, price, discountPrice, slug }:ProductCardProps)  {
   const navigate = useNavigate();
   const handleCardClick = (slug: string) => {
     navigate(`/product/${slug}`);

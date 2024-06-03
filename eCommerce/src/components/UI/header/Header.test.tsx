@@ -5,7 +5,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
-import Header from '../Header';
+import Header from '../header/Header.tsx';
 import { PagePaths } from '../../../utils/utils';
 import { AuthorizationService as oldAuthorizationService } from '../../../services/AuthorizationService';
 

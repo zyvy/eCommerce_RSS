@@ -8,7 +8,7 @@ import 'swiper/css/zoom';
 import { Pagination, Navigation } from 'swiper/modules';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ProductsService } from '../../../services/ProductsService';
+import { ProductsService } from '../../../services/ProductsService.ts';
 import styles from './ProductItem.module.css';
 
 const style = {
@@ -58,8 +58,8 @@ function ProductItem({ slug }: ProductItemProps) {
             ? productData.masterVariant.prices[0].discounted?.value.centAmount
             : undefined,
         );
-      } catch (error) {
-        setError('Тут написать про ошибку');
+      } catch (e) {
+        setError(`Тут написать про ошибку ${e}`);
         console.error(error);
       }
     };

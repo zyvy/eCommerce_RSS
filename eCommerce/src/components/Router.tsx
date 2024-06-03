@@ -54,8 +54,8 @@ function AppRouter() {
           </PrivateRouteForNotAuthUser>
         }
       />
-      <Route path={PagePaths.NotFound} element={<NotFound />} />
       <Route path="/product/:slug" element={<ItemCard />} />
+      <Route path={PagePaths.NotFound} element={<NotFound />} />
     </Routes>
   );
 }

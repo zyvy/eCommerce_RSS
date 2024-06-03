@@ -5,7 +5,7 @@ export enum PagePaths {
   Main = '/',
   Login = '/login',
   Register = '/registration',
-  NotFound = '/404',
+  NotFound = '*',
   Profile = 'profile',
 }
 
