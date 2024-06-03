@@ -27,12 +27,13 @@ function Login() {
     const login = await AuthorizationService.login({ email, password });
     if (login.error) {
       setAuthError('Incorrect email or passoword.');
-      AuthorizationService.removeCustomerLogin();
+      AuthorizationService.removeCustomerInfo();
     } else {
-      AuthorizationService.updateCustomerLogin('id', login.customer!.id);
+      AuthorizationService.updateCustomerInfo('id', login.customer!.id);
+      AuthorizationService.updateCustomerInfo('version', String(login.customer!.version));
       const token = await AuthorizationService.getAccessToken({ email, password });
       if (!token.error) {
-        AuthorizationService.updateCustomerLogin('token', token.accessToken);
+        AuthorizationService.updateCustomerInfo('token', token.accessToken);
         navigate(PagePaths.Main);
       }
     }
@@ -50,8 +51,8 @@ function Login() {
       <Header />
       <form className={styles.form} onSubmit={submit}>
         <h2 className={styles.title}>Sign in</h2>
-        <InputEmail />
-        <InputPassword />
+        <InputEmail size="medium" />
+        <InputPassword size="medium" />
         {authError.length > 0 && <div className={styles.errorMessage}>{authError}</div>}
         <Button type="submit" className={styles.button} variant="contained">
           Sign in

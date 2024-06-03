@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useMemo, useState } from 'react';
 import { CountryType } from '../utils/currencies.ts';
 
-interface Address {
+export interface Address {
   country: CountryType;
   city: string;
   street: string;
@@ -9,6 +9,8 @@ interface Address {
   default: boolean;
   shipping: boolean;
   billing: boolean;
+  key: string;
+  id: string | undefined;
 }
 
 interface AddressWithError extends Address {
@@ -28,7 +30,7 @@ type AddressesContextType = AddressesState & {
   setAddresses: Dispatch<SetStateAction<AddressesState>>;
 };
 
-const initialAddressError: AddressWithError = {
+export const initialAddressError: AddressWithError = {
   country: '',
   city: '',
   street: '',
@@ -40,6 +42,8 @@ const initialAddressError: AddressWithError = {
   cityError: '',
   streetError: '',
   postalCodeError: '',
+  key: '',
+  id: undefined,
 };
 
 const initialState: AddressesState = {
