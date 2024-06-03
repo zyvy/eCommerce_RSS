@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { ProductProjection } from '@commercetools/platform-sdk';
 import styles from './products.module.css';
 import { ProductsService } from '../../../services/ProductsService';
-import { ProductProjection } from '@commercetools/platform-sdk';
 import ProductCard from '../product-cat-card/Catalog-card';
+
 function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
