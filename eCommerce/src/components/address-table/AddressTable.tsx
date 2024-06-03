@@ -16,7 +16,6 @@ import { initialAddressError, useAddresses } from '../../context/AddressesContex
 import { getCountry } from '../../utils/currencies.ts';
 import styles from './AddressTable.module.css';
 import { RegistrationService } from '../../services/RegistrationService.ts';
-// import { setSuccessUpdateData } from '../../utils/utils.ts';
 import SuccessModal from '../UI/success-modal/SuccessModal.tsx';
 import ModalAddAddress from '../UI/modal-add-address/ModalAddAddress.tsx';
 
@@ -85,14 +84,10 @@ function AddressTable() {
   };
 
   const handleDeleteAddress = (index: number) => {
-    console.log(index);
     RegistrationService.removeAddress(addresses[index].id || '', addresses[index].billing).then((res) => {
-      console.log(1, successUpdate);
       if (!res.error) {
-        // setSuccessUpdateData(setSuccessUpdate);
         setSuccessUpdate(true);
       }
-      console.log(2, successUpdate);
     });
 
     const updatedAddresses = addresses.filter((_, i) => i !== index);

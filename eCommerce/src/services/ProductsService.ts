@@ -16,14 +16,12 @@ export class ProductsService {
   static async getProducts(): Promise<ProductProjectionPagedSearchResponse> {
     const apiRoot = ProductsService.getApiRoot();
     const response = await apiRoot.productProjections().search().get().execute();
-    console.log('Products:', response.body.results);
     return response.body;
   }
 
   static async getProductByKey(key: string): Promise<ProductProjection> {
     const apiRoot = ProductsService.getApiRoot();
     const responseTest = await apiRoot.productProjections().withKey({ key }).get().execute();
-    console.log('Products:', responseTest.body);
     return responseTest.body;
   }
 }

@@ -26,12 +26,11 @@ function ProductItem({ slug }: ProductItemProps) {
     const getProducts = async () => {
       try {
         const productData = await ProductsService.getProductByKey(slug);
-        console.log('fesf', productData);
         setProductImg(productData.masterVariant.images);
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
         setProductArtNumber(productData.masterVariant.sku);
-        setProductPrice(productData.masterVariant.prices)
+        setProductPrice(productData.masterVariant.prices);
         setProductDiscountedPrice(productData.masterVariant.prices);
       } catch (error) {
         setError('Тут написать про ошибку');

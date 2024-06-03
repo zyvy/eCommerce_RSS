@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from '@mui/material';
 import DividerWithText from '../../components/UI/divider-with-text/DividerWithText.tsx';
@@ -8,7 +8,6 @@ import InputDate from '../../components/UI/inputs/input-date/InputDate.tsx';
 import InputEmail from '../../components/UI/inputs/input-email/InputEmail.tsx';
 import InputFirstName from '../../components/UI/inputs/input-first-name/InputFirstName.tsx';
 import InputLastName from '../../components/UI/inputs/input-last-name/InputLastName.tsx';
-import InputPassword from '../../components/UI/inputs/input-password/InputPassword.tsx';
 import styles from './Profile.module.css';
 import { RegistrationService } from '../../services/RegistrationService.ts';
 import { useAuth } from '../../context/AuthContext.tsx';
@@ -16,34 +15,18 @@ import { useUserPersonalData } from '../../context/UserPersonalDataContext.tsx';
 import AddressTable from '../../components/address-table/AddressTable.tsx';
 import { Address, useAddresses } from '../../context/AddressesContext.tsx';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
-// import { setSuccessUpdateData } from '../../utils/utils.ts';
-import InputText from '../../components/UI/inputs/input-text/InputText.tsx';
 import SuccessModal from '../../components/UI/success-modal/SuccessModal.tsx';
-
-function handleOldPassword(
-  e: React.ChangeEvent<HTMLInputElement>,
-  setOldPassword: React.Dispatch<React.SetStateAction<string>>,
-) {
-  setOldPassword(e.target.value);
-}
+import ModalChangePassword from '../../components/UI/modal-change-password/ModalChangePassword.tsx';
 
 function Profile() {
   const auth = useAuth();
-  const { email, emailError, password, passwordError, setAuth } = { ...auth };
+  const { email, emailError, setAuth } = { ...auth };
   const [successUpdate, setSuccessUpdate] = useState(false);
-  const [oldPassword, setOldPassword] = useState('');
-  const [changePasswordError, setChangePasswordError] = useState('');
-
   const userPersonalData = useUserPersonalData();
   const { firstName, firstNameError, lastName, lastNameError, dateOfBirth, dateOfBirthError } = { ...userPersonalData };
   const addressesState = useAddresses();
   const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleInputOldPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleOldPassword(e, setOldPassword);
-    setChangePasswordError('');
-  };
 
   const loadUser = async () => {
     setIsLoading(true);
@@ -110,7 +93,6 @@ function Profile() {
       };
       RegistrationService.updateCustomer(updateCustomer).then((response) => {
         if (!response.error) {
-          // setSuccessUpdateData(setSuccessUpdate);
           setSuccessUpdate(true);
           setIsEdit(false);
         }
@@ -120,17 +102,6 @@ function Profile() {
 
   const handleCancel = () => {
     loadUser();
-  };
-
-  const handleChangePassword = async () => {
-    const response = await RegistrationService.changePassword(oldPassword, password);
-    if (!response.error) {
-      // setSuccessUpdateData(setSuccessUpdate);
-      setSuccessUpdate(true);
-      setIsEdit(false);
-    } else {
-      setChangePasswordError(response.errorDescription);
-    }
   };
 
   return (
@@ -154,34 +125,19 @@ function Profile() {
         </div>
         <DividerWithText text="Addresses" />
         <AddressTable />
-        <DividerWithText text="Change password" />
+
         <div className={styles.changePasswordContainer}>
-          <div className={styles.changePassword}>
-            <InputText
-              label="current password"
-              errorText={changePasswordError}
-              handleOnInput={handleInputOldPassword}
-            />
-            <InputPassword size="small" label="new password" />
-          </div>
-          <Button
-            sx={{ width: '90px' }}
-            color="success"
-            disabled={!oldPassword || !password || passwordError}
-            className={styles.button}
-            variant="outlined"
-            onClick={handleChangePassword}>
-            Update
-          </Button>
-          {successUpdate && (
-            <SuccessModal
-              title=""
-              handleClose={() => {
-                setSuccessUpdate(true);
-              }}
-            />
-          )}
+          <ModalChangePassword />
         </div>
+
+        {successUpdate && (
+          <SuccessModal
+            title=""
+            handleClose={() => {
+              setSuccessUpdate(true);
+            }}
+          />
+        )}
       </main>
 
       <Footer />

@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -12,7 +11,6 @@ import AddressContainer from '../address-container/AddressContainer.tsx';
 import styles from './ModalAddAddress.module.css';
 import { Address, useAddresses, initialAddressError } from '../../../context/AddressesContext.tsx';
 import { RegistrationService } from '../../../services/RegistrationService.ts';
-// import { setSuccessUpdateData } from '../../../utils/utils.ts';
 import SuccessModal from '../success-modal/SuccessModal.tsx';
 
 type ModalAddAddressPropsType = {
@@ -112,7 +110,6 @@ function ModalAddAddress({ editIndex, updateEditIndex, setFalseAddingAddress }: 
     });
 
     if (!data.error) {
-      // setSuccessUpdateData(setSuccessUpdate);
       setSuccessUpdate(true);
     } else {
       closeModal();
@@ -148,7 +145,6 @@ function ModalAddAddress({ editIndex, updateEditIndex, setFalseAddingAddress }: 
     });
 
     if (!data.error) {
-      // setSuccessUpdateData(setSuccessUpdate);
       setSuccessUpdate(true);
     } else {
       closeModal();
@@ -180,7 +176,7 @@ function ModalAddAddress({ editIndex, updateEditIndex, setFalseAddingAddress }: 
             />
           </div>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             color="success"
             className={styles.button}
