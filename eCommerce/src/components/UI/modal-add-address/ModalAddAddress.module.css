@@ -1,0 +1,9 @@
+.checkboxContainer {
+  display: flex;
+}
+
+@media (max-width: 500px) {
+  .checkboxContainer {
+    flex-direction: column;
+  }
+}
