@@ -71,6 +71,17 @@ function Header() {
               type="submit"
               className={styles.button}
               variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+                visibility: AuthorizationService.getCustomerInfo().id ? 'visible' : 'hidden',
+              }}
+              onClick={() => navigate(PagePaths.Profile)}>
+              Profile
+            </Button>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
               sx={{ fontSize: { xs: '0.8rem', md: '1rem' } }}
               onClick={HandleAuthButtonClick}>
               {isUserLoggedIn() ? 'Logout' : 'Log in'}
