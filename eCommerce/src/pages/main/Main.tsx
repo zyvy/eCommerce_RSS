@@ -27,7 +27,6 @@ function Main() {
       <div>
         <ProductList />
       </div>
-      {/* <ProductItem/> */}
       <Footer />
     </div>
   );
