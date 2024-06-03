@@ -157,7 +157,6 @@ function Profile() {
         <div className={styles.changePasswordContainer}>
           <div className={styles.changePassword}>
             <InputText
-              sx={{ maxWidth: '200px' }}
               label="current password"
               errorText={changePasswordError}
               handleOnInput={handleInputOldPassword}
