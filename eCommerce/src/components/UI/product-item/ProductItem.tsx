@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from '@commercetools/platform-sdk';
-import styles from './ProductItem.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import 'swiper/css/zoom'
+import 'swiper/css/zoom';
 import { Pagination, Navigation } from 'swiper/modules';
-import { ProductsService } from '../../../services/ProductsService';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { ProductsService } from '../../../services/ProductsService';
+import styles from './ProductItem.module.css';
 
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  maxWidth: '50%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -39,10 +37,8 @@ function ProductItem({ slug }: ProductItemProps) {
   const [error, setError] = useState('');
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = (e) => {
-    e.preventDefault();
+  const handleOpen = () => {
     setOpen(true);
-    console.log('efesfsefesfesfes');
   };
   const handleClose = () => setOpen(false);
 
@@ -75,56 +71,47 @@ function ProductItem({ slug }: ProductItemProps) {
 
   return (
     <>
-      {/* <Modal
+      <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <div className={styles.swiper__img}>
+          <div className={styles.swiper__modal}>
             <Swiper
               pagination={{
                 type: 'fraction',
               }}
-              navigation={true}
+              navigation
               modules={[Pagination, Navigation]}
               className="mySwiper">
               {slides?.map((slideContent, index) => (
-                <SwiperSlide key={slideContent} virtualIndex={index}>
-                  <img src={slideContent} className={styles.swiper__img2}></img>
+                <SwiperSlide key={slideContent} virtualIndex={index} className={styles.slider__modal}>
+                  <img src={slideContent} className={styles.swiper__img2} />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
         </Box>
-      </Modal> */}
+      </Modal>
       <h1>{productTitle}</h1>
       <div className={styles.product__wrapper}>
         <div className={styles.swiper__img}>
-          <Swiper
-            pagination={{
-              type: 'fraction',
-            }}
-            navigation={true}
-            zoom={true}
-            loop={true}
-            grabCursor={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper">
+          <Swiper pagination navigation grabCursor modules={[Pagination, Navigation]} className="mySwiper">
             {slides?.map((slideContent, index) => (
-              <SwiperSlide key={slideContent} virtualIndex={index} zoom={true}>
-                {/* <a href="#" onClick={handleOpen}> */}
-                  <img src={slideContent} className={styles.swiper__img2}></img>
-                {/* </a> */}
+              <SwiperSlide key={slideContent} virtualIndex={index} className={styles.swiper_slide}>
+                <img src={slideContent} className={styles.swiper__img2} onClick={handleOpen} />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-        <div>
-          <p>Article number: {productArtNumber}</p>
-          <p>{productDescr}</p>
-          {productPrice && <p className={styles.price__sale}>{productPrice}</p>}
-          {productDiscountedPrice && <p className={styles.price__discounted}>{productDiscountedPrice}</p>}
+        <div className={styles.product_description}>
+          {productArtNumber && <p className={styles.product__article}>Article number: {productArtNumber}</p>}
+          <p className={styles.product__description}>{productDescr}</p>
+          <div className={styles.price__wrapper}>
+            {productPrice && <p className={styles.price__sale}>{productPrice / 100}€</p>}
+            {productDiscountedPrice && <p className={styles.price__discounted}>{productDiscountedPrice / 100}€</p>}
+          </div>
         </div>
       </div>
     </>

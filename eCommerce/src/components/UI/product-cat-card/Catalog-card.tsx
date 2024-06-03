@@ -18,28 +18,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, image, description,
     navigate(`/product/${slug}`);
   };
   return (
-    <>
-      <div className={styles.product_card} onClick={() => handleCardClick(slug)}>
-        <p>{id}</p>
-        <img src={image} alt={name} className={styles.product_image} />
-        <h2 className={styles.product_name}>{name}</h2>
-        <p className={styles.product_description}>{description}</p>
-        {discountPrice ? (
-          <>
-            <p className={styles.product_price}>
-              <span>€</span>
-              {discountPrice} <s className={styles.product_discount}>€{price}</s>
-            </p>
-            <p className={styles.product_sale}>Sale!</p>
-          </>
-        ) : (
+    <div className={styles.product_card} onClick={() => handleCardClick(slug)}>
+      <p>{id}</p>
+      <img src={image} alt={name} className={styles.product_image} />
+      <h2 className={styles.product_name}>{name}</h2>
+      <p className={styles.product_description}>{description}</p>
+      {discountPrice ? (
+        <>
           <p className={styles.product_price}>
             <span>€</span>
-            {price}
+            {discountPrice} <s className={styles.product_discount}>€{price}</s>
           </p>
-        )}
-      </div>
-    </>
+          <p className={styles.product_sale}>Sale!</p>
+        </>
+      ) : (
+        <p className={styles.product_price}>
+          <span>€</span>
+          {price}
+        </p>
+      )}
+    </div>
   );
 };
 

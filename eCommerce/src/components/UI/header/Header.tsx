@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';

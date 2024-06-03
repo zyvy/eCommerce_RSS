@@ -3,14 +3,14 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import Registration from './Registration';
 import { MemoryRouter } from 'react-router-dom';
+import Registration from './Registration';
 import '@testing-library/jest-dom';
 import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService';
 
 jest.mock('../../services/RegistrationService', () => {
-  RegistrationService: {
-    getApiRoot: jest.fn();
+  {
+    jest.fn();
   }
 });
 
