@@ -42,5 +42,5 @@ export function setSuccessUpdateData(callback: React.Dispatch<React.SetStateActi
   callback(true);
   setTimeout(() => {
     callback(false);
-  }, 3000);
+  }, 20000);
 }

@@ -19,8 +19,8 @@ import AddressContainer from '../UI/address-container/AddressContainer.tsx';
 import styles from './AddressTable.module.css';
 import DividerWithText from '../UI/divider-with-text/DividerWithText.tsx';
 import { RegistrationService } from '../../services/RegistrationService.ts';
-import SuccessUpdate from '../UI/success-update/SuccessUpdate.tsx';
 import { setSuccessUpdateData } from '../../utils/utils.ts';
+import SuccessModal from '../UI/success-modal/SuccessModal.tsx';
 
 interface Column {
   id: 'country' | 'city' | 'street' | 'postalCode' | 'default' | 'type' | 'actions';
@@ -179,7 +179,7 @@ function AddressForm({ editIndex, updateEditIndex }: AddressFormPropsType) {
 
   return (
     <div>
-      {successUpdate && <SuccessUpdate />}
+      {successUpdate && <SuccessModal />}
       <DividerWithText text={editIndex >= 0 ? 'Edit Address' : 'Add Address'} />
       <form>
         <AddressContainer typeAddress="billing" />
@@ -313,7 +313,7 @@ function AddressTable() {
           </Table>
         </TableContainer>
       </Paper>
-      {successUpdate && <SuccessUpdate />}
+      {successUpdate && <SuccessModal />}
       <AddressForm editIndex={editIndex} updateEditIndex={setEditIndex} />
     </>
   );

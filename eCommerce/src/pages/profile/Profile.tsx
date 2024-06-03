@@ -16,9 +16,9 @@ import { useUserPersonalData } from '../../context/UserPersonalDataContext.tsx';
 import AddressTable from '../../components/address-table/AddressTable.tsx';
 import { Address, useAddresses } from '../../context/AddressesContext.tsx';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
-import SuccessUpdate from '../../components/UI/success-update/SuccessUpdate.tsx';
 import { setSuccessUpdateData } from '../../utils/utils.ts';
 import InputText from '../../components/UI/inputs/input-text/InputText.tsx';
+import SuccessModal from '../../components/UI/success-modal/SuccessModal.tsx';
 
 function handleOldPassword(
   e: React.ChangeEvent<HTMLInputElement>,
@@ -142,7 +142,6 @@ function Profile() {
           <InputLastName />
           <InputDate />
         </div>
-        {successUpdate && <SuccessUpdate />}
         <div style={{ visibility: isLoading ? 'hidden' : 'visible' }} className={styles.btnControls}>
           <Button color="success" disabled={!isEdit} className={styles.button} variant="outlined" onClick={handleSave}>
             Save
@@ -172,7 +171,7 @@ function Profile() {
             onClick={handleChangePassword}>
             Update
           </Button>
-          {successUpdate && <SuccessUpdate />}
+          {successUpdate && <SuccessModal />}
         </div>
       </main>
 
