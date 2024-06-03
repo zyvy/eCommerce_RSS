@@ -16,7 +16,7 @@ import { useUserPersonalData } from '../../context/UserPersonalDataContext.tsx';
 import AddressTable from '../../components/address-table/AddressTable.tsx';
 import { Address, useAddresses } from '../../context/AddressesContext.tsx';
 import { AuthorizationService } from '../../services/AuthorizationService.ts';
-import { setSuccessUpdateData } from '../../utils/utils.ts';
+// import { setSuccessUpdateData } from '../../utils/utils.ts';
 import InputText from '../../components/UI/inputs/input-text/InputText.tsx';
 import SuccessModal from '../../components/UI/success-modal/SuccessModal.tsx';
 
@@ -110,7 +110,8 @@ function Profile() {
       };
       RegistrationService.updateCustomer(updateCustomer).then((response) => {
         if (!response.error) {
-          setSuccessUpdateData(setSuccessUpdate);
+          // setSuccessUpdateData(setSuccessUpdate);
+          setSuccessUpdate(true);
           setIsEdit(false);
         }
       });
@@ -124,7 +125,8 @@ function Profile() {
   const handleChangePassword = async () => {
     const response = await RegistrationService.changePassword(oldPassword, password);
     if (!response.error) {
-      setSuccessUpdateData(setSuccessUpdate);
+      // setSuccessUpdateData(setSuccessUpdate);
+      setSuccessUpdate(true);
       setIsEdit(false);
     } else {
       setChangePasswordError(response.errorDescription);
@@ -171,7 +173,14 @@ function Profile() {
             onClick={handleChangePassword}>
             Update
           </Button>
-          {successUpdate && <SuccessModal />}
+          {successUpdate && (
+            <SuccessModal
+              title=""
+              handleClose={() => {
+                setSuccessUpdate(true);
+              }}
+            />
+          )}
         </div>
       </main>
 

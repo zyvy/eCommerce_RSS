@@ -7,18 +7,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { DialogTitle } from '@mui/material';
 
-function SuccessModal({ title = 'Data was update successfully!' }) {
+type SuccessModalPropsType = {
+  title: string;
+  handleClose: () => void;
+};
+
+function SuccessModal({ title, handleClose }: SuccessModalPropsType) {
   const [open, setOpen] = useState(true);
 
-  const handleClose = () => {
+  const handleCloseModal = () => {
     setOpen(false);
+    handleClose();
   };
 
   return (
     <div>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseModal}
         PaperProps={{
           sx: {
             backgroundColor: '#99ca6f',
@@ -26,10 +32,10 @@ function SuccessModal({ title = 'Data was update successfully!' }) {
         }}>
         <DialogTitle>Success</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ fontSize: '1.5rem' }}>{title}</DialogContentText>
+          <DialogContentText sx={{ fontSize: '1.5rem' }}>{title || 'Data was update successfully!'}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button sx={{ fontSize: '1.5rem' }} onClick={handleClose}>
+          <Button sx={{ fontSize: '1.5rem' }} onClick={handleCloseModal}>
             ok
           </Button>
         </DialogActions>
