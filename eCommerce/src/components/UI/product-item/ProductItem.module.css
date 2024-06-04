@@ -46,6 +46,11 @@
   text-decoration: line-through;
   font-size: 20px;
 }
+.price__default {
+  color: red;
+  font-weight: 700;
+  font-size: 25px;
+}
 .price__discounted {
   color: red;
   font-weight: 700;
