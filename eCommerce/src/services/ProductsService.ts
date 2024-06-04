@@ -24,4 +24,14 @@ export class ProductsService {
     const responseTest = await apiRoot.productProjections().withKey({ key }).get().execute();
     return responseTest.body;
   }
+  static async performSearch(searchQuery: string): Promise<ProductProjectionPagedSearchResponse> {
+    const apiRoot = ProductsService.getApiRoot();
+    const responseTest = await apiRoot.productProjections().search().get({
+      queryArgs: {
+        'text.en-US': searchQuery,
+        fuzzy: true,
+      },
+    }).execute();
+    return responseTest.body;
+  }
 }

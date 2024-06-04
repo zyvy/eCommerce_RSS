@@ -3,32 +3,34 @@ import { ProductProjection } from '@commercetools/platform-sdk';
 import styles from './products.module.css';
 import { ProductsService } from '../../../services/ProductsService.ts';
 import ProductCard from '../product-cat-card/Catalog-card.tsx';
-
+interface ProductListProps {
+  productsArray?: string;
+}
 function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-function ProductList() {
+function ProductList( {productsArray=''} : ProductListProps) {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
+    useEffect(() => {
+      console.log('trying to fetch')
+      const getProducts = async () => {
+        try {
+          const productData = await ProductsService.performSearch(productsArray)
+          setProducts(productData.results);
+        } catch (e) {
+          setError('Failed to fetch products. Please try again later.');
+          console.error(e);
+        }
+      };
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const productData = await ProductsService.getProducts();
-        setProducts(productData.results);
-      } catch (e) {
-        setError('Failed to fetch products. Please try again later.');
-        console.error(e);
-      }
-    };
+      getProducts();
+    }, [productsArray]);
 
-    getProducts();
-  }, []);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+    if (error) {
+      return <div>{error}</div>;
+    }
   return (
     <div className={styles.product_list}>
       {products.map((product) => (

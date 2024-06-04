@@ -27,7 +27,7 @@ function Main() {
         </nav>
       </div>
       <div>
-        <ProductList />
+        <ProductList  />
       </div>
       <Footer />
     </div>
