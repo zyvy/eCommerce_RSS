@@ -66,6 +66,16 @@ function Header() {
             </Button>
           </form> */}
           <div className={styles.auth_area}>
+          <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+              }}
+              onClick={() => navigate(PagePaths.Catalog)}>
+              Catalog
+            </Button>
             <Button
               type="submit"
               className={styles.button}

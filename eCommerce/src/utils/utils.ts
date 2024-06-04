@@ -3,10 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export enum PagePaths {
   Main = '/',
+  Catalog = '/catalog',
   Login = '/login',
   Register = '/registration',
   NotFound = '*',
-  Profile = 'profile',
+  Profile = '/profile',
 }
 
 export type SizeOfInput = 'small' | 'medium';

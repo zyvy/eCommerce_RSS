@@ -21,6 +21,8 @@ function Main() {
           <br />
           <Link to={PagePaths.Profile}>Профиль</Link>
           <br />
+          <Link to={PagePaths.Catalog}>Catalog</Link>
+          <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
