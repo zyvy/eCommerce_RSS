@@ -15,8 +15,8 @@ jest.mock('../../services/RegistrationService', () => {
 });
 
 describe('Registration Page', () => {
- // let RegistrationService: typeof OldRegistrationService;
- // RegistrationService = require('../../services/RegistrationService');
+  // let RegistrationService: typeof OldRegistrationService;
+  // RegistrationService = require('../../services/RegistrationService');
   test('renders Registration component correctly', () => {
     render(
       <MemoryRouter>

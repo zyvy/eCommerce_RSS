@@ -39,7 +39,7 @@ describe('Login Component', () => {
   // const mockNavigate = jest.fn();
   // let isUserLoggedIn: jest.Mock;
 
- /*  beforeEach(() => {
+  /*  beforeEach(() => {
     isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
   }); */
 

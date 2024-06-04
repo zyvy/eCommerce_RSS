@@ -11,7 +11,7 @@ interface ProductCardProps {
   slug: string;
 }
 
-function ProductCard({ id, name, image, description, price, discountPrice, slug }:ProductCardProps)  {
+function ProductCard({ id, name, image, description, price, discountPrice, slug }: ProductCardProps) {
   const navigate = useNavigate();
   const handleCardClick = (slug: string) => {
     navigate(`/product/${slug}`);
@@ -38,6 +38,6 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug 
       )}
     </div>
   );
-};
+}
 
 export default ProductCard;

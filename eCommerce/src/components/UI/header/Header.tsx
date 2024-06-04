@@ -66,7 +66,7 @@ function Header() {
             </Button>
           </form> */}
           <div className={styles.auth_area}>
-          <Button
+            <Button
               type="submit"
               className={styles.button}
               variant="contained"

@@ -29,7 +29,7 @@
   height: auto;
 }
 .swiper__img2 {
-  width: 100%;
+  width: 97%;
   border-radius: 10px;
 }
 .product__wrapper {
@@ -47,6 +47,11 @@
   font-size: 20px;
 }
 .price__discounted {
+  color: red;
+  font-weight: 700;
+  font-size: 25px;
+}
+.price__standart {
   color: red;
   font-weight: 700;
   font-size: 25px;

@@ -11,7 +11,7 @@ import { UserPersonalDataProvider } from '../context/UserPersonalDataContext.tsx
 import { AddressProvider } from '../context/AddressesContext.tsx';
 import ProfilePage from '../pages/profile/Profile.tsx';
 import ItemCard from '../pages/ItemCard/ItemCard.tsx';
-import Catalog from '../pages/catalog/Catalog.tsx'
+import Catalog from '../pages/catalog/Catalog.tsx';
 
 function AppRouter() {
   return (
