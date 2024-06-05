@@ -1,19 +1,32 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import Header from '../../components/UI/header/Header.tsx';
 import styles from './Catalog.module.css';
 import Footer from '../../components/UI/footer/Footer.tsx';
 import ProductList from '../../components/UI/products/products.tsx';
 import Searching from '../../components/UI/searching/Searching.tsx';
 import Sorting from '../../components/UI/sorting/Sorting.tsx';
+import FilteringPrice from '../../components/UI/filtering/FilteringPrice.tsx';
+import FilterSeason from '../../components/UI/filtering/FilteringSeason.tsx';
 
 function Catalog() {
   const [searchResults, setSearchResults] = useState<string>('');
   const [sortOption, setSortOption] = useState<string>('');
-  const handleSearch = (value:string ) => {
-    setSearchResults(value)
-  }
+  const [minPrice, setMinPrice] = useState<string>('');
+  const [maxPrice, setMaxPrice] = useState<string>('');
+  const [selectedSeason, setSelectedSeason] = useState<string>('');
+
+  const handleSearch = (value: string) => {
+    setSearchResults(value);
+  };
   const handleSortChange = (sortOption: string) => {
     setSortOption(sortOption);
+  };
+  const handleFilterChange = (minPrice: string, maxPrice: string) => {
+    setMinPrice(minPrice);
+    setMaxPrice(maxPrice);
+  };
+  const handleSeasonChange = (season: string) => {
+    setSelectedSeason(season);
   };
   return (
     <div className={styles.container}>
@@ -21,13 +34,21 @@ function Catalog() {
         <Header />
       </div>
       <div>
-        <Searching onChange={handleSearch}/>
+        <Searching onChange={handleSearch} />
       </div>
-      <div>
-      <Sorting onSortChange={handleSortChange} />
+      <div className={styles.filters}>
+        <Sorting onSortChange={handleSortChange} />
+        <p>Filtering</p>
+        <FilteringPrice onFilterChange={handleFilterChange} />
+        <FilterSeason onSeasonChange={handleSeasonChange} />
       </div>
       <div className={styles.catalog_wrapper}>
-        <ProductList productsArray={searchResults} sortingArray={sortOption} />
+        <ProductList
+          productsArray={searchResults}
+          sortingArray={sortOption}
+          priceFilter={[minPrice, maxPrice]}
+          season={selectedSeason}
+        />
       </div>
       <Footer />
     </div>

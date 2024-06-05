@@ -6,20 +6,22 @@ import ProductCard from '../product-cat-card/Catalog-card.tsx';
 interface ProductListProps {
   productsArray?: string;
   sortingArray?: string;
+  priceFilter?: string[];
+  season?: string;
 }
 
 function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-function ProductList( {productsArray='', sortingArray='name-asc'} : ProductListProps ) {
+function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = [], season =''} : ProductListProps ) {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
     useEffect(() => {
      // console.log('trying to fetch')
       const getProducts = async () => {
         try {
-          const productData = await ProductsService.performSearch(productsArray, sortingArray)
+          const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season)
           setProducts(productData.results);
         } catch (e) {
           setError('Failed to fetch products. Please try again later.');
@@ -28,7 +30,7 @@ function ProductList( {productsArray='', sortingArray='name-asc'} : ProductListP
       };
 
       getProducts();
-    }, [productsArray, sortingArray]);
+    }, [productsArray, sortingArray, priceFilter]);
 
     if (error) {
       return <div>{error}</div>;
