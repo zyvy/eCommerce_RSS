@@ -4,7 +4,7 @@ import {
   ProductProjection,
 } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
-import { env } from '../utils/utils.ts';
+import { env, getSortingString } from '../utils/utils.ts';
 
 export class ProductsService {
   static getApiRoot() {
@@ -24,12 +24,13 @@ export class ProductsService {
     const responseTest = await apiRoot.productProjections().withKey({ key }).get().execute();
     return responseTest.body;
   }
-  static async performSearch(searchQuery: string): Promise<ProductProjectionPagedSearchResponse> {
+  static async performSearch(searchQuery: string, sortingParams: string): Promise<ProductProjectionPagedSearchResponse> {
     const apiRoot = ProductsService.getApiRoot();
     const responseTest = await apiRoot.productProjections().search().get({
       queryArgs: {
         'text.en-US': searchQuery,
         fuzzy: true,
+        sort: getSortingString(sortingParams)
       },
     }).execute();
     return responseTest.body;
