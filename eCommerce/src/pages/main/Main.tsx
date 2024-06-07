@@ -3,7 +3,6 @@ import Header from '../../components/UI/header/Header.tsx';
 import { PagePaths } from '../../utils/utils.ts';
 import styles from './Main.module.css';
 import Footer from '../../components/UI/footer/Footer.tsx';
-import ProductList from '../../components/UI/products/products.tsx';
 // import ProductItem from '../../components/UI/product-item/ProductItem.tsx';
 
 function Main() {
@@ -21,11 +20,12 @@ function Main() {
           <br />
           <Link to={PagePaths.Profile}>Профиль</Link>
           <br />
+          <Link to={PagePaths.Catalog}>Catalog</Link>
+          <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
       <div>
-        <ProductList />
       </div>
       <Footer />
     </div>

@@ -51,7 +51,7 @@ function Header() {
       <header className={styles.header}>
         <div className={styles.logo}>
           <Link to={PagePaths.Main}>
-            <img className={styles.logo_image} src="./logo.png" alt="Logo" />
+            <img className={styles.logo_image} src="/logo.png" alt="Logo" />
           </Link>
         </div>
         <div>
@@ -66,6 +66,16 @@ function Header() {
             </Button>
           </form> */}
           <div className={styles.auth_area}>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+              }}
+              onClick={() => navigate(PagePaths.Catalog)}>
+              Catalog
+            </Button>
             <Button
               type="submit"
               className={styles.button}

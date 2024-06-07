@@ -8,8 +8,10 @@ import 'swiper/css/zoom';
 import { Pagination, Navigation } from 'swiper/modules';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ProductsService } from '../../../services/ProductsService';
+import { ProductsService } from '../../../services/ProductsService.ts';
 import styles from './ProductItem.module.css';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -58,8 +60,8 @@ function ProductItem({ slug }: ProductItemProps) {
             ? productData.masterVariant.prices[0].discounted?.value.centAmount
             : undefined,
         );
-      } catch (error) {
-        setError('Тут написать про ошибку');
+      } catch (e) {
+        setError(`Тут написать про ошибку ${e}`);
         console.error(error);
       }
     };
@@ -77,6 +79,17 @@ function ProductItem({ slug }: ProductItemProps) {
         aria-describedby="modal-modal-description">
         <Box sx={style}>
           <div className={styles.swiper__modal}>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}>
+              <CloseIcon />
+            </IconButton>
             <Swiper
               pagination={{
                 type: 'fraction',
@@ -108,8 +121,14 @@ function ProductItem({ slug }: ProductItemProps) {
           {productArtNumber && <p className={styles.product__article}>Article number: {productArtNumber}</p>}
           <p className={styles.product__description}>{productDescr}</p>
           <div className={styles.price__wrapper}>
-            {productPrice && <p className={styles.price__sale}>{productPrice / 100}€</p>}
-            {productDiscountedPrice && <p className={styles.price__discounted}>{productDiscountedPrice / 100}€</p>}
+            {productDiscountedPrice ? (
+              <>
+                <p className={styles.price__sale}>{productPrice ? productPrice / 100 : undefined}€</p>
+                <p className={styles.price__discounted}>{productDiscountedPrice / 100}€</p>
+              </>
+            ) : (
+              <p className={styles.price__standart}>{productPrice ? productPrice / 100 : undefined}€</p>
+            )}
           </div>
         </div>
       </div>

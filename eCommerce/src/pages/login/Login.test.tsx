@@ -1,11 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
-import { AuthorizationService } from '../../services/AuthorizationService';
 import { PagePaths } from '../../utils/utils';
 
 jest.mock('../../services/AuthorizationService', () => ({
@@ -37,12 +36,12 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Login Component', () => {
-  const mockNavigate = jest.fn();
-  let isUserLoggedIn: jest.Mock;
+  // const mockNavigate = jest.fn();
+  // let isUserLoggedIn: jest.Mock;
 
-  beforeEach(() => {
+  /*  beforeEach(() => {
     isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
-  });
+  }); */
 
   test('renders login form', () => {
     render(

@@ -3,10 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export enum PagePaths {
   Main = '/',
+  Catalog = '/catalog',
   Login = '/login',
   Register = '/registration',
-  NotFound = '/404',
-  Profile = 'profile',
+  NotFound = '*',
+  Profile = '/profile',
 }
 
 export type SizeOfInput = 'small' | 'medium';
@@ -43,3 +44,24 @@ export function addKeyToArray<T extends { key: string }>(arr: T[]) {
     callback(false);
   }, 20000);
 } */
+export function getSortingString(sortOption: string) {
+  let sortParameter: string = '';
+  switch (sortOption) {
+    case 'price-asc':
+      sortParameter = 'price asc';
+      break;
+    case 'price-desc':
+      sortParameter = 'price desc';
+      break;
+    case 'name-asc':
+      sortParameter = 'name.en-US asc';
+      break;
+    case 'name-desc':
+      sortParameter = 'name.en-US desc';
+      break;
+    default:
+      sortParameter = 'name.en-US asc';
+      break;
+  }
+  return sortParameter;
+}
