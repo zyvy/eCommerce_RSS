@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-// import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
-import { PagePaths, isUserLoggedIn } from '../../utils/utils.tsx';
-import { AuthorizationService } from '../../services/AuthorizationService.ts';
+import { isUserLoggedIn } from '../../../utils/validation.ts';
+import { PagePaths } from '../../../utils/utils.ts';
+import { AuthorizationService } from '../../../services/AuthorizationService.ts';
 
 const theme = createTheme({
   breakpoints: {
@@ -27,7 +26,7 @@ function Header() {
   }; */
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
-      AuthorizationService.removeCustomerLogin();
+      AuthorizationService.removeCustomerInfo();
       if (window.location.pathname === PagePaths.Main) {
         navigate(0);
       } else {
@@ -52,7 +51,7 @@ function Header() {
       <header className={styles.header}>
         <div className={styles.logo}>
           <Link to={PagePaths.Main}>
-            <img className={styles.logo_image} src="./logo.png" alt="Logo" />
+            <img className={styles.logo_image} src="/logo.png" alt="Logo" />
           </Link>
         </div>
         <div>
@@ -67,6 +66,27 @@ function Header() {
             </Button>
           </form> */}
           <div className={styles.auth_area}>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+              }}
+              onClick={() => navigate(PagePaths.Catalog)}>
+              Catalog
+            </Button>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+                visibility: AuthorizationService.getCustomerInfo().id ? 'visible' : 'hidden',
+              }}
+              onClick={() => navigate(PagePaths.Profile)}>
+              Profile
+            </Button>
             <Button
               type="submit"
               className={styles.button}

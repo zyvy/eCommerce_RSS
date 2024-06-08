@@ -4,10 +4,10 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from './Header';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
-import { PagePaths } from '../../utils/utils';
-import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
+import Header from '../header/Header.tsx';
+import { PagePaths } from '../../../utils/utils';
+import { AuthorizationService as oldAuthorizationService } from '../../../services/AuthorizationService';
 
 jest.mock('../../utils/utils', () => ({
   ...jest.requireActual('../../utils/utils'),
@@ -16,7 +16,7 @@ jest.mock('../../utils/utils', () => ({
 
 jest.mock('../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
-    removeCustomerLogin: jest.fn(),
+    removeCustomerInfo: jest.fn(),
   },
   authenticateUser: jest.fn(() => {
     const mockClientId = 'mockClientId';
@@ -100,7 +100,7 @@ describe('Header Component', () => {
     expect(registerButton).toBeInTheDocument();
   });
   // buttons handle
-  test('calls removeCustomerLogin', () => {
+  test('calls removeCustomerInfo', () => {
     (isUserLoggedIn as jest.Mock).mockReturnValue(true);
     render(
       <MemoryRouter>
@@ -111,7 +111,7 @@ describe('Header Component', () => {
     const authButton = screen.getByText(/Logout/i);
     fireEvent.click(authButton);
 
-    expect(AuthorizationService.removeCustomerLogin).toHaveBeenCalled();
+    expect(AuthorizationService.removeCustomerInfo).toHaveBeenCalled();
   });
 
   test('navigates to login page on login', () => {

@@ -1,12 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
-import { AuthorizationService } from '../../services/AuthorizationService';
-import { PagePaths } from '../../utils/utils'; 
+import { PagePaths } from '../../utils/utils';
 
 jest.mock('../../services/AuthorizationService', () => ({
   AuthorizationService: {
@@ -14,8 +13,8 @@ jest.mock('../../services/AuthorizationService', () => ({
     login: jest.fn().mockResolvedValue({ error: false, customer: { id: '123' }, errorDescription: '' }),
     auth: jest.fn().mockResolvedValue({ error: false, customer: { id: '123' }, errorDescription: '' }),
     getAccessToken: jest.fn().mockResolvedValue({ error: false, accessToken: 'mockedToken', errorDescription: '' }),
-    updateCustomerLogin: jest.fn(),
-    removeCustomerLogin: jest.fn(),
+    updateCustomerInfo: jest.fn(),
+    removeCustomerInfo: jest.fn(),
   },
 }));
 
@@ -33,16 +32,16 @@ jest.mock('../../utils/utils.ts', () => ({
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn().mockImplementation(() => mockNavigate), 
+  useNavigate: jest.fn().mockImplementation(() => mockNavigate),
 }));
 
 describe('Login Component', () => {
-  const mockNavigate = jest.fn();
-  let isUserLoggedIn: jest.Mock;
+  // const mockNavigate = jest.fn();
+  // let isUserLoggedIn: jest.Mock;
 
-  beforeEach(() => {
+  /*  beforeEach(() => {
     isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
-  });
+  }); */
 
   test('renders login form', () => {
     render(
@@ -52,10 +51,10 @@ describe('Login Component', () => {
         </Routes>
       </MemoryRouter>,
     );
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument(); 
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/toggle passw visibility/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Sign in' })).toBeInTheDocument(); 
+    expect(screen.getByRole('button', { name: 'Sign in' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Create new account' })).toBeInTheDocument();
   });
 
