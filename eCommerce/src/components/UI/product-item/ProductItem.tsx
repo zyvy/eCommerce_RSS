@@ -12,6 +12,8 @@ import { ProductsService } from '../../../services/ProductsService.ts';
 import styles from './ProductItem.module.css';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -36,6 +38,7 @@ function ProductItem({ slug }: ProductItemProps) {
   const [productArtNumber, setProductArtNumber] = useState<string | undefined>('');
   const [productPrice, setProductPrice] = useState<number | undefined>(undefined);
   const [productDiscountedPrice, setProductDiscountedPrice] = useState<number | undefined>(undefined);
+  const [addCart, setAddCart] = useState(false);
   const [error, setError] = useState('');
 
   const [open, setOpen] = React.useState(false);
@@ -69,6 +72,14 @@ function ProductItem({ slug }: ProductItemProps) {
   }, [slug]);
 
   const slides = productImg?.map((prod) => prod.url);
+
+  const addToCart = () => {
+    setAddCart(true);
+  };
+
+  const deleteFromCart = () => {
+    setAddCart(false);
+  };
 
   return (
     <>
@@ -123,12 +134,28 @@ function ProductItem({ slug }: ProductItemProps) {
           <div className={styles.price__wrapper}>
             {productDiscountedPrice ? (
               <>
-                <p className={styles.price__sale}>{productPrice ? productPrice / 100 : undefined}€</p>
-                <p className={styles.price__discounted}>{productDiscountedPrice / 100}€</p>
+                <p className={styles.price__sale}>${productPrice ? (productPrice / 100).toFixed(2) : undefined}</p>
+                <p className={styles.price__discounted}>${(productDiscountedPrice / 100).toFixed(2)}</p>
               </>
             ) : (
-              <p className={styles.price__standart}>{productPrice ? productPrice / 100 : undefined}€</p>
+              <p className={styles.price__standart}>${productPrice ? (productPrice / 100).toFixed(2) : undefined}</p>
             )}
+          </div>
+          <div className={styles.cart__wrapper}>
+          {addCart ? (
+            <Button fullWidth disabled variant="contained" size="small" color="primary" onClick={() => addToCart()}>
+              In Cart
+            </Button>
+          ) : (
+            <Button variant="contained" size="small" color="primary" onClick={() => addToCart()}>
+              Add To Cart
+            </Button>
+          )}
+          {addCart && (
+            <Button size="small" color="inherit" aria-label="cart" onClick={() => deleteFromCart()}>
+              <DeleteIcon />
+            </Button>
+          )}
           </div>
         </div>
       </div>

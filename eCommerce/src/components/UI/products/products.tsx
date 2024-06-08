@@ -14,27 +14,32 @@ function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = [], season =''} : ProductListProps ) {
+function ProductList({
+  productsArray = '',
+  sortingArray = 'name-asc',
+  priceFilter = [],
+  season = '',
+}: ProductListProps) {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
-    useEffect(() => {
-     // console.log('trying to fetch')
-      const getProducts = async () => {
-        try {
-          const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season)
-          setProducts(productData.results);
-        } catch (e) {
-          setError('Failed to fetch products. Please try again later.');
-          console.error(e);
-        }
-      };
+  useEffect(() => {
+    // console.log('trying to fetch')
+    const getProducts = async () => {
+      try {
+        const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season);
+        setProducts(productData.results);
+      } catch (e) {
+        setError('Failed to fetch products. Please try again later.');
+        console.error(e);
+      }
+    };
 
-      getProducts();
-    }, [productsArray, sortingArray, priceFilter]);
+    getProducts();
+  }, [productsArray, sortingArray, priceFilter]);
 
-    if (error) {
-      return <div>{error}</div>;
-    }
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <div className={styles.product_list}>
       {products.map((product) => (

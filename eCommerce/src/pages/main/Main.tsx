@@ -25,8 +25,7 @@ function Main() {
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
       </div>
-      <div>
-      </div>
+      <div></div>
       <Footer />
     </div>
   );
