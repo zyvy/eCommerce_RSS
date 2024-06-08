@@ -12,6 +12,7 @@ import { AddressProvider } from '../context/AddressesContext.tsx';
 import ProfilePage from '../pages/profile/Profile.tsx';
 import ItemCard from '../pages/ItemCard/ItemCard.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
+import CartPage from '../pages/cart/CartPage.tsx';
 
 function AppRouter() {
   return (
@@ -58,6 +59,7 @@ function AppRouter() {
       />
       <Route path="/product/:slug" element={<ItemCard />} />
       <Route path={PagePaths.NotFound} element={<NotFound />} />
+      <Route path={PagePaths.Cart} element={<CartPage />} />
     </Routes>
   );
 }
