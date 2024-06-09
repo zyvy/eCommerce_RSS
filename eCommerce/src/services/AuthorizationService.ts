@@ -185,7 +185,7 @@ export class AuthorizationService {
     return {
       id: '',
       token: '',
-      version: 0,
+      version: '0',
     };
   }
 

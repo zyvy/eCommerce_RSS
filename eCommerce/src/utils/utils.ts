@@ -8,6 +8,7 @@ export enum PagePaths {
   Register = '/registration',
   NotFound = '*',
   Profile = '/profile',
+  Cart = '/cart',
 }
 
 export type SizeOfInput = 'small' | 'medium';
@@ -38,12 +39,6 @@ export function addKeyToArray<T extends { key: string }>(arr: T[]) {
   });
 }
 
-/* export function setSuccessUpdateData(callback: React.Dispatch<React.SetStateAction<boolean>>) {
-  callback(true);
-  setTimeout(() => {
-    callback(false);
-  }, 20000);
-} */
 export function getSortingString(sortOption: string) {
   let sortParameter: string = '';
   switch (sortOption) {

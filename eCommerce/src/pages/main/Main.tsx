@@ -22,10 +22,10 @@ function Main() {
           <br />
           <Link to={PagePaths.Catalog}>Catalog</Link>
           <br />
+          <Link to={PagePaths.Cart}>Корзина</Link>
+          <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
-      </div>
-      <div>
       </div>
       <Footer />
     </div>
