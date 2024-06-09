@@ -13,54 +13,57 @@ import ProfilePage from '../pages/profile/Profile.tsx';
 import ItemCard from '../pages/ItemCard/ItemCard.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
 import CartPage from '../pages/cart/CartPage.tsx';
+import { CartProvider } from '../context/CartContext.tsx';
 
 function AppRouter() {
   return (
-    <Routes>
-      <Route path={PagePaths.Main} element={<MainPage />} />
-      <Route path={PagePaths.Catalog} element={<Catalog />} />
-      <Route
-        path={PagePaths.Login}
-        element={
-          <PrivateRouteForAuthUser>
-            <AuthProvider>
-              <LoginPage />
-            </AuthProvider>
-          </PrivateRouteForAuthUser>
-        }
-      />
-      <Route
-        path={PagePaths.Register}
-        element={
-          <PrivateRouteForAuthUser>
-            <AuthProvider>
-              <UserPersonalDataProvider>
-                <AddressProvider>
-                  <RegisterPage />
-                </AddressProvider>
-              </UserPersonalDataProvider>
-            </AuthProvider>
-          </PrivateRouteForAuthUser>
-        }
-      />
-      <Route
-        path={PagePaths.Profile}
-        element={
-          <PrivateRouteForNotAuthUser>
-            <AuthProvider>
-              <UserPersonalDataProvider>
-                <AddressProvider>
-                  <ProfilePage />
-                </AddressProvider>
-              </UserPersonalDataProvider>
-            </AuthProvider>
-          </PrivateRouteForNotAuthUser>
-        }
-      />
-      <Route path="/product/:slug" element={<ItemCard />} />
-      <Route path={PagePaths.NotFound} element={<NotFound />} />
-      <Route path={PagePaths.Cart} element={<CartPage />} />
-    </Routes>
+    <CartProvider>
+      <Routes>
+        <Route path={PagePaths.Main} element={<MainPage />} />
+        <Route path={PagePaths.Catalog} element={<Catalog />} />
+        <Route
+          path={PagePaths.Login}
+          element={
+            <PrivateRouteForAuthUser>
+              <AuthProvider>
+                <LoginPage />
+              </AuthProvider>
+            </PrivateRouteForAuthUser>
+          }
+        />
+        <Route
+          path={PagePaths.Register}
+          element={
+            <PrivateRouteForAuthUser>
+              <AuthProvider>
+                <UserPersonalDataProvider>
+                  <AddressProvider>
+                    <RegisterPage />
+                  </AddressProvider>
+                </UserPersonalDataProvider>
+              </AuthProvider>
+            </PrivateRouteForAuthUser>
+          }
+        />
+        <Route
+          path={PagePaths.Profile}
+          element={
+            <PrivateRouteForNotAuthUser>
+              <AuthProvider>
+                <UserPersonalDataProvider>
+                  <AddressProvider>
+                    <ProfilePage />
+                  </AddressProvider>
+                </UserPersonalDataProvider>
+              </AuthProvider>
+            </PrivateRouteForNotAuthUser>
+          }
+        />
+        <Route path="/product/:slug" element={<ItemCard />} />
+        <Route path={PagePaths.NotFound} element={<NotFound />} />
+        <Route path={PagePaths.Cart} element={<CartPage />} />
+      </Routes>
+    </CartProvider>
   );
 }
 
