@@ -31,21 +31,21 @@ const CartContext = createContext<CartContextType>({
   setCart: () => {},
 });
 
-export async function loadCart(cartContext: CartContextType, setCart: Dispatch<SetStateAction<CartState>>) {
-  CartService.getCart().then((cart) => {
-    cartContext.id = cart.id;
-    cartContext.total = cart.totalLineItemQuantity ?? 0;
-    cartContext.totalPrice = cart.totalPrice.centAmount;
-    cartContext.products = [];
-    cart.lineItems.forEach((item) => {
-      cartContext.products.push({
+export async function loadCart(cart: CartContextType, setCart: Dispatch<SetStateAction<CartState>>) {
+  CartService.getCart().then((newCart) => {
+    cart.id = newCart.id;
+    cart.total = newCart.totalLineItemQuantity ?? 0;
+    cart.totalPrice = newCart.totalPrice.centAmount;
+    cart.products = [];
+    newCart.lineItems.forEach((item) => {
+      cart.products.push({
         id: item.productId,
         variantId: item.variant.id,
         quantity: item.quantity,
         centAmount: item.price.value.centAmount,
       });
     });
-    setCart({ ...cartContext });
+    setCart({ ...cart });
   });
 }
 
