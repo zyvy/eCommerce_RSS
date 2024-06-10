@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Catalog-card.module.css';
 
@@ -9,13 +10,24 @@ interface ProductCardProps {
   price: number;
   discountPrice?: number;
   slug: string;
+  isInCart?: boolean; 
 }
 
-function ProductCard({ id, name, image, description, price, discountPrice, slug }: ProductCardProps) {
+function ProductCard({ id, name, image, description, price, discountPrice, slug, isInCart }: ProductCardProps) {
   const navigate = useNavigate();
+  const [inCart, setInCart] = useState(isInCart); 
+
   const handleCardClick = (slug: string) => {
     navigate(`/product/${slug}`);
   };
+
+  const handleAddToCart = (event: React.MouseEvent) => {
+    event.stopPropagation(); 
+    if (!inCart) {
+      setInCart(true); 
+    }
+  };
+
   return (
     <div className={styles.product_card} onClick={() => handleCardClick(slug)}>
       <p>{id}</p>
@@ -36,6 +48,13 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug 
           {price}
         </p>
       )}
+      <button 
+        className={`${styles.add_to_cart_button} ${inCart ? styles.disabled : ''}`} 
+        onClick={handleAddToCart} 
+        disabled={inCart}
+      >
+        {inCart ? 'In Cart' : 'Add to Cart'}
+      </button>
     </div>
   );
 }
