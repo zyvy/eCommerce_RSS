@@ -5,23 +5,24 @@ import Header from '../../components/UI/header/Header.tsx';
 import styles from './CartPage.module.css';
 import { CartService } from '../../services/CartService.ts';
 import { loadCart, useCart } from '../../context/CartContext.tsx';
+import ProductList from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
 
 const mockProductId = '6af8c880-75f1-43bf-adc2-9cf478f53b0c';
 
 function CartPage() {
-  const cartContext = useCart();
-  const { products, total, totalPrice, setCart } = { ...cartContext };
+  const cart = useCart();
+  const { total, totalPrice, setCart } = { ...cart };
 
   useEffect(() => {
-    loadCart(cartContext, setCart);
+    loadCart(cart, setCart);
   }, []);
 
   const handleAdd = (productId: string, variantId?: number) => {
-    CartService.addItemToCart(productId, 1, variantId).then(() => loadCart(cartContext, setCart));
+    CartService.addItemToCart(productId, 1, variantId).then(() => loadCart(cart, setCart));
   };
 
   const handleRemove = (productId: string, variantId: number) => {
-    CartService.removeItemFromCart(productId, variantId, 1).then(() => loadCart(cartContext, setCart));
+    CartService.removeItemFromCart(productId, variantId, 1).then(() => loadCart(cart, setCart));
   };
 
   const handleCreate = () => {
@@ -37,8 +38,13 @@ function CartPage() {
     cart2.then((data) => {
       console.dir(data);
     }); */
-    const cart4 = CartService.addItemToCart(mockProductId, 4);
+    /* const cart4 = CartService.addItemToCart(mockProductId, 4);
     cart4.then((data) => {
+      console.dir(data);
+    }); */
+
+    const cart5 = CartService.addItemToCart('6288538f-8384-40df-8473-4340d2acfe79', 4);
+    cart5.then((data) => {
       console.dir(data);
     });
     /* const cart4 = CartService.removeItemFromCart(mockProductId, 1, 1);
@@ -56,20 +62,26 @@ function CartPage() {
     <div className={styles.container}>
       <Header />
       <main className={styles.mainContainer}>
-        <Button disabled variant="outlined" onClick={handleCreate}>
-          Create cart
-        </Button>
-        <Button variant="outlined" onClick={() => handleAdd(mockProductId, 1)}>
-          Add
-        </Button>
-        <Button variant="outlined" onClick={() => handleRemove(mockProductId, 1)}>
-          Remove
-        </Button>
-        {products.map((product) => (
-          <div key={`${product.id}${product.variantId}`}>{`Product id=${product.id}`}</div>
-        ))}
-        <div>{`Total: ${total}`}</div>
-        <div>{`Total prise: ${totalPrice / 100}$`}</div>
+        <div>
+          <Button variant="outlined" onClick={handleCreate}>
+            Create cart
+          </Button>
+          <Button variant="outlined" onClick={() => handleAdd(mockProductId, 1)}>
+            Add
+          </Button>
+          <Button variant="outlined" onClick={() => handleRemove(mockProductId, 1)}>
+            Remove
+          </Button>
+        </div>
+
+        <h1 className={styles.title}>Cart</h1>
+
+        <div className={styles.totalContainer}>
+          <span>{`Total price: ${totalPrice / 100}`}</span>
+          <span>{`Total quantity: ${total}`}</span>
+        </div>
+
+        <ProductList />
       </main>
       <Footer />
     </div>
