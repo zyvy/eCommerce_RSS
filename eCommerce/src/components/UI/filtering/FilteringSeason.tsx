@@ -25,6 +25,6 @@ function FilterSeason({ onSeasonChange }: FilterBySeasonProps) {
       </select>
     </div>
   );
-};
+}
 
 export default FilterSeason;

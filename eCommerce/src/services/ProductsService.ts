@@ -27,22 +27,33 @@ export class ProductsService {
     const responseTest = await apiRoot.productProjections().withKey({ key }).get().execute();
     return responseTest.body;
   }
-  static async performSearch(searchQuery: string, sortingParams: string, priceFilter: string[], season: string): Promise<ProductProjectionPagedSearchResponse> {
+  static async performSearch(
+    searchQuery: string,
+    sortingParams: string,
+    priceFilter: string[],
+    season: string,
+  ): Promise<ProductProjectionPagedSearchResponse> {
     const searchParams: SearchParams = {
       'text.en-US': searchQuery,
       fuzzy: true,
       sort: getSortingString(sortingParams),
+    };
+    if (priceFilter[0] != '' && priceFilter[1] != '') {
+      searchParams['filter'] = [
+        `variants.prices.value.centAmount:range(${String(Number(priceFilter[0]) * 100)} to ${String(Number(priceFilter[1]) * 100)})`,
+      ];
     }
-    if (priceFilter[0] != '' && priceFilter[1] != '' ) {
-      searchParams['filter'] = [`variants.prices.value.centAmount:range(${String(Number(priceFilter[0]) * 100)} to ${String(Number(priceFilter[1]) * 100)})`]
-      }
-    if (season.length > 3){
-      searchParams['filter.query'] = [`variants.attributes.Season:"${season}"`]
-    } 
+    if (season.length > 3) {
+      searchParams['filter.query'] = [`variants.attributes.Season:"${season}"`];
+    }
     const apiRoot = ProductsService.getApiRoot();
-    const responseTest = await apiRoot.productProjections().search().get({
-      queryArgs: searchParams,
-    }).execute();
+    const responseTest = await apiRoot
+      .productProjections()
+      .search()
+      .get({
+        queryArgs: searchParams,
+      })
+      .execute();
     return responseTest.body;
   }
 }

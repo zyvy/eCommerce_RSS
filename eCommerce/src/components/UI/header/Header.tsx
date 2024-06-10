@@ -5,6 +5,14 @@ import styles from './Header.module.css';
 import { isUserLoggedIn } from '../../../utils/validation.ts';
 import { PagePaths } from '../../../utils/utils.ts';
 import { AuthorizationService } from '../../../services/AuthorizationService.ts';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MediaQuery from 'react-responsive';
+import React from 'react';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 const theme = createTheme({
   breakpoints: {
@@ -35,6 +43,7 @@ function Header() {
     } else {
       navigate(PagePaths.Login);
     }
+    
   };
 
   const HandleRegisterButtonClick = () => {
@@ -54,7 +63,7 @@ function Header() {
             <img className={styles.logo_image} src="/logo.png" alt="Logo" />
           </Link>
         </div>
-        <div>
+        <div className={styles.buttons_wrapper}>
           {/*  <form className={styles.search_input} onSubmit={handleSearch}>
             <input type="text" name="searchQuery" />
             <Button
@@ -104,6 +113,34 @@ function Header() {
               {isUserLoggedIn() ? 'My orders' : 'Register'}
             </Button>
           </div>
+          <MediaQuery query="(max-device-width: 700px)">
+            <PopupState variant="popover" popupId="demo-popup-menu">
+              {(popupState) => (
+                <React.Fragment>
+                  <Button variant="contained" {...bindTrigger(popupState)}>
+                    Menu
+                  </Button>
+                  <Menu {...bindMenu(popupState)}>
+                    <MenuItem onClick={HandleAuthButtonClick}>Login</MenuItem>
+                    <MenuItem onClick={popupState.close}>My account</MenuItem>
+                    <MenuItem onClick={popupState.close}>Logout</MenuItem>
+                  </Menu>
+                </React.Fragment>
+              )}
+            </PopupState>
+          </MediaQuery>
+          <IconButton
+            edge="start"
+            color="default"
+            aria-label="cart"
+
+            // component={Link}
+            // to="cart"
+          >
+            <Badge badgeContent="2" color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
         </div>
       </header>
     </ThemeProvider>
