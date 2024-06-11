@@ -55,7 +55,7 @@ function ProductList() {
             <div className={styles.priceContainer}>
               <div className={styles.priceItem}>
                 <span>Price: </span>
-                <span>{`${product.centAmount / 100}$`}</span>
+                <span>{`${(product.centAmount / 100).toFixed(2)}$`}</span>
               </div>
               <div className={styles.priceItem}>
                 <span>Quantity: </span>
@@ -63,7 +63,7 @@ function ProductList() {
               </div>
               <div className={styles.priceItem}>
                 <span>Total price: </span>
-                <span>{`${getTotalProductPrice(product)}$`}</span>
+                <span>{`${getTotalProductPrice(product).toFixed(2)}$`}</span>
               </div>
             </div>
             <div className={styles.btnControls}>
