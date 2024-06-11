@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Catalog-card.module.css';
+import { CartService } from '../../../services/CartService';
 
 interface ProductCardProps {
   id: string;
@@ -21,9 +22,13 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
     navigate(`/product/${slug}`);
   };
 
-  const handleAddToCart = (event: React.MouseEvent) => {
-    event.stopPropagation(); 
+  const handleAddToCart = (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     if (!inCart) {
+      if (!CartService.getCartInfo){
+        CartService.createCart();
+      }
+      CartService.addItemToCart(id, 1)
       setInCart(true); 
     }
   };
@@ -50,7 +55,7 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
       )}
       <button 
         className={`${styles.add_to_cart_button} ${inCart ? styles.disabled : ''}`} 
-        onClick={handleAddToCart} 
+        onClick={(event) => handleAddToCart(id, event)} 
         disabled={inCart}
       >
         {inCart ? 'In Cart' : 'Add to Cart'}

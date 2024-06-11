@@ -1,4 +1,5 @@
 import { AuthorizationService } from './AuthorizationService.ts';
+import { CartDraft } from '@commercetools/platform-sdk';
 
 const KEY_CART = 'cart';
 
@@ -35,6 +36,16 @@ async function getLineItemId(productId: string, variantId: number) {
 export class CartService {
   static async createCart() {
     const customerId = AuthorizationService.getCustomerInfo().id;
+    let requestBody: CartDraft = {
+      currency: 'USD',
+    };
+    if (customerId) {
+      requestBody = {
+        ...requestBody,
+        customerId: customerId,
+      };
+    }
+
     if (customerId) {
       const cart = await getCartByCustomerId(customerId);
       if (cart) {
@@ -45,10 +56,7 @@ export class CartService {
     const response = await AuthorizationService.getApiRoot()
       .carts()
       .post({
-        body: {
-          currency: 'USD',
-          customerId,
-        },
+        body: requestBody,
       })
       .execute();
     CartService.updateCartInfo('id', response.body.id);
