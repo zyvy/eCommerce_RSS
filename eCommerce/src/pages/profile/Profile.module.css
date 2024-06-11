@@ -28,12 +28,6 @@
   gap: 30px;
 }
 
-/* .changePassword,
-.changePasswordContainer {
-  display: flex;
-  gap: 20px;
-} */
-
 .changePasswordContainer {
   margin-top: 30px;
 }
@@ -42,8 +36,4 @@
   .personalData {
     grid-template-columns: 1fr;
   }
-
-  /* .changePassword {
-    flex-direction: column;
-  } */
 }

@@ -7,12 +7,13 @@ type CartType = {
   id: string;
 };
 
-type ProductCart = {
+export interface ProductCart {
   id: string;
   variantId: number;
   quantity: number;
   lineItemId: string;
-};
+  centAmount: number;
+}
 
 async function getCartByCustomerId(customerId: string) {
   try {
@@ -51,7 +52,10 @@ export class CartService {
     const response = await AuthorizationService.getApiRoot()
       .carts()
       .post({
-        body: requestBody,
+        body: {
+          currency: 'USD',
+          ...(customerId !== '' && { customerId }),
+        },
       })
       .execute();
     CartService.updateCartInfo('id', response.body.id);
@@ -65,6 +69,7 @@ export class CartService {
       variantId: item.variant.id,
       quantity: item.quantity,
       lineItemId: item.id,
+      centAmount: item.price.value.centAmount,
     }));
   }
 

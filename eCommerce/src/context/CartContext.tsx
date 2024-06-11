@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction, createContext, useState, useContext, useMemo, ReactNode } from 'react';
-import { CartService } from '../services/CartService.ts';
+import { CartService, ProductCart } from '../services/CartService.ts';
 
-export type ProductCart = {
+/* export type ProductCart = {
   id: string;
   variantId: number;
   quantity: number;
   centAmount: number;
-};
+}; */
 
 export interface CartState {
   id: string;
@@ -43,6 +43,7 @@ export async function loadCart(cart: CartContextType, setCart: Dispatch<SetState
         variantId: item.variant.id,
         quantity: item.quantity,
         centAmount: item.price.value.centAmount,
+        lineItemId: item.id,
       });
     });
     setCart({ ...cart });
