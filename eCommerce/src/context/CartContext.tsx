@@ -1,13 +1,6 @@
 import { Dispatch, SetStateAction, createContext, useState, useContext, useMemo, ReactNode } from 'react';
 import { CartService, ProductCart } from '../services/CartService.ts';
 
-/* export type ProductCart = {
-  id: string;
-  variantId: number;
-  quantity: number;
-  centAmount: number;
-}; */
-
 export interface CartState {
   id: string;
   products: ProductCart[];
@@ -19,7 +12,7 @@ export type CartContextType = CartState & {
   setCart: Dispatch<SetStateAction<CartState>>;
 };
 
-const initialCartState: CartState = {
+export const initialCartState: CartState = {
   id: '',
   products: [],
   total: 0,

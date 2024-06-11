@@ -9,6 +9,7 @@ import Header from '../../components/UI/header/Header.tsx';
 import { useAuth } from '../../context/AuthContext.tsx';
 import InputEmail from '../../components/UI/inputs/input-email/InputEmail.tsx';
 import InputPassword from '../../components/UI/inputs/input-password/InputPassword.tsx';
+import { CartService } from '../../services/CartService.ts';
 
 function Login() {
   const [authError, setAuthError] = useState('');
@@ -33,7 +34,12 @@ function Login() {
       AuthorizationService.updateCustomerInfo('version', String(login.customer!.version));
       const token = await AuthorizationService.getAccessToken({ email, password });
       if (!token.error) {
-        AuthorizationService.updateCustomerInfo('token', token.accessToken);
+        await AuthorizationService.updateCustomerInfo('token', token.accessToken);
+        const cart = await CartService.getCartByCustomer();
+        if (cart) {
+          CartService.updateCartInfo('id', cart.id);
+        }
+
         navigate(PagePaths.Main);
       }
     }

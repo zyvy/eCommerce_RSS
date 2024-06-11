@@ -3,7 +3,7 @@ import Footer from '../../components/UI/footer/Footer.tsx';
 import Header from '../../components/UI/header/Header.tsx';
 import styles from './CartPage.module.css';
 import { loadCart, useCart } from '../../context/CartContext.tsx';
-import ProductList from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
+import ProductListForCart from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
 
 function CartPage() {
   const cart = useCart();
@@ -24,7 +24,7 @@ function CartPage() {
           <span>{`Total quantity: ${total}`}</span>
         </div>
 
-        <ProductList />
+        <ProductListForCart />
       </main>
       <Footer />
     </div>

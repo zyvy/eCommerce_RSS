@@ -1,5 +1,4 @@
 import { AuthorizationService } from './AuthorizationService.ts';
-import { CartDraft } from '@commercetools/platform-sdk';
 
 const KEY_CART = 'cart';
 
@@ -37,11 +36,6 @@ async function getLineItemId(productId: string, variantId: number) {
 export class CartService {
   static async createCart() {
     const customerId = AuthorizationService.getCustomerInfo().id;
-    let requestBody: CartDraft = {
-      currency: 'USD',
-    };
-    console.log(customerId, requestBody)
-    
     if (customerId) {
       const cart = await getCartByCustomerId(customerId);
       if (cart) {
@@ -74,7 +68,7 @@ export class CartService {
   }
 
   static async addItemToCart(productId: string, quantity: number, variantId?: number) {
-    console.log('add item', productId)
+    console.log('add item', productId);
     const version = await CartService.getCartVersion();
     const response = await AuthorizationService.getApiRoot()
       .carts()
@@ -127,13 +121,23 @@ export class CartService {
 
   static async getCart() {
     const cardId = CartService.getCartInfo().id;
-    const customerId = AuthorizationService.getCustomerInfo().id;
-    if (!cardId && customerId) {
-      const response = await AuthorizationService.getApiRoot().carts().withCustomerId({ customerId }).get().execute();
-      return response.body;
-    }
     const response = await AuthorizationService.getApiRoot().carts().withId({ ID: cardId }).get().execute();
     return response.body;
+  }
+
+  static async getCartByCustomer() {
+    const cardId = CartService.getCartInfo().id;
+    if (cardId) {
+      const response = await CartService.getCart();
+      return response;
+    }
+    const customerId = AuthorizationService.getCustomerInfo().id;
+    try {
+      const response = await AuthorizationService.getApiRoot().carts().withCustomerId({ customerId }).get().execute();
+      return response.body;
+    } catch {
+      return null;
+    }
   }
 
   static async getAllCarts() {
@@ -182,5 +186,9 @@ export class CartService {
   static getCartInfo(): CartType {
     const cart = localStorage.getItem(KEY_CART);
     return cart ? JSON.parse(cart) : { id: '' };
+  }
+
+  static removeCartInfo() {
+    localStorage.removeItem(KEY_CART);
   }
 }

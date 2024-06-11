@@ -11,7 +11,7 @@ interface ProductNameCart extends ProductCart {
 
 const getTotalProductPrice = (product: ProductNameCart) => (product.centAmount / 100) * product.quantity;
 
-function ProductList() {
+function ProductListForCart() {
   const cart = useCart();
   const { products, setCart } = { ...cart };
 
@@ -96,4 +96,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default ProductListForCart;

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Catalog-card.module.css';
-import { CartService } from '../../../services/CartService';
+import { CartService } from '../../../services/CartService.ts';
+import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
 interface ProductCardProps {
   id: string;
@@ -11,13 +12,16 @@ interface ProductCardProps {
   price: number;
   discountPrice?: number;
   slug: string;
-  isInCart?: boolean; 
+  isInCart?: boolean;
 }
 
 function ProductCard({ id, name, image, description, price, discountPrice, slug, isInCart }: ProductCardProps) {
   const navigate = useNavigate();
-  const [inCart, setInCart] = useState(isInCart); 
+  const [inCart, setInCart] = useState(isInCart);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const cart = useCart();
+  const { setCart } = { ...cart };
 
   const handleCardClick = (slug: string) => {
     navigate(`/product/${slug}`);
@@ -26,13 +30,14 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
   const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     if (!inCart && !loading) {
-      setLoading(true)
-      if (!CartService.getCartInfo().id){
+      setLoading(true);
+      if (!CartService.getCartInfo().id) {
         await CartService.createCart();
       }
-      await CartService.addItemToCart(id, 1)
-      setInCart(true); 
-      setLoading(false)
+      await CartService.addItemToCart(id, 1);
+      setInCart(true);
+      setLoading(false);
+      loadCart(cart, setCart);
     }
   };
 
@@ -56,11 +61,10 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
           {price}
         </p>
       )}
-      <button 
-        className={`${styles.add_to_cart_button} ${inCart ? styles.disabled : ''}`} 
-        onClick={(event) => handleAddToCart(id, event)} 
-        disabled={inCart || loading}
-      >
+      <button
+        className={`${styles.add_to_cart_button} ${inCart ? styles.disabled : ''}`}
+        onClick={(event) => handleAddToCart(id, event)}
+        disabled={inCart || loading}>
         {loading ? 'Adding to card...' : inCart ? 'In Cart' : 'Add to Cart'}
       </button>
     </div>
