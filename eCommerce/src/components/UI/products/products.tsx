@@ -15,28 +15,39 @@ function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-async function getItemsInCard():Promise<string[]>{
-  const products = await CartService.getProducts();
-  return products.map((item) => item.id )
+async function getItemsInCard(): Promise<string[]> {
+  if (CartService.getCartInfo().id) {
+    const products = await CartService.getProducts();
+    return products.map((item) => item.id);
+  } else {
+    return [''];
+  }
 }
 
-function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = [], season =''} : ProductListProps ) {
+function ProductList({
+  productsArray = '',
+  sortingArray = 'name-asc',
+  priceFilter = [],
+  season = '',
+}: ProductListProps) {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<string[]>([]);
-    useEffect(() => {
-     // console.log('trying to fetch')
-      const getProducts = async () => {
-        try {
-          const itemsInCart = await getItemsInCard();
+  useEffect(() => {
+    // console.log('trying to fetch')
+    const getProducts = async () => {
+      try {
+        const itemsInCart = await getItemsInCard();
+        if (itemsInCart) {
           setCartItems(itemsInCart);
-          const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season)
-          setProducts(productData.results);
-        } catch (e) {
-          setError('Failed to fetch products. Please try again later.');
-          console.error(e);
         }
-      };
+        const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season);
+        setProducts(productData.results);
+      } catch (e) {
+        setError('Failed to fetch products. Please try again later.');
+        console.error(e);
+      }
+    };
     getProducts();
   }, [productsArray, sortingArray, priceFilter]);
 
@@ -65,7 +76,7 @@ function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = 
               : 0
           }
           slug={product.key ? product.key : ''}
-          isInCart = {cartItems.some((id) => product.id == id)}
+          isInCart={cartItems.some((id) => product.id == id)}
         />
       ))}
     </div>
