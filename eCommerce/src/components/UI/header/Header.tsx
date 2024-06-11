@@ -9,10 +9,17 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MediaQuery from 'react-responsive';
-import React from 'react';
+import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import Fade from '@mui/material/Fade';
+import Drawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+import CloseIcon from "@mui/icons-material/Close";
+
+
+
+  // const handleClose = () => setOpen(false);
 
 const theme = createTheme({
   breakpoints: {
@@ -27,6 +34,20 @@ const theme = createTheme({
 });
 
 function Header() {
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = React.useState(false);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
   const navigate = useNavigate();
   /* const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +64,7 @@ function Header() {
     } else {
       navigate(PagePaths.Login);
     }
-    
+    setAnchorEl(null);
   };
 
   const HandleRegisterButtonClick = () => {
@@ -53,7 +74,12 @@ function Header() {
     } else {
       navigate(PagePaths.Register);
     }
+    setAnchorEl(null);
   };
+
+  // function toggleDrawer(arg0: boolean): React.MouseEventHandler<HTMLButtonElement> | undefined {
+  //   throw new Error('Function not implemented.');
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -114,20 +140,27 @@ function Header() {
             </Button>
           </div>
           <MediaQuery query="(max-device-width: 700px)">
-            <PopupState variant="popover" popupId="demo-popup-menu">
-              {(popupState) => (
-                <React.Fragment>
-                  <Button variant="contained" {...bindTrigger(popupState)}>
-                    Menu
-                  </Button>
-                  <Menu {...bindMenu(popupState)}>
-                    <MenuItem onClick={HandleAuthButtonClick}>Login</MenuItem>
-                    <MenuItem onClick={popupState.close}>My account</MenuItem>
-                    <MenuItem onClick={popupState.close}>Logout</MenuItem>
-                  </Menu>
-                </React.Fragment>
-              )}
-            </PopupState>
+          <div>
+            <Button onClick={toggleDrawer(true)}>Open drawer</Button>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+            <IconButton sx={{mb: 2, justifyContent: 'flex-end'}}>
+                    <CloseIcon onClick={toggleDrawer(false)} />
+                  </IconButton>
+              <Box sx={{
+                  width: 250,
+                  paddingTop: "50px",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }}>
+                  
+                <MenuItem onClick={() => navigate(PagePaths.Catalog)}>CATALOG</MenuItem>
+                {AuthorizationService.getCustomerInfo().id && <MenuItem onClick={() => navigate(PagePaths.Catalog)}>PROFILE</MenuItem>}       
+                <MenuItem onClick={HandleAuthButtonClick}>{isUserLoggedIn() ? 'LOGOUT' : 'LOG IN'}</MenuItem>
+                <MenuItem onClick={HandleRegisterButtonClick}>{isUserLoggedIn() ? 'MY ORDERS' : 'REGISTER'}</MenuItem>
+              </Box>
+            </Drawer>
+          </div>
           </MediaQuery>
           <IconButton
             edge="start"
