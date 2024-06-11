@@ -37,13 +37,12 @@ function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = 
           console.error(e);
         }
       };
+    getProducts();
+  }, [productsArray, sortingArray, priceFilter]);
 
-      getProducts();
-    }, [productsArray, sortingArray, priceFilter]);
-
-    if (error) {
-      return <div>{error}</div>;
-    }
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <div className={styles.product_list}>
       {products.map((product) => (

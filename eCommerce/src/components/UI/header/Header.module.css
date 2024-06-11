@@ -4,13 +4,6 @@
   align-items: center;
   align-self: stretch;
 }
-@media (max-width: 700px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
 
 .logo_image {
   height: 100px;
@@ -25,7 +18,28 @@
   display: flex;
   gap: 5px;
 }
+.buttons_wrapper {
+  display: flex;
+  gap: 15px;
+}
 .auth_area {
   display: flex;
   gap: 5px;
+}
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .buttons_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 20px;
+    padding-right: 30px;
+  }
+  .auth_area {
+    display: none;
+  }
 }
