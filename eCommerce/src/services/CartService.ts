@@ -39,13 +39,8 @@ export class CartService {
     let requestBody: CartDraft = {
       currency: 'USD',
     };
-    if (customerId) {
-      requestBody = {
-        ...requestBody,
-        customerId: customerId,
-      };
-    }
-
+    console.log(customerId, requestBody)
+    
     if (customerId) {
       const cart = await getCartByCustomerId(customerId);
       if (cart) {
@@ -74,6 +69,7 @@ export class CartService {
   }
 
   static async addItemToCart(productId: string, quantity: number, variantId?: number) {
+    console.log('add item', productId)
     const version = await CartService.getCartVersion();
     const response = await AuthorizationService.getApiRoot()
       .carts()

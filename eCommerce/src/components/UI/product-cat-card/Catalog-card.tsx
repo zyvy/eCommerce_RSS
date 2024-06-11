@@ -17,19 +17,22 @@ interface ProductCardProps {
 function ProductCard({ id, name, image, description, price, discountPrice, slug, isInCart }: ProductCardProps) {
   const navigate = useNavigate();
   const [inCart, setInCart] = useState(isInCart); 
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleCardClick = (slug: string) => {
     navigate(`/product/${slug}`);
   };
 
-  const handleAddToCart = (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (!inCart) {
-      if (!CartService.getCartInfo){
-        CartService.createCart();
+    if (!inCart && !loading) {
+      setLoading(true)
+      if (!CartService.getCartInfo().id){
+        await CartService.createCart();
       }
-      CartService.addItemToCart(id, 1)
+      await CartService.addItemToCart(id, 1)
       setInCart(true); 
+      setLoading(false)
     }
   };
 
@@ -56,9 +59,9 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
       <button 
         className={`${styles.add_to_cart_button} ${inCart ? styles.disabled : ''}`} 
         onClick={(event) => handleAddToCart(id, event)} 
-        disabled={inCart}
+        disabled={inCart || loading}
       >
-        {inCart ? 'In Cart' : 'Add to Cart'}
+        {loading ? 'Adding to card...' : inCart ? 'In Cart' : 'Add to Cart'}
       </button>
     </div>
   );

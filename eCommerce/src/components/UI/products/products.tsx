@@ -3,6 +3,7 @@ import { ProductProjection } from '@commercetools/platform-sdk';
 import styles from './products.module.css';
 import { ProductsService } from '../../../services/ProductsService.ts';
 import ProductCard from '../product-cat-card/Catalog-card.tsx';
+import { CartService } from '../../../services/CartService.ts';
 interface ProductListProps {
   productsArray?: string;
   sortingArray?: string;
@@ -14,13 +15,21 @@ function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
+async function getItemsInCard():Promise<string[]>{
+  const products = await CartService.getProducts();
+  return products.map((item) => item.id )
+}
+
 function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = [], season =''} : ProductListProps ) {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [cartItems, setCartItems] = useState<string[]>([]);
     useEffect(() => {
      // console.log('trying to fetch')
       const getProducts = async () => {
         try {
+          const itemsInCart = await getItemsInCard();
+          setCartItems(itemsInCart);
           const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season)
           setProducts(productData.results);
         } catch (e) {
@@ -57,6 +66,7 @@ function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = 
               : 0
           }
           slug={product.key ? product.key : ''}
+          isInCart = {cartItems.some((id) => product.id == id)}
         />
       ))}
     </div>
