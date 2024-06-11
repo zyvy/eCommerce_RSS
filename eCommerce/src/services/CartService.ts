@@ -1,4 +1,5 @@
 import { AuthorizationService } from './AuthorizationService.ts';
+import { CartDraft } from '@commercetools/platform-sdk';
 
 const KEY_CART = 'cart';
 
@@ -36,6 +37,11 @@ async function getLineItemId(productId: string, variantId: number) {
 export class CartService {
   static async createCart() {
     const customerId = AuthorizationService.getCustomerInfo().id;
+    let requestBody: CartDraft = {
+      currency: 'USD',
+    };
+    console.log(customerId, requestBody)
+    
     if (customerId) {
       const cart = await getCartByCustomerId(customerId);
       if (cart) {
@@ -68,6 +74,7 @@ export class CartService {
   }
 
   static async addItemToCart(productId: string, quantity: number, variantId?: number) {
+    console.log('add item', productId)
     const version = await CartService.getCartVersion();
     const response = await AuthorizationService.getApiRoot()
       .carts()

@@ -47,6 +47,7 @@ export class ProductsService {
       fuzzy: true,
       sort: getSortingString(sortingParams),
     };
+
     if (priceFilter[0] !== '' && priceFilter[1] !== '') {
       searchParams.filter = [
         `variants.prices.value.centAmount:range(${String(Number(priceFilter[0]) * 100)} to ${String(Number(priceFilter[1]) * 100)})`,
