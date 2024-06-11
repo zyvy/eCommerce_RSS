@@ -51,6 +51,59 @@
   width: 100%;
   border: 1px solid #1976d2;
   border-radius: 5px;
+  gap: 10px;
+}
+
+.btnControls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.controlQuantityContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.quantity {
+  font-size: 1.2rem;
+}
+
+.quantityControlButton {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #1976d2;
+  border-radius: 5px;
+}
+
+.btnRemove:hover {
+  background-color: #fb06066b;
+  border: 1px solid #fb06066b;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnAdd:hover {
+  background-color: #1976d242;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnDelete {
+  padding: 5px 15px;
+  font-size: 1.2rem;
+  border: 1px solid #fb06066b;
+  background-color: #f6f1ea;
+  border-radius: 7px;
+}
+
+.btnDelete:hover {
+  background-color: #fb06066b;
+  border: 1px solid #fb06066b;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 @media (max-width: 1000px) {
@@ -62,5 +115,10 @@
 @media (max-width: 500px) {
   .priceContainer {
     font-size: 0.8rem;
+  }
+
+  .quantity,
+  .btnDelete {
+    font-size: 1rem;
   }
 }

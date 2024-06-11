@@ -48,7 +48,7 @@ export class CartService {
       .post({
         body: {
           currency: 'USD',
-          customerId,
+          ...(customerId !== '' && { customerId }),
         },
       })
       .execute();
