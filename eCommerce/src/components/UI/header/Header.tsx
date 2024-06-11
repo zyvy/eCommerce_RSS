@@ -5,6 +5,18 @@ import styles from './Header.module.css';
 import { isUserLoggedIn } from '../../../utils/validation.ts';
 import { PagePaths } from '../../../utils/utils.ts';
 import { AuthorizationService } from '../../../services/AuthorizationService.ts';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MediaQuery from 'react-responsive';
+import React, { useState, useEffect } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import Drawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+import CloseIcon from '@mui/icons-material/Close';
+import { loadCart, useCart } from '../../../context/CartContext.tsx';
+
+// const handleClose = () => setOpen(false);
 
 const theme = createTheme({
   breakpoints: {
@@ -19,6 +31,19 @@ const theme = createTheme({
 });
 
 function Header() {
+  const [open, setOpen] = useState(false);
+
+  const cartContext = useCart();
+  const { total, setCart } = { ...cartContext };
+
+  useEffect(() => {
+    loadCart(cartContext, setCart);
+  }, []);
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
   const navigate = useNavigate();
   /* const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +79,7 @@ function Header() {
             <img className={styles.logo_image} src="/logo.png" alt="Logo" />
           </Link>
         </div>
-        <div>
+        <div className={styles.buttons_wrapper}>
           {/*  <form className={styles.search_input} onSubmit={handleSearch}>
             <input type="text" name="searchQuery" />
             <Button
@@ -104,6 +129,38 @@ function Header() {
               {isUserLoggedIn() ? 'My orders' : 'Register'}
             </Button>
           </div>
+          <MediaQuery query="(max-device-width: 700px)">
+            <div>
+              <Button variant="contained" onClick={toggleDrawer(true)}>
+                MENU
+              </Button>
+              <Drawer open={open} onClose={toggleDrawer(false)}>
+                <IconButton sx={{ mb: 2, justifyContent: 'flex-end' }} onClick={toggleDrawer(false)}>
+                  <CloseIcon />
+                </IconButton>
+                <Box
+                  sx={{
+                    width: 250,
+                    paddingTop: '50px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}>
+                  <MenuItem onClick={() => navigate(PagePaths.Catalog)}>CATALOG</MenuItem>
+                  {AuthorizationService.getCustomerInfo().id && (
+                    <MenuItem onClick={() => navigate(PagePaths.Profile)}>PROFILE</MenuItem>
+                  )}
+                  <MenuItem onClick={HandleAuthButtonClick}>{isUserLoggedIn() ? 'LOGOUT' : 'LOG IN'}</MenuItem>
+                  <MenuItem onClick={HandleRegisterButtonClick}>{isUserLoggedIn() ? 'MY ORDERS' : 'REGISTER'}</MenuItem>
+                </Box>
+              </Drawer>
+            </div>
+          </MediaQuery>
+          <IconButton edge="start" color="default" aria-label="cart" component={Link} to={PagePaths.Cart}>
+            <Badge badgeContent={total} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
         </div>
       </header>
     </ThemeProvider>

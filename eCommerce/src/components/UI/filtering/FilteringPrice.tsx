@@ -27,23 +27,11 @@ function FilteringPrice({ onFilterChange }: FilteringProps) {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="minPrice">Min Price:</label>
-          <input
-            type="number"
-            id="minPrice"
-            value={minPrice}
-            onChange={handleMinPriceChange}
-            placeholder="Min Price"
-          />
+          <input type="number" id="minPrice" value={minPrice} onChange={handleMinPriceChange} placeholder="Min Price" />
         </div>
         <div>
           <label htmlFor="maxPrice">Max Price:</label>
-          <input
-            type="number"
-            id="maxPrice"
-            value={maxPrice}
-            onChange={handleMaxPriceChange}
-            placeholder="Max Price"
-          />
+          <input type="number" id="maxPrice" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Max Price" />
         </div>
         <button type="submit">Submit</button>
       </form>
