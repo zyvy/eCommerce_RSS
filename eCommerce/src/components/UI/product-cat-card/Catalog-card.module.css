@@ -28,3 +28,15 @@
   font-size: 0.9em;
   color: #555;
 }
+.add_to_cart_button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.add_to_cart_button.disabled {
+  background-color: #CCCCCC; 
+  cursor: not-allowed;
+}
