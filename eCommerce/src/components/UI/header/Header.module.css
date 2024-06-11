@@ -33,10 +33,13 @@
     justify-content: space-between;
   }
   .buttons_wrapper {
-    display: block;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 20px;
+    padding-right: 30px;
   }
-}
-.MuiDrawer-paperAnchorLeft{
-  width: 40% !important;
+  .auth_area {
+    display: none;
+  }
 }

@@ -9,17 +9,14 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MediaQuery from 'react-responsive';
-import React, { useState } from 'react';
-import Menu from '@mui/material/Menu';
+import React, { useState, useEffect } from 'react';
 import MenuItem from '@mui/material/MenuItem';
-import Fade from '@mui/material/Fade';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from '@mui/icons-material/Close';
+import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
-
-
-  // const handleClose = () => setOpen(false);
+// const handleClose = () => setOpen(false);
 
 const theme = createTheme({
   breakpoints: {
@@ -34,16 +31,15 @@ const theme = createTheme({
 });
 
 function Header() {
+  const [open, setOpen] = useState(false);
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [open, setOpen] = React.useState(false);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+  const cartContext = useCart();
+  const { total, setCart } = { ...cartContext };
+
+  useEffect(() => {
+    loadCart(cartContext, setCart);
+  }, []);
+
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
@@ -64,7 +60,6 @@ function Header() {
     } else {
       navigate(PagePaths.Login);
     }
-    setAnchorEl(null);
   };
 
   const HandleRegisterButtonClick = () => {
@@ -74,12 +69,7 @@ function Header() {
     } else {
       navigate(PagePaths.Register);
     }
-    setAnchorEl(null);
   };
-
-  // function toggleDrawer(arg0: boolean): React.MouseEventHandler<HTMLButtonElement> | undefined {
-  //   throw new Error('Function not implemented.');
-  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -140,37 +130,34 @@ function Header() {
             </Button>
           </div>
           <MediaQuery query="(max-device-width: 700px)">
-          <div>
-            <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
-            <IconButton sx={{mb: 2, justifyContent: 'flex-end'}}>
-                    <CloseIcon onClick={toggleDrawer(false)} />
-                  </IconButton>
-              <Box sx={{
-                  width: 250,
-                  paddingTop: "50px",
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center'
-                }}>
-                  
-                <MenuItem onClick={() => navigate(PagePaths.Catalog)}>CATALOG</MenuItem>
-                {AuthorizationService.getCustomerInfo().id && <MenuItem onClick={() => navigate(PagePaths.Catalog)}>PROFILE</MenuItem>}       
-                <MenuItem onClick={HandleAuthButtonClick}>{isUserLoggedIn() ? 'LOGOUT' : 'LOG IN'}</MenuItem>
-                <MenuItem onClick={HandleRegisterButtonClick}>{isUserLoggedIn() ? 'MY ORDERS' : 'REGISTER'}</MenuItem>
-              </Box>
-            </Drawer>
-          </div>
+            <div>
+              <Button variant="contained" onClick={toggleDrawer(true)}>
+                MENU
+              </Button>
+              <Drawer open={open} onClose={toggleDrawer(false)}>
+                <IconButton sx={{ mb: 2, justifyContent: 'flex-end' }} onClick={toggleDrawer(false)}>
+                  <CloseIcon />
+                </IconButton>
+                <Box
+                  sx={{
+                    width: 250,
+                    paddingTop: '50px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}>
+                  <MenuItem onClick={() => navigate(PagePaths.Catalog)}>CATALOG</MenuItem>
+                  {AuthorizationService.getCustomerInfo().id && (
+                    <MenuItem onClick={() => navigate(PagePaths.Profile)}>PROFILE</MenuItem>
+                  )}
+                  <MenuItem onClick={HandleAuthButtonClick}>{isUserLoggedIn() ? 'LOGOUT' : 'LOG IN'}</MenuItem>
+                  <MenuItem onClick={HandleRegisterButtonClick}>{isUserLoggedIn() ? 'MY ORDERS' : 'REGISTER'}</MenuItem>
+                </Box>
+              </Drawer>
+            </div>
           </MediaQuery>
-          <IconButton
-            edge="start"
-            color="default"
-            aria-label="cart"
-
-            // component={Link}
-            // to="cart"
-          >
-            <Badge badgeContent="2" color="error">
+          <IconButton edge="start" color="default" aria-label="cart" component={Link} to={PagePaths.Cart}>
+            <Badge badgeContent={total} color="error">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
