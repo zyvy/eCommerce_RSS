@@ -2,6 +2,7 @@ import styles from './ProfileCards.module.css';
 import SergK from '../../assets/1.jpg';
 import SergT from '../../assets/2.jpg';
 import VitaZ from '../../assets/3.jpg';
+import RsLogo from '../../assets/rs_school_js.svg';
 function ProfileCards() {
   return (
     <div className={styles.about_wrapper}>
@@ -28,7 +29,8 @@ function ProfileCards() {
         <a href="https://github.com/zyvy" className={styles.profile_github} target="_blank">
           GitHub Link
         </a>
-        <p className={styles.profile_description}>Never think I can do it</p>User experience enhancement and wireframing.
+        <p className={styles.profile_description}>Never think I can do it</p>User experience enhancement and
+        wireframing.
       </div>
       <div className={styles.profile_card}>
         <img src={SergK} className={styles.profile_image} />
@@ -55,6 +57,11 @@ function ProfileCards() {
           I like learning to program. I want to become a frontend developer, so I study this profession. I really enjoy
           learning and learning new things!
         </p>
+      </div>
+      <div>
+        <a href="https://rs.school/">
+          <img src={RsLogo} alt="RS School Logo" target="_blank" />
+        </a>
       </div>
     </div>
   );
