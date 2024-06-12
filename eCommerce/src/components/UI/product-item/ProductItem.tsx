@@ -14,6 +14,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { CartService } from '../../../services/CartService.ts';
+import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -29,9 +31,10 @@ const style = {
 
 interface ProductItemProps {
   slug: string;
+  isInCart?: boolean;
 }
 
-function ProductItem({ slug }: ProductItemProps) {
+function ProductItem({ slug, isInCart }: ProductItemProps) {
   const [productImg, setProductImg] = useState<Image[] | undefined>([]);
   const [productTitle, setProductTitle] = useState('');
   const [productDescr, setProductDescr] = useState<string | undefined>('');
@@ -39,7 +42,12 @@ function ProductItem({ slug }: ProductItemProps) {
   const [productPrice, setProductPrice] = useState<number | undefined>(undefined);
   const [productDiscountedPrice, setProductDiscountedPrice] = useState<number | undefined>(undefined);
   const [addCart, setAddCart] = useState(false);
+  const [productId, setProductId] = useState('');
+  const [inCart, setInCart] = useState(isInCart);
   const [error, setError] = useState('');
+
+  const cart = useCart();
+  const { products, setCart } = { ...cart };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -47,10 +55,30 @@ function ProductItem({ slug }: ProductItemProps) {
   };
   const handleClose = () => setOpen(false);
 
+  console.log(isInCart)
+
+  const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (!inCart) {
+      if (!CartService.getCartInfo().id) {
+        await CartService.createCart();
+      }
+      await CartService.addItemToCart(id, 1);
+      setInCart(true);
+      setAddCart(true);
+      loadCart(cart, setCart);
+    }
+  };
+
+  const handleDelete = (productId: string, variang: number, quantity: number) => {
+    CartService.removeItemFromCart(productId, variang, quantity).then(() => loadCart(cart, setCart));
+  };
+
   useEffect(() => {
     const getProducts = async () => {
       try {
         const productData = await ProductsService.getProductByKey(slug);
+        setProductId(productData.id)
         setProductImg(productData.masterVariant.images);
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
@@ -142,16 +170,16 @@ function ProductItem({ slug }: ProductItemProps) {
             )}
           </div>
           <div className={styles.cart__wrapper}>
-          {addCart ? (
+          {inCart ? (
             <Button fullWidth disabled variant="contained" size="small" color="primary" onClick={() => addToCart()}>
               In Cart
             </Button>
           ) : (
-            <Button variant="contained" size="small" color="primary" onClick={() => addToCart()}>
+            <Button variant="contained" size="small" color="primary" onClick={(event) => handleAddToCart(productId, event)}>
               Add To Cart
             </Button>
           )}
-          {addCart && (
+          {inCart && (
             <Button size="small" color="inherit" aria-label="cart" onClick={() => deleteFromCart()}>
               <DeleteIcon />
             </Button>
