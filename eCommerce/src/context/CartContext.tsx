@@ -19,7 +19,7 @@ export type CartContextType = CartState & {
   setCart: Dispatch<SetStateAction<CartState>>;
 };
 
-const initialCartState: CartState = {
+export const initialCartState: CartState = {
   id: '',
   products: [],
   total: 0,
