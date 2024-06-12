@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/UI/footer/Footer.tsx';
 import Header from '../../components/UI/header/Header.tsx';
 import styles from './CartPage.module.css';
 import { loadCart, useCart } from '../../context/CartContext.tsx';
 import ProductList from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
 import ModalClearCart from '../../components/UI/modal-clear-cart/ModalClearCart.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 
 function CartPage() {
   const cart = useCart();
   const { total, totalPrice, setCart } = { ...cart };
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCart(cart, setCart);
@@ -23,6 +27,13 @@ function CartPage() {
         <div className={styles.totalContainer}>
           <span>{`Total price: ${(totalPrice / 100).toFixed(2)}$`}</span>
           <span>{`Total quantity: ${total}`}</span>
+        </div>
+
+        <div style={{ display: total ? 'none' : 'flex' }} className={styles.emptyCart}>
+          <h3 className={styles.emptyCartTitle}>Your basket is empty. Don`t want to pick up the products?</h3>
+          <Button variant="outlined" onClick={() => navigate(PagePaths.Catalog)}>
+            go to shopping
+          </Button>
         </div>
 
         <ProductList />

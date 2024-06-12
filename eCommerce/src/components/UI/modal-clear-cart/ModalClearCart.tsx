@@ -38,11 +38,7 @@ function ModalClearCart() {
 
   return (
     <>
-      <Button
-        style={{ visibility: total ? 'visible' : 'hidden' }}
-        variant="outlined"
-        color="error"
-        onClick={handleClickOpen}>
+      <Button style={{ display: total ? 'block' : 'none' }} variant="outlined" color="error" onClick={handleClickOpen}>
         Clear cart
       </Button>
       <Dialog open={open} onClick={handleClose}>

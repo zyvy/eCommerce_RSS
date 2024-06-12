@@ -87,7 +87,7 @@
 }
 
 .btnAdd:hover {
-  background-color: #1976d242;
+  background-color: #32c90459;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -95,14 +95,15 @@
 .btnDelete {
   padding: 5px 15px;
   font-size: 1.2rem;
+  color: #fb06069c;
+  font-weight: 600;
   border: 1px solid #fb06066b;
   background-color: #f6f1ea;
   border-radius: 7px;
 }
 
 .btnDelete:hover {
-  background-color: #fb06066b;
-  border: 1px solid #fb06066b;
+  background-color: #fb060615;
   cursor: pointer;
   transition: all 0.3s;
 }
