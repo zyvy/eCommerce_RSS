@@ -150,6 +150,51 @@ export class AuthorizationService {
       errorDescription: data.error_description,
     };
   }
+  static async getAnonymousToken(): Promise<AccessToketResponse> {
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', authenticateUser());
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: '',
+    };
+
+    const params = new URLSearchParams({
+      grant_type: 'client_credentials',
+      scope: `view_published_products:${env.VITE_PROJECT_KEY} manage_my_orders:${env.VITE_PROJECT_KEY} manage_my_profile:${env.VITE_PROJECT_KEY}`
+    }).toString();
+
+    let response = null;
+    try {
+      response = await fetch(
+        `https://auth.${env.VITE_REGION}.commercetools.com/oauth/${env.VITE_PROJECT_KEY}/anonymous/token?${params}`,
+        requestOptions,
+      );
+    } catch (error: unknown) {
+      const message = typeof error === 'string' ? error : '';
+      return {
+        error: true,
+        accessToken: '',
+        errorDescription: message,
+      };
+    }
+    if (response.status === 200) {
+      const data: Token = await response.json();
+      localStorage.setItem("AnonymousToken", JSON.stringify(data.access_token));
+      return {
+        error: false,
+        accessToken: data.access_token,
+        errorDescription: '',
+      };
+    }
+    const data: BadResponse = await response.json();
+    return {
+      error: true,
+      accessToken: '',
+      errorDescription: data.error_description,
+    };
+  }
 
   static async getCustomerPasswordToken(email: string) {
     const apiRoot = AuthorizationService.getApiRoot();
@@ -185,7 +230,7 @@ export class AuthorizationService {
     return {
       id: '',
       token: '',
-      version: 0,
+      version: '0',
     };
   }
 

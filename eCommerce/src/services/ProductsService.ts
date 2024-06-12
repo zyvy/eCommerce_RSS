@@ -5,6 +5,7 @@ import {
 } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
 import { env, getSortingString } from '../utils/utils.ts';
+
 interface SearchParams {
   [key: string]: string | boolean | string[];
 }
@@ -27,6 +28,13 @@ export class ProductsService {
     const responseTest = await apiRoot.productProjections().withKey({ key }).get().execute();
     return responseTest.body;
   }
+
+  static async getProductById(id: string): Promise<ProductProjection> {
+    const apiRoot = ProductsService.getApiRoot();
+    const responseTest = await apiRoot.productProjections().withId({ ID: id }).get().execute();
+    return responseTest.body;
+  }
+
   static async performSearch(
     searchQuery: string,
     sortingParams: string,
@@ -34,12 +42,14 @@ export class ProductsService {
     season: string,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const searchParams: SearchParams = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'text.en-US': searchQuery,
       fuzzy: true,
       sort: getSortingString(sortingParams),
     };
-    if (priceFilter[0] != '' && priceFilter[1] != '') {
-      searchParams['filter'] = [
+
+    if (priceFilter[0] !== '' && priceFilter[1] !== '') {
+      searchParams.filter = [
         `variants.prices.value.centAmount:range(${String(Number(priceFilter[0]) * 100)} to ${String(Number(priceFilter[1]) * 100)})`,
       ];
     }
