@@ -14,6 +14,7 @@ import ItemCard from '../pages/ItemCard/ItemCard.tsx';
 import Catalog from '../pages/catalog/Catalog.tsx';
 import CartPage from '../pages/cart/CartPage.tsx';
 import { CartProvider } from '../context/CartContext.tsx';
+import AboutUs from '../pages/about-us/about-us.tsx';
 
 function AppRouter() {
   return (
@@ -62,6 +63,7 @@ function AppRouter() {
         <Route path="/product/:slug" element={<ItemCard />} />
         <Route path={PagePaths.NotFound} element={<NotFound />} />
         <Route path={PagePaths.Cart} element={<CartPage />} />
+        <Route path={PagePaths.About} element={<AboutUs />} />
       </Routes>
     </CartProvider>
   );
