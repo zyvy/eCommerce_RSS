@@ -43,7 +43,7 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
   const [productDiscountedPrice, setProductDiscountedPrice] = useState<number | undefined>(undefined);
   const [addCart, setAddCart] = useState(false);
   const [productId, setProductId] = useState('');
-  const [inCart, setInCart] = useState(isInCart);
+  const [inCart, setInCart] = useState(false);
   const [error, setError] = useState('');
 
   const cart = useCart();
@@ -55,7 +55,7 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
   };
   const handleClose = () => setOpen(false);
 
-  console.log(isInCart)
+  console.log(inCart)
 
   const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -91,12 +91,28 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
             ? productData.masterVariant.prices[0].discounted?.value.centAmount
             : undefined,
         );
+        console.log('1111', productData.id)
+        console.log('2222', products)
+        products.forEach(el => {
+          if (el.id === productData.id){
+            setInCart(true)
+          }
+        })
       } catch (e) {
         setError(`Тут написать про ошибку ${e}`);
         console.error(error);
       }
     };
     getProducts();
+    
+    // products.forEach(el => {
+    //   if (el.id === productId){
+    //     console.log('true')
+    //     setInCart(true)
+    //     return
+    //   }
+    //   return
+    // })
   }, [slug]);
 
   const slides = productImg?.map((prod) => prod.url);
