@@ -1,29 +1,25 @@
 import { Dispatch, SetStateAction, createContext, useState, useContext, useMemo, ReactNode } from 'react';
+import { Cart } from '@commercetools/platform-sdk';
 import { CartService, ProductCart } from '../services/CartService.ts';
-
-/* export type ProductCart = {
-  id: string;
-  variantId: number;
-  quantity: number;
-  centAmount: number;
-}; */
 
 export interface CartState {
   id: string;
   products: ProductCart[];
   total: number;
   totalPrice: number;
+  totalDiscount: number;
 }
 
 export type CartContextType = CartState & {
   setCart: Dispatch<SetStateAction<CartState>>;
 };
 
-const initialCartState: CartState = {
+export const initialCartState: CartState = {
   id: '',
   products: [],
   total: 0,
   totalPrice: 0,
+  totalDiscount: 0,
 };
 
 const CartContext = createContext<CartContextType>({
@@ -31,12 +27,33 @@ const CartContext = createContext<CartContextType>({
   setCart: () => {},
 });
 
+const calculateTotalDiscount = (cart: Cart) => {
+  let totalDiscount = 0;
+
+  cart.lineItems.forEach((item) => {
+    const itemDiscount = item.discountedPricePerQuantity.reduce((acc, discounts) => {
+      const lineItemDiscount = discounts.discountedPrice.includedDiscounts.reduce(
+        (acc2, discount) => acc2 + discount.discountedAmount.centAmount * discounts.quantity,
+        0,
+      );
+      return acc + lineItemDiscount;
+    }, 0);
+
+    totalDiscount += itemDiscount;
+  });
+
+  return totalDiscount;
+};
+
 export async function loadCart(cart: CartContextType, setCart: Dispatch<SetStateAction<CartState>>) {
-  CartService.getCart().then((newCart) => {
+  try {
+    const newCart = await CartService.getCart();
     cart.id = newCart.id;
     cart.total = newCart.totalLineItemQuantity ?? 0;
-    cart.totalPrice = newCart.totalPrice.centAmount;
+    const totalPrice = newCart.totalPrice.centAmount;
     cart.products = [];
+    const totalDiscount2 = calculateTotalDiscount(newCart);
+    const totalDiscount = newCart.discountOnTotalPrice?.discountedAmount.centAmount ?? 0;
     newCart.lineItems.forEach((item) => {
       cart.products.push({
         id: item.productId,
@@ -46,8 +63,11 @@ export async function loadCart(cart: CartContextType, setCart: Dispatch<SetState
         lineItemId: item.id,
       });
     });
-    setCart({ ...cart });
-  });
+    console.log(totalDiscount2, totalDiscount);
+    setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
+  } catch (error) {
+    console.log('laod cart:', error);
+  }
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {

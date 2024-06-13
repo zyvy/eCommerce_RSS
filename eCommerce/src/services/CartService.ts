@@ -1,5 +1,5 @@
+import { CartUpdateAction } from '@commercetools/platform-sdk';
 import { AuthorizationService } from './AuthorizationService.ts';
-import { CartDraft } from '@commercetools/platform-sdk';
 
 const KEY_CART = 'cart';
 
@@ -37,11 +37,6 @@ async function getLineItemId(productId: string, variantId: number) {
 export class CartService {
   static async createCart() {
     const customerId = AuthorizationService.getCustomerInfo().id;
-    let requestBody: CartDraft = {
-      currency: 'USD',
-    };
-    console.log(customerId, requestBody)
-    
     if (customerId) {
       const cart = await getCartByCustomerId(customerId);
       if (cart) {
@@ -74,7 +69,7 @@ export class CartService {
   }
 
   static async addItemToCart(productId: string, quantity: number, variantId?: number) {
-    console.log('add item', productId)
+    console.log('add item', productId);
     const version = await CartService.getCartVersion();
     const response = await AuthorizationService.getApiRoot()
       .carts()
@@ -116,6 +111,30 @@ export class CartService {
                 quantity,
               },
             ],
+          },
+        })
+        .execute();
+      return response.body;
+    } catch {
+      return null;
+    }
+  }
+
+  static async clearCart() {
+    const cart = await CartService.getCart();
+    const { version } = cart;
+    const actions: CartUpdateAction[] = cart.lineItems.map((item) => ({
+      action: 'removeLineItem',
+      lineItemId: item.id,
+    }));
+    try {
+      const response = await AuthorizationService.getApiRoot()
+        .carts()
+        .withId({ ID: CartService.getCartInfo().id })
+        .post({
+          body: {
+            version,
+            actions,
           },
         })
         .execute();
@@ -167,6 +186,76 @@ export class CartService {
       return null;
     }
   }
+
+  static getActiveDiscountCodes = async () => {
+    try {
+      const response = await AuthorizationService.getApiRoot().discountCodes().get().execute();
+      return response.body.results.filter((code) => code.isActive);
+    } catch (error) {
+      return null;
+    }
+  };
+
+  static getDiscounts = async (discountCodeIds: string[]) => {
+    const discountPromises = discountCodeIds.map((codeId) =>
+      AuthorizationService.getApiRoot().discountCodes().withId({ ID: codeId }).get().execute(),
+    );
+    const discountResponses = await Promise.all(discountPromises);
+    return discountResponses.map((response) => response.body);
+  };
+
+  static applyDiscountToCart = async (discountCode: string) => {
+    try {
+      const version = await CartService.getCartVersion();
+      const cart = await AuthorizationService.getApiRoot()
+        .carts()
+        .withId({ ID: CartService.getCartInfo().id })
+        .post({
+          body: {
+            version,
+            actions: [
+              {
+                action: 'addDiscountCode',
+                code: discountCode,
+              },
+            ],
+          },
+        })
+        .execute();
+      return cart;
+    } catch (error) {
+      console.dir(error);
+      return null;
+    }
+  };
+
+  static removeDiscountCartCode = async (discountCode: string) => {
+    try {
+      const version = await CartService.getCartVersion();
+      const cart = await AuthorizationService.getApiRoot()
+        .carts()
+        .withId({ ID: CartService.getCartInfo().id })
+        .post({
+          body: {
+            version,
+            actions: [
+              {
+                action: 'removeDiscountCode',
+                discountCode: {
+                  id: discountCode,
+                  typeId: 'discount-code',
+                },
+              },
+            ],
+          },
+        })
+        .execute();
+      return cart;
+    } catch (error) {
+      console.dir(error);
+      return null;
+    }
+  };
 
   static async getCartVersion() {
     const data = await CartService.getCart();

@@ -13,7 +13,7 @@ const getTotalProductPrice = (product: ProductNameCart) => (product.centAmount /
 
 function ProductList() {
   const cart = useCart();
-  const { products, setCart } = { ...cart };
+  const { total, products, setCart } = { ...cart };
 
   const [productsFull, setProductsFull] = useState<ProductNameCart[]>([]);
 
@@ -45,7 +45,7 @@ function ProductList() {
   };
 
   return (
-    <div className={styles.productList}>
+    <div className={styles.productList} style={{ display: total ? 'flex' : 'none' }}>
       {productsFull.map((product) => (
         <div className={styles.product} key={product.lineItemId}>
           <h3 className={styles.title}>{product.name}</h3>
