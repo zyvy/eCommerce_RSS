@@ -196,6 +196,14 @@ export class CartService {
     }
   };
 
+  static getDiscounts = async (discountCodeIds: string[]) => {
+    const discountPromises = discountCodeIds.map((codeId) =>
+      AuthorizationService.getApiRoot().discountCodes().withId({ ID: codeId }).get().execute(),
+    );
+    const discountResponses = await Promise.all(discountPromises);
+    return discountResponses.map((response) => response.body);
+  };
+
   static applyDiscountToCart = async (discountCode: string) => {
     try {
       const version = await CartService.getCartVersion();
@@ -214,11 +222,36 @@ export class CartService {
           },
         })
         .execute();
-
-      console.log('Корзина обновлена с примененной скидкой:', cart.body);
       return cart;
     } catch (error) {
-      console.error('Ошибка при применении скидки к корзине:', error);
+      console.dir(error);
+      return null;
+    }
+  };
+
+  static removeDiscountCartCode = async (discountCode: string) => {
+    try {
+      const version = await CartService.getCartVersion();
+      const cart = await AuthorizationService.getApiRoot()
+        .carts()
+        .withId({ ID: CartService.getCartInfo().id })
+        .post({
+          body: {
+            version,
+            actions: [
+              {
+                action: 'removeDiscountCode',
+                discountCode: {
+                  id: discountCode,
+                  typeId: 'discount-code',
+                },
+              },
+            ],
+          },
+        })
+        .execute();
+      return cart;
+    } catch (error) {
       console.dir(error);
       return null;
     }

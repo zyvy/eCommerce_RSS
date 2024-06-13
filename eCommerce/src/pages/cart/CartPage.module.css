@@ -48,8 +48,37 @@
   margin: 0;
 }
 
-@media (max-width: 500px) {
+.priceContainer {
+  display: flex;
+  gap: 15px;
+}
+
+.oldPrice {
+  position: relative;
+  color: #7f94a1;
+  visibility: hidden;
+}
+
+.oldPrice:before {
+  border-bottom: 3px solid red;
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 50%;
+  transform: rotate(-12deg);
+}
+
+.visible {
+  visibility: visible;
+}
+
+@media (max-width: 550px) {
   .totalContainer {
     font-size: 1rem;
+  }
+
+  .priceContainer {
+    flex-direction: column;
+    gap: 5px;
   }
 }

@@ -8,11 +8,11 @@ import { loadCart, useCart } from '../../context/CartContext.tsx';
 import ProductListForCart from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
 import ModalClearCart from '../../components/UI/modal-clear-cart/ModalClearCart.tsx';
 import { PagePaths } from '../../utils/utils.ts';
-import { CartService } from '../../services/CartService.ts';
+import PromotionalCodeUseFrom from '../../components/UI/promotional-code-use-form/PromotionalCodeUseFrom.tsx';
 
 function CartPage() {
   const cart = useCart();
-  const { total, totalPrice, setCart } = { ...cart };
+  const { total, setCart } = { ...cart };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,9 +26,18 @@ function CartPage() {
         <h1 className={styles.title}>Cart</h1>
 
         <div className={styles.totalContainer}>
-          <span>{`Total price: ${(totalPrice / 100).toFixed(2)}$`}</span>
+          <div className={styles.priceContainer}>
+            <span>Total price: </span>
+            <span>{`${(cart.totalPrice / 100).toFixed(2)}$`}</span>
+            <span className={`${styles.oldPrice} ${cart.totalDiscount ? styles.visible : ''}`}>
+              {' '}
+              {`${((cart.totalDiscount + cart.totalPrice) / 100).toFixed(2)}$`}
+            </span>
+          </div>
           <span>{`Total quantity: ${total}`}</span>
         </div>
+
+        <PromotionalCodeUseFrom />
 
         <div style={{ display: total ? 'none' : 'flex' }} className={styles.emptyCart}>
           <h3 className={styles.emptyCartTitle}>Your basket is empty. Don`t want to pick up the products?</h3>
@@ -39,15 +48,6 @@ function CartPage() {
 
         <ProductListForCart />
         <ModalClearCart />
-        <Button
-          variant="outlined"
-          onClick={() => {
-            CartService.getActiveDiscountCodes().then((data) => console.log('codes', data));
-            CartService.applyDiscountToCart('test5');
-            loadCart(cart, setCart);
-          }}>
-          скидки
-        </Button>
       </main>
       <Footer />
     </div>

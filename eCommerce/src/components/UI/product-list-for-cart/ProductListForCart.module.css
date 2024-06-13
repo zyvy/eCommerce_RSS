@@ -3,16 +3,19 @@
   gap: 20px;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: center;
 }
 
 .product {
   padding: 15px;
   display: flex;
   flex-direction: column;
+
   border: 3px solid #1976d2;
   border-radius: 15px;
   gap: 10px;
-  width: 42%;
+  width: 100%;
+  max-width: 700px;
 }
 
 .product:hover {
@@ -106,12 +109,6 @@
   background-color: #fb060615;
   cursor: pointer;
   transition: all 0.3s;
-}
-
-@media (max-width: 1000px) {
-  .product {
-    width: 100%;
-  }
 }
 
 @media (max-width: 500px) {
