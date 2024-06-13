@@ -94,6 +94,16 @@ function Header() {
               sx={{
                 fontSize: { xs: '0.8rem', md: '1rem' },
               }}
+              onClick={() => navigate(PagePaths.About)}>
+              About us
+            </Button>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+              }}
               onClick={() => navigate(PagePaths.Catalog)}>
               Catalog
             </Button>
@@ -142,6 +152,7 @@ function Header() {
                     flexDirection: 'column',
                     alignItems: 'center',
                   }}>
+                  <MenuItem onClick={() => navigate(PagePaths.About)}>ABOUT US</MenuItem>
                   <MenuItem onClick={() => navigate(PagePaths.Catalog)}>CATALOG</MenuItem>
                   {AuthorizationService.getCustomerInfo().id && (
                     <MenuItem onClick={() => navigate(PagePaths.Profile)}>PROFILE</MenuItem>

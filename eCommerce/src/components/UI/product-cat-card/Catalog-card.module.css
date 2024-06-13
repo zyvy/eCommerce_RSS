@@ -31,12 +31,12 @@
 .add_to_cart_button {
   margin-top: 10px;
   padding: 10px;
-  background-color: #4CAF50; 
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
 }
 .add_to_cart_button.disabled {
-  background-color: #CCCCCC; 
+  background-color: #cccccc;
   cursor: not-allowed;
 }

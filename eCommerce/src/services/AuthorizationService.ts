@@ -162,7 +162,7 @@ export class AuthorizationService {
 
     const params = new URLSearchParams({
       grant_type: 'client_credentials',
-      scope: `view_published_products:${env.VITE_PROJECT_KEY} manage_my_orders:${env.VITE_PROJECT_KEY} manage_my_profile:${env.VITE_PROJECT_KEY}`
+      scope: `view_published_products:${env.VITE_PROJECT_KEY} manage_my_orders:${env.VITE_PROJECT_KEY} manage_my_profile:${env.VITE_PROJECT_KEY}`,
     }).toString();
 
     let response = null;
@@ -181,7 +181,7 @@ export class AuthorizationService {
     }
     if (response.status === 200) {
       const data: Token = await response.json();
-      localStorage.setItem("AnonymousToken", JSON.stringify(data.access_token));
+      localStorage.setItem('AnonymousToken', JSON.stringify(data.access_token));
       return {
         error: false,
         accessToken: data.access_token,

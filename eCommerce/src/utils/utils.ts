@@ -9,7 +9,7 @@ export enum PagePaths {
   NotFound = '*',
   Profile = '/profile',
   Cart = '/cart',
-  About ='/about-us'
+  About = '/about-us',
 }
 
 export type SizeOfInput = 'small' | 'medium';

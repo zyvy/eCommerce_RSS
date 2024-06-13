@@ -58,9 +58,9 @@ function ProfileCards() {
           learning and learning new things!
         </p>
       </div>
-      <div>
-        <a href="https://rs.school/">
-          <img src={RsLogo} alt="RS School Logo" target="_blank" />
+      <div className={styles.rs_logo}>
+        <a href="https://rs.school/" target="_blank">
+          <img src={RsLogo} alt="RS School Logo" />
         </a>
       </div>
     </div>
