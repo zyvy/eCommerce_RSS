@@ -31,17 +31,15 @@ const style = {
 
 interface ProductItemProps {
   slug: string;
-  isInCart?: boolean;
 }
 
-function ProductItem({ slug, isInCart }: ProductItemProps) {
+function ProductItem({ slug }: ProductItemProps) {
   const [productImg, setProductImg] = useState<Image[] | undefined>([]);
   const [productTitle, setProductTitle] = useState('');
   const [productDescr, setProductDescr] = useState<string | undefined>('');
   const [productArtNumber, setProductArtNumber] = useState<string | undefined>('');
   const [productPrice, setProductPrice] = useState<number | undefined>(undefined);
   const [productDiscountedPrice, setProductDiscountedPrice] = useState<number | undefined>(undefined);
-  const [addCart, setAddCart] = useState(false);
   const [productId, setProductId] = useState('');
   const [inCart, setInCart] = useState(false);
   const [error, setError] = useState('');
@@ -55,8 +53,6 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
   };
   const handleClose = () => setOpen(false);
 
-  console.log(inCart)
-
   const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     if (!inCart) {
@@ -65,13 +61,8 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
       }
       await CartService.addItemToCart(id, 1);
       setInCart(true);
-      setAddCart(true);
       loadCart(cart, setCart);
     }
-  };
-
-  const handleDelete = (productId: string, variang: number, quantity: number) => {
-    CartService.removeItemFromCart(productId, variang, quantity).then(() => loadCart(cart, setCart));
   };
 
   useEffect(() => {
@@ -91,8 +82,7 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
             ? productData.masterVariant.prices[0].discounted?.value.centAmount
             : undefined,
         );
-        console.log('1111', productData.id)
-        console.log('2222', products)
+
         products.forEach(el => {
           if (el.id === productData.id){
             setInCart(true)
@@ -104,25 +94,13 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
       }
     };
     getProducts();
-    
-    // products.forEach(el => {
-    //   if (el.id === productId){
-    //     console.log('true')
-    //     setInCart(true)
-    //     return
-    //   }
-    //   return
-    // })
   }, [slug]);
 
   const slides = productImg?.map((prod) => prod.url);
 
-  const addToCart = () => {
-    setAddCart(true);
-  };
-
-  const deleteFromCart = () => {
-    setAddCart(false);
+  const handleDelete = (productId: string, variang: number, quantity: number) => {
+    CartService.removeItemFromCart(productId, variang, quantity).then(() => loadCart(cart, setCart));
+    setInCart(false)
   };
 
   return (
@@ -187,7 +165,7 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
           </div>
           <div className={styles.cart__wrapper}>
           {inCart ? (
-            <Button fullWidth disabled variant="contained" size="small" color="primary" onClick={() => addToCart()}>
+            <Button fullWidth disabled variant="contained" size="small" color="primary">
               In Cart
             </Button>
           ) : (
@@ -196,7 +174,7 @@ function ProductItem({ slug, isInCart }: ProductItemProps) {
             </Button>
           )}
           {inCart && (
-            <Button size="small" color="inherit" aria-label="cart" onClick={() => deleteFromCart()}>
+            <Button size="small" color="inherit" aria-label="cart" onClick={() => handleDelete(productId, 1, 1)}>
               <DeleteIcon />
             </Button>
           )}
