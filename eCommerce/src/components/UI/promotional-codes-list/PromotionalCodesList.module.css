@@ -1,0 +1,21 @@
+.promoCodeContainer {
+  display: flex;
+  gap: 30px;
+  padding: 10px;
+  border: 1px solid #1976d2;
+  border-radius: 10px;
+}
+
+.promoCode {
+  padding: 10px;
+  border: 1px solid #1976d2;
+}
+
+.description {
+  text-align: center;
+  align-self: center;
+}
+
+.title {
+  text-align: center;
+}

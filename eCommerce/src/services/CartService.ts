@@ -187,6 +187,43 @@ export class CartService {
     }
   }
 
+  static getActiveDiscountCodes = async () => {
+    try {
+      const response = await AuthorizationService.getApiRoot().discountCodes().get().execute();
+      return response.body.results.filter((code) => code.isActive);
+    } catch (error) {
+      return null;
+    }
+  };
+
+  static applyDiscountToCart = async (discountCode: string) => {
+    try {
+      const version = await CartService.getCartVersion();
+      const cart = await AuthorizationService.getApiRoot()
+        .carts()
+        .withId({ ID: CartService.getCartInfo().id })
+        .post({
+          body: {
+            version,
+            actions: [
+              {
+                action: 'addDiscountCode',
+                code: discountCode,
+              },
+            ],
+          },
+        })
+        .execute();
+
+      console.log('Корзина обновлена с примененной скидкой:', cart.body);
+      return cart;
+    } catch (error) {
+      console.error('Ошибка при применении скидки к корзине:', error);
+      console.dir(error);
+      return null;
+    }
+  };
+
   static async getCartVersion() {
     const data = await CartService.getCart();
     return data.version;

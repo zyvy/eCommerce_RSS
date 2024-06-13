@@ -5,9 +5,10 @@ import Footer from '../../components/UI/footer/Footer.tsx';
 import Header from '../../components/UI/header/Header.tsx';
 import styles from './CartPage.module.css';
 import { loadCart, useCart } from '../../context/CartContext.tsx';
-import ProductList from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
+import ProductListForCart from '../../components/UI/product-list-for-cart/ProductListForCart.tsx';
 import ModalClearCart from '../../components/UI/modal-clear-cart/ModalClearCart.tsx';
 import { PagePaths } from '../../utils/utils.ts';
+import { CartService } from '../../services/CartService.ts';
 
 function CartPage() {
   const cart = useCart();
@@ -36,8 +37,17 @@ function CartPage() {
           </Button>
         </div>
 
-        <ProductList />
+        <ProductListForCart />
         <ModalClearCart />
+        <Button
+          variant="outlined"
+          onClick={() => {
+            CartService.getActiveDiscountCodes().then((data) => console.log('codes', data));
+            CartService.applyDiscountToCart('test5');
+            loadCart(cart, setCart);
+          }}>
+          скидки
+        </Button>
       </main>
       <Footer />
     </div>
