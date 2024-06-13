@@ -12,6 +12,10 @@ import { ProductsService } from '../../../services/ProductsService.ts';
 import styles from './ProductItem.module.css';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { CartService } from '../../../services/CartService.ts';
+import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -36,7 +40,12 @@ function ProductItem({ slug }: ProductItemProps) {
   const [productArtNumber, setProductArtNumber] = useState<string | undefined>('');
   const [productPrice, setProductPrice] = useState<number | undefined>(undefined);
   const [productDiscountedPrice, setProductDiscountedPrice] = useState<number | undefined>(undefined);
+  const [productId, setProductId] = useState('');
+  const [inCart, setInCart] = useState(false);
   const [error, setError] = useState('');
+
+  const cart = useCart();
+  const { products, setCart } = { ...cart };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -44,10 +53,23 @@ function ProductItem({ slug }: ProductItemProps) {
   };
   const handleClose = () => setOpen(false);
 
+  const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (!inCart) {
+      if (!CartService.getCartInfo().id) {
+        await CartService.createCart();
+      }
+      await CartService.addItemToCart(id, 1);
+      setInCart(true);
+      loadCart(cart, setCart);
+    }
+  };
+
   useEffect(() => {
     const getProducts = async () => {
       try {
         const productData = await ProductsService.getProductByKey(slug);
+        setProductId(productData.id)
         setProductImg(productData.masterVariant.images);
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
@@ -60,6 +82,12 @@ function ProductItem({ slug }: ProductItemProps) {
             ? productData.masterVariant.prices[0].discounted?.value.centAmount
             : undefined,
         );
+
+        products.forEach(el => {
+          if (el.id === productData.id){
+            setInCart(true)
+          }
+        })
       } catch (e) {
         setError(`Тут написать про ошибку ${e}`);
         console.error(error);
@@ -69,6 +97,11 @@ function ProductItem({ slug }: ProductItemProps) {
   }, [slug]);
 
   const slides = productImg?.map((prod) => prod.url);
+
+  const handleDelete = (productId: string, variang: number, quantity: number) => {
+    CartService.removeItemFromCart(productId, variang, quantity).then(() => loadCart(cart, setCart));
+    setInCart(false)
+  };
 
   return (
     <>
@@ -123,12 +156,28 @@ function ProductItem({ slug }: ProductItemProps) {
           <div className={styles.price__wrapper}>
             {productDiscountedPrice ? (
               <>
-                <p className={styles.price__sale}>{productPrice ? productPrice / 100 : undefined}€</p>
-                <p className={styles.price__discounted}>{productDiscountedPrice / 100}€</p>
+                <p className={styles.price__sale}>${productPrice ? (productPrice / 100).toFixed(2) : undefined}</p>
+                <p className={styles.price__discounted}>${(productDiscountedPrice / 100).toFixed(2)}</p>
               </>
             ) : (
-              <p className={styles.price__standart}>{productPrice ? productPrice / 100 : undefined}€</p>
+              <p className={styles.price__standart}>${productPrice ? (productPrice / 100).toFixed(2) : undefined}</p>
             )}
+          </div>
+          <div className={styles.cart__wrapper}>
+          {inCart ? (
+            <Button fullWidth disabled variant="contained" size="small" color="primary">
+              In Cart
+            </Button>
+          ) : (
+            <Button variant="contained" size="small" color="primary" onClick={(event) => handleAddToCart(productId, event)}>
+              Add To Cart
+            </Button>
+          )}
+          {inCart && (
+            <Button size="small" color="inherit" aria-label="cart" onClick={() => handleDelete(productId, 1, 1)}>
+              <DeleteIcon />
+            </Button>
+          )}
           </div>
         </div>
       </div>
