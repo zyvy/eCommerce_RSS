@@ -8,12 +8,12 @@ import 'swiper/css/zoom';
 import { Pagination, Navigation } from 'swiper/modules';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ProductsService } from '../../../services/ProductsService.ts';
-import styles from './ProductItem.module.css';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import styles from './ProductItem.module.css';
+import { ProductsService } from '../../../services/ProductsService.ts';
 import { CartService } from '../../../services/CartService.ts';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
@@ -89,8 +89,7 @@ function ProductItem({ slug }: ProductItemProps) {
           }
         });
       } catch (e) {
-        setError(`Тут написать про ошибку ${e}`);
-        console.error(error);
+        setError(error);
       }
     };
     getProducts();

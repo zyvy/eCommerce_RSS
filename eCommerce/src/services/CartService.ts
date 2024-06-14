@@ -223,7 +223,6 @@ export class CartService {
         .execute();
       return cart;
     } catch (error) {
-      console.dir(error);
       return null;
     }
   };
@@ -251,7 +250,6 @@ export class CartService {
         .execute();
       return cart;
     } catch (error) {
-      console.dir(error);
       return null;
     }
   };

@@ -150,6 +150,7 @@ export class AuthorizationService {
       errorDescription: data.error_description,
     };
   }
+
   static async getAnonymousToken(): Promise<AccessToketResponse> {
     const myHeaders = new Headers();
     myHeaders.append('Authorization', authenticateUser());

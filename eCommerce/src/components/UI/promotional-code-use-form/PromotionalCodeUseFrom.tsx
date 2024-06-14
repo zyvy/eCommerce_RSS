@@ -16,8 +16,6 @@ function PromotionalCodeUseFrom() {
   const cart = useCart();
   const { setCart } = { ...cart };
 
-  console.dir(cart);
-
   const handleOnInputPromoCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextError('');
     setApplyPromoCode(e.target.value);

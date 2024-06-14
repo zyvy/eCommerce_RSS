@@ -65,7 +65,7 @@ export async function loadCart(cart: CartContextType, setCart: Dispatch<SetState
     });
     setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
   } catch (error) {
-    console.error('laod cart:', error);
+    return null;
   }
 }
 
