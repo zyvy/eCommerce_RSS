@@ -69,7 +69,6 @@ export class CartService {
   }
 
   static async addItemToCart(productId: string, quantity: number, variantId?: number) {
-    console.log('add item', productId);
     const version = await CartService.getCartVersion();
     const response = await AuthorizationService.getApiRoot()
       .carts()
@@ -224,7 +223,6 @@ export class CartService {
         .execute();
       return cart;
     } catch (error) {
-      console.dir(error);
       return null;
     }
   };
@@ -252,7 +250,6 @@ export class CartService {
         .execute();
       return cart;
     } catch (error) {
-      console.dir(error);
       return null;
     }
   };

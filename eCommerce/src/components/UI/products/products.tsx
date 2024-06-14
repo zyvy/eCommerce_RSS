@@ -46,14 +46,13 @@ function ProductList({
         setProducts(productData.results);
       } catch (e) {
         setError('Failed to fetch products. Please try again later.');
-        console.error(e);
       }
     };
     getProducts();
   }, [productsArray, sortingArray, priceFilter]);
 
   const cart = useCart();
-  const { products, setCart } = { ...cart };
+  const { products } = { ...cart };
 
   if (error) {
     return <div>{error}</div>;

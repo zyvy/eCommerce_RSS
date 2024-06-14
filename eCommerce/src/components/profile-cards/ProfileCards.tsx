@@ -3,6 +3,7 @@ import SergK from '../../assets/1.jpg';
 import SergT from '../../assets/2.jpg';
 import VitaZ from '../../assets/3.jpg';
 import RsLogo from '../../assets/rs_school_js.svg';
+
 function ProfileCards() {
   return (
     <div className={styles.about_wrapper}>
@@ -26,7 +27,7 @@ function ProfileCards() {
         <h2 className="profile-name">Vitali Zabairachny</h2>
         <h3 className="profile-name">Team leader</h3>
         <h4>Significant contributions: team motivation, user experience enhancement and wireframing.</h4>
-        <a href="https://github.com/zyvy" className={styles.profile_github} target="_blank">
+        <a href="https://github.com/zyvy" className={styles.profile_github} target="_blank" rel="noreferrer">
           GitHub Link
         </a>
         <p className={styles.profile_description}>Never think I can do it</p>User experience enhancement and
@@ -37,7 +38,7 @@ function ProfileCards() {
         <h2 className="profile-name">Sergey Kruglov</h2>
         <h3 className="profile-name">Front End Programmer</h3>
         <h4>Significant contributions: UI design and implementation.</h4>
-        <a href="https://github.com/serega3526" className={styles.profile_github} target="_blank">
+        <a href="https://github.com/serega3526" className={styles.profile_github} target="_blank" rel="noreferrer">
           GitHub Link
         </a>
         <p className={styles.profile_description}>
@@ -50,7 +51,7 @@ function ProfileCards() {
         <h2 className="profile-name">Sergey Terebinov</h2>
         <h3 className="profile-name">Front End Programmer</h3>
         <h4>Significant contributions: API hacker and Context provider</h4>
-        <a href="https://github.com/terebinovsergey" className={styles.profile_github} target="_blank">
+        <a href="https://github.com/terebinovsergey" className={styles.profile_github} target="_blank" rel="noreferrer">
           GitHub Link
         </a>
         <p className={styles.profile_description}>
@@ -58,9 +59,9 @@ function ProfileCards() {
           learning and learning new things!
         </p>
       </div>
-      <div>
-        <a href="https://rs.school/">
-          <img src={RsLogo} alt="RS School Logo" target="_blank" />
+      <div className={styles.rs_logo}>
+        <a href="https://rs.school/" target="_blank" rel="noreferrer">
+          <img src={RsLogo} alt="RS School Logo" />
         </a>
       </div>
     </div>

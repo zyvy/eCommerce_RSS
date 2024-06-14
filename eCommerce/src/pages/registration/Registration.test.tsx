@@ -4,7 +4,7 @@
 
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Registration from '../registration/Registration.tsx';
+import Registration from './Registration.tsx';
 import '@testing-library/jest-dom';
 // import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService.ts';
 

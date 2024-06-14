@@ -8,12 +8,12 @@ import 'swiper/css/zoom';
 import { Pagination, Navigation } from 'swiper/modules';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ProductsService } from '../../../services/ProductsService.ts';
-import styles from './ProductItem.module.css';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import styles from './ProductItem.module.css';
+import { ProductsService } from '../../../services/ProductsService.ts';
 import { CartService } from '../../../services/CartService.ts';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
@@ -69,7 +69,7 @@ function ProductItem({ slug }: ProductItemProps) {
     const getProducts = async () => {
       try {
         const productData = await ProductsService.getProductByKey(slug);
-        setProductId(productData.id)
+        setProductId(productData.id);
         setProductImg(productData.masterVariant.images);
         setProductTitle(productData.name['en-US']);
         setProductDescr(productData.description?.['en-US']);
@@ -83,14 +83,13 @@ function ProductItem({ slug }: ProductItemProps) {
             : undefined,
         );
 
-        products.forEach(el => {
-          if (el.id === productData.id){
-            setInCart(true)
+        products.forEach((el) => {
+          if (el.id === productData.id) {
+            setInCart(true);
           }
-        })
+        });
       } catch (e) {
-        setError(`Тут написать про ошибку ${e}`);
-        console.error(error);
+        setError(error);
       }
     };
     getProducts();
@@ -100,7 +99,7 @@ function ProductItem({ slug }: ProductItemProps) {
 
   const handleDelete = (productId: string, variang: number, quantity: number) => {
     CartService.removeItemFromCart(productId, variang, quantity).then(() => loadCart(cart, setCart));
-    setInCart(false)
+    setInCart(false);
   };
 
   return (
@@ -164,20 +163,24 @@ function ProductItem({ slug }: ProductItemProps) {
             )}
           </div>
           <div className={styles.cart__wrapper}>
-          {inCart ? (
-            <Button fullWidth disabled variant="contained" size="small" color="primary">
-              In Cart
-            </Button>
-          ) : (
-            <Button variant="contained" size="small" color="primary" onClick={(event) => handleAddToCart(productId, event)}>
-              Add To Cart
-            </Button>
-          )}
-          {inCart && (
-            <Button size="small" color="inherit" aria-label="cart" onClick={() => handleDelete(productId, 1, 1)}>
-              <DeleteIcon />
-            </Button>
-          )}
+            {inCart ? (
+              <Button fullWidth disabled variant="contained" size="small" color="primary">
+                In Cart
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                onClick={(event) => handleAddToCart(productId, event)}>
+                Add To Cart
+              </Button>
+            )}
+            {inCart && (
+              <Button size="small" color="inherit" aria-label="cart" onClick={() => handleDelete(productId, 1, 1)}>
+                <DeleteIcon />
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -63,10 +63,9 @@ export async function loadCart(cart: CartContextType, setCart: Dispatch<SetState
         lineItemId: item.id,
       });
     });
-    console.log(totalDiscount2, totalDiscount);
     setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
   } catch (error) {
-    console.log('laod cart:', error);
+    return null;
   }
 }
 

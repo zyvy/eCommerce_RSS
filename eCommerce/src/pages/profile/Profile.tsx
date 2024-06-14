@@ -34,7 +34,6 @@ function Profile() {
     const response = await RegistrationService.getCustomer();
     const { customer } = response;
     if (!customer) {
-      console.log('something error fetch getCustomer');
       return;
     }
 

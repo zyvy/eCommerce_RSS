@@ -8,7 +8,7 @@ function Sorting({ onSortChange }: SortingProps) {
   const [selectedOption, setSelectedOption] = useState<string>('');
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
     setSelectedOption(value);
     onSortChange(value);
   };

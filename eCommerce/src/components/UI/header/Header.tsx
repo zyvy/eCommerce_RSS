@@ -1,19 +1,19 @@
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Header.module.css';
-import { isUserLoggedIn } from '../../../utils/validation.ts';
-import { PagePaths } from '../../../utils/utils.ts';
-import { AuthorizationService } from '../../../services/AuthorizationService.ts';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MediaQuery from 'react-responsive';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
+import { AuthorizationService } from '../../../services/AuthorizationService.ts';
+import { PagePaths } from '../../../utils/utils.ts';
+import { isUserLoggedIn } from '../../../utils/validation.ts';
+import styles from './Header.module.css';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
 // const handleClose = () => setOpen(false);
@@ -94,6 +94,16 @@ function Header() {
               sx={{
                 fontSize: { xs: '0.8rem', md: '1rem' },
               }}
+              onClick={() => navigate(PagePaths.About)}>
+              About us
+            </Button>
+            <Button
+              type="submit"
+              className={styles.button}
+              variant="contained"
+              sx={{
+                fontSize: { xs: '0.8rem', md: '1rem' },
+              }}
               onClick={() => navigate(PagePaths.Catalog)}>
               Catalog
             </Button>
@@ -142,6 +152,7 @@ function Header() {
                     flexDirection: 'column',
                     alignItems: 'center',
                   }}>
+                  <MenuItem onClick={() => navigate(PagePaths.About)}>ABOUT US</MenuItem>
                   <MenuItem onClick={() => navigate(PagePaths.Catalog)}>CATALOG</MenuItem>
                   {AuthorizationService.getCustomerInfo().id && (
                     <MenuItem onClick={() => navigate(PagePaths.Profile)}>PROFILE</MenuItem>
