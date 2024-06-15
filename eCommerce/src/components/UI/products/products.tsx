@@ -17,14 +17,6 @@ function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-/* async function getItemsInCard(): Promise<string[]> {
-  if (CartService.getCartInfo().id) {
-    const products = await CartService.getProducts();
-    return products.map((item) => item.id);
-  } else {
-    return [''];
-  }
-} */
 
 function ProductList({
   productsArray = '',
@@ -34,22 +26,36 @@ function ProductList({
 }: ProductListProps) {
   const [productsProjection, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
-  // const [cartItems, setCartItems] = useState<string[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(0);
+  const productsPerPage = 6
+
+  const handlePageClick = (pageNumber: number) => {
+    console.log('got to page', pageNumber)
+    setOffset(productsPerPage * (pageNumber - 1));
+    setCurrentPage(pageNumber);
+  };
+
   useEffect(() => {
     const getProducts = async () => {
       try {
-        /* const itemsInCart = await getItemsInCard();
-        if (itemsInCart) {
-          setCartItems(itemsInCart);
-        } */
-        const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season);
+        const productData = await ProductsService.performSearch(
+          productsArray,
+          sortingArray,
+          priceFilter,
+          season,
+          productsPerPage,
+          offset,
+        );
         setProducts(productData.results);
+        setTotalPages(productData.total ? Math.ceil(productData.total / productsPerPage) : 0);
       } catch (e) {
         setError('Failed to fetch products. Please try again later.');
       }
     };
     getProducts();
-  }, [productsArray, sortingArray, priceFilter]);
+  }, [productsArray, sortingArray, priceFilter, currentPage]);
 
   const cart = useCart();
   const { products } = { ...cart };
@@ -58,31 +64,43 @@ function ProductList({
     return <div>{error}</div>;
   }
   return (
-    <div className={styles.product_list}>
-      {productsProjection.map((product) => (
-        <ProductCard
-          key={product.id}
-          id={product.id}
-          name={product.name['en-US']}
-          image={product.masterVariant?.images?.[0].url ? product.masterVariant?.images?.[0].url : 'http://localhost'}
-          description={
-            product.description?.['en-US'] ? extractFirstSentence(product.description?.['en-US']) : 'description'
-          }
-          price={
-            product.masterVariant?.prices?.[0].value?.centAmount
-              ? product.masterVariant.prices[0].value.centAmount / 100
-              : 0
-          }
-          discountPrice={
-            product.masterVariant?.prices?.[0].discounted
-              ? product.masterVariant.prices?.[0].discounted.value?.centAmount / 100
-              : 0
-          }
-          slug={product.key ? product.key : ''}
-          /* isInCart={cartItems.some((id) => product.id === id)} */
-          isInCart={products.some(({ id }) => product.id === id)}
-        />
-      ))}
+    <div>
+      <div className={styles.product_list}>
+        {productsProjection.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            name={product.name['en-US']}
+            image={product.masterVariant?.images?.[0].url ? product.masterVariant?.images?.[0].url : 'http://localhost'}
+            description={
+              product.description?.['en-US'] ? extractFirstSentence(product.description?.['en-US']) : 'description'
+            }
+            price={
+              product.masterVariant?.prices?.[0].value?.centAmount
+                ? product.masterVariant.prices[0].value.centAmount / 100
+                : 0
+            }
+            discountPrice={
+              product.masterVariant?.prices?.[0].discounted
+                ? product.masterVariant.prices?.[0].discounted.value?.centAmount / 100
+                : 0
+            }
+            slug={product.key ? product.key : ''}
+            /* isInCart={cartItems.some((id) => product.id === id)} */
+            isInCart={products.some(({ id }) => product.id === id)}
+          />
+        ))}
+      </div>
+      <div className={styles.pagination_block}>
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => handlePageClick(pageNumber)}
+            className={pageNumber === currentPage ? styles.active : ''}>
+            {pageNumber}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
