@@ -2,12 +2,18 @@ import { Dispatch, SetStateAction, createContext, useState, useContext, useMemo,
 import { Cart } from '@commercetools/platform-sdk';
 import { CartService, ProductCart } from '../services/CartService.ts';
 
+type PromoCode = {
+  id: string;
+  code: string;
+};
+
 export interface CartState {
   id: string;
   products: ProductCart[];
   total: number;
   totalPrice: number;
   totalDiscount: number;
+  allApplyPromoCodes: PromoCode[];
 }
 
 export type CartContextType = CartState & {
@@ -20,6 +26,7 @@ export const initialCartState: CartState = {
   total: 0,
   totalPrice: 0,
   totalDiscount: 0,
+  allApplyPromoCodes: [],
 };
 
 const CartContext = createContext<CartContextType>({
@@ -65,7 +72,7 @@ export async function loadCart(cart: CartContextType, setCart: Dispatch<SetState
     });
     setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
   } catch (error) {
-    return null;
+    console.dir(error);
   }
 }
 

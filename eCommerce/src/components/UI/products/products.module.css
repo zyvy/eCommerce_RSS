@@ -1,31 +1,30 @@
 .product_list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 20px; 
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
-
 
 @media (max-width: 900px) {
   .product_list {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .product_list {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
-.pagination_block{
+.pagination_block {
   display: flex;
   justify-content: center;
 }
-button{
+button {
   cursor: pointer;
 }
-button:hover{
+button:hover {
   background-color: gray;
 }
-.active{
+.active {
   background-color: lightslategray;
 }
