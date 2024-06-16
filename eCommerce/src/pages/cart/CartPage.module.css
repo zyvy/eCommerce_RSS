@@ -54,6 +54,7 @@
 }
 
 .oldPrice {
+  align-self: flex-start;
   position: relative;
   color: #7f94a1;
   visibility: hidden;

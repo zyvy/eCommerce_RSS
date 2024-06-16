@@ -4,12 +4,14 @@ import TextField from '@mui/material/TextField';
 type PropsType = {
   label: string;
   errorText: string;
+  value: string;
   handleOnInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function InputText({ label, errorText, handleOnInput }: PropsType) {
+function InputText({ label, errorText, value, handleOnInput }: PropsType) {
   return (
     <TextField
+      value={value}
       error={!!errorText}
       helperText={errorText}
       size="small"

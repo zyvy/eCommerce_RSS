@@ -1,4 +1,4 @@
-import { DiscountCode, DiscountCodeInfo } from '@commercetools/platform-sdk';
+import { DiscountCode } from '@commercetools/platform-sdk';
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
@@ -9,15 +9,18 @@ import { CartService } from '../../../services/CartService.ts';
 import InputText from '../inputs/input-text/InputText.tsx';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
+type PromoCode = {
+  id: string;
+  code: string;
+};
+
 const isPromoCodeValid = (codes: DiscountCode[], code: string) => codes.some((item) => item.code === code);
 
 function PromotionalCodeUseFrom() {
   const [promoCodes, setPromoCodes] = useState<DiscountCode[]>([]);
   const [applyPromoCode, setApplyPromoCode] = useState('');
   const [textError, setTextError] = useState('');
-  const [allApplyPromoCodes, setAllApplyPromoCodes] = useState<DiscountCodeInfo[] | undefined>([]);
-  const [promo10, setPromo10] = useState('');
-  const [promo20, setPromo20] = useState('');
+  const [allApplyPromoCodes, setAllApplyPromoCodes] = useState<PromoCode[]>([]);
 
   const cart = useCart();
   const { setCart } = { ...cart };
@@ -32,36 +35,27 @@ function PromotionalCodeUseFrom() {
       setTextError('invalid promotional code');
       return;
     }
+
     const response = await CartService.applyDiscountToCart(applyPromoCode);
-    setAllApplyPromoCodes(response?.body.discountCodes);
-    setPromo10('Промокод sale10 применен.');
-    setPromo20('Промокод sale20 применен.');
-    loadCart(cart, setCart);
-    setTextError('');
-
-    await CartService.getDiscounts(promoCodes.map((code) => code.id));
-  };
-  const handleDelPromoCode10 = async () => {
-    await CartService.removeDiscountCartCode('4a958570-db54-4cb7-bce5-abfb4619d92e');
-
-    for (let i = 0; i < promoCodes.length; i++) {
-      if (promoCodes[i].id === '4a958570-db54-4cb7-bce5-abfb4619d92e') {
-        promoCodes.splice(i, 1);
-        setPromoCodes(promoCodes);
-        setPromo10('');
-      }
+    if (response) {
+      const applyPromoCodes = response?.body.discountCodes.map((code) => code.discountCode.id);
+      const discounts = await CartService.getDiscounts(applyPromoCodes);
+      const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
+      setAllApplyPromoCodes(applyCodes);
     }
-    loadCart(cart, setCart);
-  };
-  const handleDelPromoCode20 = async () => {
-    await CartService.removeDiscountCartCode('b640da39-b5d6-470d-b15a-ec25d440fab0');
 
-    for (let i = 0; i < promoCodes.length; i++) {
-      if (promoCodes[i].id === 'b640da39-b5d6-470d-b15a-ec25d440fab0') {
-        promoCodes.splice(i, 1);
-        setPromoCodes(promoCodes);
-        setPromo20('');
-      }
+    loadCart(cart, setCart);
+    setApplyPromoCode('');
+    setTextError('');
+  };
+
+  const handleRemovePromoCode = async (discountCode: string) => {
+    const response = await CartService.removeDiscountCartCode(discountCode);
+    if (response) {
+      const applyPromoCodes = response?.body.discountCodes.map((code) => code.discountCode.id);
+      const discounts = await CartService.getDiscounts(applyPromoCodes);
+      const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
+      setAllApplyPromoCodes(applyCodes);
     }
     loadCart(cart, setCart);
   };
@@ -72,12 +66,28 @@ function PromotionalCodeUseFrom() {
         setPromoCodes(codes);
       }
     });
+
+    console.log('use effect');
+
+    if (CartService.getCartInfo().id) {
+      CartService.getCart().then((response) => {
+        CartService.getDiscounts(response.discountCodes.map((code) => code.discountCode.id)).then((discounts) => {
+          const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
+          setAllApplyPromoCodes(applyCodes);
+        });
+      });
+    }
   }, []);
 
   return (
     <>
       <div className={styles.applyPromoCodeContainer}>
-        <InputText handleOnInput={handleOnInputPromoCode} label="promo code" errorText={textError} />
+        <InputText
+          handleOnInput={handleOnInputPromoCode}
+          value={applyPromoCode}
+          label="promo code"
+          errorText={textError}
+        />
         <Button
           disabled={applyPromoCode.length === 0}
           style={{ alignSelf: 'flex-start' }}
@@ -87,32 +97,16 @@ function PromotionalCodeUseFrom() {
         </Button>
       </div>
       <div>
-        {allApplyPromoCodes?.map((item) => {
-          if (item.discountCode.id === '4a958570-db54-4cb7-bce5-abfb4619d92e' && promo10.length && cart.totalDiscount) {
-            return (
-              <div key={item.discountCode.id} className={styles.wrapper_discount}>
-                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-                  {promo10}
-                </Alert>
-                <Button size="small" color="inherit" aria-label="cart" onClick={handleDelPromoCode10}>
-                  <DeleteIcon />
-                </Button>
-              </div>
-            );
-          }
-          if (item.discountCode.id === 'b640da39-b5d6-470d-b15a-ec25d440fab0' && promo20.length && cart.totalDiscount) {
-            return (
-              <div key={item.discountCode.id} className={styles.wrapper_discount}>
-                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-                  {promo20}
-                </Alert>
-                <Button size="small" color="inherit" aria-label="cart" onClick={handleDelPromoCode20}>
-                  <DeleteIcon />
-                </Button>
-              </div>
-            );
-          }
-        })}
+        {allApplyPromoCodes.map((item) => (
+          <div key={item.id} className={styles.wrapper_discount}>
+            <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+              {`Promo code "${item.code}" applied.`}
+            </Alert>
+            <Button size="small" color="inherit" aria-label="cart" onClick={() => handleRemovePromoCode(item.id)}>
+              <DeleteIcon />
+            </Button>
+          </div>
+        ))}
       </div>
     </>
   );

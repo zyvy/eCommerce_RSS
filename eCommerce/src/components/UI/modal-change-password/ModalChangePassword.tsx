@@ -61,6 +61,7 @@ function ModalChangePassword() {
         <DialogContent>
           <div className={styles.changePassword}>
             <InputText
+              value={oldPassword}
               label="current password"
               errorText={changePasswordError}
               handleOnInput={handleInputOldPassword}
