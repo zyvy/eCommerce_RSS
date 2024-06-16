@@ -13,7 +13,7 @@ const getTotalProductPrice = (product: ProductNameCart) => (product.centAmount /
 
 function ProductList() {
   const cart = useCart();
-  const { total, products, setCart } = { ...cart };
+  const { allApplyPromoCodes, total, products, setCart } = { ...cart };
 
   const [productsFull, setProductsFull] = useState<ProductNameCart[]>([]);
 
@@ -32,8 +32,13 @@ function ProductList() {
     });
   }, [products]);
 
-  const handleDelete = (productId: string, variang: number, quantity: number) => {
-    CartService.removeItemFromCart(productId, variang, quantity).then(() => loadCart(cart, setCart));
+  const handleDelete = async (productId: string, variang: number, quantity: number) => {
+    await CartService.removeItemFromCart(productId, variang, quantity);
+    if (cart.products.length <= 1) {
+      await Promise.all(allApplyPromoCodes.map((code) => CartService.removeDiscountCartCode(code.id)));
+      cart.allApplyPromoCodes = [];
+    }
+    loadCart(cart, setCart);
   };
 
   const handleAdd = (productId: string, variantId?: number) => {

@@ -9,7 +9,7 @@ import { CartService } from '../../../services/CartService.ts';
 
 function ModalClearCart() {
   const cart = useCart();
-  const { total, setCart } = { ...cart };
+  const { total, allApplyPromoCodes, setCart } = { ...cart };
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -28,14 +28,12 @@ function ModalClearCart() {
   };
 
   const handleClearCart = async () => {
-    await CartService.removeDiscountCartCode('4a958570-db54-4cb7-bce5-abfb4619d92e');
-    await CartService.removeDiscountCartCode('b640da39-b5d6-470d-b15a-ec25d440fab0');
-    await CartService.clearCart().then(() =>
-      loadCart(cart, setCart).then(() => {
-        scrollToTop();
-        setOpen(false);
-      }),
-    );
+    await Promise.all(allApplyPromoCodes.map((code) => CartService.removeDiscountCartCode(code.id)));
+    await CartService.clearCart();
+    cart.allApplyPromoCodes = [];
+    await loadCart(cart, setCart);
+    scrollToTop();
+    setOpen(false);
   };
 
   return (

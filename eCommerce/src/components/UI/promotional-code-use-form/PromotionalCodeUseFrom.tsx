@@ -9,17 +9,15 @@ import { CartService } from '../../../services/CartService.ts';
 import InputText from '../inputs/input-text/InputText.tsx';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
-
 const isPromoCodeValid = (codes: DiscountCode[], code: string) => codes.some((item) => item.code === code);
 
 function PromotionalCodeUseFrom() {
   const [promoCodes, setPromoCodes] = useState<DiscountCode[]>([]);
   const [applyPromoCode, setApplyPromoCode] = useState('');
   const [textError, setTextError] = useState('');
-  
 
   const cart = useCart();
-  const { allApplyPromoCodes, setCart } = { ...cart };
+  const { allApplyPromoCodes, products, setCart } = { ...cart };
 
   const handleOnInputPromoCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextError('');
@@ -37,8 +35,7 @@ function PromotionalCodeUseFrom() {
       const applyPromoCodes = response?.body.discountCodes.map((code) => code.discountCode.id);
       const discounts = await CartService.getDiscounts(applyPromoCodes);
       const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
-      setCart({ ...cart, allApplyPromoCodes: applyCodes });
-
+      cart.allApplyPromoCodes = applyCodes;
     }
 
     loadCart(cart, setCart);
@@ -52,7 +49,7 @@ function PromotionalCodeUseFrom() {
       const applyPromoCodes = response?.body.discountCodes.map((code) => code.discountCode.id);
       const discounts = await CartService.getDiscounts(applyPromoCodes);
       const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
-      setCart({ ...cart, allApplyPromoCodes: applyCodes });
+      cart.allApplyPromoCodes = applyCodes;
     }
     loadCart(cart, setCart);
   };
@@ -84,7 +81,7 @@ function PromotionalCodeUseFrom() {
           errorText={textError}
         />
         <Button
-          disabled={applyPromoCode.length === 0}
+          disabled={applyPromoCode.length === 0 || products.length === 0}
           style={{ alignSelf: 'flex-start' }}
           variant="outlined"
           onClick={handleApplyPromoCode}>

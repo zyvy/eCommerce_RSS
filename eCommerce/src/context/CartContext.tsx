@@ -13,9 +13,8 @@ export interface CartState {
   total: number;
   totalPrice: number;
   totalDiscount: number;
-  allApplyPromoCodes: PromoCode[],
+  allApplyPromoCodes: PromoCode[];
 }
-
 
 export type CartContextType = CartState & {
   setCart: Dispatch<SetStateAction<CartState>>;
