@@ -23,18 +23,23 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
   const cart = useCart();
   const { setCart } = { ...cart };
 
-  const handleCardClick = (slug: string) => {
-    navigate(`/product/${slug}`);
+  const handleCardClick = (urlslug: string) => {
+    navigate(`/product/${urlslug}`);
+  };
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLElement>, urlslug: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleCardClick(urlslug);
+    }
   };
 
-  const handleAddToCart = async (id: string, event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddToCart = async (prodid: string, event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     if (!inCart && !loading) {
       setLoading(true);
       if (!CartService.getCartInfo().id) {
         await CartService.createCart();
       }
-      await CartService.addItemToCart(id, 1);
+      await CartService.addItemToCart(prodid, 1);
       setInCart(true);
       setLoading(false);
       loadCart(cart, setCart);
@@ -42,7 +47,12 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
   };
 
   return (
-    <div className={styles.product_card} onClick={() => handleCardClick(slug)}>
+    <div
+      className={styles.product_card}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(event) => handleKeyPress(event, slug)}
+      onClick={() => handleCardClick(slug)}>
       <p>{id}</p>
       <img src={image} alt={name} className={styles.product_image} />
       <h2 className={styles.product_name}>{name}</h2>
@@ -50,25 +60,32 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
       {discountPrice ? (
         <>
           <p className={styles.product_price}>
-            <span>€</span>
+            <span>$</span>
             {discountPrice} <s className={styles.product_discount}>€{price}</s>
           </p>
           <p className={styles.product_sale}>Sale!</p>
         </>
       ) : (
         <p className={styles.product_price}>
-          <span>€</span>
+          <span>$</span>
           {price}
         </p>
       )}
       <button
+        type="button"
         className={`${styles.add_to_cart_button} ${inCart ? styles.disabled : ''}`}
         onClick={(event) => handleAddToCart(id, event)}
         disabled={inCart || loading}>
-        {loading ? 'Adding to card...' : inCart ? 'In Cart' : 'Add to Cart'}
+        {loading && 'Adding to cart...'}
+        {!loading && inCart && 'In Cart'}
+        {!loading && !inCart && 'Add to Cart'}
       </button>
     </div>
   );
 }
+ProductCard.defaultProps = {
+  discountPrice: undefined,
+  isInCart: false,
+};
 
 export default ProductCard;

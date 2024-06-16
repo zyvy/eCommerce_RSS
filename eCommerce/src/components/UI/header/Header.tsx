@@ -38,7 +38,7 @@ function Header() {
 
   useEffect(() => {
     loadCart(cartContext, setCart);
-  }, []);
+  }, [cartContext, setCart]);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);

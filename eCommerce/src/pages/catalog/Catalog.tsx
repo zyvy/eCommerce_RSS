@@ -18,12 +18,12 @@ function Catalog() {
   const handleSearch = (value: string) => {
     setSearchResults(value);
   };
-  const handleSortChange = (sortOption: string) => {
-    setSortOption(sortOption);
+  const handleSortChange = (srtOption: string) => {
+    setSortOption(srtOption);
   };
-  const handleFilterChange = (minPrice: string, maxPrice: string) => {
-    setMinPrice(minPrice);
-    setMaxPrice(maxPrice);
+  const handleFilterChange = (mnPrice: string, mxPrice: string) => {
+    setMinPrice(mnPrice);
+    setMaxPrice(mxPrice);
   };
   const handleSeasonChange = (season: string) => {
     setSelectedSeason(season);

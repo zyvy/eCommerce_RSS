@@ -41,15 +41,15 @@ export class ProductsService {
     priceFilter: string[],
     season: string,
     limit: number,
-    offset: number
+    offset: number,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const searchParams: SearchParams = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       'text.en-US': searchQuery,
       fuzzy: true,
       sort: getSortingString(sortingParams),
-      limit: limit,
-      offset: offset,
+      limit,
+      offset,
     };
 
     if (priceFilter[0] !== '' && priceFilter[1] !== '') {

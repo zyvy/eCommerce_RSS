@@ -23,7 +23,7 @@ function ProfileCards() {
         </p>
       </div>
       <div className={styles.profile_card}>
-        <img src={VitaZ} className={styles.profile_image} />
+        <img src={VitaZ} className={styles.profile_image} alt="profile-card" />
         <h2 className="profile-name">Vitali Zabairachny</h2>
         <h3 className="profile-name">Team leader</h3>
         <h4>Significant contributions: team motivation, user experience enhancement and wireframing.</h4>
@@ -34,7 +34,7 @@ function ProfileCards() {
         wireframing.
       </div>
       <div className={styles.profile_card}>
-        <img src={SergK} className={styles.profile_image} />
+        <img src={SergK} className={styles.profile_image} alt="profile-card" />
         <h2 className="profile-name">Sergey Kruglov</h2>
         <h3 className="profile-name">Front End Programmer</h3>
         <h4>Significant contributions: UI design and implementation.</h4>
@@ -42,12 +42,12 @@ function ProfileCards() {
           GitHub Link
         </a>
         <p className={styles.profile_description}>
-          I am a novice developer. I'm learning fast. Now I work as a marketer, but in the future I want to change my
-          profession.
+          I am a novice developer. I&apos;m learning fast. Now I work as a marketer, but in the future I want to change
+          my profession.
         </p>
       </div>
       <div className={styles.profile_card}>
-        <img src={SergT} className={styles.profile_image} />
+        <img src={SergT} className={styles.profile_image} alt="profile-card" />
         <h2 className="profile-name">Sergey Terebinov</h2>
         <h3 className="profile-name">Front End Programmer</h3>
         <h4>Significant contributions: API hacker and Context provider</h4>

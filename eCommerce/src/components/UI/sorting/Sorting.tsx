@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import styles from './Sorting.module.css';
 
 interface SortingProps {
   onSortChange: (sortOption: string) => void;
@@ -15,14 +16,16 @@ function Sorting({ onSortChange }: SortingProps) {
 
   return (
     <div>
-      <label htmlFor="sort">Sort by: </label>
-      <select id="sort" value={selectedOption} onChange={handleSortChange}>
-        <option value="">Select</option>
-        <option value="price-asc">Price: Low to High</option>
-        <option value="price-desc">Price: High to Low</option>
-        <option value="name-asc">Name: A to Z</option>
-        <option value="name-desc">Name: Z to A</option>
-      </select>
+      <label htmlFor={styles.sort}>
+        Sort by:
+        <select id={styles.sort} value={selectedOption} onChange={handleSortChange}>
+          <option value="">Select</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A to Z</option>
+          <option value="name-desc">Name: Z to A</option>
+        </select>
+      </label>
     </div>
   );
 }

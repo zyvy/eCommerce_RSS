@@ -1,6 +1,6 @@
-import Footer from '../../components/UI/footer/Footer';
-import Header from '../../components/UI/header/Header';
-import ProfileCards from '../../components/profile-cards/ProfileCards';
+import Footer from '../../components/UI/footer/Footer.tsx';
+import Header from '../../components/UI/header/Header.tsx';
+import ProfileCards from '../../components/profile-cards/ProfileCards.tsx';
 
 function AboutUs() {
   return (
