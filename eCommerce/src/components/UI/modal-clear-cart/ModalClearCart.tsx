@@ -27,8 +27,10 @@ function ModalClearCart() {
     });
   };
 
-  const handleClearCart = () => {
-    CartService.clearCart().then(() =>
+  const handleClearCart = async () => {
+    await CartService.removeDiscountCartCode('4a958570-db54-4cb7-bce5-abfb4619d92e');
+    await CartService.removeDiscountCartCode('b640da39-b5d6-470d-b15a-ec25d440fab0');
+    await CartService.clearCart().then(() =>
       loadCart(cart, setCart).then(() => {
         scrollToTop();
         setOpen(false);
