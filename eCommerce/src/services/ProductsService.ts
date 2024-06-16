@@ -41,7 +41,7 @@ export class ProductsService {
     priceFilter: string[],
     season: string,
     limit: number,
-    offset: number
+    offset: number,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const searchParams: SearchParams = {
       // eslint-disable-next-line @typescript-eslint/naming-convention

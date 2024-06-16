@@ -90,7 +90,7 @@ function PromotionalCodeUseFrom() {
         {allApplyPromoCodes?.map((item) => {
           if (item.discountCode.id === '4a958570-db54-4cb7-bce5-abfb4619d92e' && promo10.length && cart.totalDiscount) {
             return (
-              <div className={styles.wrapper_discount}>
+              <div key={item.discountCode.id} className={styles.wrapper_discount}>
                 <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
                   {promo10}
                 </Alert>
@@ -102,7 +102,7 @@ function PromotionalCodeUseFrom() {
           }
           if (item.discountCode.id === 'b640da39-b5d6-470d-b15a-ec25d440fab0' && promo20.length && cart.totalDiscount) {
             return (
-              <div className={styles.wrapper_discount}>
+              <div key={item.discountCode.id} className={styles.wrapper_discount}>
                 <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
                   {promo20}
                 </Alert>

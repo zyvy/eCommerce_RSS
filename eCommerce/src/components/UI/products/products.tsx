@@ -29,10 +29,10 @@ function ProductList({
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [offset, setOffset] = useState<number>(0);
-  const productsPerPage = 6
+  const productsPerPage = 6;
 
   const handlePageClick = (pageNumber: number) => {
-    console.log('got to page', pageNumber)
+    console.log('got to page', pageNumber);
     setOffset(productsPerPage * (pageNumber - 1));
     setCurrentPage(pageNumber);
   };
