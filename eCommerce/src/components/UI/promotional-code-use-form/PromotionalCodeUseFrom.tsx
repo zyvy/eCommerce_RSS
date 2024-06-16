@@ -9,10 +9,6 @@ import { CartService } from '../../../services/CartService.ts';
 import InputText from '../inputs/input-text/InputText.tsx';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
 
-type PromoCode = {
-  id: string;
-  code: string;
-};
 
 const isPromoCodeValid = (codes: DiscountCode[], code: string) => codes.some((item) => item.code === code);
 
@@ -20,10 +16,10 @@ function PromotionalCodeUseFrom() {
   const [promoCodes, setPromoCodes] = useState<DiscountCode[]>([]);
   const [applyPromoCode, setApplyPromoCode] = useState('');
   const [textError, setTextError] = useState('');
-  const [allApplyPromoCodes, setAllApplyPromoCodes] = useState<PromoCode[]>([]);
+  
 
   const cart = useCart();
-  const { setCart } = { ...cart };
+  const { allApplyPromoCodes, setCart } = { ...cart };
 
   const handleOnInputPromoCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextError('');
@@ -41,7 +37,8 @@ function PromotionalCodeUseFrom() {
       const applyPromoCodes = response?.body.discountCodes.map((code) => code.discountCode.id);
       const discounts = await CartService.getDiscounts(applyPromoCodes);
       const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
-      setAllApplyPromoCodes(applyCodes);
+      setCart({ ...cart, allApplyPromoCodes: applyCodes });
+
     }
 
     loadCart(cart, setCart);
@@ -55,7 +52,7 @@ function PromotionalCodeUseFrom() {
       const applyPromoCodes = response?.body.discountCodes.map((code) => code.discountCode.id);
       const discounts = await CartService.getDiscounts(applyPromoCodes);
       const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
-      setAllApplyPromoCodes(applyCodes);
+      setCart({ ...cart, allApplyPromoCodes: applyCodes });
     }
     loadCart(cart, setCart);
   };
@@ -67,13 +64,11 @@ function PromotionalCodeUseFrom() {
       }
     });
 
-    console.log('use effect');
-
     if (CartService.getCartInfo().id) {
       CartService.getCart().then((response) => {
         CartService.getDiscounts(response.discountCodes.map((code) => code.discountCode.id)).then((discounts) => {
           const applyCodes = discounts.map((discount) => ({ id: discount.id, code: discount.code }));
-          setAllApplyPromoCodes(applyCodes);
+          setCart({ ...cart, allApplyPromoCodes: applyCodes });
         });
       });
     }
