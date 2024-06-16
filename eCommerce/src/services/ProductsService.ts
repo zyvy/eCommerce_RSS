@@ -7,7 +7,7 @@ import { ctpClient } from './ctpClient.ts';
 import { env, getSortingString } from '../utils/utils.ts';
 
 interface SearchParams {
-  [key: string]: string | boolean | string[];
+  [key: string]: string | boolean | string[] | number;
 }
 
 export class ProductsService {
@@ -40,12 +40,16 @@ export class ProductsService {
     sortingParams: string,
     priceFilter: string[],
     season: string,
+    limit: number,
+    offset: number
   ): Promise<ProductProjectionPagedSearchResponse> {
     const searchParams: SearchParams = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       'text.en-US': searchQuery,
       fuzzy: true,
       sort: getSortingString(sortingParams),
+      limit: limit,
+      offset: offset,
     };
 
     if (priceFilter[0] !== '' && priceFilter[1] !== '') {
