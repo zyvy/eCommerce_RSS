@@ -2,6 +2,7 @@
 import { Customer, createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ctpClient } from './ctpClient.ts';
 import { env } from '../utils/utils.ts';
+import { CartService } from './CartService.ts';
 
 type Token = {
   access_token: string;
@@ -41,6 +42,14 @@ type CustomerInfo = {
   version: string;
 };
 
+interface SigninParams {
+  email: string;
+  password: string;
+  updateProductData?: boolean;
+  anonymousCartId?: string;
+  anonymousCartSignInMode?: string;
+}
+
 const KEY_CUSTOMER = 'customer';
 
 function authenticateUser() {
@@ -52,6 +61,16 @@ function authenticateUser() {
 export class AuthorizationService {
   static async login({ email, password }: AuthData): Promise<LoginResponse> {
     const apiRoot = AuthorizationService.getApiRoot();
+    const anonimCartId = CartService.getCartInfo()?.id;
+    const requestBody: SigninParams = {
+      email,
+      password,
+    };
+    if (anonimCartId) {
+      requestBody.updateProductData = true;
+      requestBody.anonymousCartId = anonimCartId;
+      requestBody.anonymousCartSignInMode = 'MergeWithExistingCustomerCart';
+    }
 
     try {
       const {
@@ -60,10 +79,7 @@ export class AuthorizationService {
         .me()
         .login()
         .post({
-          body: {
-            email,
-            password,
-          },
+          body: requestBody,
         })
         .execute();
 
