@@ -9,9 +9,7 @@ import '@testing-library/jest-dom';
 // import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService.ts';
 
 jest.mock('../../services/RegistrationService', () => {
-  {
-    jest.fn();
-  }
+  jest.fn();
 });
 
 describe('Registration Page', () => {

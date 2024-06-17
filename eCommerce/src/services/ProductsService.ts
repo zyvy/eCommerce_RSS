@@ -48,8 +48,8 @@ export class ProductsService {
       'text.en-US': searchQuery,
       fuzzy: true,
       sort: getSortingString(sortingParams),
-      limit: limit,
-      offset: offset,
+      limit,
+      offset,
     };
 
     if (priceFilter[0] !== '' && priceFilter[1] !== '') {

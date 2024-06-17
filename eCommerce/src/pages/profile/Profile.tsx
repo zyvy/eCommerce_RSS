@@ -74,7 +74,7 @@ function Profile() {
 
   useEffect(() => {
     loadUser();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!isLoading) {

@@ -52,7 +52,10 @@ const calculateTotalDiscount = (cart: Cart) => {
   return totalDiscount;
 };
 
-export async function loadCart(cart: CartContextType, setCart: Dispatch<SetStateAction<CartState>>) {
+export async function loadCart(
+  cart: CartContextType,
+  setCart: Dispatch<SetStateAction<CartState>>,
+): Promise<void | null> {
   try {
     const newCart = await CartService.getCart();
     cart.id = newCart.id;
@@ -71,6 +74,7 @@ export async function loadCart(cart: CartContextType, setCart: Dispatch<SetState
       });
     });
     setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
+    return null;
   } catch (error) {
     console.dir(error);
   }

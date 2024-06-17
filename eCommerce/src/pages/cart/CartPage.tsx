@@ -17,7 +17,7 @@ function CartPage() {
 
   useEffect(() => {
     loadCart(cart, setCart);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={styles.container}>
