@@ -38,7 +38,7 @@ function Header() {
 
   useEffect(() => {
     loadCart(cartContext, setCart);
-  }, [cartContext, setCart]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);

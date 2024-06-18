@@ -1,4 +1,2 @@
-#!/bin/sh
-. "$(dirname "$0")/husky.sh"
-
-cd eCommerce && npm run lint && npm run prettier
+#!/usr/bin/env sh
+. "${0%/*}/h"

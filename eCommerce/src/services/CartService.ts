@@ -143,8 +143,11 @@ export class CartService {
     }
   }
 
-  static async getCart() {
-    const cardId = CartService.getCartInfo().id;
+  static async getCart(id?: string) {
+    let cardId = CartService.getCartInfo().id;
+    if (id) {
+      cardId = id;
+    }
     const customerId = AuthorizationService.getCustomerInfo().id;
     if (!cardId && customerId) {
       const response = await AuthorizationService.getApiRoot().carts().withCustomerId({ customerId }).get().execute();
@@ -269,4 +272,5 @@ export class CartService {
     const cart = localStorage.getItem(KEY_CART);
     return cart ? JSON.parse(cart) : { id: '' };
   }
+
 }
