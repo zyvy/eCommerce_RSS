@@ -74,10 +74,10 @@ export async function loadCart(
       });
     });
     setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
-    return null;
   } catch (error) {
     console.dir(error);
   }
+  return null;
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
