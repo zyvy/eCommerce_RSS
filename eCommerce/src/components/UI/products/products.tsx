@@ -5,7 +5,7 @@ import { ProductsService } from '../../../services/ProductsService.ts';
 import ProductCard from '../product-cat-card/Catalog-card.tsx';
 // import { CartService } from '../../../services/CartService.ts';
 import { useCart } from '../../../context/CartContext.tsx';
-
+/* eslint-disable react/require-default-props */
 interface ProductListProps {
   productsArray?: string;
   sortingArray?: string;
@@ -32,7 +32,7 @@ function ProductList({
   const productsPerPage = 6;
 
   const handlePageClick = (pageNumber: number) => {
-    console.log('got to page', pageNumber);
+    // console.log('got to page', pageNumber);
     setOffset(productsPerPage * (pageNumber - 1));
     setCurrentPage(pageNumber);
   };
@@ -101,11 +101,5 @@ function ProductList({
     </div>
   );
 }
-ProductList.defaultProps = {
-  productsArray: '',
-  sortingArray: 'name-asc',
-  priceFilter: [],
-  season: '',
-};
 
 export default ProductList;
