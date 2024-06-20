@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Catalog-card.module.css';
 import { CartService } from '../../../services/CartService.ts';
 import { loadCart, useCart } from '../../../context/CartContext.tsx';
-
+/* eslint-disable react/require-default-props */
 interface ProductCardProps {
   id: string;
   name: string;
@@ -15,7 +15,16 @@ interface ProductCardProps {
   isInCart?: boolean;
 }
 
-function ProductCard({ id, name, image, description, price, discountPrice, slug, isInCart }: ProductCardProps) {
+function ProductCard({
+  id,
+  name,
+  image,
+  description,
+  price,
+  discountPrice = undefined,
+  slug,
+  isInCart = false,
+}: ProductCardProps) {
   const navigate = useNavigate();
   const [inCart, setInCart] = useState(isInCart);
   const [loading, setLoading] = useState<boolean>(false);
@@ -83,9 +92,5 @@ function ProductCard({ id, name, image, description, price, discountPrice, slug,
     </div>
   );
 }
-ProductCard.defaultProps = {
-  discountPrice: undefined,
-  isInCart: false,
-};
 
 export default ProductCard;

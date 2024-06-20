@@ -60,20 +60,26 @@ export async function loadCart(
     const newCart = await CartService.getCart();
     cart.id = newCart.id;
     cart.total = newCart.totalLineItemQuantity ?? 0;
-    const totalPrice = newCart.totalPrice.centAmount;
-    cart.products = [];
-    const totalDiscount2 = calculateTotalDiscount(newCart);
-    const totalDiscount = newCart.discountOnTotalPrice?.discountedAmount.centAmount ?? 0;
-    newCart.lineItems.forEach((item) => {
-      cart.products.push({
-        id: item.productId,
-        variantId: item.variant.id,
-        quantity: item.quantity,
-        centAmount: item.price.value.centAmount,
-        lineItemId: item.id,
+    //  console.log(newCart)
+    if (newCart.lineItems.length > 0) {
+      const totalPrice = newCart.totalPrice.centAmount;
+      cart.products = [];
+      const totalDiscount2 = calculateTotalDiscount(newCart);
+      const totalDiscount = newCart.discountOnTotalPrice?.discountedAmount.centAmount ?? 0;
+
+      // console.log(newCart.lineItems);
+
+      newCart.lineItems.forEach((item) => {
+        cart.products.push({
+          id: item.productId,
+          variantId: item.variant.id,
+          quantity: item.quantity,
+          centAmount: item.price.value.centAmount,
+          lineItemId: item.id,
+        });
       });
-    });
-    setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
+      setCart({ ...cart, totalPrice, totalDiscount: totalDiscount + totalDiscount2 });
+    }
   } catch (error) {
     console.dir(error);
   }

@@ -153,8 +153,12 @@ export class CartService {
       const response = await AuthorizationService.getApiRoot().carts().withCustomerId({ customerId }).get().execute();
       return response.body;
     }
-    const response = await AuthorizationService.getApiRoot().carts().withId({ ID: cardId }).get().execute();
-    return response.body;
+    if (cardId) {
+      const response = await AuthorizationService.getApiRoot().carts().withId({ ID: cardId }).get().execute();
+      return response.body;
+    }
+    const resp = this.createCart();
+    return resp;
   }
 
   static async getAllCarts() {
