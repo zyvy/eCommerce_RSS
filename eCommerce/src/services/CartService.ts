@@ -276,4 +276,5 @@ export class CartService {
     const cart = localStorage.getItem(KEY_CART);
     return cart ? JSON.parse(cart) : { id: '' };
   }
+
 }
