@@ -60,14 +60,14 @@ export async function loadCart(
     const newCart = await CartService.getCart();
     cart.id = newCart.id;
     cart.total = newCart.totalLineItemQuantity ?? 0;
-  //  console.log(newCart)
+    //  console.log(newCart)
     if (newCart.lineItems.length > 0) {
       const totalPrice = newCart.totalPrice.centAmount;
       cart.products = [];
       const totalDiscount2 = calculateTotalDiscount(newCart);
       const totalDiscount = newCart.discountOnTotalPrice?.discountedAmount.centAmount ?? 0;
 
-     // console.log(newCart.lineItems);
+      // console.log(newCart.lineItems);
 
       newCart.lineItems.forEach((item) => {
         cart.products.push({

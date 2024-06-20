@@ -15,7 +15,16 @@ interface ProductCardProps {
   isInCart?: boolean;
 }
 
-function ProductCard({ id, name, image, description, price, discountPrice = undefined, slug, isInCart = false }: ProductCardProps) {
+function ProductCard({
+  id,
+  name,
+  image,
+  description,
+  price,
+  discountPrice = undefined,
+  slug,
+  isInCart = false,
+}: ProductCardProps) {
   const navigate = useNavigate();
   const [inCart, setInCart] = useState(isInCart);
   const [loading, setLoading] = useState<boolean>(false);
