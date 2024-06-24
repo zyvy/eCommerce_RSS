@@ -6,7 +6,7 @@ import {
   type AuthMiddlewareOptions,
   type HttpMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
-import { env } from '../utils/utils.tsx';
+import { env } from '../utils/utils.ts';
 
 const projectKey = env.VITE_PROJECT_KEY;
 const scopes = [env.VITE_SCOPE];
@@ -43,5 +43,4 @@ export const ctpClient = new ClientBuilder()
   .withProjectKey(projectKey)
   .withClientCredentialsFlow(authMiddlewareOptions)
   .withHttpMiddleware(httpMiddlewareOptions)
-  .withLoggerMiddleware()
   .build();

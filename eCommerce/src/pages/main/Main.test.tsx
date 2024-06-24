@@ -5,12 +5,11 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
-import Main from './Main';
-import { isUserLoggedIn } from '../../utils/utils';
-import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
+import Main from './Main.tsx';
+// import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
 
-jest.mock('../../utils/utils', () => ({
-  ...jest.requireActual('../../utils/utils'),
+jest.mock('../../utils/utils.ts', () => ({
+  ...jest.requireActual('../../utils/utils.ts'),
   isUserLoggedIn: jest.fn(),
 }));
 jest.mock('react-router-dom', () => ({
@@ -20,7 +19,7 @@ jest.mock('react-router-dom', () => ({
 
 jest.mock('../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
-    removeCustomerLogin: jest.fn(),
+    removeCustomerInfo: jest.fn(),
   },
   authenticateUser: jest.fn(() => {
     const mockClientId = 'mockClientId';
@@ -34,13 +33,12 @@ jest.mock('../../services/AuthorizationService.ts', () => ({
 describe('Main Component', () => {
   let isUserLoggedIn: jest.Mock;
   let navigateMock: jest.Mock;
-  let AuthorizationService: typeof oldAuthorizationService;
+  // let AuthorizationService: typeof oldAuthorizationService;
 
   beforeEach(() => {
-    isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
     navigateMock = jest.fn();
     (useNavigate as jest.Mock).mockReturnValue(navigateMock);
-    AuthorizationService = require('../../services/AuthorizationService').AuthorizationService;
+    // AuthorizationService = require('../../services/AuthorizationService').AuthorizationService;
   });
 
   afterEach(() => {

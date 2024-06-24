@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import Header from '../../components/UI/Header.tsx';
-import { PagePaths } from '../../utils/utils.tsx';
-import Footer from '../../components/UI/footer.tsx';
+import Header from '../../components/UI/header/Header.tsx';
+import { PagePaths } from '../../utils/utils.ts';
 import styles from './Main.module.css';
+import Footer from '../../components/UI/footer/Footer.tsx';
+import PromotionalCodesList from '../../components/UI/promotional-codes-list/PromotionalCodesList.tsx';
 
 function Main() {
   return (
@@ -17,8 +18,17 @@ function Main() {
           <br />
           <Link to={PagePaths.Main}>Главная</Link>
           <br />
+          <Link to={PagePaths.Profile}>Профиль</Link>
+          <br />
+          <Link to={PagePaths.Catalog}>Catalog</Link>
+          <br />
+          <Link to={PagePaths.Cart}>Корзина</Link>
+          <br />
+          <Link to={PagePaths.About}>О нас</Link>
+          <br />
           <Link to={PagePaths.NotFound}>404</Link>
         </nav>
+        <PromotionalCodesList />
       </div>
       <Footer />
     </div>

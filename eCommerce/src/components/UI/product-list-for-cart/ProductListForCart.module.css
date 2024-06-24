@@ -1,0 +1,123 @@
+.productList {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.product {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+
+  border: 3px solid #1976d2;
+  border-radius: 15px;
+  gap: 10px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.product:hover {
+  box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.5);
+}
+
+.img {
+  width: 120px;
+  height: 120px;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+}
+
+.productContent {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.priceContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.2rem;
+  gap: 5px;
+}
+
+.priceItem {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #1976d2;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.btnControls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.controlQuantityContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.quantity {
+  font-size: 1.2rem;
+}
+
+.quantityControlButton {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #1976d2;
+  border-radius: 5px;
+}
+
+.btnRemove:hover {
+  background-color: #fb06066b;
+  border: 1px solid #fb06066b;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnAdd:hover {
+  background-color: #32c90459;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btnDelete {
+  padding: 5px 15px;
+  font-size: 1.2rem;
+  color: #fb06069c;
+  font-weight: 600;
+  border: 1px solid #fb06066b;
+  background-color: #f6f1ea;
+  border-radius: 7px;
+}
+
+.btnDelete:hover {
+  background-color: #fb060615;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+@media (max-width: 500px) {
+  .priceContainer {
+    font-size: 0.8rem;
+  }
+
+  .quantity,
+  .btnDelete {
+    font-size: 1rem;
+  }
+}

@@ -3,20 +3,18 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import Registration from './Registration';
 import { MemoryRouter } from 'react-router-dom';
+import Registration from './Registration.tsx';
 import '@testing-library/jest-dom';
-import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService';
+// import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService.ts';
 
 jest.mock('../../services/RegistrationService', () => {
-  RegistrationService: {
-    getApiRoot: jest.fn();
-  }
+  jest.fn();
 });
 
 describe('Registration Page', () => {
-  let RegistrationService: typeof OldRegistrationService;
-  RegistrationService = require('../../services/RegistrationService');
+  // let RegistrationService: typeof OldRegistrationService;
+  // RegistrationService = require('../../services/RegistrationService');
   test('renders Registration component correctly', () => {
     render(
       <MemoryRouter>

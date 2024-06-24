@@ -1,0 +1,7 @@
+.applyPromoCodeContainer {
+  display: flex;
+  gap: 30px;
+}
+.wrapper_discount {
+  display: flex;
+}

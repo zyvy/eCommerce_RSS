@@ -1,0 +1,35 @@
+.title {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.tableHead,
+.tableData {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tableHead {
+  background-color: #f4f4f4;
+}
+
+.tableButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkboxContainer {
+  display: flex;
+}
+
+@media (max-width: 500px) {
+  .checkboxContainer {
+    flex-direction: column;
+  }
+}

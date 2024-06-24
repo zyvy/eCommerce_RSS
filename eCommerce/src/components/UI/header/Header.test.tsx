@@ -4,19 +4,19 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from './Header';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
-import { PagePaths } from '../../utils/utils';
-import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
+import Header from './Header.tsx';
+import { PagePaths } from '../../../utils/utils.ts';
+import { AuthorizationService as oldAuthorizationService } from '../../../services/AuthorizationService.ts';
 
-jest.mock('../../utils/utils', () => ({
-  ...jest.requireActual('../../utils/utils'),
+jest.mock('../../../utils/utils.ts', () => ({
+  ...jest.requireActual('../../../utils/utils.ts'),
   isUserLoggedIn: jest.fn(),
 }));
 
 jest.mock('../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
-    removeCustomerLogin: jest.fn(),
+    removeCustomerInfo: jest.fn(),
   },
   authenticateUser: jest.fn(() => {
     const mockClientId = 'mockClientId';
@@ -38,10 +38,8 @@ describe('Header Component', () => {
   let AuthorizationService: typeof oldAuthorizationService;
 
   beforeEach(() => {
-    isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
     navigateMock = jest.fn();
     (useNavigate as jest.Mock).mockReturnValue(navigateMock);
-    AuthorizationService = require('../../services/AuthorizationService').AuthorizationService;
   });
 
   afterEach(() => {
@@ -89,7 +87,7 @@ describe('Header Component', () => {
     const registerButton = getByText(/Register/i);
     expect(registerButton).toBeInTheDocument();
   });
-  test('renders register button', () => {
+  test('renders register button 2', () => {
     isUserLoggedIn.mockReturnValue(true);
     const { getByText } = render(
       <MemoryRouter>
@@ -100,7 +98,7 @@ describe('Header Component', () => {
     expect(registerButton).toBeInTheDocument();
   });
   // buttons handle
-  test('calls removeCustomerLogin', () => {
+  test('calls removeCustomerInfo', () => {
     (isUserLoggedIn as jest.Mock).mockReturnValue(true);
     render(
       <MemoryRouter>
@@ -111,7 +109,7 @@ describe('Header Component', () => {
     const authButton = screen.getByText(/Logout/i);
     fireEvent.click(authButton);
 
-    expect(AuthorizationService.removeCustomerLogin).toHaveBeenCalled();
+    expect(AuthorizationService.removeCustomerInfo).toHaveBeenCalled();
   });
 
   test('navigates to login page on login', () => {
