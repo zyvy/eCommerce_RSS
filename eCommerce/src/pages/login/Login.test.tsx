@@ -1,12 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Login from './Login';
-import { AuthorizationService } from '../../services/AuthorizationService';
-import { PagePaths } from '../../utils/utils'; 
+import Login from './Login.tsx';
+import { PagePaths } from '../../utils/utils.tsx';
 
 jest.mock('../../services/AuthorizationService', () => ({
   AuthorizationService: {
@@ -33,17 +32,10 @@ jest.mock('../../utils/utils.ts', () => ({
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn().mockImplementation(() => mockNavigate), 
+  useNavigate: jest.fn().mockImplementation(() => mockNavigate),
 }));
 
 describe('Login Component', () => {
-  const mockNavigate = jest.fn();
-  let isUserLoggedIn: jest.Mock;
-
-  beforeEach(() => {
-    isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
-  });
-
   test('renders login form', () => {
     render(
       <MemoryRouter initialEntries={[PagePaths.Login]}>
@@ -52,33 +44,10 @@ describe('Login Component', () => {
         </Routes>
       </MemoryRouter>,
     );
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument(); 
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/toggle passw visibility/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Sign in' })).toBeInTheDocument(); 
+    expect(screen.getByRole('button', { name: 'Sign in' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Create new account' })).toBeInTheDocument();
   });
-
-  /* test('handles successful login', async () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
-    );
-    const logInBtn = screen.getByRole('button', { name: 'Sign in' });
-
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(screen.getByLabelText(/password/i), { target: { value: '123PassworD*' } });
-    fireEvent.click(logInBtn);
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith(PagePaths.Main);
-      expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
-      expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Main page');
-    });
-
-    expect(AuthorizationService.login).toHaveBeenCalledWith({ email: 'test@test.com', password: 'Password' });
-    expect(AuthorizationService.getAccessToken).toHaveBeenCalledWith({ email: 'test@example.com', password: '123PassworD*' });
-    expect(AuthorizationService.updateCustomerLogin).toHaveBeenCalledWith('token', 'mockedToken');
-    expect(mockNavigate).toHaveBeenCalledWith(PagePaths.Main);
-  }); */
 });

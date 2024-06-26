@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Footer from './Footer';
+import Footer from './footer.tsx';
 
 describe('Footer Component', () => {
   test('renders footer message 1', () => {
@@ -15,7 +15,9 @@ describe('Footer Component', () => {
   test('renders footer message 2', () => {
     render(<Footer />);
     const currentYear = new Date().getFullYear();
-    const copyrightMessage = screen.getByText(new RegExp(`© ${currentYear} OLD Ecommerce Shop. All rights reserved.`, 'i'));
+    const copyrightMessage = screen.getByText(
+      new RegExp(`© ${currentYear} OLD Ecommerce Shop. All rights reserved.`, 'i'),
+    );
     expect(copyrightMessage).toBeInTheDocument();
   });
 });

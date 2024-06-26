@@ -21,10 +21,6 @@ const theme = createTheme({
 
 function Header() {
   const navigate = useNavigate();
-  /* const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO search
-  }; */
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
       AuthorizationService.removeCustomerLogin();
