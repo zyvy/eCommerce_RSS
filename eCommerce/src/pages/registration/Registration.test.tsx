@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Registration from './Registration.tsx';
@@ -25,7 +24,8 @@ describe('Registration Page', () => {
     expect(screen.getByLabelText(/Last name/)).toBeInTheDocument();
     expect(screen.getByText(/Add billing address/)).toBeInTheDocument();
     expect(screen.getByText(/Add shipping address/)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Register/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Sign in/ })).toBeInTheDocument();
+    const regButtons = screen.getAllByRole('button', { name: /Register/ });
+    expect(regButtons).toHaveLength(2);
   });
 });

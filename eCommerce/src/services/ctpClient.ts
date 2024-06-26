@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import {
   ClientBuilder,
   PasswordAuthMiddlewareOptions,
@@ -7,6 +7,8 @@ import {
   type HttpMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
 import { env } from '../utils/utils.tsx';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const fetch = require('node-fetch');
 
 const projectKey = env.VITE_PROJECT_KEY;
 const scopes = [env.VITE_SCOPE];
