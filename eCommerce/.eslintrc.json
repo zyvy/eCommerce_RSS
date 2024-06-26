@@ -12,7 +12,9 @@
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
     "plugin:import/recommended",
-    "prettier"
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -32,7 +34,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "react-hooks", "prettier", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "prettier", "@typescript-eslint", "jest"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
     "react/react-in-jsx-scope": "off",
@@ -58,10 +60,6 @@
     ],
     "@typescript-eslint/naming-convention": [
       "error",
-      {
-        "selector": "variable",
-        "format": ["camelCase"]
-      },
       {
         "selector": "typeLike",
         "format": ["PascalCase"]

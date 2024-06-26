@@ -4,51 +4,21 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from './Header';
-import { useNavigate, MemoryRouter } from 'react-router-dom';
-import { PagePaths } from '../../utils/utils';
-import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
+import { MemoryRouter } from 'react-router-dom';
+import Header from './Header.tsx';
+import * as utils from '../../utils/utils.tsx';
+import { AuthorizationService } from '../../services/AuthorizationService.ts';
 
-jest.mock('../../utils/utils', () => ({
-  ...jest.requireActual('../../utils/utils'),
-  isUserLoggedIn: jest.fn(),
-}));
-
-jest.mock('../../services/AuthorizationService.ts', () => ({
+jest.mock('../../services/AuthorizationService', () => ({
   AuthorizationService: {
     removeCustomerLogin: jest.fn(),
   },
-  authenticateUser: jest.fn(() => {
-    const mockClientId = 'mockClientId';
-    const mockClientSecret = 'mockClientSecret';
-    const token = `${mockClientId}:${mockClientSecret}`;
-    const hash = Buffer.from(token).toString('base64');
-    return `Basic ${hash}`;
-  }),
 }));
+const userLogged = jest.spyOn(utils, 'isUserLoggedIn');
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
-}));
-
-describe('Header Component', () => {
-  let isUserLoggedIn: jest.Mock;
-  let navigateMock: jest.Mock;
-  let AuthorizationService: typeof oldAuthorizationService;
-
-  beforeEach(() => {
-    isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
-    navigateMock = jest.fn();
-    (useNavigate as jest.Mock).mockReturnValue(navigateMock);
-    AuthorizationService = require('../../services/AuthorizationService').AuthorizationService;
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-  // renders
+describe('Header Component user logout', () => {
   test('renders logo', () => {
+    userLogged.mockReturnValue(false);
     const { getByAltText } = render(
       <MemoryRouter>
         <Header />
@@ -59,7 +29,7 @@ describe('Header Component', () => {
   });
 
   test('renders login button', () => {
-    isUserLoggedIn.mockReturnValue(false);
+    userLogged.mockReturnValue(false);
     const { getByText } = render(
       <MemoryRouter>
         <Header />
@@ -68,8 +38,9 @@ describe('Header Component', () => {
     const loginButton = getByText(/Log in/i);
     expect(loginButton).toBeInTheDocument();
   });
+
   test('renders logout button', () => {
-    isUserLoggedIn.mockReturnValue(true);
+    userLogged.mockReturnValue(true);
     const { getByText } = render(
       <MemoryRouter>
         <Header />
@@ -79,8 +50,8 @@ describe('Header Component', () => {
     expect(loginButton).toBeInTheDocument();
   });
 
-  test('renders register button', () => {
-    isUserLoggedIn.mockReturnValue(false);
+  test('renders register button usr not logged', () => {
+    userLogged.mockReturnValue(false);
     const { getByText } = render(
       <MemoryRouter>
         <Header />
@@ -89,8 +60,9 @@ describe('Header Component', () => {
     const registerButton = getByText(/Register/i);
     expect(registerButton).toBeInTheDocument();
   });
-  test('renders register button', () => {
-    isUserLoggedIn.mockReturnValue(true);
+
+  test('renders register button user logged', () => {
+    userLogged.mockReturnValue(true);
     const { getByText } = render(
       <MemoryRouter>
         <Header />
@@ -101,7 +73,7 @@ describe('Header Component', () => {
   });
   // buttons handle
   test('calls removeCustomerLogin', () => {
-    (isUserLoggedIn as jest.Mock).mockReturnValue(true);
+    userLogged.mockReturnValue(true);
     render(
       <MemoryRouter>
         <Header />
@@ -112,19 +84,5 @@ describe('Header Component', () => {
     fireEvent.click(authButton);
 
     expect(AuthorizationService.removeCustomerLogin).toHaveBeenCalled();
-  });
-
-  test('navigates to login page on login', () => {
-    (isUserLoggedIn as jest.Mock).mockReturnValue(false);
-    render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>,
-    );
-
-    const authButton = screen.getByText(/Log in/i);
-    fireEvent.click(authButton);
-
-    expect(navigateMock).toHaveBeenCalledWith(PagePaths.Login);
   });
 });

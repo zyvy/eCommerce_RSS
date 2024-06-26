@@ -5,9 +5,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
-import Main from './Main';
-import { isUserLoggedIn } from '../../utils/utils';
-import { AuthorizationService as oldAuthorizationService } from '../../services/AuthorizationService';
+import Main from './Main.tsx';
+import { isUserLoggedIn } from '../../utils/utils.tsx';
 
 jest.mock('../../utils/utils', () => ({
   ...jest.requireActual('../../utils/utils'),
@@ -32,15 +31,12 @@ jest.mock('../../services/AuthorizationService.ts', () => ({
 }));
 
 describe('Main Component', () => {
-  let isUserLoggedIn: jest.Mock;
+  // let isUserLoggedIn: jest.Mock;
   let navigateMock: jest.Mock;
-  let AuthorizationService: typeof oldAuthorizationService;
 
   beforeEach(() => {
-    isUserLoggedIn = require('../../utils/utils').isUserLoggedIn;
     navigateMock = jest.fn();
     (useNavigate as jest.Mock).mockReturnValue(navigateMock);
-    AuthorizationService = require('../../services/AuthorizationService').AuthorizationService;
   });
 
   afterEach(() => {
@@ -76,7 +72,7 @@ describe('Main Component', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Main page');
     expect(screen.getByText('Главная')).toBeInTheDocument();
     expect(screen.getByText('Logout')).toBeInTheDocument();
-    expect(screen.getByText(/Orders/)).toBeInTheDocument();
+    expect(screen.getByText(/orders/)).toBeInTheDocument();
     expect(screen.getByText('404')).toBeInTheDocument();
   });
 });

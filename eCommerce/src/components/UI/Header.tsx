@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 // import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -21,10 +20,6 @@ const theme = createTheme({
 
 function Header() {
   const navigate = useNavigate();
-  /* const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO search
-  }; */
   const HandleAuthButtonClick = () => {
     if (isUserLoggedIn()) {
       AuthorizationService.removeCustomerLogin();
