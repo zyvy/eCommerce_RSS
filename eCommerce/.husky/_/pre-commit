@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/husky.sh"
 
-cd eCommerce && npm run lint && npm run ci:format
+cd eCommerce && npm run lint && npm run prettier
