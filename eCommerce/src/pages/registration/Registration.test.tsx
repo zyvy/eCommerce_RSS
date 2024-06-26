@@ -9,6 +9,7 @@ import '@testing-library/jest-dom';
 
 jest.mock('../../services/RegistrationService.ts');
 jest.mock('../../services/AuthorizationService.ts');
+jest.mock('../../services/ctpClient.ts');
 
 describe('Registration Page', () => {
   test('renders Registration component correctly', () => {

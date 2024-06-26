@@ -4,7 +4,4 @@ module.exports = {
     ['@babel/preset-react', {runtime: 'automatic'}],
     '@babel/preset-typescript',
   ],
-  "transformIgnorePatterns": [
-      "node_modules/(?!variables/.*)"
-    ]
 };

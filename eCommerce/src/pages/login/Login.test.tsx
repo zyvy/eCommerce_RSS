@@ -18,7 +18,8 @@ jest.mock('../../services/AuthorizationService', () => ({
   },
 }));
 
-jest.mock('../../utils/utils.ts', () => ({
+jest.mock('../../utils/utils.tsx', () => ({
+  ...jest.requireActual('../../utils/utils'),
   isEmailValid: jest.fn(),
   isPasswordValid: jest.fn(),
   PagePaths: {

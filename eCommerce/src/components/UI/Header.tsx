@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 // import React from 'react';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
