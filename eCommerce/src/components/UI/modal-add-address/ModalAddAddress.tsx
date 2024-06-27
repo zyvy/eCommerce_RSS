@@ -72,9 +72,9 @@ function ModalAddAddress({ editIndex, updateEditIndex, setFalseAddingAddress }: 
     });
   };
 
-  function checkDefaultAddress(addresses: Address[]) {
+  function checkDefaultAddress(addreses: Address[]) {
     if (currentAddressBilling.default) {
-      addresses.forEach((address) => {
+      addreses.forEach((address) => {
         if (address.default) {
           if (address.billing && currentAddressBilling.billing) {
             address.default = false;

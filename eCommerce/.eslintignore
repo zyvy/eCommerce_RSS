@@ -1,3 +1,5 @@
 node_modules/
 dist/
 client/dist/
+vite.config.ts
+vite-env.d.ts

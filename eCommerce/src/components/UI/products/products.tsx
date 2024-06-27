@@ -3,6 +3,7 @@ import { ProductProjection } from '@commercetools/platform-sdk';
 import styles from './products.module.css';
 import { ProductsService } from '../../../services/ProductsService.ts';
 import ProductCard from '../product-cat-card/Catalog-card.tsx';
+/* eslint-disable react/require-default-props */
 interface ProductListProps {
   productsArray?: string;
   sortingArray?: string;
@@ -14,27 +15,32 @@ function extractFirstSentence(text: string): string {
   const match = text.match(/.*?[.!?](?:\s|$)/);
   return match ? match[0] : text;
 }
-function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = [], season =''} : ProductListProps ) {
+function ProductList({
+  productsArray = '',
+  sortingArray = 'name-asc',
+  priceFilter = [],
+  season = '',
+}: ProductListProps) {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [error, setError] = useState<string | null>(null);
-    useEffect(() => {
-     // console.log('trying to fetch')
-      const getProducts = async () => {
-        try {
-          const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season)
-          setProducts(productData.results);
-        } catch (e) {
-          setError('Failed to fetch products. Please try again later.');
-          console.error(e);
-        }
-      };
+  useEffect(() => {
+    // console.log('trying to fetch')
+    const getProducts = async () => {
+      try {
+        const productData = await ProductsService.performSearch(productsArray, sortingArray, priceFilter, season);
+        setProducts(productData.results);
+      } catch (e) {
+        setError('Failed to fetch products. Please try again later.');
+        console.error(e);
+      }
+    };
 
-      getProducts();
-    }, [productsArray, sortingArray, priceFilter]);
+    getProducts();
+  }, [productsArray, sortingArray, priceFilter, season]);
 
-    if (error) {
-      return <div>{error}</div>;
-    }
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <div className={styles.product_list}>
       {products.map((product) => (
@@ -51,11 +57,7 @@ function ProductList( {productsArray='', sortingArray='name-asc', priceFilter = 
               ? product.masterVariant.prices[0].value.centAmount / 100
               : 0
           }
-          discountPrice={
-            product.masterVariant?.prices?.[0].discounted
-              ? product.masterVariant?.prices?.[0].discounted?.value?.centAmount / 100
-              : 0
-          }
+          discountPrice={(product.masterVariant?.prices?.[0]?.discounted?.value?.centAmount ?? 0) / 100}
           slug={product.key ? product.key : ''}
         />
       ))}

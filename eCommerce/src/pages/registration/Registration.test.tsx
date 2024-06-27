@@ -1,22 +1,16 @@
 /**
  * @jest-environment jsdom
  */
-
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Registration from '../registration/Registration.tsx';
+import Registration from './Registration.tsx';
 import '@testing-library/jest-dom';
-// import { RegistrationService as OldRegistrationService } from '../../services/RegistrationService.ts';
 
-jest.mock('../../services/RegistrationService', () => {
-  {
-    jest.fn();
-  }
-});
+jest.mock('../../services/RegistrationService.ts');
+jest.mock('../../services/AuthorizationService.ts');
+jest.mock('../../services/ctpClient.ts');
 
 describe('Registration Page', () => {
-  // let RegistrationService: typeof OldRegistrationService;
-  // RegistrationService = require('../../services/RegistrationService');
   test('renders Registration component correctly', () => {
     render(
       <MemoryRouter>
@@ -30,7 +24,8 @@ describe('Registration Page', () => {
     expect(screen.getByLabelText(/Last name/)).toBeInTheDocument();
     expect(screen.getByText(/Add billing address/)).toBeInTheDocument();
     expect(screen.getByText(/Add shipping address/)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Register/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Sign in/ })).toBeInTheDocument();
+    const regButtons = screen.getAllByRole('button', { name: /Register/ });
+    expect(regButtons).toHaveLength(2);
   });
 });

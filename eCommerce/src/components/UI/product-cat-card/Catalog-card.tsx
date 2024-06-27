@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './Catalog-card.module.css';
 
+/* eslint-disable react/require-default-props */
 interface ProductCardProps {
   id: string;
   name: string;
@@ -11,13 +12,23 @@ interface ProductCardProps {
   slug: string;
 }
 
-function ProductCard({ id, name, image, description, price, discountPrice, slug }: ProductCardProps) {
+function ProductCard({ id, name, image, description, price, discountPrice = 0, slug }: ProductCardProps) {
   const navigate = useNavigate();
-  const handleCardClick = (slug: string) => {
-    navigate(`/product/${slug}`);
+  const handleCardClick = (_slug: string) => {
+    navigate(`/product/${_slug}`);
+  };
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLElement>, urlslug: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleCardClick(urlslug);
+    }
   };
   return (
-    <div className={styles.product_card} onClick={() => handleCardClick(slug)}>
+    <div
+      className={styles.product_card}
+      tabIndex={0}
+      role="button"
+      onClick={() => handleCardClick(slug)}
+      onKeyDown={(event) => handleKeyPress(event, slug)}>
       <p>{id}</p>
       <img src={image} alt={name} className={styles.product_image} />
       <h2 className={styles.product_name}>{name}</h2>

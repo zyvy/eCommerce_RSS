@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { Image } from '@commercetools/platform-sdk';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,13 +9,13 @@ import 'swiper/css/zoom';
 import { Pagination, Navigation } from 'swiper/modules';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ProductsService } from '../../../services/ProductsService.ts';
-import styles from './ProductItem.module.css';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import { ProductsService } from '../../../services/ProductsService.ts';
+import styles from './ProductItem.module.css';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -66,7 +67,7 @@ function ProductItem({ slug }: ProductItemProps) {
       }
     };
     getProducts();
-  }, [slug]);
+  }, [slug]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const slides = productImg?.map((prod) => prod.url);
 
@@ -99,7 +100,7 @@ function ProductItem({ slug }: ProductItemProps) {
               className="mySwiper">
               {slides?.map((slideContent, index) => (
                 <SwiperSlide key={slideContent} virtualIndex={index} className={styles.slider__modal}>
-                  <img src={slideContent} className={styles.swiper__img2} />
+                  <img src={slideContent} className={styles.swiper__img2} alt="product pic" />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -112,7 +113,19 @@ function ProductItem({ slug }: ProductItemProps) {
           <Swiper pagination navigation grabCursor modules={[Pagination, Navigation]} className="mySwiper">
             {slides?.map((slideContent, index) => (
               <SwiperSlide key={slideContent} virtualIndex={index} className={styles.swiper_slide}>
-                <img src={slideContent} className={styles.swiper__img2} onClick={handleOpen} />
+                {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */}
+                <img
+                  src={slideContent}
+                  className={styles.swiper__img2}
+                  onClick={handleOpen}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleOpen();
+                    }
+                  }}
+                  alt="product pic"
+                />
+                {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */}
               </SwiperSlide>
             ))}
           </Swiper>
