@@ -15,6 +15,7 @@ jest.mock('../../services/AuthorizationService', () => ({
     getAccessToken: jest.fn().mockResolvedValue({ error: false, accessToken: 'mockedToken', errorDescription: '' }),
     updateCustomerLogin: jest.fn(),
     removeCustomerLogin: jest.fn(),
+    getCustomerInfo: jest.fn().mockReturnValue({ id: '' }),
   },
 }));
 

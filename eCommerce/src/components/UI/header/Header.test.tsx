@@ -11,7 +11,8 @@ import { AuthorizationService } from '../../../services/AuthorizationService.ts'
 
 jest.mock('../../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
-    removeCustomerLogin: jest.fn(),
+    removeCustomerInfo: jest.fn(),
+    getCustomerInfo: jest.fn().mockReturnValue({ id: '' }),
   },
 }));
 const userLogged = jest.spyOn(utils, 'isUserLoggedIn');
@@ -83,6 +84,6 @@ describe('Header Component user logout', () => {
     const authButton = screen.getByText(/Logout/i);
     fireEvent.click(authButton);
 
-    expect(AuthorizationService.removeCustomerLogin).toHaveBeenCalled();
+    expect(AuthorizationService.removeCustomerInfo).toHaveBeenCalled();
   });
 });

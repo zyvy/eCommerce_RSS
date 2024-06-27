@@ -8,7 +8,7 @@ import { useNavigate, MemoryRouter } from 'react-router-dom';
 import Main from './Main.tsx';
 import { isUserLoggedIn } from '../../utils/validation.ts';
 
-jest.mock('../../utils/utils', () => ({
+jest.mock('../../utils/validation.ts', () => ({
   ...jest.requireActual('../../utils/validation.ts'),
   isUserLoggedIn: jest.fn(),
 }));
@@ -20,6 +20,7 @@ jest.mock('react-router-dom', () => ({
 jest.mock('../../services/AuthorizationService.ts', () => ({
   AuthorizationService: {
     removeCustomerLogin: jest.fn(),
+    getCustomerInfo: jest.fn().mockReturnValue({ id: '' }),
   },
   authenticateUser: jest.fn(() => {
     const mockClientId = 'mockClientId';
