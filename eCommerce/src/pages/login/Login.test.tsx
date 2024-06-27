@@ -13,12 +13,14 @@ jest.mock('../../services/AuthorizationService', () => ({
     login: jest.fn().mockResolvedValue({ error: false, customer: { id: '123' }, errorDescription: '' }),
     auth: jest.fn().mockResolvedValue({ error: false, customer: { id: '123' }, errorDescription: '' }),
     getAccessToken: jest.fn().mockResolvedValue({ error: false, accessToken: 'mockedToken', errorDescription: '' }),
-    updateCustomerInfo: jest.fn(),
-    removeCustomerInfo: jest.fn(),
+    updateCustomerLogin: jest.fn(),
+    removeCustomerLogin: jest.fn(),
+    getCustomerInfo: jest.fn().mockReturnValue({ id: '' }),
   },
 }));
 
-jest.mock('../../utils/utils.ts', () => ({
+jest.mock('../../utils/validation.ts', () => ({
+  ...jest.requireActual('../../utils/validation.ts'),
   isEmailValid: jest.fn(),
   isPasswordValid: jest.fn(),
   PagePaths: {
