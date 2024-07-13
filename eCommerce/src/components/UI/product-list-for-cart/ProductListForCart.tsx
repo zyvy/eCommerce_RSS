@@ -17,6 +17,8 @@ function ProductList() {
 
   const [productsFull, setProductsFull] = useState<ProductNameCart[]>([]);
 
+  const [buttonStatus, setButtonstatus] = useState(false);
+
   useEffect(() => {
     if (!products.length) return;
     Promise.all(products.map(({ id }) => ProductsService.getProductById(id))).then((data) => {
@@ -33,20 +35,26 @@ function ProductList() {
   }, [products]);
 
   const handleDelete = async (productId: string, variang: number, quantity: number) => {
+    setButtonstatus(true);
     await CartService.removeItemFromCart(productId, variang, quantity);
     if (cart.products.length <= 1) {
       await Promise.all(allApplyPromoCodes.map((code) => CartService.removeDiscountCartCode(code.id)));
       cart.allApplyPromoCodes = [];
     }
     loadCart(cart, setCart);
+    setButtonstatus(false);
   };
 
   const handleAdd = (productId: string, variantId?: number) => {
+    setButtonstatus(true);
     CartService.addItemToCart(productId, 1, variantId).then(() => loadCart(cart, setCart));
+    setButtonstatus(false);
   };
 
   const handleRemove = (productId: string, variantId: number) => {
+    setButtonstatus(true);
     CartService.removeItemFromCart(productId, variantId, 1).then(() => loadCart(cart, setCart));
+    setButtonstatus(false);
   };
 
   return (
@@ -74,6 +82,7 @@ function ProductList() {
             <div className={styles.btnControls}>
               <button
                 type="button"
+                disabled={buttonStatus}
                 className={styles.btnDelete}
                 onClick={() => handleDelete(product.id, product.variantId, product.quantity)}>
                 Delete
@@ -82,6 +91,7 @@ function ProductList() {
                 <button
                   className={`${styles.quantityControlButton} ${styles.btnRemove}`}
                   type="button"
+                  disabled={buttonStatus}
                   onClick={() => handleRemove(product.id, product.variantId)}>
                   -
                 </button>
@@ -89,6 +99,7 @@ function ProductList() {
                 <button
                   className={`${styles.quantityControlButton} ${styles.btnAdd}`}
                   type="button"
+                  disabled={buttonStatus}
                   onClick={() => handleAdd(product.id, product.variantId)}>
                   +
                 </button>
